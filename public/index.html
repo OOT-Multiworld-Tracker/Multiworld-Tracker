@@ -331,7 +331,7 @@
         return Object.keys(worlds[worldId]).map(item => {
             let location = locations.get(Object.keys(worlds[worldId]).indexOf(item)+1);
             console.log(location)
-            if (location && worlds[worldId][item].player==myWorld && (!location.logic||location.logic())&&!locations.get(location.id).completed)
+            if (location && worlds[worldId][item].player==myWorld && (worldId != myWorld || ((!location.logic||location.logic())&&!locations.get(location.id).completed)))
                 return (<Item location={location.name} name={worlds[worldId][item].item}/>)
         })
     }

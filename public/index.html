@@ -153,10 +153,10 @@
 
         if (settings.world_count > 1) {
             Object.values(log.locations).forEach((world) => {
-                worlds.push(world)
+                worlds.push({save, locations: world})
             })
         } else {
-            worlds.push(log.locations)
+            worlds.push({save, locations: log.locations})
         }
         Rerender()
     }
@@ -193,6 +193,8 @@
     }
 </script>
 
+<script src="/js/mixins.js"></script>
+
 <script>
     if (require) {
         require('electron').ipcRenderer.on('packet', (event, data) => {
@@ -208,58 +210,6 @@
                 break;
             }
         })
-    }
-</script>
-
-<script>
-    //Mixins
-    function CanStunDeku() {
-        return save.inventory.fairySlingshot || save.inventory.boomerang || save.inventory.dekuSticks || (save.inventory.bombBag||save.inventory.bombchus) || save.inventory.dekuNuts || save.inventory.dinsFire || save.swords.kokiriSword || save.shields.dekuShield
-    }
-
-    function HasExplosives() {
-        return save.inventory.bombBag || save.inventory.bombchus
-    }
-
-    function CanDamage() {
-        return save.swords.kokiriSword || save.inventory.bombchus || save.inventory.bombBag || save.inventory.dekuSticks || (CanUseMagic() && save.inventory.dinsFire) || (save.age == 1 && save.inventory.fairySlingshot)
-    }
-
-    function CanExitForest() {
-        return settings.open_forest != "closed" || locations.get(1).completed || HasExplosives() || save.inventory.swimming >= 1 || (CanUseMagic() && save.inventory.dinsFire)
-    }
-
-    function CanLightFires() {
-        return save.inventory.dekuSticks || (CanUseMagic() && save.inventory.dinsFire) || (save.age == 1 && CanUseMagic() && save.inventory.fairyBow && save.inventory.fireArrows)
-    }
-
-    function CanUseMagic() {
-        return save.magic_meter_size > 1
-    }
-
-    function CanBecomeAdult() {
-        return settings.open_door_of_time || save.inventory.ocarina >= 1 && save.questStatus.songOfTime
-    }
-
-    // Area Entry Mixins
-    function CanEnterDodongo() {
-        return CanEnterDeathMountain() && (save.inventory.strength >= 1 || HasExplosives());
-    }
-
-    function CanEnterDeathMountain() {
-        return settings.open_kakariko || (save.inventory.childTradeItem >= 2 || HasExplosives());
-    }
-
-    function CanEnterZorasRiver() {
-        return save.inventory.swimming >= 1 || HasExplosives() || (CanBecomeAdult() && save.inventory.megatonHammer)
-    }
-
-    function CanEnterZorasDomain() {
-        return save.inventory.swimming >= 1 || (HasExplosives() || (CanBecomeAdult() && save.inventory.megatonHammer) && (save.inventory.ocarina >= 1 && save.questStatus.sariasSong))
-    }
-
-    function CanEnterJabu() {
-        return CanEnterZorasDomain()
     }
 </script>
 
@@ -317,9 +267,9 @@
         return worlds.map(world => {
             let items = 0;
 
-            Object.keys(worlds[worlds.indexOf(world)]).map(item => {
-                let location = locations.get(Object.keys(worlds[worlds.indexOf(world)]).indexOf(item)+1)
-                if (location && worlds[worlds.indexOf(world)][item].player==myWorld && (!location.logic||location.logic())&&!locations.get(location.id).completed)
+            Object.keys(worlds[worlds.indexOf(world)]["locations"]).map(item => {
+                let location = locations.get(Object.keys(worlds[worlds.indexOf(world)]["locations"]).indexOf(item)+1)
+                if (location && worlds[worlds.indexOf(world)]["locations"][item].player==myWorld && (!location.logic||location.logic({save, settings, "locations":MapToArray(locations)}))&&!locations.get(location.id).completed)
                     items++
             })
 
@@ -328,17 +278,16 @@
     }
 
     function RenderWorldItems(worldId) {
-        return Object.keys(worlds[worldId]).map(item => {
-            let location = locations.get(Object.keys(worlds[worldId]).indexOf(item)+1);
-            console.log(location)
-            if (location && worlds[worldId][item].player==myWorld && (worldId != myWorld || ((!location.logic||location.logic())&&!locations.get(location.id).completed)))
-                return (<Item location={location.name} name={worlds[worldId][item].item}/>)
+        return Object.keys(worlds[worldId]["locations"]).map(item => {
+            let location = locations.get(Object.keys(worlds[worldId]["locations"]).indexOf(item)+1);
+            if (location && worlds[worldId]["locations"][item].player==myWorld && (!location.logic||location.logic(worlds[worldId])) &&!locations.get(location.id).completed)
+                return (<Item location={location.name} name={worlds[worldId]["locations"][item].item}/>)
         })
     }
 
     function GetAccessibleLocations () {
         return locationJson.map(location => {
-            if ((location.preExit==true||CanExitForest())&&(!location.logic||location.logic())&&!locations.get(location.id).completed)
+            if ((location.preExit==true||CanExitForest())&&(!location.logic||location.logic({save, settings, "locations":MapToArray(locations)}))&&!locations.get(location.id).completed)
                 return (<Location id={location.id} name={location.name}/>)
         });
     }

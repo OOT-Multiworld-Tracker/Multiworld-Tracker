@@ -269,7 +269,7 @@
 
             Object.keys(worlds[worlds.indexOf(world)]["locations"]).map(item => {
                 let location = locations.get(Object.keys(worlds[worlds.indexOf(world)]["locations"]).indexOf(item)+1)
-                if (location && worlds[worlds.indexOf(world)]["locations"][item].player==myWorld && (!location.logic||location.logic({save, settings, "locations":MapToArray(locations)}))&&!locations.get(location.id).completed)
+                if (location && worlds[worlds.indexOf(world)]["locations"][item].player==myWorld && (!location.logic||location.logic({save, settings, "locations":MapToArray(locations)}))&&!worlds[worlds.indexOf(world)]["locations"][item].completed)
                     items++
             })
 
@@ -279,8 +279,8 @@
 
     function RenderWorldItems(worldId) {
         return Object.keys(worlds[worldId]["locations"]).map(item => {
-            let location = locations.get(Object.keys(worlds[worldId]["locations"]).indexOf(item)+1);
-            if (location && worlds[worldId]["locations"][item].player==myWorld && (!location.logic||location.logic(worlds[worldId])) &&!locations.get(location.id).completed)
+            let location = locations.get(Object.keys(worlds[worldId]["locations"]).indexOf(item));
+            if (location && worlds[worldId]["locations"][item].player==myWorld && (!location.logic||location.logic(worlds[worldId])) &&!worlds[worldId]["locations"][item].completed) 
                 return (<Item location={location.name} name={worlds[worldId]["locations"][item].item}/>)
         })
     }

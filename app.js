@@ -1,15 +1,15 @@
 /**
- * @type{import('./src/networking/auto_tracker')}
+ * @type{import('./public/networking/auto_tracker')}
  */
-const AutoTracker = new (require('./src/networking/auto_tracker'))()
+const AutoTracker = new (require('./js/networking/auto_tracker'))()
 AutoTracker.Initalize() // Initalize the emulator-linked auto tracker.
 
-const WebServer = new (require('./src/renderer/webserver'))()
+const WebServer = new (require('./js/renderer/webserver'))()
 
 /**
- * @type{import('./src/renderer/electron')}
+ * @type{import('./public/renderer/electron')}
  */
-const Electron = new (require('./src/renderer/electron'))()
+const Electron = new (require('./js/renderer/electron'))()
 
 Electron.on('data', (data) => {
   AutoTracker.Send(data)

@@ -456,19 +456,19 @@
     },
     {
       "name": "GC Shop Item 5",
-      "logic": "(world => save.inventory.strength >= 1 || HasExplosives(world)"
+      "logic": "(world) => save.inventory.strength >= 1 || HasExplosives(world)"
     },
     {
       "name": "GC Shop Item 6",
-      "logic": "(world => save.inventory.strength >= 1 || HasExplosives(world)"
+      "logic": "(world) => save.inventory.strength >= 1 || HasExplosives(world)"
     },
     {
       "name": "GC Shop Item 7",
-      "logic": "(world => save.inventory.strength >= 1 || HasExplosives(world)"
+      "logic": "(world) => save.inventory.strength >= 1 || HasExplosives(world)"
     },
     {
       "name": "GC Shop Item 8",
-      "logic": "(world => save.inventory.strength >= 1 || HasExplosives(world)"
+      "logic": "(world) => save.inventory.strength >= 1 || HasExplosives(world)"
     },
     {
       "name": "DMC Volcano Freestanding PoH",

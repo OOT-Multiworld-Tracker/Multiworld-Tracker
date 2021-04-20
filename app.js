@@ -11,6 +11,10 @@ const WebServer = new (require('./src/renderer/webserver'))()
  */
 const Electron = new (require('./src/renderer/electron'))()
 
+Electron.on('data', (data) => {
+  AutoTracker.Send(data)
+})
+
 AutoTracker.on('data', (data) => {
   Electron.SendData(data)
 })

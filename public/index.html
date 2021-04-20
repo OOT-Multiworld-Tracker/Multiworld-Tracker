@@ -181,6 +181,8 @@
     function MarkComplete (props) {
         console.log('Marked as complete: ', props.id)
         locations.get(props.id).completed = true;
+        // Serialize and compress a packet for sending
+        require("electron").ipcRenderer.send("packets", JSON.stringify({"save": {"swords": save.swords, "shields": save.shields, "inventory": save.inventory, "questStatus": save.questStatus}, "locations":NetworkSerialize(locations, "completed")}).replace(/true/g, "1").replace(/false/g, "0"))
         RenderAvaliable();
         RenderCompleted();
     }
@@ -210,6 +212,18 @@
                 break;
             }
         })
+    }
+
+    function NetworkSerialize(map, data) {
+        let array = []
+        map.forEach((value) => array.push(value[data]?1:0))
+        return array
+    }
+
+    function NetworkDeserialize(world, data) {
+        for (let i=1;i<Object.keys(worlds[world].locations).length;i++) {
+            worlds[world].locations[Object.keys(worlds[world].locations)[i]].completed = data[i-1]
+        }
     }
 </script>
 

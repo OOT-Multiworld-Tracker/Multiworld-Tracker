@@ -1,7 +1,9 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, ipcMain } = require('electron')
+const EventEmitter = require('events')
 
-class ElectronRenderer {
+class ElectronRenderer extends EventEmitter {
   constructor () {
+    super()
     /**
      * @private
      * @type {BrowserWindow}
@@ -37,6 +39,10 @@ class ElectronRenderer {
         contextIsolation: false,
         nodeIntegration: true
       }
+    })
+
+    ipcMain.on('packets', (e, data) => {
+      this.emit('data', data)
     })
 
     this.LoadWindow('index.html')

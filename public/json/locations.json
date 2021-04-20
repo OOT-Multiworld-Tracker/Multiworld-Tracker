@@ -13,13 +13,16 @@
       "logic": "(world) => CanEnterJabu(world) && save.inventory.boomerang"
     },
     {
-      "name": "Phantom Ganon"
+      "name": "Phantom Ganon",
+      "logic": "(world) => CanEnterForest(world) && save.inventory.fairyBow"
     },
     {
-      "name": "Volvagia"
+      "name": "Volvagia",
+      "logic":"(world) => CanEnterFire(world) && save.tunics.goronTunic && save.inventory.megatonHammer"
     },
     {
-      "name": "Morpha"
+      "name": "Morpha",
+      "logic": "(world) => CanEnterWater(world)"
     },
     {
       "name": "Bongo Bongo"
@@ -388,101 +391,116 @@
       "logic": "(world) => HasExplosives(world)"
     },
     {
-      "name": "DMT Freestanding PoH"
+      "name": "DMT Freestanding PoH",
+      "logic": "(world) => CanEnterDeathMountain(world)"
     },
     {
       "name": "DMT Chest",
-      "logic": "(world) => HasExplosives(world)"
+      "logic": "(world) => CanEnterDeathMountain(world) && HasExplosives(world)"
     },
     {
       "name": "DMT Storms Grotto Chest",
-      "logic": "(world) => save.inventory.ocarina >= 1 && save.questStatus.songOfStorms"
+      "logic": "(world) => CanEnterDeathMountain(world) && save.inventory.ocarina >= 1 && save.questStatus.songOfStorms"
     },
     {
       "name": "DMT Great Fairy Reward",
-      "logic": "(world) => save.inventory.ocarina >= 1 && save.questStatus.zeldasLullaby && HasExplosives(world)"
+      "logic": "(world) => CanEnterDeathMountain(world) && save.inventory.ocarina >= 1 && save.questStatus.zeldasLullaby && HasExplosives(world)"
     },
     {
-      "name": "DMT Biggoron"
+      "name": "DMT Biggoron",
+      "logic": "(world) => CanEnterDeathMountain(world)"
     },
     {
       "name": "GC Darunias Joy",
-      "logic": "(world) => save.inventory.ocarina >= 1 && save.questStatus.sariasSong == true"
+      "logic": "(world) => CanEnterDeathMountain(world) && save.inventory.ocarina >= 1 && save.questStatus.sariasSong == true"
     },
     {
       "name": "GC Pot Freestanding PoH",
-      "logic": "(world) => HasExplosives(world) && CanLightFires(world) && ((save.inventory.ocarina >= 1 && save.questStatus.sariasSong == true) || (CanUseMagic(world) && save.inventory.dinsFire))"
+      "logic": "(world) => CanEnterDeathMountain(world) && HasExplosives(world) && CanLightFires(world) && ((save.inventory.ocarina >= 1 && save.questStatus.sariasSong == true) || (CanUseMagic(world) && save.inventory.dinsFire))"
     },
     {
       "name": "GC Rolling Goron as Child",
-      "logic": "(world) => HasExplosives(world)"
+      "logic": "(world) => CanEnterDeathMountain(world) && HasExplosives(world)"
     },
     {
       "name": "GC Rolling Goron as Adult",
-      "logic": "(world) => HasExplosives(world) && CanBecomeAdult(world)"
+      "logic": "(world) => CanEnterDeathMountain(world) && HasExplosives(world) && CanBecomeAdult(world)"
     },
     {
       "name": "GC Medigoron",
-      "logic": "(world) => CanBecomeAdult(world) && HasExplosives(world)"
+      "logic": "(world) => CanEnterDeathMountain(world) && CanBecomeAdult(world) && HasExplosives(world)"
     },
     {
       "name": "GC Maze Left Chest",
-      "logic": "(world) => CanBecomeAdult(world) && save.inventory.megatonHammer"
+      "logic": "(world) => CanEnterDeathMountain(world) &&CanBecomeAdult(world) && save.inventory.megatonHammer"
     },
     {
       "name": "GC Maze Right Chest",
-      "logic": "(world) => HasExplosives(world)"
+      "logic": "(world) => CanEnterDeathMountain(world) &&HasExplosives(world)"
     },
     {
       "name": "GC Maze Center Chest",
-      "logic": "(world) => HasExplosives(world)"
+      "logic": "(world) => CanEnterDeathMountain(world) &&HasExplosives(world)"
     },
     {
-      "name": "GC Deku Scrub Grotto Left"
+      "name": "GC Deku Scrub Grotto Left",
+      "logic": "(world) => CanEnterDeathMountain(world)"
     },
     {
-      "name": "GC Deku Scrub Grotto Center"
+      "name": "GC Deku Scrub Grotto Center",
+      "logic": "(world) => CanEnterDeathMountain(world)"
     },
     {
-      "name": "GC Deku Scrub Grotto Right"
+      "name": "GC Deku Scrub Grotto Right",
+      "logic": "(world) => CanEnterDeathMountain(world)"
     },
     {
-      "name": "GC Shop Item 5"
+      "name": "GC Shop Item 5",
+      "logic": "(world => save.inventory.strength >= 1 || HasExplosives(world)"
     },
     {
-      "name": "GC Shop Item 6"
+      "name": "GC Shop Item 6",
+      "logic": "(world => save.inventory.strength >= 1 || HasExplosives(world)"
     },
     {
-      "name": "GC Shop Item 7"
+      "name": "GC Shop Item 7",
+      "logic": "(world => save.inventory.strength >= 1 || HasExplosives(world)"
     },
     {
-      "name": "GC Shop Item 8"
+      "name": "GC Shop Item 8",
+      "logic": "(world => save.inventory.strength >= 1 || HasExplosives(world)"
     },
     {
-      "name": "DMC Volcano Freestanding PoH"
+      "name": "DMC Volcano Freestanding PoH",
+      "logic": "(world) => HasExplosives(world) && CanEnterDeathMountain(world)"
     },
     {
-      "name": "DMC Wall Freestanding PoH"
+      "name": "DMC Wall Freestanding PoH",
+      "logic": "(world) => HasExplosives(world) && CanEnterDeathMountain(world)"
     },
     {
       "name": "DMC Upper Grotto Chest",
-      "logic": "(world) => HasExplosives(world)"
+      "logic": "(world) => CanEnterDeathMountain(world) && HasExplosives(world)"
     },
     {
       "name": "DMC Great Fairy Reward",
-      "logic": "(world) => save.inventory.ocarina >= 1 && save.questStatus.zeldasLullaby && HasExplosives(world)"
+      "logic": "(world) => CanEnterDeathMountain(world) && save.inventory.ocarina >= 1 && save.questStatus.zeldasLullaby && HasExplosives(world)"
     },
     {
-      "name": "DMC Deku Scrub"
+      "name": "DMC Deku Scrub",
+      "logic": "(world) => CanEnterDeathMountain(world) && HasExplosives(world)"
     },
     {
-      "name": "DMC Deku Scrub Grotto Left"
+      "name": "DMC Deku Scrub Grotto Left",
+      "logic": "(world) => CanEnterDeathMountain(world) && HasExplosives(world)"
     },
     {
-      "name": "DMC Deku Scrub Grotto Center"
+      "name": "DMC Deku Scrub Grotto Center",
+      "logic": "(world) => CanEnterDeathMountain(world) && HasExplosives(world)"
     },
     {
-      "name": "DMC Deku Scrub Grotto Right"
+      "name": "DMC Deku Scrub Grotto Right",
+      "logic": "(world) => CanEnterDeathMountain(world) && HasExplosives(world)"
     },
     {
       "name": "ZR Magic Bean Salesman",
@@ -557,7 +575,8 @@
       "logic": "(world) => CanEnterZorasDomain(world) && CanBecomeAdult(world) && save.boots.ironBoots"
     },
     {
-      "name": "LH Underwater Item"
+      "name": "LH Underwater Item",
+      "logic": "(world) => save.inventory.swimming >= 1"
     },
     {
       "name": "LH Child Fishing"
@@ -911,145 +930,192 @@
       "logic": "(world) => dungeons[3].mq == true && save.inventory.ocarina >= 1 && save.questStatus.songOfStorms && save.inventory.boomerang"
     },
     {
-      "name": "Forest Temple First Room Chest"
+      "name": "Forest Temple First Room Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterForest(world)"
     },
     {
-      "name": "Forest Temple First Stalfos Chest"
+      "name": "Forest Temple First Stalfos Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterForest(world)"
     },
     {
-      "name": "Forest Temple Raised Island Courtyard Chest"
+      "name": "Forest Temple Raised Island Courtyard Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterForest(world)"
     },
     {
-      "name": "Forest Temple Well Chest"
+      "name": "Forest Temple Well Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterForest(world) && save.inventory.fairyBow"
     },
     {
-      "name": "Forest Temple Eye Switch Chest"
+      "name": "Forest Temple Eye Switch Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterForest(world) && save.inventory.fairyBow"
     },
     {
-      "name": "Forest Temple Boss Key Chest"
+      "name": "Forest Temple Boss Key Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterForest(world) && save.inventory.fairyBow"
     },
     {
-      "name": "Forest Temple Floormaster Chest"
+      "name": "Forest Temple Floormaster Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterForest(world)"
     },
     {
-      "name": "Forest Temple Red Poe Chest"
+      "name": "Forest Temple Red Poe Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterForest(world)"
     },
     {
-      "name": "Forest Temple Bow Chest"
+      "name": "Forest Temple Bow Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterForest(world)"
     },
     {
-      "name": "Forest Temple Falling Ceiling Room Chest"
+      "name": "Forest Temple Falling Ceiling Room Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterForest(world)"
     },
     {
-      "name": "Forest Temple Basement Chest"
+      "name": "Forest Temple Basement Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterForest(world)"
     },
     {
-      "name": "Forest Temple GS First Room"
+      "name": "Forest Temple GS First Room",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterForest(world)"
     },
     {
-      "name": "Forest Temple GS Lobby"
+      "name": "Forest Temple GS Lobby",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterForest(world)"
     },
     {
-      "name": "Forest Temple GS Raised Island Courtyard"
+      "name": "Forest Temple GS Raised Island Courtyard",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterForest(world)"
     },
     {
-      "name": "Forest Temple GS Level Island Courtyard"
+      "name": "Forest Temple GS Level Island Courtyard",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterForest(world)"
     },
     {
-      "name": "Forest Temple GS Basement"
+      "name": "Forest Temple GS Basement",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterForest(world)"
     },
     {
-      "name": "Forest Temple Phantom Ganon Heart"
+      "name": "Forest Temple Phantom Ganon Heart",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterForest(world) && save.inventory.fairyBow"
     },
     {
-      "name": "Fire Temple MQ Map Room Side Chest"
+      "name": "Fire Temple MQ Map Room Side Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterFire(world)"
     },
     {
-      "name": "Fire Temple MQ Megaton Hammer Chest"
+      "name": "Fire Temple MQ Megaton Hammer Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterFire(world)"
     },
     {
-      "name": "Fire Temple MQ Near Boss Chest"
+      "name": "Fire Temple MQ Near Boss Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterFire(world)"
     },
     {
-      "name": "Fire Temple MQ Big Lava Room Blocked Door Chest"
+      "name": "Fire Temple MQ Big Lava Room Blocked Door Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterFire(world)"
     },
     {
-      "name": "Fire Temple MQ Boss Key Chest"
+      "name": "Fire Temple MQ Boss Key Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterFire(world)"
     },
     {
-      "name": "Fire Temple MQ Lizalfos Maze Side Room Chest"
+      "name": "Fire Temple MQ Lizalfos Maze Side Room Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterFire(world)"
     },
     {
-      "name": "Fire Temple MQ Lizalfos Maze Upper Chest"
+      "name": "Fire Temple MQ Lizalfos Maze Upper Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterFire(world)"
     },
     {
-      "name": "Fire Temple MQ Lizalfos Maze Lower Chest"
+      "name": "Fire Temple MQ Lizalfos Maze Lower Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterFire(world)"
     },
     {
-      "name": "Fire Temple MQ Freestanding Key"
+      "name": "Fire Temple MQ Freestanding Key",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterFire(world)"
     },
     {
-      "name": "Fire Temple MQ Chest On Fire"
+      "name": "Fire Temple MQ Chest On Fire",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterFire(world)"
     },
     {
-      "name": "Fire Temple MQ GS Big Lava Room Open Door"
+      "name": "Fire Temple MQ GS Big Lava Room Open Door",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterFire(world)"
     },
     {
-      "name": "Fire Temple MQ GS Skull On Fire"
+      "name": "Fire Temple MQ GS Skull On Fire",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterFire(world)"
     },
     {
-      "name": "Fire Temple MQ GS Fire Wall Maze Center"
+      "name": "Fire Temple MQ GS Fire Wall Maze Center",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterFire(world)"
     },
     {
-      "name": "Fire Temple MQ GS Fire Wall Maze Side Room"
+      "name": "Fire Temple MQ GS Fire Wall Maze Side Room",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterFire(world)"
     },
     {
-      "name": "Fire Temple MQ GS Above Fire Wall Maze"
+      "name": "Fire Temple MQ GS Above Fire Wall Maze",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterFire(world)"
     },
     {
-      "name": "Fire Temple Volvagia Heart"
+      "name": "Fire Temple Volvagia Heart",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterFire(world) && save.inventory.megatonHammer"
     },
     {
-      "name": "Water Temple Cracked Wall Chest"
+      "name": "Water Temple Cracked Wall Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterWater(world)"
     },
     {
-      "name": "Water Temple Torches Chest"
+      "name": "Water Temple Torches Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterWater(world)"
     },
     {
-      "name": "Water Temple Boss Key Chest"
+      "name": "Water Temple Boss Key Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterWater(world)"
     },
     {
-      "name": "Water Temple Central Pillar Chest"
+      "name": "Water Temple Central Pillar Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterWater(world)"
     },
     {
-      "name": "Water Temple Central Bow Target Chest"
+      "name": "Water Temple Central Bow Target Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterWater(world)"
     },
     {
-      "name": "Water Temple Longshot Chest"
+      "name": "Water Temple Longshot Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterWater(world)"
     },
     {
-      "name": "Water Temple River Chest"
+      "name": "Water Temple River Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterWater(world)"
     },
     {
-      "name": "Water Temple Dragon Chest"
+      "name": "Water Temple Dragon Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterWater(world)"
     },
     {
-      "name": "Water Temple GS Behind Gate"
+      "name": "Water Temple GS Behind Gate",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterWater(world)"
     },
     {
-      "name": "Water Temple GS Near Boss Key Chest"
+      "name": "Water Temple GS Near Boss Key Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterWater(world)"
     },
     {
-      "name": "Water Temple GS Central Pillar"
+      "name": "Water Temple GS Central Pillar",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterWater(world)"
     },
     {
-      "name": "Water Temple GS Falling Platform Room"
+      "name": "Water Temple GS Falling Platform Room",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterWater(world)"
     },
     {
-      "name": "Water Temple GS River"
+      "name": "Water Temple GS River",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterWater(world)"
     },
     {
-      "name": "Water Temple Morpha Heart"
+      "name": "Water Temple Morpha Heart",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterWater(world)"
     },
     {
       "name": "Shadow Temple Hover Boots Chest"

@@ -16,8 +16,8 @@ class DungeonList extends React.Component {
   }
 }
 
-function SaveList () {
-  return (
+class SaveList extends React.Component {
+  render() {
     <table className='table-striped'>
       <thead>
         <tr>
@@ -29,11 +29,11 @@ function SaveList () {
         {RenderSaves()}
       </tbody>
     </table>
-  )
+  }
 }
 
-function WorldList () {
-  return (
+class WorldList extends React.Component {
+  render() {
     <table className='table-striped'>
       <thead>
         <tr>
@@ -45,11 +45,11 @@ function WorldList () {
         {RenderWorlds()}
       </tbody>
     </table>
-  )
+  }
 }
 
-function WorldItemList (props) {
-  return (
+class WorldItemList extends React.Component {
+  render() {
     <div>
       <p>World Items</p>
       <table className='table-striped'>
@@ -60,15 +60,15 @@ function WorldItemList (props) {
           </tr>
         </thead>
         <tbody>
-          {RenderWorldItems(props.id)}
+          {RenderWorldItems(this.props.id)}
         </tbody>
       </table>
     </div>
-  )
+  }
 }
 
-function LocationList () {
-  return (
+class LocationList extends React.Component {
+  render() {
     <table className='table-striped'>
       <thead>
         <tr>
@@ -79,11 +79,11 @@ function LocationList () {
         {GetAccessibleLocations()}
       </tbody>
     </table>
-  )
+  }
 }
 
-function CompletedLocationList () {
-  return (
+class CompletedLocationList extends React.Component {
+  render() {
     <table className='table-striped'>
       <thead>
         <tr>
@@ -94,57 +94,56 @@ function CompletedLocationList () {
         {GetCompleteLocations()}
       </tbody>
     </table>
-  )
+  }
 }
-
-function Dungeon (props) {
-  return (
-    <tr onClick={() => ChangeStatus(props)}>
-      <td>{props.name}</td>
-      <td>{props.status}</td>
+class Dungeon extends React.Component {
+  render() {
+    <tr onClick={() => ChangeStatus(this.props)}>
+      <td>{this.props.name}</td>
+      <td>{this.props.status}</td>
     </tr>
-  )
+  }
 }
 
-function World (props) {
-  return (
-    <tr onClick={() => ReactDOM.render(<WorldItemList id={props.id} />, document.getElementById('avaliable-root'))}>
-      <td>{props.name}</td>
-      <td>{props.items}</td>
+class World extends React.Component {
+  render() {
+    <tr onClick={() => ReactDOM.render(<WorldItemList id={this.props.id} />, document.getElementById('avaliable-root'))}>
+      <td>{this.props.name}</td>
+      <td>{this.props.items}</td>
     </tr>
-  )
+  }
 }
 
-function Item (props) {
-  return (
+class Item extends React.Component {
+  return() {
     <tr>
-      <td>{props.location}</td>
-      <td>{props.name}</td>
+      <td>{this.props.location}</td>
+      <td>{this.props.name}</td>
     </tr>
-  )
+  }
 }
 
-function Save (props) {
-  return (
-    <tr onClick={() => LoadState(props.name)}>
-      <td>{props.name}</td>
+class Save extends react.Component {
+  render() {
+    <tr onClick={() => LoadState(this.props.name)}>
+      <td>{this.props.name}</td>
       <td />
     </tr>
-  )
+  }
 }
 
-function Location (props) {
-  return (
-    <tr onClick={() => MarkComplete(props)}>
-      <td>{props.name}</td>
+class Location extends React.Component {
+  render() {
+    <tr onClick={() => MarkComplete(this.props)}>
+      <td>{this.props.name}</td>
     </tr>
-  )
+  }
 }
 
-function CompleteLocation (props) {
-  return (
-    <tr onClick={() => UnMark(props)}>
-      <td>{props.name}</td>
+class CompleteLocation extends React.Component {
+  render() {
+    <tr onClick={() => UnMark(this.props)}>
+      <td>{this.props.name}</td>
     </tr>
-  )
+  }
 }

@@ -65,7 +65,7 @@ function RenderWorldItems (worldId) {
   return Object.keys(worlds[worldId].locations).map(item => {
     const location = locations.get(Object.keys(worlds[worldId].locations).indexOf(item))
 
-    if (location && (worlds.length == 1 || worlds[worldId].locations[item].player == myWorld) && (!location.logic || location.logic(worlds[worldId])) && !worlds[worldId].locations[item].completed) { 
+    if (location && (worlds.length == 1 || worlds[worldId].locations[item].player == myWorld) && (location.preExit == true || CanExitForest(worlds[worldId])) && (!location.logic || location.logic(worlds[worldId])) && !worlds[worldId].locations[item].completed) { 
       return (<Item location={location.name} name={worlds[worldId].locations[item].item||worlds[worldId].locations[item]} />) 
     }
   })

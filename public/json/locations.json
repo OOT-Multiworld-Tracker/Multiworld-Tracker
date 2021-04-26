@@ -33,7 +33,8 @@
       "logic": "(world) => CanEnterSpirit(world)"
     },
     {
-      "name": "Song from Impa"
+      "name": "Song from Impa",
+      "logic": "(world) => save.inventory.childTradeItem >= 2"
     },
     {
       "name": "Song from Malon",

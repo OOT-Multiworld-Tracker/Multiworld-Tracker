@@ -1,10 +1,11 @@
 if (require) {
   require('electron').ipcRenderer.on('packet', (event, data) => {
     const parsed = JSON.parse(data)
+    console.log(parsed);
 
     switch (parsed.payload) {
       case 0:
-        save = JSON.parse(data).data.save
+        save = parsed.data.save
         RenderAvaliable()
         break
       case 1:

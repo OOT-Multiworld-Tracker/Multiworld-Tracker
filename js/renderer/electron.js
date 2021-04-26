@@ -32,8 +32,8 @@ class ElectronRenderer extends EventEmitter {
    */
   CreateWindow () {
     this.window = new BrowserWindow({
-      width: 800,
-      height: 600,
+      width: 1024,
+      height: 748,
       frame: false,
       webPreferences: {
         contextIsolation: false,

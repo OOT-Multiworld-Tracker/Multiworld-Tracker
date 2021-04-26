@@ -1,0 +1,406 @@
+[
+    {
+        "id": "0",
+        "name": "Inside The Deku Tree"
+    },
+    {
+        "id": "1",
+        "name": "Dodongos Cavern"
+    },
+    {
+        "id": "2",
+        "name": "Inside Jabu Jabus Belly"
+    },
+    {
+        "id": "3",
+        "name": "Forest Temple"
+    },
+    {
+        "id": "4",
+        "name": "Fire Temple"
+    },
+    {
+        "id": "5",
+        "name": "Water Temple"
+    },
+    {
+        "id": "6",
+        "name": "Spirit Temple"
+    },
+    {
+        "id": "7",
+        "name": "Shadow Temple"
+    },
+    {
+        "id": "8",
+        "name": "Bottom Of The Well"
+    },
+    {
+        "id": "9",
+        "name": "Ice Cavern"
+    },
+    {
+        "id": "10",
+        "name": "Ganons Tower"
+    },
+    {
+        "id": "11",
+        "name": "Gerudo Training Grounds"
+    },
+    {
+        "id": "12",
+        "name": "Thieves Hideout"
+    },
+    {
+        "id": "13",
+        "name": "Inside Ganons Castle"
+    },
+    {
+        "id": "14",
+        "name": "Ganons Tower Collapsing"
+    },
+    {
+        "id": "15",
+        "name": "Inside Ganons Castle Collapsing"
+    },
+    {
+        "id": "16",
+        "name": "Treasure Box Shop"
+    },
+    {
+        "id": "17",
+        "name": "Gohmas Lair"
+    },
+    {
+        "id": "18",
+        "name": "King Dodongos Lair"
+    },
+    {
+        "id": "19",
+        "name": "Barinades Lair"
+    },
+    {
+        "id": "20",
+        "name": "Phantom Ganons Lair"
+    },
+    {
+        "id": "21",
+        "name": "Volvagias Lair"
+    },
+    {
+        "id": "22",
+        "name": "Morphas Lair"
+    },
+    {
+        "id": "23",
+        "name": "Twinrovas Lair"
+    },
+    {
+        "id": "24",
+        "name": "Bongo Bongos Lair"
+    },
+    {
+        "id": "25",
+        "name": "Ganondorfs Lair"
+    },
+    {
+        "id": "26",
+        "name": "Tower Collapse Exterior"
+    },
+    {
+        "id": "27",
+        "name": "Market Entrance Child Day"
+    },
+    {
+        "id": "28",
+        "name": "Market Entrance Child Night"
+    },
+    {
+        "id": "29",
+        "name": "Market Entrance Adult"
+    },
+    {
+        "id": "30",
+        "name": "Back Alley Day"
+    },
+    {
+        "id": "31",
+        "name": "Back Alley Night"
+    },
+    {
+        "id": "32",
+        "name": "Market Child Day"
+    },
+    {
+        "id": "33",
+        "name": "Market Child Night"
+    },
+    {
+        "id": "34",
+        "name": "Market Adult"
+    },
+    {
+        "id": "35",
+        "name": "Temple Of Time Exterior Child Day"
+    },
+    {
+        "id": "36",
+        "name": "Temple Of Time Exterior Child Night"
+    },
+    {
+        "id": "37",
+        "name": "Temple Of Time Exterior Adult"
+    },
+    {
+        "id": "38",
+        "name": "Know It All Brothers House"
+    },
+    {
+        "id": "39",
+        "name": "House Of Twins"
+    },
+    {
+        "id": "40",
+        "name": "Midos House"
+    },
+    {
+        "id": "41",
+        "name": "Sarias House"
+    },
+    {
+        "id": "42",
+        "name": "Carpenter Boss House"
+    },
+    {
+        "id": "43",
+        "name": "Back Alley Man In Green House"
+    },
+    {
+        "id": "44",
+        "name": "Bazaar"
+    },
+    {
+        "id": "45",
+        "name": "Kokiri Shop"
+    },
+    {
+        "id": "46",
+        "name": "Goron Shop"
+    },
+    {
+        "id": "47",
+        "name": "Zora Shop"
+    },
+    {
+        "id": "48",
+        "name": "Kakariko Potion Shop"
+    },
+    {
+        "id": "49",
+        "name": "Market Potion Shop"
+    },
+    {
+        "id": "50",
+        "name": "Bombchu Shop"
+    },
+    {
+        "id": "51",
+        "name": "Happy Mask Shop"
+    },
+    {
+        "id": "52",
+        "name": "Links House"
+    },
+    {
+        "id": "53",
+        "name": "Back Alley Dog Lady House"
+    },
+    {
+        "id": "54",
+        "name": "Stable"
+    },
+    {
+        "id": "55",
+        "name": "Impas House"
+    },
+    {
+        "id": "56",
+        "name": "Lakeside Laboratory"
+    },
+    {
+        "id": "57",
+        "name": "Carpenters Tent"
+    },
+    {
+        "id": "58",
+        "name": "Gravekeepers Hut"
+    },
+    {
+        "id": "59",
+        "name": "Great Fairys Fountain Upgrades"
+    },
+    {
+        "id": "60",
+        "name": "Fairys Fountain"
+    },
+    {
+        "id": "61",
+        "name": "Great Fairys Fountain Spells"
+    },
+    {
+        "id": "62",
+        "name": "Grottos"
+    },
+    {
+        "id": "63",
+        "name": "Grave Redead"
+    },
+    {
+        "id": "64",
+        "name": "Grave Fairys Fountain"
+    },
+    {
+        "id": "65",
+        "name": "Royal Family Tomb"
+    },
+    {
+        "id": "66",
+        "name": "Shooting Gallery"
+    },
+    {
+        "id": "67",
+        "name": "Temple Of Time"
+    },
+    {
+        "id": "68",
+        "name": "Chamber Of The Sages"
+    },
+    {
+        "id": "69",
+        "name": "Castle Hedge Maze Day"
+    },
+    {
+        "id": "70",
+        "name": "Castle Hedge Maze Night"
+    },
+    {
+        "id": "71",
+        "name": "Cutscene Map"
+    },
+    {
+        "id": "72",
+        "name": "Windmill"
+    },
+    {
+        "id": "73",
+        "name": "Fishing Pond"
+    },
+    {
+        "id": "74",
+        "name": "Castle Courtyard"
+    },
+    {
+        "id": "75",
+        "name": "Bumbchu Bowling"
+    },
+    {
+        "id": "76",
+        "name": "Ranch House"
+    },
+    {
+        "id": "77",
+        "name": "Guard House"
+    },
+    {
+        "id": "78",
+        "name": "Grannys Potion Shop"
+    },
+    {
+        "id": "79",
+        "name": "Ganon Battle Arena"
+    },
+    {
+        "id": "80",
+        "name": "House Of Skulltula"
+    },
+    {
+        "id": "81",
+        "name": "Hyrule Field"
+    },
+    {
+        "id": "82",
+        "name": "Kakariko Village"
+    },
+    {
+        "id": "83",
+        "name": "Graveyard"
+    },
+    {
+        "id": "84",
+        "name": "Zoras River"
+    },
+    {
+        "id": "85",
+        "name": "Kokiri Forest"
+    },
+    {
+        "id": "86",
+        "name": "Sacred Forest Meadow"
+    },
+    {
+        "id": "87",
+        "name": "Lake Hylia"
+    },
+    {
+        "id": "88",
+        "name": "Zoras Domain"
+    },
+    {
+        "id": "89",
+        "name": "Zoras Fountain"
+    },
+    {
+        "id": "90",
+        "name": "Gerudo Valley"
+    },
+    {
+        "id": "91",
+        "name": "Lost Woods"
+    },
+    {
+        "id": "92",
+        "name": "Desert Colossus"
+    },
+    {
+        "id": "93",
+        "name": "Gerudos Fortress"
+    },
+    {
+        "id": "94",
+        "name": "Haunted Wasteland"
+    },
+    {
+        "id": "95",
+        "name": "Hyrule Castle"
+    },
+    {
+        "id": "96",
+        "name": "Death Mountain Trail"
+    },
+    {
+        "id": "97",
+        "name": "Death Mountain Crater"
+    },
+    {
+        "id": "98",
+        "name": "Goron City"
+    },
+    {
+        "id": "99",
+        "name": "Lon Lon Ranch"
+    },
+    {
+        "id": "100",
+        "name": "Ganons Castle Exterior"
+    }
+]

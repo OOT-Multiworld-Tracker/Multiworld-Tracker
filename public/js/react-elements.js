@@ -117,6 +117,14 @@ class Dungeon extends React.Component {
   }
 }
 
+class PlayerInfo extends React.Component {
+  render() {
+    return (
+
+    )
+  }
+}
+
 class World extends React.Component {
   render() {
     return (

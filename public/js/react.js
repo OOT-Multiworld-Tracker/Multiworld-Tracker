@@ -12,6 +12,8 @@ function RenderCompleted () {
 }
 
 function RenderSidebar (page = 0) {
+  sidebar = page
+  console.log("Rendering sidebar " + sidebar);
   ReactDOM.unmountComponentAtNode(document.getElementsByClassName('sidebar')[0])
   switch (page) {
     case 0:
@@ -37,7 +39,7 @@ function RenderSidebar (page = 0) {
     case 2:
       ReactDOM.render((<div>
         <p>My World ID</p>
-        <input type='number' onInput={(elem) => { myWorld = elem.target.value; ReactDOM.render(<WorldList />, document.getElementById('world-root')) }} />
+        <input type='number' onInput={(elem) => { myWorld = elem.target.value; ReactDOM.render(<WorldList />, document.getElementById('world-root')) }} value={myWorld} />
         <p>Worlds</p>
         <div id='world-root' />
                        </div>), document.getElementsByClassName('sidebar')[0])
@@ -79,7 +81,8 @@ function GetCompleteLocations () {
 }
 
 function Rerender () {
-  RenderAvaliable()
+  RenderAvaliable();
+  RenderSidebar();
 }
 
 function RenderDungeons () {

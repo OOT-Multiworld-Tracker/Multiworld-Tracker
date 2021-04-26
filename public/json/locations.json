@@ -49,13 +49,16 @@
       "name": "Song from Windmill"
     },
     {
-      "name": "Sheik in Forest"
+      "name": "Sheik in Forest",
+      "logic":"(world) => CanBecomeAdult(world) && CanEnterForest(world)"
     },
     {
-      "name": "Sheik in Crater"
+      "name": "Sheik in Crater",
+      "logic":"(world) => CanBecomeAdult(world) && CanEnterDMC(world)"
     },
     {
-      "name": "Sheik in Ice Cavern"
+      "name": "Sheik in Ice Cavern",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterWater(world)"
     },
     {
       "name": "Sheik at Colossus"
@@ -90,22 +93,6 @@
       "name": "KF Storms Grotto Chest",
       "preExit": true,
       "logic": "(world) => save.inventory.ocarina >= 1 && save.questStatus.songOfStorms == true"
-    },
-    {
-      "name": "KF Shop Item 1",
-      "preExit": true
-    },
-    {
-      "name": "KF Shop Item 2",
-      "preExit": true
-    },
-    {
-      "name": "KF Shop Item 3",
-      "preExit": true
-    },
-    {
-      "name": "KF Shop Item 4",
-      "preExit": true
     },
     {
       "name": "KF Shop Item 5",
@@ -384,11 +371,11 @@
     },
     {
       "name": "Graveyard Hookshot Chest",
-      "logic": "(world) => HasExplosives(world)"
+      "logic": "(world) => HasExplosives(world) && CanBecomeAdult(world)"
     },
     {
       "name": "Graveyard Dampe Race Freestanding PoH",
-      "logic": "(world) => HasExplosives(world)"
+      "logic": "(world) => HasExplosives(world) && CanBecomeAdult(world)"
     },
     {
       "name": "DMT Freestanding PoH",
@@ -590,10 +577,12 @@
       "logic": "(world) => save.inventory.swimming == 2"
     },
     {
-      "name": "LH Freestanding PoH"
+      "name": "LH Freestanding PoH",
+      "logic": "(world) => CanBecomeAdult(world) && save.inventory.ocarina >= 1 && save.inventory.hookshot >= 1"
     },
     {
-      "name": "LH Sun"
+      "name": "LH Sun",
+      "logic": "(world) => CanBecomeAdult(world) && locations.get(6).completed && save.inventory.fairyBow"
     },
     {
       "name": "LH Deku Scrub Grotto Left",
@@ -614,7 +603,8 @@
       "name": "GV Waterfall Freestanding PoH"
     },
     {
-      "name": "GV Chest"
+      "name": "GV Chest",
+      "logic": "(world) => save.questStatus.gerudoMembershipCard"
     },
     {
       "name": "GV Deku Scrub Grotto Front",
@@ -625,37 +615,48 @@
       "logic": "(world) => CanStunDeku(world)"
     },
     {
-      "name": "GF Gerudo Membership Card"
+      "name": "GF Gerudo Membership Card",
+      "logic": "(world) => CanBecomeAdult(world) && (save.inventory.hookshot == 2 || (save.inventory.ocarina >= 1 && save.questStatus.eponasSong))"
     },
     {
-      "name": "GF Chest"
+      "name": "GF Chest",
+      "logic": "(world) => CanBecomeAdult(world) && (save.inventory.hookshot == 2 || (save.inventory.ocarina >= 1 && save.questStatus.eponasSong))"
     },
     {
-      "name": "GF HBA 1000 Points"
+      "name": "GF HBA 1000 Points",
+      "logic": "(world) => CanBecomeAdult(world) && save.questStatus.gerudoMembershipCard && (save.inventory.hookshot == 2 || (save.inventory.ocarina >= 1 && save.questStatus.eponasSong))"
     },
     {
-      "name": "GF HBA 1500 Points"
+      "name": "GF HBA 1500 Points",
+      "logic": "(world) => CanBecomeAdult(world) && save.questStatus.gerudoMembershipCard && (save.inventory.hookshot == 2 || (save.inventory.ocarina >= 1 && save.questStatus.eponasSong))"
     },
     {
-      "name": "Wasteland Bombchu Salesman"
+      "name": "Wasteland Bombchu Salesman",
+      "logic": "(world) => save.inventory.hookshot == 2 && save.questStatus.gerudoMembershipCard"
     },
     {
-      "name": "Wasteland Chest"
+      "name": "Wasteland Chest",
+      "logic": "(world) => save.inventory.hookshot == 2 && save.questStatus.gerudoMembershipCard"
     },
     {
-      "name": "Colossus Great Fairy Reward"
+      "name": "Colossus Great Fairy Reward",
+      "logic": "(world) => (save.inventory.ocarina >= 1 && save.questStatus.requiemOfSpirit) || (save.questStatus.gerudoMembershipCard && save.inventory.hookshot == 2)"
     },
     {
-      "name": "Colossus Freestanding PoH"
+      "name": "Colossus Freestanding PoH",
+      "logic": "(world) => (save.inventory.ocarina >= 1 && save.questStatus.requiemOfSpirit) || (save.questStatus.gerudoMembershipCard && save.inventory.hookshot == 2)"
     },
     {
-      "name": "Colossus Deku Scrub Grotto Front"
+      "name": "Colossus Deku Scrub Grotto Front",
+      "logic": "(world) => (save.inventory.ocarina >= 1 && save.questStatus.requiemOfSpirit) || (save.questStatus.gerudoMembershipCard && save.inventory.hookshot == 2) && CanStunDeku(world)"
     },
     {
-      "name": "Colossus Deku Scrub Grotto Rear"
+      "name": "Colossus Deku Scrub Grotto Rear",
+      "logic": "(world) => (save.inventory.ocarina >= 1 && save.questStatus.requiemOfSpirit) || (save.questStatus.gerudoMembershipCard && save.inventory.hookshot == 2) && CanStunDeku(world)"
     },
     {
-      "name": "OGC Great Fairy Reward"
+      "name": "OGC Great Fairy Reward",
+      "logic": "(world) => (save.inventory.ocarina >= 1 && save.questStatus.requiemOfSpirit && save.questStatus.zeldasLullaby) || (save.questStatus.gerudoMembershipCard && save.inventory.hookshot == 2) && CanStunDeku(world) && HasExplosives()"
     },
     {
       "name": "Deku Tree Slingshot Room Side Chest",
@@ -811,7 +812,7 @@
     },
     {
       "name": "Dodongos Cavern King Dodongo Heart",
-      "logic": "(world) => CanEnterDodongo(world) && (save.inventory.bombBag || save.inventory.strength >=1)"
+      "logic": "(world) => CanEnterDodongo(world) && (save.inventory.bombBag || save.inventory.strength >=1) && (save.inventory.dekuSticks || save.swords.kokiriSword)"
     },
     {
       "name": "Jabu Jabus Belly MQ First Room Side Chest",
@@ -867,7 +868,7 @@
     },
     {
       "name": "Jabu Jabus Belly Barinade Heart",
-      "logic": "(world) => CanEnterJabu(world) && save.inventory.boomerang"
+      "logic": "(world) => CanEnterJabu(world) && save.inventory.boomerang && (save.inventory.dekuSticks || save.swords.kokiriSword)"
     },
     {
       "name": "Bottom of the Well Front Left Fake Wall Chest",
@@ -1118,282 +1119,375 @@
       "logic": "(world) => CanBecomeAdult(world) && CanEnterWater(world)"
     },
     {
-      "name": "Shadow Temple Hover Boots Chest"
+      "name": "Shadow Temple Hover Boots Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterShadow(world)"
     },
     {
-      "name": "Shadow Temple Early Silver Rupee Chest"
+      "name": "Shadow Temple Early Silver Rupee Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterShadow(world)"
     },
     {
-      "name": "Shadow Temple Invisible Blades Visible Chest"
+      "name": "Shadow Temple Invisible Blades Visible Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterShadow(world)"
     },
     {
-      "name": "Shadow Temple Invisible Blades Invisible Chest"
+      "name": "Shadow Temple Invisible Blades Invisible Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterShadow(world)"
     },
     {
-      "name": "Shadow Temple Falling Spikes Lower Chest"
+      "name": "Shadow Temple Falling Spikes Lower Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterShadow(world)"
     },
     {
-      "name": "Shadow Temple Falling Spikes Upper Chest"
+      "name": "Shadow Temple Falling Spikes Upper Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterShadow(world)"
     },
     {
-      "name": "Shadow Temple Falling Spikes Switch Chest"
+      "name": "Shadow Temple Falling Spikes Switch Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterShadow(world)"
     },
     {
-      "name": "Shadow Temple Invisible Spikes Chest"
+      "name": "Shadow Temple Invisible Spikes Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterShadow(world)"
     },
     {
-      "name": "Shadow Temple Freestanding Key"
+      "name": "Shadow Temple Freestanding Key",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterShadow(world)"
     },
     {
-      "name": "Shadow Temple Wind Hint Chest"
+      "name": "Shadow Temple Wind Hint Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterShadow(world)"
     },
     {
-      "name": "Shadow Temple After Wind Enemy Chest"
+      "name": "Shadow Temple After Wind Enemy Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterShadow(world)"
     },
     {
-      "name": "Shadow Temple After Wind Hidden Chest"
+      "name": "Shadow Temple After Wind Hidden Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterShadow(world)"
     },
     {
-      "name": "Shadow Temple Spike Walls Left Chest"
+      "name": "Shadow Temple Spike Walls Left Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterShadow(world)"
     },
     {
-      "name": "Shadow Temple Boss Key Chest"
+      "name": "Shadow Temple Boss Key Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterShadow(world)"
     },
     {
-      "name": "Shadow Temple Invisible Floormaster Chest"
+      "name": "Shadow Temple Invisible Floormaster Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterShadow(world)"
     },
     {
-      "name": "Shadow Temple GS Like Like Room"
+      "name": "Shadow Temple GS Like Like Room",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterShadow(world)"
     },
     {
-      "name": "Shadow Temple GS Falling Spikes Room"
+      "name": "Shadow Temple GS Falling Spikes Room",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterShadow(world)"
     },
     {
-      "name": "Shadow Temple GS Single Giant Pot"
+      "name": "Shadow Temple GS Single Giant Pot",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterShadow(world)"
     },
     {
-      "name": "Shadow Temple GS Near Ship"
+      "name": "Shadow Temple GS Near Ship",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterShadow(world)"
     },
     {
-      "name": "Shadow Temple GS Triple Giant Pot"
+      "name": "Shadow Temple GS Triple Giant Pot",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterShadow(world)"
     },
     {
-      "name": "Shadow Temple Bongo Bongo Heart"
+      "name": "Shadow Temple Bongo Bongo Heart",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterShadow(world)"
     },
     {
-      "name": "Spirit Temple MQ Entrance Front Left Chest"
+      "name": "Spirit Temple MQ Entrance Front Left Chest",
+      "logic": "(world) => CanBecomeAdult(world) && dungeons[8].mq == true && CanEnterSpirit(world)"
     },
     {
-      "name": "Spirit Temple MQ Entrance Back Right Chest"
+      "name": "Spirit Temple MQ Entrance Back Right Chest",
+      "logic": "(world) => CanBecomeAdult(world) && dungeons[8].mq == true && CanEnterSpirit(world)"
     },
     {
-      "name": "Spirit Temple MQ Entrance Front Right Chest"
+      "name": "Spirit Temple MQ Entrance Front Right Chest",
+      "logic": "(world) => CanBecomeAdult(world) && dungeons[8].mq == true && CanEnterSpirit(world)"
     },
     {
-      "name": "Spirit Temple MQ Entrance Back Left Chest"
+      "name": "Spirit Temple MQ Entrance Back Left Chest",
+      "logic": "(world) => CanBecomeAdult(world) && dungeons[8].mq == true && CanEnterSpirit(world)"
     },
     {
-      "name": "Spirit Temple MQ Map Room Enemy Chest"
+      "name": "Spirit Temple MQ Map Room Enemy Chest",
+      "logic": "(world) => CanBecomeAdult(world) && dungeons[8].mq == true && CanEnterSpirit(world)"
     },
     {
-      "name": "Spirit Temple MQ Child Climb North Chest"
+      "name": "Spirit Temple MQ Child Climb North Chest",
+      "logic": "(world) => CanBecomeAdult(world) && dungeons[8].mq == true && CanEnterSpirit(world)"
     },
     {
-      "name": "Spirit Temple MQ Child Climb South Chest"
+      "name": "Spirit Temple MQ Child Climb South Chest",
+      "logic": "(world) => CanBecomeAdult(world) && dungeons[8].mq == true && CanEnterSpirit(world)"
     },
     {
-      "name": "Spirit Temple MQ Silver Block Hallway Chest"
+      "name": "Spirit Temple MQ Silver Block Hallway Chest",
+      "logic": "(world) => CanBecomeAdult(world) && dungeons[8].mq == true && CanEnterSpirit(world)"
     },
     {
-      "name": "Spirit Temple MQ Sun Block Room Chest"
+      "name": "Spirit Temple MQ Sun Block Room Chest",
+      "logic": "(world) => CanBecomeAdult(world) && dungeons[8].mq == true && CanEnterSpirit(world)"
     },
     {
-      "name": "Spirit Temple Silver Gauntlets Chest"
+      "name": "Spirit Temple Silver Gauntlets Chest",
+      "logic": "(world) => CanBecomeAdult(world) && dungeons[8].mq == true && CanEnterSpirit(world)"
     },
     {
-      "name": "Spirit Temple MQ Child Hammer Switch Chest"
+      "name": "Spirit Temple MQ Child Hammer Switch Chest",
+      "logic": "(world) => CanBecomeAdult(world) && dungeons[8].mq == true && CanEnterSpirit(world)"
     },
     {
-      "name": "Spirit Temple MQ Statue Room Lullaby Chest"
+      "name": "Spirit Temple MQ Statue Room Lullaby Chest",
+      "logic": "(world) => CanBecomeAdult(world) && dungeons[8].mq == true && CanEnterSpirit(world)"
     },
     {
-      "name": "Spirit Temple MQ Statue Room Invisible Chest"
+      "name": "Spirit Temple MQ Statue Room Invisible Chest",
+      "logic": "(world) => CanBecomeAdult(world) && dungeons[8].mq == true && CanEnterSpirit(world)"
     },
     {
-      "name": "Spirit Temple MQ Leever Room Chest"
+      "name": "Spirit Temple MQ Leever Room Chest",
+      "logic": "(world) => CanBecomeAdult(world) && dungeons[8].mq == true && CanEnterSpirit(world)"
     },
     {
-      "name": "Spirit Temple MQ Symphony Room Chest"
+      "name": "Spirit Temple MQ Symphony Room Chest",
+      "logic": "(world) => CanBecomeAdult(world) && dungeons[8].mq == true && CanEnterSpirit(world)"
     },
     {
-      "name": "Spirit Temple MQ Beamos Room Chest"
+      "name": "Spirit Temple MQ Beamos Room Chest",
+      "logic": "(world) => CanBecomeAdult(world) && dungeons[8].mq == true && CanEnterSpirit(world)"
     },
     {
-      "name": "Spirit Temple MQ Chest Switch Chest"
+      "name": "Spirit Temple MQ Chest Switch Chest",
+      "logic": "(world) => CanBecomeAdult(world) && dungeons[8].mq == true && CanEnterSpirit(world)"
     },
     {
-      "name": "Spirit Temple MQ Boss Key Chest"
+      "name": "Spirit Temple MQ Boss Key Chest",
+      "logic": "(world) => CanBecomeAdult(world) && dungeons[8].mq == true && CanEnterSpirit(world)"
     },
     {
-      "name": "Spirit Temple Mirror Shield Chest"
+      "name": "Spirit Temple Mirror Shield Chest",
+      "logic": "(world) => CanBecomeAdult(world) && dungeons[8].mq == true && CanEnterSpirit(world)"
     },
     {
-      "name": "Spirit Temple MQ Mirror Puzzle Invisible Chest"
+      "name": "Spirit Temple MQ Mirror Puzzle Invisible Chest",
+      "logic": "(world) => CanBecomeAdult(world) && dungeons[8].mq == true && CanEnterSpirit(world)"
     },
     {
-      "name": "Spirit Temple MQ GS Sun Block Room"
+      "name": "Spirit Temple MQ GS Sun Block Room",
+      "logic": "(world) => CanBecomeAdult(world) && dungeons[8].mq == true && CanEnterSpirit(world)"
     },
     {
-      "name": "Spirit Temple MQ GS Leever Room"
+      "name": "Spirit Temple MQ GS Leever Room",
+      "logic": "(world) => CanBecomeAdult(world) && dungeons[8].mq == true && CanEnterSpirit(world)"
     },
     {
-      "name": "Spirit Temple MQ GS Symphony Room"
+      "name": "Spirit Temple MQ GS Symphony Room",
+      "logic": "(world) => CanBecomeAdult(world) && dungeons[8].mq == true && CanEnterSpirit(world)"
     },
     {
-      "name": "Spirit Temple MQ GS Nine Thrones Room West"
+      "name": "Spirit Temple MQ GS Nine Thrones Room West",
+      "logic": "(world) => CanBecomeAdult(world) && dungeons[8].mq == true && CanEnterSpirit(world)"
     },
     {
-      "name": "Spirit Temple MQ GS Nine Thrones Room North"
+      "name": "Spirit Temple MQ GS Nine Thrones Room North",
+      "logic": "(world) => CanBecomeAdult(world) && dungeons[8].mq == true && CanEnterSpirit(world)"
     },
     {
-      "name": "Spirit Temple Twinrova Heart"
+      "name": "Spirit Temple Twinrova Heart",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterSpirit(world)"
     },
     {
-      "name": "Ice Cavern MQ Freestanding PoH"
+      "name": "Ice Cavern MQ Freestanding PoH",
+      "logic": "(world) => CanBecomeAdult(world) && dungeons[9].mq == true && CanEnterIce(world)"
     },
     {
-      "name": "Ice Cavern MQ Iron Boots Chest"
+      "name": "Ice Cavern MQ Iron Boots Chest",
+      "logic": "(world) => CanBecomeAdult(world) && dungeons[9].mq == true && CanEnterIce(world)"
     },
     {
-      "name": "Ice Cavern MQ GS Red Ice"
+      "name": "Ice Cavern MQ GS Red Ice",
+      "logic": "(world) => CanBecomeAdult(world) && dungeons[9].mq == true && CanEnterIce(world)"
     },
     {
-      "name": "Ice Cavern MQ GS Ice Block"
+      "name": "Ice Cavern MQ GS Ice Block",
+      "logic": "(world) => CanBecomeAdult(world) && dungeons[9].mq == true && CanEnterIce(world)"
     },
     {
-      "name": "Ice Cavern MQ GS Scarecrow"
+      "name": "Ice Cavern MQ GS Scarecrow",
+      "logic": "(world) => CanBecomeAdult(world) && dungeons[9].mq == true && CanEnterIce(world)"
     },
     {
-      "name": "Gerudo Training Grounds Lobby Left Chest"
+      "name": "Gerudo Training Grounds Lobby Left Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterGtG(world)"
     },
     {
-      "name": "Gerudo Training Grounds Lobby Right Chest"
+      "name": "Gerudo Training Grounds Lobby Right Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterGtG(world)"
     },
     {
-      "name": "Gerudo Training Grounds Stalfos Chest"
+      "name": "Gerudo Training Grounds Stalfos Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterGtG(world)"
     },
     {
-      "name": "Gerudo Training Grounds Before Heavy Block Chest"
+      "name": "Gerudo Training Grounds Before Heavy Block Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterGtG(world)"
     },
     {
-      "name": "Gerudo Training Grounds Heavy Block First Chest"
+      "name": "Gerudo Training Grounds Heavy Block First Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterGtG(world)"
     },
     {
-      "name": "Gerudo Training Grounds Heavy Block Second Chest"
+      "name": "Gerudo Training Grounds Heavy Block Second Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterGtG(world)"
     },
     {
-      "name": "Gerudo Training Grounds Heavy Block Third Chest"
+      "name": "Gerudo Training Grounds Heavy Block Third Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterGtG(world)"
     },
     {
-      "name": "Gerudo Training Grounds Heavy Block Fourth Chest"
+      "name": "Gerudo Training Grounds Heavy Block Fourth Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterGtG(world)"
     },
     {
-      "name": "Gerudo Training Grounds Eye Statue Chest"
+      "name": "Gerudo Training Grounds Eye Statue Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterGtG(world)"
     },
     {
-      "name": "Gerudo Training Grounds Near Scarecrow Chest"
+      "name": "Gerudo Training Grounds Near Scarecrow Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterGtG(world)"
     },
     {
-      "name": "Gerudo Training Grounds Hammer Room Clear Chest"
+      "name": "Gerudo Training Grounds Hammer Room Clear Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterGtG(world)"
     },
     {
-      "name": "Gerudo Training Grounds Hammer Room Switch Chest"
+      "name": "Gerudo Training Grounds Hammer Room Switch Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterGtG(world)"
     },
     {
-      "name": "Gerudo Training Grounds Freestanding Key"
+      "name": "Gerudo Training Grounds Freestanding Key",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterGtG(world)"
     },
     {
-      "name": "Gerudo Training Grounds Maze Right Central Chest"
+      "name": "Gerudo Training Grounds Maze Right Central Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterGtG(world)"
     },
     {
-      "name": "Gerudo Training Grounds Maze Right Side Chest"
+      "name": "Gerudo Training Grounds Maze Right Side Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterGtG(world)"
     },
     {
-      "name": "Gerudo Training Grounds Underwater Silver Rupee Chest"
+      "name": "Gerudo Training Grounds Underwater Silver Rupee Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterGtG(world)"
     },
     {
-      "name": "Gerudo Training Grounds Beamos Chest"
+      "name": "Gerudo Training Grounds Beamos Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterGtG(world)"
     },
     {
-      "name": "Gerudo Training Grounds Hidden Ceiling Chest"
+      "name": "Gerudo Training Grounds Hidden Ceiling Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterGtG(world)"
     },
     {
-      "name": "Gerudo Training Grounds Maze Path First Chest"
+      "name": "Gerudo Training Grounds Maze Path First Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterGtG(world)"
     },
     {
-      "name": "Gerudo Training Grounds Maze Path Second Chest"
+      "name": "Gerudo Training Grounds Maze Path Second Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterGtG(world)"
     },
     {
-      "name": "Gerudo Training Grounds Maze Path Third Chest"
+      "name": "Gerudo Training Grounds Maze Path Third Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterGtG(world)"
     },
     {
-      "name": "Gerudo Training Grounds Maze Path Final Chest"
+      "name": "Gerudo Training Grounds Maze Path Final Chest",
+      "logic": "(world) => CanBecomeAdult(world) && CanEnterGtG(world)"
     },
     {
-      "name": "Ganons Castle MQ Forest Trial Freestanding Key"
+      "name": "Ganons Castle MQ Forest Trial Freestanding Key",
+      "logic": "(world) => CanBecomeAdult(world) && dungeons[11].mq == true && CanEnterGC(world)"
     },
     {
-      "name": "Ganons Castle MQ Forest Trial Eye Switch Chest"
+      "name": "Ganons Castle MQ Forest Trial Eye Switch Chest",
+      "logic": "(world) => CanBecomeAdult(world) && dungeons[11].mq == true && CanEnterGC(world)"
     },
     {
-      "name": "Ganons Castle MQ Forest Trial Frozen Eye Switch Chest"
+      "name": "Ganons Castle MQ Forest Trial Frozen Eye Switch Chest",
+      "logic": "(world) => CanBecomeAdult(world) && dungeons[11].mq == true && CanEnterGC(world)"
     },
     {
-      "name": "Ganons Castle MQ Water Trial Chest"
+      "name": "Ganons Castle MQ Water Trial Chest",
+      "logic": "(world) => CanBecomeAdult(world) && dungeons[11].mq == true && CanEnterGC(world)"
     },
     {
-      "name": "Ganons Castle MQ Shadow Trial Bomb Flower Chest"
+      "name": "Ganons Castle MQ Shadow Trial Bomb Flower Chest",
+      "logic": "(world) => CanBecomeAdult(world) && dungeons[11].mq == true && CanEnterGC(world)"
     },
     {
-      "name": "Ganons Castle MQ Shadow Trial Eye Switch Chest"
+      "name": "Ganons Castle MQ Shadow Trial Eye Switch Chest",
+      "logic": "(world) => CanBecomeAdult(world) && dungeons[11].mq == true && CanEnterGC(world)"
     },
     {
-      "name": "Ganons Castle MQ Light Trial Lullaby Chest"
+      "name": "Ganons Castle MQ Light Trial Lullaby Chest",
+      "logic": "(world) => CanBecomeAdult(world) && dungeons[11].mq == true && CanEnterGC(world)"
     },
     {
-      "name": "Ganons Castle MQ Spirit Trial First Chest"
+      "name": "Ganons Castle MQ Spirit Trial First Chest",
+      "logic": "(world) => CanBecomeAdult(world) && dungeons[11].mq == true && CanEnterGC(world)"
     },
     {
-      "name": "Ganons Castle MQ Spirit Trial Invisible Chest"
+      "name": "Ganons Castle MQ Spirit Trial Invisible Chest",
+      "logic": "(world) => CanBecomeAdult(world) && dungeons[11].mq == true && CanEnterGC(world)"
     },
     {
-      "name": "Ganons Castle MQ Spirit Trial Sun Front Left Chest"
+      "name": "Ganons Castle MQ Spirit Trial Sun Front Left Chest",
+      "logic": "(world) => CanBecomeAdult(world) && dungeons[11].mq == true && CanEnterGC(world)"
     },
     {
-      "name": "Ganons Castle MQ Spirit Trial Sun Back Left Chest"
+      "name": "Ganons Castle MQ Spirit Trial Sun Back Left Chest",
+      "logic": "(world) => CanBecomeAdult(world) && dungeons[11].mq == true && CanEnterGC(world)"
     },
     {
-      "name": "Ganons Castle MQ Spirit Trial Sun Back Right Chest"
+      "name": "Ganons Castle MQ Spirit Trial Sun Back Right Chest",
+      "logic": "(world) => CanBecomeAdult(world) && dungeons[11].mq == true && CanEnterGC(world)"
     },
     {
-      "name": "Ganons Castle MQ Spirit Trial Golden Gauntlets Chest"
+      "name": "Ganons Castle MQ Spirit Trial Golden Gauntlets Chest",
+      "logic": "(world) => CanBecomeAdult(world) && dungeons[11].mq == true && CanEnterGC(world)"
     },
     {
-      "name": "Ganons Castle MQ Deku Scrub Left"
+      "name": "Ganons Castle MQ Deku Scrub Left",
+      "logic": "(world) => CanBecomeAdult(world) && dungeons[11].mq == true && CanEnterGC(world)"
     },
     {
-      "name": "Ganons Castle MQ Deku Scrub Center-Left"
+      "name": "Ganons Castle MQ Deku Scrub Center-Left",
+      "logic": "(world) => CanBecomeAdult(world) && dungeons[11].mq == true && CanEnterGC(world)"
     },
     {
-      "name": "Ganons Castle MQ Deku Scrub Center"
+      "name": "Ganons Castle MQ Deku Scrub Center",
+      "logic": "(world) => CanBecomeAdult(world) && dungeons[11].mq == true && CanEnterGC(world)"
     },
     {
-      "name": "Ganons Castle MQ Deku Scrub Center-Right"
+      "name": "Ganons Castle MQ Deku Scrub Center-Right",
+      "logic": "(world) => CanBecomeAdult(world) && dungeons[11].mq == true && CanEnterGC(world)"
     },
     {
-      "name": "Ganons Castle MQ Deku Scrub Right"
+      "name": "Ganons Castle MQ Deku Scrub Right",
+      "logic": "(world) => CanBecomeAdult(world) && dungeons[11].mq == true && CanEnterGC(world)"
     },
     {
-      "name": "Ganons Tower Boss Key Chest"
+      "name": "Ganons Tower Boss Key Chest",
+      "logic": "(world) => CanBecomeAdult(world) && dungeons[11].mq == true && CanEnterGC(world)"
     }
   ]

@@ -209,3 +209,15 @@ function CanEnterDMC (world = { save, settings, locations: MapToArray(locations)
 function CanEnterWater (world = { save, settings, locations: MapToArray(locations) }) {
   return CanBecomeAdult(world) && save.boots.ironBoots && save.inventory.hookshot >= 1
 }
+
+function CanEnterShadow (world = { save, settings, locations: MapToArray(locations) }) {
+  return CanBecomeAdult(world) && save.inventory.hookshot >= 1 && (save.inventory.ocarina>=1&&save.questStatus.nocturneOfShadow) && save.inventory.lensOfTruth
+}
+
+function CanEnterSpirit (world = { save, settings, locations: MapToArray(locations) }) {
+  return (save.inventory.ocarina>=1&&save.questStatus.requiemOfSpirit) || (CanBecomeAdult() && save.questStatus.gerudoMembershipCard && (save.inventory.hookshot == 2 || save.inventory.ocarina >= 1 && save.questStatus.eponasSong))
+}
+
+function CanEnterGtG (world = { save, settings, locations: MapToArray(locations) }) {
+  return (CanBecomeAdult() && save.questStatus.gerudoMembershipCard && (save.inventory.hookshot == 2 || save.inventory.ocarina >= 1 && save.questStatus.eponasSong))
+}

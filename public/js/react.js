@@ -45,6 +45,13 @@ function RenderSidebar (page = 0) {
                        </div>), document.getElementsByClassName('sidebar')[0])
       ReactDOM.render(<WorldList />, document.getElementById('world-root'))
       break
+    case 3:
+      ReactDOM.render((<div>
+        <p>Items</p>
+        <div id='item-root' />
+          </div>), document.getElementsByClassName('sidebar')[0])
+      ReactDOM.render(<ItemList />, document.getElementById('item-root'))
+      break
   }
 }
 

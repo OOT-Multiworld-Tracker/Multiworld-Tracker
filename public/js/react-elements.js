@@ -119,9 +119,6 @@ class Dungeon extends React.Component {
 
 class PlayerInfo extends React.Component {
   render() {
-    return (
-
-    )
   }
 }
 

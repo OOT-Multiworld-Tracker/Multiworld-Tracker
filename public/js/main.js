@@ -41,7 +41,7 @@ var myWorld = 1
 ParseLocations()
 
 function SaveAlert () {
-  SaveState('test-save')
+  SaveState(`${save.player_name}-${save.seed}`)
 }
 
 function SaveState (fileName) {
@@ -85,6 +85,7 @@ function ParseSpoilerLog (log) {
     dungeons[i].mq = log.dungeons['World 1'][Object.keys(log.dungeons['World 1'])[i]] == 'mq'
   }
   settings = log.settings
+  save.seed = log[":seed"]
   worlds = []
 
   if (settings.world_count > 1) {
@@ -118,7 +119,8 @@ function MarkComplete (props) {
   console.log('Marked as complete: ', props.id)
   locations.get(props.id).completed = true
   // Serialize and compress a packet for sending
-  require('electron').ipcRenderer.send('packets', JSON.stringify({ save: { swords: save.swords, shields: save.shields, inventory: save.inventory, questStatus: save.questStatus }, locations: NetworkSerialize(locations, 'completed') }).replace(/true/g, '1').replace(/false/g, '0'))
+  if (window.isElectron)
+    require('electron').ipcRenderer.send('packets', JSON.stringify({ save: { swords: save.swords, shields: save.shields, inventory: save.inventory, questStatus: save.questStatus }, locations: NetworkSerialize(locations, 'completed') }).replace(/true/g, '1').replace(/false/g, '0'))
   RenderAvaliable()
   RenderCompleted()
 }

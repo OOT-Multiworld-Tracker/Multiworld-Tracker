@@ -25,28 +25,35 @@
       "logic": "(world) => CanEnterWater(world)"
     },
     {
-      "name": "Bongo Bongo"
+      "name": "Bongo Bongo",
+      "logic": "(world) => CanEnterShadow(world)"
     },
     {
-      "name": "Twinrova"
+      "name": "Twinrova",
+      "logic": "(world) => CanEnterSpirit(world)"
     },
     {
       "name": "Song from Impa"
     },
     {
-      "name": "Song from Malon"
+      "name": "Song from Malon",
+      "logic": "(world) => world.save.inventory.ocarina >= 1"
     },
     {
-      "name": "Song from Saria"
+      "name": "Song from Saria",
+      "logic": "(world) => world.save.inventory.ocarina >= 1 && locations.get(1).completed"
     },
     {
-      "name": "Song from Composers Grave"
+      "name": "Song from Composers Grave",
+      "logic": "(world) => (world.save.inventory.ocarina >= 1 && world.save.questStatus.zeldasLullaby) && HasExplosives(world) && CanDamage(world) && (world.save.inventory.fairySlingshot || world.save.inventory.boomerang)"
     },
     {
-      "name": "Song from Ocarina of Time"
+      "name": "Song from Ocarina of Time",
+      "logic": "(world) => world.save.questStatus.kokiriEmerald && world.save.questStatus.goronRuby && world.save.questStatus.zoraSapphire"
     },
     {
-      "name": "Song from Windmill"
+      "name": "Song from Windmill",
+      "logic": "(world) => world.save.inventory.ocarina >= 1"
     },
     {
       "name": "Sheik in Forest",
@@ -61,13 +68,16 @@
       "logic": "(world) => CanBecomeAdult(world) && CanEnterWater(world)"
     },
     {
-      "name": "Sheik at Colossus"
+      "name": "Sheik at Colossus",
+      "logic": "(world) => CanEnterSpirit(world)"
     },
     {
-      "name": "Sheik in Kakariko"
+      "name": "Sheik in Kakariko",
+      "logic": "(world) => CanBecomeAdult(world)"
     },
     {
-      "name": "Sheik at Temple"
+      "name": "Sheik at Temple",
+      "logic": "(world) => CanBecomeAdult(world) && world.save.questStatus.spiritMedallion"
     },
     {
       "name": "KF Midos Top Left Chest",

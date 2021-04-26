@@ -119,7 +119,7 @@ function MarkComplete (props) {
   console.log('Marked as complete: ', props.id)
   locations.get(props.id).completed = true
   // Serialize and compress a packet for sending
-  if (window.isElectron)
+  if (require)
     require('electron').ipcRenderer.send('packets', JSON.stringify({ save: { swords: save.swords, shields: save.shields, inventory: save.inventory, questStatus: save.questStatus }, locations: NetworkSerialize(locations, 'completed') }).replace(/true/g, '1').replace(/false/g, '0'))
   RenderAvaliable()
   RenderCompleted()
@@ -205,6 +205,11 @@ function CanEnterFire (world = { save, settings, locations: MapToArray(locations
   return CanBecomeAdult(world) && CanEnterDMC(world) && save.inventory.hookshot >= 1
 }
 
+function CanEnterIce (world = { save, settings, locations: MapToArray(locations) }) {
+  const save = world.save
+  return CanBecomeAdult(world) && CanEnterWater(world)
+}
+
 function CanEnterDMC (world = { save, settings, locations: MapToArray(locations) }) {
   return HasExplosives(world)
 }
@@ -227,4 +232,9 @@ function CanEnterSpirit (world = { save, settings, locations: MapToArray(locatio
 function CanEnterGtG (world = { save, settings, locations: MapToArray(locations) }) {
   const save = world.save
   return (CanBecomeAdult() && save.questStatus.gerudoMembershipCard && (save.inventory.hookshot == 2 || save.inventory.ocarina >= 1 && save.questStatus.eponasSong))
+}
+
+function CanEnterGC (world = { save, settings, locations: MapToArray(locations) }) {
+  const save = world.save
+  return (CanBecomeAdult() && save.questStatus.lightMedallion && save.questStatus.spiritMedallion && save.questStatus.shadowMedallion)
 }

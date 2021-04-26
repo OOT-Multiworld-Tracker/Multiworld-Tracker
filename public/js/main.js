@@ -81,9 +81,6 @@ function MapToArray (map) {
 
 function ParseSpoilerLog (log) {
   console.log(log)
-  for (let i = 0; i < Object.keys(log.dungeons['World 1']).length; i++) {
-    dungeons[i].mq = log.dungeons['World 1'][Object.keys(log.dungeons['World 1'])[i]] == 'mq'
-  }
   settings = log.settings
   save.seed = log[":seed"]
   worlds = []
@@ -92,8 +89,16 @@ function ParseSpoilerLog (log) {
     Object.values(log.locations).forEach((world) => {
       worlds.push({ save, locations: world })
     })
+
+    for (let i = 0; i < Object.keys(log.dungeons['World 1']).length; i++) {
+      dungeons[i].mq = log.dungeons['World 1'][Object.keys(log.dungeons['World 1'])[i]] == 'mq'
+    }
   } else {
     worlds.push({ save, locations: log.locations })
+
+    for (let i = 0; i < Object.keys(log.dungeons).length; i++) {
+      dungeons[i].mq = log.dungeons[Object.keys(log.dungeons)[i]] == 'mq'
+    }
   }
   Rerender()
 }

@@ -139,7 +139,7 @@ class Item extends React.Component {
   }
 }
 
-class Save extends react.Component {
+class Save extends React.Component {
   render() {
     return (
       <tr onClick={() => LoadState(this.props.name)}>

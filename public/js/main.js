@@ -34,7 +34,7 @@ let settings = {
   tokensanity: 'dungeons'
 }
 let worlds = []
-const myWorld = 1
+var myWorld = 1
 
 ParseLocations()
 

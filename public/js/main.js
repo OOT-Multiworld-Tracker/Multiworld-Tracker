@@ -191,14 +191,17 @@ function CanEnterZorasDomain (world = { save, settings, locations: MapToArray(lo
 }
 
 function CanEnterJabu (world = { save, settings, locations: MapToArray(locations) }) {
+  const save = world.save
   return CanEnterZorasDomain(world)
 }
 
 function CanEnterForest (world = { save, settings, locations: MapToArray(locations) }) {
+  const save = world.save
   return CanBecomeAdult(world) && save.inventory.hookshot >= 1 && save.inventory.ocarina >= 1 && save.questStatus.sariasSong
 }
 
 function CanEnterFire (world = { save, settings, locations: MapToArray(locations) }) {
+  const save = world.save
   return CanBecomeAdult(world) && CanEnterDMC(world) && save.inventory.hookshot >= 1
 }
 
@@ -207,17 +210,21 @@ function CanEnterDMC (world = { save, settings, locations: MapToArray(locations)
 }
 
 function CanEnterWater (world = { save, settings, locations: MapToArray(locations) }) {
+  const save = world.save
   return CanBecomeAdult(world) && save.boots.ironBoots && save.inventory.hookshot >= 1
 }
 
 function CanEnterShadow (world = { save, settings, locations: MapToArray(locations) }) {
+  const save = world.save
   return CanBecomeAdult(world) && save.inventory.hookshot >= 1 && (save.inventory.ocarina>=1&&save.questStatus.nocturneOfShadow) && save.inventory.lensOfTruth
 }
 
 function CanEnterSpirit (world = { save, settings, locations: MapToArray(locations) }) {
+  const save = world.save
   return (save.inventory.ocarina>=1&&save.questStatus.requiemOfSpirit) || (CanBecomeAdult() && save.questStatus.gerudoMembershipCard && (save.inventory.hookshot == 2 || save.inventory.ocarina >= 1 && save.questStatus.eponasSong))
 }
 
 function CanEnterGtG (world = { save, settings, locations: MapToArray(locations) }) {
+  const save = world.save
   return (CanBecomeAdult() && save.questStatus.gerudoMembershipCard && (save.inventory.hookshot == 2 || save.inventory.ocarina >= 1 && save.questStatus.eponasSong))
 }

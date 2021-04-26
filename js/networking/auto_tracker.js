@@ -23,7 +23,7 @@ class AutoTracker extends EventEmitter {
     })
 
     this.socket.on('message', (data) => {
-      console.log(data)
+      // console.log(data)
       this.emit('data', data)
     })
   }

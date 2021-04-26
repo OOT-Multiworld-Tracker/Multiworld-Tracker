@@ -117,6 +117,14 @@ class Dungeon extends React.Component {
   }
 }
 
+class PlayerInfo extends React.Component {
+  render() {
+    return (
+
+    )
+  }
+}
+
 class World extends React.Component {
   render() {
     return (
@@ -139,7 +147,7 @@ class Item extends React.Component {
   }
 }
 
-class Save extends react.Component {
+class Save extends React.Component {
   render() {
     return (
       <tr onClick={() => LoadState(this.props.name)}>

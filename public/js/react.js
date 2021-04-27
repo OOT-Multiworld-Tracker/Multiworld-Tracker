@@ -45,6 +45,13 @@ function RenderSidebar (page = 0) {
                        </div>), document.getElementsByClassName('sidebar')[0])
       ReactDOM.render(<WorldList />, document.getElementById('world-root'))
       break
+    case 3:
+      ReactDOM.render((<div>
+        <p>Items</p>
+        <div id='item-root' />
+          </div>), document.getElementsByClassName('sidebar')[0])
+      ReactDOM.render(<ItemList />, document.getElementById('item-root'))
+      break
   }
 }
 
@@ -54,7 +61,7 @@ function RenderWorlds () {
 
     Object.keys(worlds[worlds.indexOf(world)].locations).map(item => {
       const location = locations.get(Object.keys(worlds[worlds.indexOf(world)].locations).indexOf(item) + 1)
-      if (location && worlds[worlds.indexOf(world)].locations[item].player == myWorld && (!location.logic || location.logic({ save, settings, locations: MapToArray(locations) })) && !worlds[worlds.indexOf(world)].locations[item].completed) { items++ }
+      if (location && (worlds.length == 1 || worlds[worldId].locations[item].player == myWorld) && (!location.logic || location.logic({ save, settings, locations: MapToArray(locations) })) && !worlds[worlds.indexOf(world)].locations[item].completed) { items++ }
     })
 
     return (<World name={'World' + (worlds.indexOf(world) + 1)} id={worlds.indexOf(world)} items={items} />)
@@ -64,7 +71,10 @@ function RenderWorlds () {
 function RenderWorldItems (worldId) {
   return Object.keys(worlds[worldId].locations).map(item => {
     const location = locations.get(Object.keys(worlds[worldId].locations).indexOf(item))
-    if (location && worlds[worldId].locations[item].player == myWorld && (!location.logic || location.logic(worlds[worldId])) && !worlds[worldId].locations[item].completed) { return (<Item location={location.name} name={worlds[worldId].locations[item].item} />) }
+
+    if (location && (worlds.length == 1 || worlds[worldId].locations[item].player == myWorld) && (location.preExit == true || CanExitForest(worlds[worldId])) && (!location.logic || location.logic(worlds[worldId])) && !worlds[worldId].locations[item].completed) { 
+      return (<Item location={location.name} name={worlds[worldId].locations[item].item||worlds[worldId].locations[item]} />) 
+    }
   })
 }
 

@@ -16,6 +16,28 @@ class DungeonList extends React.Component {
   }
 }
 
+class ItemList extends React.Component {
+  list () {
+    return Object.keys(save.inventory).map((item) => (<Item location={item} name={save.inventory[item] ? 1 : 0}/>));
+  }
+
+  render () {
+    return (
+      <table className='table-striped'>
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Have</th>
+          </tr>
+        </thead>
+        <tbody>
+          {this.list()}
+        </tbody>
+      </table>
+    )
+  }
+}
+
 class SaveList extends React.Component {
   render() {
     return (

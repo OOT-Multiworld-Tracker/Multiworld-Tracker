@@ -36,12 +36,12 @@ let settings = {
 let scene;
 let sidebar = 0;
 let worlds = []
-const myWorld = 1
+var myWorld = 1
 
 ParseLocations()
 
 function SaveAlert () {
-  SaveState('test-save')
+  SaveState(`${save.player_name}-${save.seed}`)
 }
 
 function SaveState (fileName) {
@@ -81,18 +81,24 @@ function MapToArray (map) {
 
 function ParseSpoilerLog (log) {
   console.log(log)
-  for (let i = 0; i < Object.keys(log.dungeons['World 1']).length; i++) {
-    dungeons[i].mq = log.dungeons['World 1'][Object.keys(log.dungeons['World 1'])[i]] == 'mq'
-  }
   settings = log.settings
+  save.seed = log[":seed"]
   worlds = []
 
   if (settings.world_count > 1) {
     Object.values(log.locations).forEach((world) => {
       worlds.push({ save, locations: world })
     })
+
+    for (let i = 0; i < Object.keys(log.dungeons['World 1']).length; i++) {
+      dungeons[i].mq = log.dungeons['World 1'][Object.keys(log.dungeons['World 1'])[i]] == 'mq'
+    }
   } else {
     worlds.push({ save, locations: log.locations })
+
+    for (let i = 0; i < Object.keys(log.dungeons).length; i++) {
+      dungeons[i].mq = log.dungeons[Object.keys(log.dungeons)[i]] == 'mq'
+    }
   }
   Rerender()
 }
@@ -118,7 +124,8 @@ function MarkComplete (props) {
   console.log('Marked as complete: ', props.id)
   locations.get(props.id).completed = true
   // Serialize and compress a packet for sending
-  require('electron').ipcRenderer.send('packets', JSON.stringify({ save: { swords: save.swords, shields: save.shields, inventory: save.inventory, questStatus: save.questStatus }, locations: NetworkSerialize(locations, 'completed') }).replace(/true/g, '1').replace(/false/g, '0'))
+  if (require)
+    require('electron').ipcRenderer.send('packets', JSON.stringify({ save: { swords: save.swords, shields: save.shields, inventory: save.inventory, questStatus: save.questStatus }, locations: NetworkSerialize(locations, 'completed') }).replace(/true/g, '1').replace(/false/g, '0'))
   RenderAvaliable()
   RenderCompleted()
 }
@@ -189,15 +196,23 @@ function CanEnterZorasDomain (world = { save, settings, locations: MapToArray(lo
 }
 
 function CanEnterJabu (world = { save, settings, locations: MapToArray(locations) }) {
+  const save = world.save
   return CanEnterZorasDomain(world)
 }
 
 function CanEnterForest (world = { save, settings, locations: MapToArray(locations) }) {
+  const save = world.save
   return CanBecomeAdult(world) && save.inventory.hookshot >= 1 && save.inventory.ocarina >= 1 && save.questStatus.sariasSong
 }
 
 function CanEnterFire (world = { save, settings, locations: MapToArray(locations) }) {
+  const save = world.save
   return CanBecomeAdult(world) && CanEnterDMC(world) && save.inventory.hookshot >= 1
+}
+
+function CanEnterIce (world = { save, settings, locations: MapToArray(locations) }) {
+  const save = world.save
+  return CanBecomeAdult(world) && CanEnterWater(world)
 }
 
 function CanEnterDMC (world = { save, settings, locations: MapToArray(locations) }) {
@@ -205,5 +220,26 @@ function CanEnterDMC (world = { save, settings, locations: MapToArray(locations)
 }
 
 function CanEnterWater (world = { save, settings, locations: MapToArray(locations) }) {
+  const save = world.save
   return CanBecomeAdult(world) && save.boots.ironBoots && save.inventory.hookshot >= 1
+}
+
+function CanEnterShadow (world = { save, settings, locations: MapToArray(locations) }) {
+  const save = world.save
+  return CanBecomeAdult(world) && save.inventory.hookshot >= 1 && (save.inventory.ocarina>=1&&save.questStatus.nocturneOfShadow) && save.inventory.lensOfTruth
+}
+
+function CanEnterSpirit (world = { save, settings, locations: MapToArray(locations) }) {
+  const save = world.save
+  return (save.inventory.ocarina>=1&&save.questStatus.requiemOfSpirit) || (CanBecomeAdult() && save.questStatus.gerudoMembershipCard && (save.inventory.hookshot == 2 || save.inventory.ocarina >= 1 && save.questStatus.eponasSong))
+}
+
+function CanEnterGtG (world = { save, settings, locations: MapToArray(locations) }) {
+  const save = world.save
+  return (CanBecomeAdult() && save.questStatus.gerudoMembershipCard && (save.inventory.hookshot == 2 || save.inventory.ocarina >= 1 && save.questStatus.eponasSong))
+}
+
+function CanEnterGC (world = { save, settings, locations: MapToArray(locations) }) {
+  const save = world.save
+  return (CanBecomeAdult() && save.questStatus.lightMedallion && save.questStatus.spiritMedallion && save.questStatus.shadowMedallion)
 }

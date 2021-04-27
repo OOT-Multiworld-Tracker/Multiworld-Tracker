@@ -19,7 +19,7 @@ function RenderSidebar (page = 0) {
     case 0:
       ReactDOM.render((<div>
         <input type='file' onInput={(elem) => { SpoilerUploaded(elem.target) }} title='Upload Spoiler' />
-        <div className='character_name'>{save.player_name}</div>
+        <PlayerInfo name={save.player_name}/>
         <div className='world_id'>{'World ' + myWorld}</div>
 
         <p>Dungeons</p>

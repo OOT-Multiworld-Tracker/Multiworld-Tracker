@@ -118,9 +118,36 @@ class Dungeon extends React.Component {
 }
 
 class PlayerInfo extends React.Component {
+  constructor(props) {
+    console.log("Player Info...")
+    super(props);
+    this.state = { name: save.player_name };
+  }
+
+  componentDidMount() {
+    this.nameUpdater = setInterval(
+      () => this.tick(),
+      1000
+    );
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.nameUpdater);
+  }
+
+  tick() {
+    console.log("Tick!");
+    console.log(this.state.name);
+    console.log(save.player_name);
+    if (this.state.name !== save.player_name) {
+      console.log("Name set");
+      this.setState({ name: save.player_name });
+    }
+  }
+
   render() {
     return (
-
+      <div className='character_name'>{this.state.name}</div>
     )
   }
 }

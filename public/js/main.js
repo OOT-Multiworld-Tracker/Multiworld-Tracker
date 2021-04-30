@@ -43,25 +43,26 @@ function SaveAlert () {
 
 function SaveState (fileName) {
   const saveFile = {}
-  Object.assign(saveFile, { dungeons: dungeons })
-  Object.assign(saveFile, { settings: settings })
-  Object.assign(saveFile, { save: save })
-  Object.assign(saveFile, { locations: MapToArray(locations) })
+  Object.assign(saveFile, { dungeons: app.local.world.dungeons })
+  Object.assign(saveFile, { settings: app.global.settings })
+  Object.assign(saveFile, { save: app.local.world.save })
+  Object.assign(saveFile, { locations: app.local.world.locations.Array() })
 
   localStorage.setItem(`save-${fileName}`, JSON.stringify(saveFile))
 }
 
 function LoadState (fileName) {
   const file = JSON.parse(localStorage.getItem(fileName))
-  dungeons = file.dungeons
-  settings = file.settings
-  save = file.save
+  app.local.world.dungeons = file.dungeons
+  app.global.settings = file.settings
+  app.local.world.save = file.save
 
   file.locations.forEach((location) => {
-    locations.set(location.id, location)
+    app.local.world.locations.All().set(location.id, location)
   })
 
-  Rerender()
+  ReactDOM.render(<Sidebar/>, document.getElementsByClassName('sidebar')[0])
+  ReactDOM.render(<Locations/>, document.getElementById('avaliable-root'))
 }
 
 function SpoilerUploaded (data) {

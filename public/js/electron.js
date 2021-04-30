@@ -1,7 +1,7 @@
 if (require) {
   require('electron').ipcRenderer.on('packet', (event, data) => {
     const parsed = JSON.parse(data)
-    console.log(parsed);
+    console.log(parsed)
 
     switch (parsed.payload) {
       case 0:

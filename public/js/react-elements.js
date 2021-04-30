@@ -1,4 +1,8 @@
-class DungeonList extends React.Component {
+class Dungeons extends React.Component {
+  constructor () {
+    super()
+    this.state = { dungeons }
+  }
   render () {
     return (
       <table className='table-striped'>
@@ -9,16 +13,22 @@ class DungeonList extends React.Component {
           </tr>
         </thead>
         <tbody>
-          {RenderDungeons()}
+          {dungeons.map((dungeon) => {return (
+              <tr onClick={() => { dungeon.mq = !dungeon.mq; this.setState({dungeons}) }}>
+                <td>{dungeon.name}</td>
+                <td>{dungeon.mq == true ? 'Master' : 'Vanilla'}</td>
+              </tr>
+            )})}
         </tbody>
       </table>
     )
   }
 }
 
-class ItemList extends React.Component {
-  list () {
-    return Object.keys(save.inventory).map((item) => (<Item location={item} name={save.inventory[item] ? 1 : 0}/>));
+class Items extends React.Component {
+  constructor () {
+    super ()
+    this.state = { items: save.inventory }
   }
 
   render () {
@@ -31,14 +41,25 @@ class ItemList extends React.Component {
           </tr>
         </thead>
         <tbody>
-          {this.list()}
+          {Object.keys(this.state.items).map((item) => (
+          <tr>
+            <td>{item}</td>
+            <td>{this.state.items[item] ? 1 : 0}</td>
+          </tr>))}
         </tbody>
       </table>
     )
   }
 }
 
-class SaveList extends React.Component {
+class Saves extends React.Component {
+  list () {
+    const files = []; 
+    for (let i = 0; i < localStorage.length; i++) { 
+      files.push(<Save name={localStorage.key(i)} />)
+    }
+    return files;
+  }
   render() {
     return (
       <table className='table-striped'>
@@ -49,14 +70,18 @@ class SaveList extends React.Component {
           </tr>
         </thead>
         <tbody>
-          {RenderSaves()}
+          {this.list()}
         </tbody>
       </table>
     )
   }
 }
 
-class WorldList extends React.Component {
+class Worlds extends React.Component {
+  constructor () {
+    super ()
+  }
+
   render() {
     return (
       <table className='table-striped'>
@@ -67,14 +92,19 @@ class WorldList extends React.Component {
           </tr>
         </thead>
         <tbody>
-          {RenderWorlds()}
+          {app.worlds.map((world, index) => { return (<World name={'World ' + index} id={index} items={world.locations.Accessible(false, false).length}/>) })}
         </tbody>
       </table>
     )
   }
 }
 
-class WorldItemList extends React.Component {
+
+class ItemPopulation extends React.Component {
+  constructor (props) {
+    super (props)
+  }
+
   render() {
     return (
       <div>
@@ -87,7 +117,11 @@ class WorldItemList extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {RenderWorldItems(this.props.id)}
+            {app.worlds[this.props.id].locations.Accessible(false, true).map(location => {
+              if (app.worlds.length === 1 || location.player === myWorld) {
+                return location
+              }
+            })}
           </tbody>
         </table>
       </div>
@@ -95,7 +129,12 @@ class WorldItemList extends React.Component {
   }
 }
 
-class LocationList extends React.Component {
+class Locations extends React.Component {
+  constructor (props) {
+    super (props)
+    this.filter = props.completed || false
+  }
+
   render() {
     return (
       <table className='table-striped'>
@@ -105,62 +144,48 @@ class LocationList extends React.Component {
           </tr>
         </thead>
         <tbody>
-          {GetAccessibleLocations()}
+          {app.local.world.locations.Accessible(this.filter, false)}
         </tbody>
       </table>
     )
   }
 }
 
-class CompletedLocationList extends React.Component {
-  render() {
-    return (
-      <table className='table-striped'>
-        <thead>
-          <tr>
-            <th>Location</th>
-          </tr>
-        </thead>
-        <tbody>
-          {GetCompleteLocations()}
-        </tbody>
-      </table>
-    )
+class Player extends React.Component {
+  constructor () {
+    super()
+    this.state = { name: save.player_name };
   }
-}
-class Dungeon extends React.Component {
-  render() {
-    return (
-      <tr onClick={() => ChangeStatus(this.props)}>
-        <td>{this.props.name}</td>
-        <td>{this.props.status}</td>
-      </tr>
-    )
+
+  componentDidMount () {
+    this.timer = setInterval(
+      () => this.tick(),
+      1000
+    );
+  }
+
+  componentWillUnmount () {
+    clearInterval(this.timer);
+  }
+
+  tick () {
+    this.setState({ name: save.player_name });
+  }
+
+  render () {
+    return app.worlds.length == 1 ? (
+      <div className='character_name'>{this.state.name}</div>
+    ) : (<div>World {this.state.name}</div>)
   }
 }
 
-class PlayerInfo extends React.Component {
-  render() {
-  }
-}
 
 class World extends React.Component {
   render() {
     return (
-      <tr onClick={() => ReactDOM.render(<WorldItemList id={this.props.id} />, document.getElementById('avaliable-root'))}>
+      <tr onClick={() => ReactDOM.render(<ItemPopulation id={this.props.id} />, document.getElementById('avaliable-root'))}>
         <td>{this.props.name}</td>
         <td>{this.props.items}</td>
-      </tr>
-    )
-  }
-}
-
-class Item extends React.Component {
-  render() {
-    return (
-      <tr>
-        <td>{this.props.location}</td>
-        <td>{this.props.name}</td>
       </tr>
     )
   }
@@ -180,19 +205,57 @@ class Save extends React.Component {
 class Location extends React.Component {
   render() {
     return (
-      <tr onClick={() => MarkComplete(this.props)}>
+      <tr onClick={() => ToggleCompleted(this.props)}>
         <td>{this.props.name}</td>
+        {this.props.item ? <td>{this.props.item}</td> : null}
       </tr>
     )
   }
 }
 
-class CompleteLocation extends React.Component {
-  render() {
-    return (
-      <tr onClick={() => UnMark(this.props)}>
-        <td>{this.props.name}</td>
-      </tr>
-    )
+class Sidebar extends React.Component {
+  constructor () {
+    super ()
+    this.state = { page: 0 }
+    eSidebar = this
+  }
+
+  render () {
+    switch (this.state.page) {
+      case 0:
+        return (
+          <div>
+            <input type='file' onInput={(elem) => { SpoilerUploaded(elem.target) }} title='Upload Spoiler' />
+              <Player/>
+              <div className='world_id'>{'World ' + myWorld}</div>
+              <p>Dungeons</p>
+              <Dungeons />
+          </div>
+        );
+      case 1:
+        return (
+          <div>
+            <button className='btn btn-default' onClick={() => SaveAlert()}>Save</button>
+            <p>Files</p>
+            <Saves/>
+          </div>
+        );
+      case 2:
+        return (
+          <div>
+            <p>My World ID</p>
+            <input type='number' onInput={(elem) => { myWorld = elem.target.value; }} />
+            <p>Worlds</p>
+            <Worlds/>
+          </div>
+        );
+      case 3:
+        return (
+          <div>
+            <p>Items</p>
+            <Items/>
+          </div>
+        );
+    }
   }
 }

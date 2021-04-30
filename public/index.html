@@ -14,16 +14,16 @@
 
             <div class="toolbar-actions">
                 <div class="btn-group">
-                  <button onclick="RenderSidebar(0)" class="btn btn-default">
+                  <button onclick="eSidebar.setState({page: 0})" class="btn btn-default">
                     <span class="icon icon-compass"></span>
                   </button>
-                  <button onclick="RenderSidebar(1)" class="btn btn-default">
+                  <button onclick="eSidebar.setState({page: 1})" class="btn btn-default">
                     <span class="icon icon-download"></span>
                   </button>
-                  <button onclick="RenderSidebar(2)" class="btn btn-default">
+                  <button onclick="eSidebar.setState({page: 2})" class="btn btn-default">
                     <span class="icon icon-network"></span>
                   </button>
-                  <button onclick="RenderSidebar(3)" class="btn btn-default">
+                  <button onclick="eSidebar.setState({page: 3})" class="btn btn-default">
                     <span class="icon icon-network"></span>
                   </button>
                 </div>
@@ -75,8 +75,9 @@
 <script>if (window.module) module = window.module;</script>
 </body>
 </html>
-<script src="/js/main.js"></script>
-<script src="/js/electron.js"></script>
+<script src="/js/app.js" type="text/babel"></script>
+<script src="/js/main.js"  type="text/babel"></script>
+<script src="/js/electron.js"  type="text/babel"></script>
 
 <script src="/js/react-elements.js"  type="text/babel"></script>
 <script src="/js/react.js" type="text/babel"></script>

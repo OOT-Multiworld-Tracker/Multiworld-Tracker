@@ -34,15 +34,18 @@
     },
     {
       "name": "Song from Impa",
-      "logic": "(world) => save.inventory.childTradeItem >= 2"
+      "logic": "(world) => world.save.inventory.childTradeItem >= 34"
     },
     {
       "name": "Song from Malon",
-      "logic": "(world) => world.save.inventory.ocarina >= 1"
+      "logic": "(world) => world.save.inventory.ocarina >= 1 && world.save.inventory.childTradeItem >= 34"
+    },
+    {
+      "name": "Malon Egg"
     },
     {
       "name": "Song from Saria",
-      "logic": "(world) => world.save.inventory.ocarina >= 1 && locations.get(1).completed"
+      "logic": "(world) => world.save.inventory.ocarina >= 1 && world.locations.Array()[1].completed"
     },
     {
       "name": "Song from Composers Grave",
@@ -107,22 +110,27 @@
     },
     {
       "name": "KF Shop Item 5",
-      "preExit": true
+      "preExit": true,
+      "logic": "(world) => ShopRandomized(world, 1)"
     },
     {
       "name": "KF Shop Item 6",
-      "preExit": true
+      "preExit": true,
+      "logic": "(world) => ShopRandomized(world, 2)"
     },
     {
       "name": "KF Shop Item 7",
-      "preExit": true
+      "preExit": true,
+      "logic": "(world) => ShopRandomized(world, 3)"
     },
     {
       "name": "KF Shop Item 8",
-      "preExit": true
+      "preExit": true,
+      "logic": "(world) => ShopRandomized(world, 4)"
     },
     {
-      "name": "LW Gift from Saria"
+      "name": "LW Gift from Saria",
+      "logic": "(world) => app.global.settings.open_forest != 'closed' || world.locations.Array()[1].completed == true"
     },
     {
       "name": "LW Ocarina Memory Game",
@@ -145,21 +153,23 @@
     },
     {
       "name": "LW Deku Scrub Near Deku Theater Left",
-      "preExit": true
+      "preExit": true,
+      "logic":"(world) => IsScrubSanity(world)"
     },
     {
       "name": "LW Deku Scrub Near Deku Theater Right",
-      "preExit": true
+      "preExit": true,
+      "logic":"(world) => IsScrubSanity(world)"
     },
     {
       "name": "LW Deku Scrub Grotto Front",
       "preExit": true,
-      "logic": "(world) => HasExplosives(world)"
+      "logic": "(world) => HasExplosives(world) && IsScrubSanity(world)"
     },
     {
       "name": "LW Deku Scrub Grotto Rear",
       "preExit": true,
-      "logic": "(world) => HasExplosives(world)"
+      "logic": "(world) => HasExplosives(world) && IsScrubSanity(world)"
     },
     {
       "name": "SFM Wolfos Grotto Chest",
@@ -169,12 +179,12 @@
     {
       "name": "SFM Deku Scrub Grotto Front",
       "preExit": true,
-      "logic": "(world) => HasExplosives(world)"
+      "logic": "(world) => HasExplosives(world) && IsScrubSanity(world)"
     },
     {
       "name": "SFM Deku Scrub Grotto Rear",
       "preExit": true,
-      "logic": "(world) => HasExplosives(world)"
+      "logic": "(world) => HasExplosives(world) && IsScrubSanity(world)"
     },
     {
       "name": "HF Ocarina of Time Item",
@@ -223,40 +233,52 @@
       "logic": "(world) => world.save.inventory.bottle_1 || world.save.inventory.bottle_2 || world.save.inventory.bottle_3 || world.save.inventory.bottle_4"
     },
     {
-      "name": "Market Bazaar Item 5"
+      "name": "Market Bazaar Item 5",
+      "logic": "(world) => ShopRandomized(world, 1)"
     },
     {
-      "name": "Market Bazaar Item 6"
+      "name": "Market Bazaar Item 6",
+      "logic": "(world) => ShopRandomized(world, 2)"
     },
     {
-      "name": "Market Bazaar Item 7"
+      "name": "Market Bazaar Item 7",
+      "logic": "(world) => ShopRandomized(world, 3)"
     },
     {
-      "name": "Market Bazaar Item 8"
+      "name": "Market Bazaar Item 8",
+      "logic": "(world) => ShopRandomized(world, 4)"
     },
     {
-      "name": "Market Potion Shop Item 5"
+      "name": "Market Potion Shop Item 5",
+      "logic": "(world) => ShopRandomized(world, 1)"
     },
     {
-      "name": "Market Potion Shop Item 6"
+      "name": "Market Potion Shop Item 6",
+      "logic": "(world) => ShopRandomized(world, 2)"
     },
     {
-      "name": "Market Potion Shop Item 7"
+      "name": "Market Potion Shop Item 7",
+      "logic": "(world) => ShopRandomized(world, 3)"
     },
     {
-      "name": "Market Potion Shop Item 8"
+      "name": "Market Potion Shop Item 8",
+      "logic": "(world) => ShopRandomized(world, 4)"
     },
     {
-      "name": "Market Bombchu Shop Item 5"
+      "name": "Market Bombchu Shop Item 5",
+      "logic": "(world) => ShopRandomized(world, 1)"
     },
     {
-      "name": "Market Bombchu Shop Item 6"
+      "name": "Market Bombchu Shop Item 6",
+      "logic": "(world) => ShopRandomized(world, 2)"
     },
     {
-      "name": "Market Bombchu Shop Item 7"
+      "name": "Market Bombchu Shop Item 7",
+      "logic": "(world) => ShopRandomized(world, 3)"
     },
     {
-      "name": "Market Bombchu Shop Item 8"
+      "name": "Market Bombchu Shop Item 8",
+      "logic": "(world) => ShopRandomized(world, 4)"
     },
     {
       "name": "ToT Light Arrows Cutscene",
@@ -273,13 +295,16 @@
       "name": "LLR Freestanding PoH"
     },
     {
-      "name": "LLR Deku Scrub Grotto Left"
+      "name": "LLR Deku Scrub Grotto Left",
+      "logic": "(world) => IsScrubSanity(world)"
     },
     {
-      "name": "LLR Deku Scrub Grotto Center"
+      "name": "LLR Deku Scrub Grotto Center",
+      "logic": "(world) => IsScrubSanity(world)"
     },
     {
-      "name": "LLR Deku Scrub Grotto Right"
+      "name": "LLR Deku Scrub Grotto Right",
+      "logic": "(world) => IsScrubSanity(world)"
     },
     {
       "name": "Kak Anju as Child"
@@ -332,35 +357,35 @@
     },
     {
       "name": "Kak Bazaar Item 5",
-      "logic": "(world) => CanBecomeAdult(world)"
+      "logic": "(world) => CanBecomeAdult(world) && ShopRandomized(world, 1)"
     },
     {
       "name": "Kak Bazaar Item 6",
-      "logic": "(world) => CanBecomeAdult(world)"
+      "logic": "(world) => CanBecomeAdult(world) && ShopRandomized(world, 2)"
     },
     {
       "name": "Kak Bazaar Item 7",
-      "logic": "(world) => CanBecomeAdult(world)"
+      "logic": "(world) => CanBecomeAdult(world) && ShopRandomized(world, 3)"
     },
     {
       "name": "Kak Bazaar Item 8",
-      "logic": "(world) => CanBecomeAdult(world)"
+      "logic": "(world) => CanBecomeAdult(world) && ShopRandomized(world, 4)"
     },
     {
       "name": "Kak Potion Shop Item 5",
-      "logic": "(world) => CanBecomeAdult(world)"
+      "logic": "(world) => CanBecomeAdult(world) && ShopRandomized(world, 1)"
     },
     {
       "name": "Kak Potion Shop Item 6",
-      "logic": "(world) => CanBecomeAdult(world)"
+      "logic": "(world) => CanBecomeAdult(world) && ShopRandomized(world, 2)"
     },
     {
       "name": "Kak Potion Shop Item 7",
-      "logic": "(world) => CanBecomeAdult(world)"
+      "logic": "(world) => CanBecomeAdult(world) && ShopRandomized(world, 3)"
     },
     {
       "name": "Kak Potion Shop Item 8",
-      "logic": "(world) => CanBecomeAdult(world)"
+      "logic": "(world) => CanBecomeAdult(world) && ShopRandomized(world, 4)"
     },
     {
       "name": "Graveyard Shield Grave Chest"
@@ -406,7 +431,7 @@
     },
     {
       "name": "DMT Biggoron",
-      "logic": "(world) => CanEnterDeathMountain(world)"
+      "logic": "(world) => CanEnterDeathMountain(world) && CanBecomeAdult(world) && world.save.inventory.adultTradeItem == 55"
     },
     {
       "name": "GC Darunias Joy",
@@ -442,35 +467,35 @@
     },
     {
       "name": "GC Deku Scrub Grotto Left",
-      "logic": "(world) => CanEnterDeathMountain(world)"
+      "logic": "(world) => CanEnterDeathMountain(world) && IsScrubSanity(world)"
     },
     {
       "name": "GC Deku Scrub Grotto Center",
-      "logic": "(world) => CanEnterDeathMountain(world)"
+      "logic": "(world) => CanEnterDeathMountain(world) && IsScrubSanity(world)"
     },
     {
       "name": "GC Deku Scrub Grotto Right",
-      "logic": "(world) => CanEnterDeathMountain(world)"
+      "logic": "(world) => CanEnterDeathMountain(world) && IsScrubSanity(world)"
     },
     {
       "name": "GC Shop Item 5",
-      "logic": "(world) => world.save.inventory.strength >= 1 || HasExplosives(world)"
+      "logic": "(world) => (world.save.inventory.strength >= 1 || HasExplosives(world)) && ShopRandomized(world, 1)"
     },
     {
       "name": "GC Shop Item 6",
-      "logic": "(world) => world.save.inventory.strength >= 1 || HasExplosives(world)"
+      "logic": "(world) => (world.save.inventory.strength >= 1 || HasExplosives(world)) && ShopRandomized(world, 2)"
     },
     {
       "name": "GC Shop Item 7",
-      "logic": "(world) => world.save.inventory.strength >= 1 || HasExplosives(world)"
+      "logic": "(world) => (world.save.inventory.strength >= 1 || HasExplosives(world)) && ShopRandomized(world, 3)"
     },
     {
       "name": "GC Shop Item 8",
-      "logic": "(world) => world.save.inventory.strength >= 1 || HasExplosives(world)"
+      "logic": "(world) => (world.save.inventory.strength >= 1 || HasExplosives(world)) && ShopRandomized(world, 4)"
     },
     {
       "name": "DMC Volcano Freestanding PoH",
-      "logic": "(world) => HasExplosives(world) && CanEnterDeathMountain(world)"
+      "logic": "(world) => HasExplosives(world) && CanEnterDeathMountain(world) && CanBecomeAdult(world)"
     },
     {
       "name": "DMC Wall Freestanding PoH",
@@ -486,19 +511,19 @@
     },
     {
       "name": "DMC Deku Scrub",
-      "logic": "(world) => CanEnterDeathMountain(world) && HasExplosives(world)"
+      "logic": "(world) => CanEnterDeathMountain(world) && HasExplosives(world) && IsScrubSanity(world)"
     },
     {
       "name": "DMC Deku Scrub Grotto Left",
-      "logic": "(world) => CanEnterDeathMountain(world) && HasExplosives(world)"
+      "logic": "(world) => CanEnterDeathMountain(world) && HasExplosives(world) && IsScrubSanity(world)"
     },
     {
       "name": "DMC Deku Scrub Grotto Center",
-      "logic": "(world) => CanEnterDeathMountain(world) && HasExplosives(world)"
+      "logic": "(world) => CanEnterDeathMountain(world) && HasExplosives(world) && IsScrubSanity(world)"
     },
     {
       "name": "DMC Deku Scrub Grotto Right",
-      "logic": "(world) => CanEnterDeathMountain(world) && HasExplosives(world)"
+      "logic": "(world) => CanEnterDeathMountain(world) && HasExplosives(world) && IsScrubSanity(world)"
     },
     {
       "name": "ZR Magic Bean Salesman",
@@ -526,11 +551,11 @@
     },
     {
       "name": "ZR Deku Scrub Grotto Front",
-      "logic": "(world) => CanEnterZorasRiver(world)"
+      "logic": "(world) => CanEnterZorasRiver(world) && IsScrubSanity(world)"
     },
     {
       "name": "ZR Deku Scrub Grotto Rear",
-      "logic": "(world) => CanEnterZorasRiver(world)"
+      "logic": "(world) => CanEnterZorasRiver(world) && IsScrubSanity(world)"
     },
     {
       "name": "ZD Diving Minigame",
@@ -546,19 +571,19 @@
     },
     {
       "name": "ZD Shop Item 5",
-      "logic": "(world) => CanEnterZorasDomain(world)"
+      "logic": "(world) => CanEnterZorasDomain(world)&& ShopRandomized(world, 1)"
     },
     {
       "name": "ZD Shop Item 6",
-      "logic": "(world) => CanEnterZorasDomain(world)"
+      "logic": "(world) => CanEnterZorasDomain(world)&& ShopRandomized(world, 2)"
     },
     {
       "name": "ZD Shop Item 7",
-      "logic": "(world) => CanEnterZorasDomain(world)"
+      "logic": "(world) => CanEnterZorasDomain(world)&& ShopRandomized(world, 3)"
     },
     {
       "name": "ZD Shop Item 8",
-      "logic": "(world) => CanEnterZorasDomain(world)"
+      "logic": "(world) => CanEnterZorasDomain(world)&& ShopRandomized(world, 4)"
     },
     {
       "name": "ZF Great Fairy Reward",
@@ -597,15 +622,15 @@
     },
     {
       "name": "LH Deku Scrub Grotto Left",
-      "logic": "(world) => CanStunDeku(world)"
+      "logic": "(world) => CanStunDeku(world) && IsScrubSanity(world)"
     },
     {
       "name": "LH Deku Scrub Grotto Center",
-      "logic": "(world) => CanStunDeku(world)"
+      "logic": "(world) => CanStunDeku(world) && IsScrubSanity(world)"
     },
     {
       "name": "LH Deku Scrub Grotto Right",
-      "logic": "(world) => CanStunDeku(world)"
+      "logic": "(world) => CanStunDeku(world) && IsScrubSanity(world)"
     },
     {
       "name": "GV Crate Freestanding PoH"
@@ -619,11 +644,11 @@
     },
     {
       "name": "GV Deku Scrub Grotto Front",
-      "logic": "(world) => CanStunDeku(world)"
+      "logic": "(world) => IsScrubSanity(world) && CanStunDeku(world)"
     },
     {
       "name": "GV Deku Scrub Grotto Rear",
-      "logic": "(world) => CanStunDeku(world)"
+      "logic": "(world) => IsScrubSanity(world) && CanStunDeku(world)"
     },
     {
       "name": "GF Gerudo Membership Card",
@@ -659,11 +684,11 @@
     },
     {
       "name": "Colossus Deku Scrub Grotto Front",
-      "logic": "(world) => (world.save.inventory.ocarina >= 1 && world.save.questStatus.requiemOfSpirit) || (world.save.questStatus.gerudoMembershipCard && world.save.inventory.hookshot == 2) && CanStunDeku(world)"
+      "logic": "(world) => IsScrubSanity(world) && (world.save.inventory.ocarina >= 1 && world.save.questStatus.requiemOfSpirit) || (world.save.questStatus.gerudoMembershipCard && world.save.inventory.hookshot == 2) && CanStunDeku(world)"
     },
     {
       "name": "Colossus Deku Scrub Grotto Rear",
-      "logic": "(world) => (world.save.inventory.ocarina >= 1 && world.save.questStatus.requiemOfSpirit) || (world.save.questStatus.gerudoMembershipCard && world.save.inventory.hookshot == 2) && CanStunDeku(world)"
+      "logic": "(world) => IsScrubSanity(world) && (world.save.inventory.ocarina >= 1 && world.save.questStatus.requiemOfSpirit) || (world.save.questStatus.gerudoMembershipCard && world.save.inventory.hookshot == 2) && CanStunDeku(world)"
     },
     {
       "name": "OGC Great Fairy Reward",
@@ -783,19 +808,19 @@
     },
     {
       "name": "Dodongos Cavern Deku Scrub Side Room Near Dodongos",
-      "logic": "(world) => dungeons[1].mq == false &&CanEnterDodongo(world)"
+      "logic": "(world) => IsScrubSanity(world) && dungeons[1].mq == false &&CanEnterDodongo(world)"
     },
     {
       "name": "Dodongos Cavern Deku Scrub Lobby",
-      "logic": "(world) => dungeons[1].mq == false &&CanEnterDodongo(world)"
+      "logic": "(world) => IsScrubSanity(world) && dungeons[1].mq == false &&CanEnterDodongo(world)"
     },
     {
       "name": "Dodongos Cavern Deku Scrub Near Bomb Bag Left",
-      "logic": "(world) => dungeons[1].mq == false &&CanEnterDodongo(world)"
+      "logic": "(world) => IsScrubSanity(world) && dungeons[1].mq == false &&CanEnterDodongo(world)"
     },
     {
       "name": "Dodongos Cavern Deku Scrub Near Bomb Bag Right",
-      "logic": "(world) => dungeons[1].mq == false &&CanEnterDodongo(world)"
+      "logic": "(world) => IsScrubSanity(world) && dungeons[1].mq == false &&CanEnterDodongo(world)"
     },
     {
       "name": "Dodongos Cavern GS Side Room Near Lower Lizalfos",

@@ -110,6 +110,8 @@ function ParseLocations (locations, spoiler=null) {
     data.forEach((location, index) => {
       location.id = index
 
+      console.log(location)
+      
       if (location.logic) {
         location.logic = eval(location.logic)
       }
@@ -242,4 +244,12 @@ function CanEnterGtG (world = { save, settings, locations: MapToArray(locations)
 function CanEnterGC (world = { save, settings, locations: MapToArray(locations) }) {
   const save = world.save
   return (CanBecomeAdult() && save.questStatus.lightMedallion && save.questStatus.spiritMedallion && save.questStatus.shadowMedallion)
+}
+
+function ShopRandomized(world = app.local.world, count = 0) {
+  return app.global.settings.shopsanity >= count
+}
+
+function IsScrubSanity(world = app.local.world) {
+  return app.global.settings.shuffle_scrubs !== 'none'
 }

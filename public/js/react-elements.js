@@ -94,7 +94,7 @@ class Worlds extends React.Component {
           </tr>
         </thead>
         <tbody>
-          {app.worlds.map((world, index) => { return (<World name={'World ' + index} id={index} items={world.locations.Accessible(false, false).length}/>) })}
+          {app.worlds.map((world, index) => { return (<World name={'World ' + index} id={index} items={world.locations.Accessible(false, false).filter(location => location.item && location.item.player == myWorld).length}/>) })}
         </tbody>
       </table>
     )
@@ -120,8 +120,8 @@ class ItemPopulation extends React.Component {
           </thead>
           <tbody>
             {app.worlds[this.props.id].locations.Accessible(false, true).map(location => {
-              if (app.worlds.length === 1 || location.player === myWorld) {
-                return location
+              if (location.item && (app.worlds.length === 1 || location.item.player == myWorld)) {
+                return <Location id={location.id} item={location.item.item || "Unknown"} name={location.name} />
               }
             })}
           </tbody>
@@ -274,6 +274,11 @@ class Header extends React.Component {
 }
 
 class Location extends React.Component {
+  constructor (props) {
+    super(props)
+    console.log(this.props)
+  }
+
   render() {
     return (
       <tr onClick={() => ToggleCompleted(this.props)}>

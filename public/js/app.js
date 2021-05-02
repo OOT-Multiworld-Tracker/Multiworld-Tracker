@@ -24,17 +24,18 @@ class App {
 }
 
 class GameWorld {
-  constructor (save, dungeons) {
+  constructor (save, dungeons, locations) {
     this.save = save
-    this.locations = new LocationManager(this)
+    this.locations = new LocationManager(this, locations)
     this.dungeons = dungeons
   }
 }
 
 class LocationManager {
-  constructor (world) {
+  constructor (world, spoiler) {
     this.world = world
-    this.locations = ParseLocations(new Map())
+    this.spoiler = spoiler
+    this.locations = ParseLocations(new Map(), this.spoiler)
   }
 
   All () {

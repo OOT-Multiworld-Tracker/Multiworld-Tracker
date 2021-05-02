@@ -33,6 +33,7 @@ let settings = {
   shopsanity: 2,
   tokensanity: 'dungeons'
 }
+let uploadedSpoiler;
 
 var app = new App()
 var myWorld = 1
@@ -80,12 +81,13 @@ function MapToArray (map) {
 function ParseSpoilerLog (log) {
   console.log(log)
   settings = log.settings
+  uploadedSpoiler = log
   save.seed = log[":seed"]
   app.worlds = []
 
   if (settings.world_count > 1) {
-    Object.values(log.locations).forEach((world) => {
-      app.worlds.push({ save, locations: world })
+    Object.values(log.locations).forEach((world, index) => {
+      app.worlds.push(new GameWorld(save, dungeons, Object.values(log.locations[`World ${index+1}`])))
     })
 
     for (let i = 0; i < Object.keys(log.dungeons['World 1']).length; i++) {
@@ -102,7 +104,7 @@ function ParseSpoilerLog (log) {
   ReactDOM.render(<Sidebar/>, document.getElementsByClassName('sidebar')[0])
 }
 
-function ParseLocations (locations) {
+function ParseLocations (locations, spoiler=null) {
   $.getJSON('/json/locations.json', (data) => {
     locationJson = data
     data.forEach((location, index) => {
@@ -112,6 +114,8 @@ function ParseLocations (locations) {
         location.logic = eval(location.logic)
       }
 
+      if (spoiler)
+        location.item = spoiler[index]
       locations.set(location.id, location)
     })
 

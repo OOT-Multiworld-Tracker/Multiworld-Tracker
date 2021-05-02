@@ -110,8 +110,6 @@ function ParseLocations (locations, spoiler=null) {
     data.forEach((location, index) => {
       location.id = index
 
-      console.log(location)
-      
       if (location.logic) {
         location.logic = eval(location.logic)
       }

@@ -13,6 +13,7 @@ const WebServer = new (require('./js/renderer/webserver'))()
 const Electron = process.type ? new (require('./js/renderer/electron'))() : {on:() =>{}}
 
 Electron.on('data', (data) => {
+  console.log(data)
   AutoTracker.Send(data)
 })
 

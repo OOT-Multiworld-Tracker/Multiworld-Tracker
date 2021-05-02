@@ -13,6 +13,14 @@ if (require) {
       case 1:
         // Scene payload
         break
+      case 3:
+        console.log("Received other map tracker")
+        if (app.worlds[parsed.data.world]==app.local.world) // Prevent lost progress through mistakes or attempted trolls.
+          return
+
+        NetworkDeserialize(app.worlds[parsed.data.world], parsed.data)
+        console.log(parsed.data)
+        break
     }
   })
 }
@@ -24,7 +32,8 @@ function NetworkSerialize (map, data) {
 }
 
 function NetworkDeserialize (world, data) {
-  for (let i = 1; i < Object.keys(worlds[world].locations).length; i++) {
-    worlds[world].locations[Object.keys(worlds[world].locations)[i]].completed = data[i - 1]
-  }
+  if (!world)
+    return app.worlds.push(new GameWorld(data.save, dungeons))
+
+  world.locations.Array().forEach((location,index) => {location.completed = data.locations[index]})
 }

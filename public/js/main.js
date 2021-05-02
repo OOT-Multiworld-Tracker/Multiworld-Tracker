@@ -133,7 +133,7 @@ function ToggleCompleted (props) {
   app.local.world.locations.Array()[props.id].completed = !app.local.world.locations.Array()[props.id].completed
   // Serialize and compress a packet for sending
   if (window.isElectron)
-    require('electron').ipcRenderer.send('packets', JSON.stringify({ save: { swords: save.swords, shields: save.shields, inventory: save.inventory, questStatus: save.questStatus }, locations: NetworkSerialize(locations, 'completed') }).replace(/true/g, '1').replace(/false/g, '0'))
+    require('electron').ipcRenderer.send('packets', JSON.stringify({ world: myWorld-1, save: { swords: save.swords, shields: save.shields, inventory: save.inventory, questStatus: save.questStatus }, locations: NetworkSerialize(app.local.world.locations.Array(), 'completed') }).replace(/true/g, '1').replace(/false/g, '0'))
   app.RenderLocations()
 }
 

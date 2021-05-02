@@ -7,14 +7,13 @@ class AutoTracker extends EventEmitter {
     /**
      * @private
      */
-    this.socket = new WebSocket('ws://localhost:8080')
+    this.socket = new WebSocket(`ws://localhost:${process.argv[2]||8080}`)
     this.socket.onerror = () => { console.log('Failed to connect to client') }
   }
 
   Send (data) {
     const json = JSON.parse(data)
-    json.PAYLOAD = 2
-    this.socket.send(JSON.stringify(json))
+    this.socket.send(JSON.stringify({ PAYLOAD: 2, data: json }))
   }
 
   Initalize () {

@@ -1,5 +1,11 @@
 # Multiworld-Tracker
 
+## Features
+- Multiworld ***AutoTracking!!*** (Currently only your held items)
+- Minimal Spoiler Location View (See only the items you can access at that time)
+- Search for locations by keywords (e.g Ocarina Saria)
+- View your friends' progress in Multiworld
+
 ![image](https://user-images.githubusercontent.com/25229421/116802093-1d8a5a00-aade-11eb-8722-2f90ca9bd8ba.png)
 
 A minimalist Ocarina of Time Multiworld Auto-Tracker. Built to have plugin-based autotracker support using Modloader64, this tracker is designed for up-to-date fun-run! Any users using the same plugin and tracker will be automatically updated regarding your progress, and can see what locations they have left! Upon uploading a spoiler log, you can see any locations associated with *your* world in other worlds. This allows you to get a general idea of your potential progression options. The spoiler-log information is limited the world's currently accessible locations, so you won't get over spoiled.

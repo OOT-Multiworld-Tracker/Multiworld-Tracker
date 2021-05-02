@@ -62,7 +62,7 @@ function LoadState (fileName) {
   })
 
   ReactDOM.render(<Sidebar/>, document.getElementsByClassName('sidebar')[0])
-  ReactDOM.render(<Locations/>, document.getElementById('avaliable-root'))
+  app.RenderLocations()
 }
 
 function SpoilerUploaded (data) {

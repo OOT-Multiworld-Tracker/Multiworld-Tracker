@@ -5,8 +5,8 @@ if (require) {
 
     switch (parsed.payload) {
       case 0:
-        save = parsed.data.save
-        RenderAvaliable()
+        app.local.world.save = parsed.data.save
+        app.RenderLocations()
         break
       case 1:
         // Scene payload

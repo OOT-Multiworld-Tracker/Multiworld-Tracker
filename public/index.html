@@ -9,43 +9,12 @@
 
 <body>
     <div class="window">
-        <header class="toolbar toolbar-header" style="-webkit-app-region: drag">
-            <h1 class="title">Ocarina of Time - Multiworld Autotracker</h1>
-
-            <div class="toolbar-actions">
-                <div class="btn-group">
-                  <button onclick="eSidebar.setState({page: 0})" class="btn btn-default">
-                    <span class="icon icon-compass"></span>
-                  </button>
-                  <button onclick="eSidebar.setState({page: 1})" class="btn btn-default">
-                    <span class="icon icon-download"></span>
-                  </button>
-                  <button onclick="eSidebar.setState({page: 2})" class="btn btn-default">
-                    <span class="icon icon-network"></span>
-                  </button>
-                  <button onclick="eSidebar.setState({page: 3})" class="btn btn-default">
-                    <span class="icon icon-network"></span>
-                  </button>
-                </div>
-            
-                <div class="btn-group pull-right">
-                    <button class="btn btn-default pull-right">
-                        <span class="icon icon-minus"></span>
-                    </button>
-                    <button class="btn btn-default pull-right">
-                        <span class="icon icon-doc"></span>
-                    </button>
-                    <button class="btn btn-default pull-right">
-                        <span class="icon icon-cancel"></span>
-                    </button>
-                </div>
-              </div>
-        </header>
+        <div id="header-root"></div>
 
         <div class="window-content">
             <div class="">
                 <div class="pane-group">
-                    <div class="pane-sm sidebar">
+                    <div class="pane-md sidebar">
 
                     </div>
                     <div class="pane padded">
@@ -57,6 +26,8 @@
                                 Show Scene Locations
                             </button>
                         </div>
+                        
+                        <input class="btn btn-default" onchange="app.SearchLocations(this.value)" placeholder="Click Here to Search" style="width: 40%; cursor: pointer; background-color: white; border-radius: 0; text-align: left"/>
 
                         <p>Accessible Locations</p>
                         <div id="avaliable-root"></div>

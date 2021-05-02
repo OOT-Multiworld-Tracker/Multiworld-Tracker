@@ -17,6 +17,10 @@ class App {
     ReactDOM.render(<Locations />, document.getElementById('avaliable-root'))
     ReactDOM.render(<Locations completed="true"/>, document.getElementById('completed-root'))
   }
+
+  SearchLocations(term) {
+    locationList.setState({search: term})
+  }
 }
 
 class GameWorld {
@@ -41,9 +45,21 @@ class LocationManager {
     return MapToArray(this.locations)
   }
 
-  Accessible (complete, showItems) {
-    return this.Array().filter(location => (IsAccessible(location, this.world) && complete == false && !location.completed) || complete && location.completed == true).map(location => (
-      <Location id={location.id} item={showItems ? location.item || "Unknown" : null} name={location.name} />))
+  Accessible (complete=false, showItems=false) {
+    return this.Array().filter(location => (IsAccessible(location, this.world) && complete == false && !location.completed) || complete && location.completed == true)
+  }
+
+  Search (term) {
+    const keywords = term.split(' ')
+    return this.Accessible().filter((location) => {
+      let valid = true
+      keywords.forEach(keyword => {
+        if (!location.name.includes(keyword)) {
+          valid = false
+        }
+      })
+      return valid
+    })
   }
 
   Get (completed = false) {

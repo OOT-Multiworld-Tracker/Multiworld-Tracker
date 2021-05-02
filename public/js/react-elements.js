@@ -1,3 +1,5 @@
+var locationList;
+
 class Dungeons extends React.Component {
   constructor () {
     super()
@@ -133,6 +135,11 @@ class Locations extends React.Component {
   constructor (props) {
     super (props)
     this.filter = props.completed || false
+    this.showItems = props.showItems || false
+
+    if (!locationList)
+     locationList = this
+    this.state = {search: ""}
   }
 
   render() {
@@ -144,7 +151,29 @@ class Locations extends React.Component {
           </tr>
         </thead>
         <tbody>
-          {app.local.world.locations.Accessible(this.filter, false)}
+          {!this.state.search ? app.local.world.locations.Accessible(this.filter, false).map(location => (
+      <Location id={location.id} item={this.showItems ? location.item || "Unknown" : null} name={location.name} />)) : 
+      
+        app.local.world.locations.Search(this.state.search).map(location => (
+        <Location id={location.id} item={this.showItems ? location.item || "Unknown" : null} name={location.name} />))}
+        </tbody>
+      </table>
+    )
+  }
+}
+
+class Settings extends React.Component {
+  render() {
+    return (
+      <table className='table-striped'>
+        <thead>
+          <tr>
+            <th>Setting</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          {Object.keys(app.global.settings).map((setting) => (<tr><td>{setting}</td><td>{app.global.settings[setting]}</td></tr>))}
         </tbody>
       </table>
     )
@@ -198,6 +227,48 @@ class Save extends React.Component {
         <td>{this.props.name}</td>
         <td />
       </tr>
+    )
+  }
+}
+
+class Header extends React.Component {
+  render() {
+    return (
+      <header className="toolbar toolbar-header">
+        {window.isElectron ? <h1 class="title">Ocarina of Time - Multiworld Autotracker</h1> : null}
+
+        <div class="toolbar-actions">
+          <div class="btn-group">
+            <button onClick={() => eSidebar.setState({page: 0})} class="btn btn-default">
+              <span class="icon icon-compass"/>
+            </button>
+            <button onClick={() => eSidebar.setState({page: 1})} class="btn btn-default">
+              <span class="icon icon-download"/>
+            </button>
+            <button onClick={() => eSidebar.setState({page: 2})} class="btn btn-default">
+              <span class="icon icon-network"></span>
+            </button>
+            <button onClick={() => eSidebar.setState({page: 3})} class="btn btn-default">
+              <span class="icon icon-network"></span>
+            </button>
+            <button onClick={() => eSidebar.setState({page: 4})} class="btn btn-default">
+              <span class="icon icon-cog"></span>
+            </button>
+          </div>
+
+          {window.isElectron ? <div class="btn-group pull-right">
+              <button class="btn btn-default pull-right">
+                  <span class="icon icon-minus"></span>
+              </button>
+              <button class="btn btn-default pull-right">
+                  <span class="icon icon-doc"></span>
+              </button>
+              <button class="btn btn-default pull-right">
+                  <span class="icon icon-cancel"></span>
+              </button>
+          </div> : null}
+        </div>
+      </header>
     )
   }
 }
@@ -256,6 +327,15 @@ class Sidebar extends React.Component {
             <Items/>
           </div>
         );
+      case 4:
+        return (
+          <div>
+            <p>Settings</p>
+            <Settings/>
+          </div>
+        )
     }
   }
 }
+
+ReactDOM.render(<Header/>, document.getElementById("header-root"))

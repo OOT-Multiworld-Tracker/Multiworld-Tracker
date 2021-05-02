@@ -8,6 +8,7 @@ class AutoTracker extends EventEmitter {
      * @private
      */
     this.socket = new WebSocket('ws://localhost:8080')
+    this.socket.onerror = () => { console.log('Failed to connect to client') }
   }
 
   Send (data) {

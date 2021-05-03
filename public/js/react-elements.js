@@ -239,31 +239,31 @@ class Header extends React.Component {
 
         <div class="toolbar-actions">
           <div class="btn-group">
-            <button onClick={() => eSidebar.setState({page: 0})} class="btn btn-default">
+            <button onClick={() => eSidebar.setState({page: 0})} class="btn btn-dark btn-default">
               <span class="icon icon-compass"/>
             </button>
-            <button onClick={() => eSidebar.setState({page: 1})} class="btn btn-default">
+            <button onClick={() => eSidebar.setState({page: 1})} class="btn btn-dark  btn-default">
               <span class="icon icon-download"/>
             </button>
-            <button onClick={() => eSidebar.setState({page: 2})} class="btn btn-default">
+            <button onClick={() => eSidebar.setState({page: 2})} class="btn btn-dark btn-default">
               <span class="icon icon-network"></span>
             </button>
-            <button onClick={() => eSidebar.setState({page: 3})} class="btn btn-default">
+            <button onClick={() => eSidebar.setState({page: 3})} class="btn btn-dark btn-default">
               <span class="icon icon-network"></span>
             </button>
-            <button onClick={() => eSidebar.setState({page: 4})} class="btn btn-default">
+            <button onClick={() => eSidebar.setState({page: 4})} class="btn btn-dark btn-default">
               <span class="icon icon-cog"></span>
             </button>
           </div>
 
           {window.isElectron ? <div class="btn-group pull-right">
-              <button class="btn btn-default pull-right">
+              <button class="btn btn-default btn-dark pull-right">
                   <span class="icon icon-minus"></span>
               </button>
-              <button class="btn btn-default pull-right">
+              <button class="btn btn-default btn-dark pull-right">
                   <span class="icon icon-doc"></span>
               </button>
-              <button class="btn btn-default pull-right">
+              <button class="btn btn-default btn-dark pull-right">
                   <span class="icon icon-cancel"></span>
               </button>
           </div> : null}

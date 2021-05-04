@@ -36,5 +36,6 @@ function NetworkDeserialize (world, data) {
   if (!world)
     return app.worlds.push(new GameWorld(data.save, dungeons))
 
+  world.save = data.save
   world.locations.Array().forEach((location,index) => {location.completed = data.locations[index]})
 }

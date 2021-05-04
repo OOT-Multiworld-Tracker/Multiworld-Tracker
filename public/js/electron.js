@@ -8,6 +8,7 @@ if (require) {
     switch (parsed.payload) {
       case 0:
         app.local.world.save = parsed.data.save
+        app.worlds[myWorld-1].save = parsed.data.save
         app.RenderLocations()
         break
       case 1:

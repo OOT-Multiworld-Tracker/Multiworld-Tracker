@@ -137,7 +137,7 @@ class Locations extends React.Component {
     this.filter = props.completed || false
     this.showItems = props.showItems || false
 
-    if (!locationList)
+    if (!this.filter)
      locationList = this
     this.state = {search: ""}
   }
@@ -276,7 +276,6 @@ class Header extends React.Component {
 class Location extends React.Component {
   constructor (props) {
     super(props)
-    console.log(this.props)
   }
 
   render() {
@@ -299,6 +298,7 @@ class Sidebar extends React.Component {
   render () {
     switch (this.state.page) {
       case 0:
+        ReactDOM.render(<Locations/>, document.getElementById('avaliable-root'))
         return (
           <div>
             <input type='file' onInput={(elem) => { SpoilerUploaded(elem.target) }} title='Upload Spoiler' />

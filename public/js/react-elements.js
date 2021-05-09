@@ -30,7 +30,7 @@ class Dungeons extends React.Component {
 class Items extends React.Component {
   constructor () {
     super ()
-    this.state = { items: save.inventory }
+    this.state = { items: app.local.world.save.inventory }
   }
 
   render () {
@@ -44,7 +44,7 @@ class Items extends React.Component {
         </thead>
         <tbody>
           {Object.keys(this.state.items).map((item) => (
-          <tr>
+          <tr onClick={() => {app.local.world.save.inventory[item] = !app.local.world.save.inventory[item]; this.setState({items: app.local.world.save.inventory})}}>
             <td>{item}</td>
             <td>{this.state.items[item] ? 1 : 0}</td>
           </tr>))}
@@ -56,11 +56,11 @@ class Items extends React.Component {
 
 class Saves extends React.Component {
   list () {
-    const files = []; 
+    const files = []
     for (let i = 0; i < localStorage.length; i++) { 
       files.push(<Save name={localStorage.key(i)} />)
     }
-    return files;
+    return files
   }
   render() {
     return (

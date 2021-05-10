@@ -29,8 +29,8 @@ class Dungeons extends React.Component {
 
 class Items extends React.Component {
   constructor () {
-    super ()
-    this.state = { items: app.local.world.save.inventory }
+    super()
+    this.state = { items: app.local.world.save }
   }
 
   render () {
@@ -43,10 +43,25 @@ class Items extends React.Component {
           </tr>
         </thead>
         <tbody>
-          {Object.keys(this.state.items).map((item) => (
-          <tr onClick={() => {app.local.world.save.inventory[item] = !app.local.world.save.inventory[item]; this.setState({items: app.local.world.save.inventory})}}>
+          {Object.keys(this.state.items.inventory).map((item) => (
+          <tr onClick={() => {app.local.world.save.inventory[item] = !app.local.world.save.inventory[item]; this.setState({items: app.local.world.save}); app.RenderLocations()}}>
             <td>{item}</td>
-            <td>{this.state.items[item] ? 1 : 0}</td>
+            <td>{this.state.items.inventory[item] ? 1 : 0}</td>
+          </tr>))}
+          {Object.keys(this.state.items.swords).map((item) => (
+          <tr onClick={() => {app.local.world.save.swords[item] = !app.local.world.save.swords[item]; this.setState({items: app.local.world.save}); app.RenderLocations()}}>
+            <td>{item}</td>
+            <td>{this.state.items.swords[item] ? 1 : 0}</td>
+          </tr>))}
+          {Object.keys(this.state.items.tunics).map((item) => (
+          <tr onClick={() => {app.local.world.save.tunics[item] = !app.local.world.save.tunics[item]; this.setState({items: app.local.world.save}); app.RenderLocations()}}>
+            <td>{item}</td>
+            <td>{this.state.items.tunics[item] ? 1 : 0}</td>
+          </tr>))}
+          {Object.keys(this.state.items.questStatus).map((item) => (
+          <tr onClick={() => {app.local.world.save.questStatus[item] = !app.local.world.save.questStatus[item]; this.setState({items: app.local.world.save}); app.RenderLocations()}}>
+            <td>{item}</td>
+            <td>{this.state.items.questStatus[item] ? 1 : 0}</td>
           </tr>))}
         </tbody>
       </table>

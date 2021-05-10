@@ -13,13 +13,13 @@ class App {
     this.local.world = this.worlds[0]
   }
 
-  RenderLocations() {
+  RenderLocations () {
     ReactDOM.render(<Locations />, document.getElementById('avaliable-root'))
-    ReactDOM.render(<Locations completed="true"/>, document.getElementById('completed-root'))
+    ReactDOM.render(<Locations completed='true' />, document.getElementById('completed-root'))
   }
 
-  SearchLocations(term) {
-    locationList.setState({search: term})
+  SearchLocations (term) {
+    locationList.setState({ search: term })
   }
 }
 

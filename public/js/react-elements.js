@@ -1,10 +1,11 @@
-var locationList;
+let locationList
 
 class Dungeons extends React.Component {
   constructor () {
     super()
     this.state = { dungeons }
   }
+
   render () {
     return (
       <table className='table-striped'>
@@ -15,12 +16,14 @@ class Dungeons extends React.Component {
           </tr>
         </thead>
         <tbody>
-          {dungeons.map((dungeon) => {return (
-              <tr onClick={() => { dungeon.mq = !dungeon.mq; this.setState({dungeons}) }}>
+          {dungeons.map((dungeon) => {
+            return (
+              <tr onClick={() => { dungeon.mq = !dungeon.mq; this.setState({ dungeons }) }}>
                 <td>{dungeon.name}</td>
                 <td>{dungeon.mq == true ? 'Master' : 'Vanilla'}</td>
               </tr>
-            )})}
+            )
+          })}
         </tbody>
       </table>
     )
@@ -44,25 +47,25 @@ class Items extends React.Component {
         </thead>
         <tbody>
           {Object.keys(this.state.items.inventory).map((item) => (
-          <tr onClick={() => {app.local.world.save.inventory[item] = !app.local.world.save.inventory[item]; this.setState({items: app.local.world.save}); app.RenderLocations()}}>
-            <td>{item}</td>
-            <td>{this.state.items.inventory[item] ? 1 : 0}</td>
-          </tr>))}
+            <tr onClick={() => { app.local.world.save.inventory[item] = !app.local.world.save.inventory[item]; this.setState({ items: app.local.world.save }); app.RenderLocations() }}>
+              <td>{item}</td>
+              <td>{this.state.items.inventory[item] ? 1 : 0}</td>
+            </tr>))}
           {Object.keys(this.state.items.swords).map((item) => (
-          <tr onClick={() => {app.local.world.save.swords[item] = !app.local.world.save.swords[item]; this.setState({items: app.local.world.save}); app.RenderLocations()}}>
-            <td>{item}</td>
-            <td>{this.state.items.swords[item] ? 1 : 0}</td>
-          </tr>))}
+            <tr onClick={() => { app.local.world.save.swords[item] = !app.local.world.save.swords[item]; this.setState({ items: app.local.world.save }); app.RenderLocations() }}>
+              <td>{item}</td>
+              <td>{this.state.items.swords[item] ? 1 : 0}</td>
+            </tr>))}
           {Object.keys(this.state.items.tunics).map((item) => (
-          <tr onClick={() => {app.local.world.save.tunics[item] = !app.local.world.save.tunics[item]; this.setState({items: app.local.world.save}); app.RenderLocations()}}>
-            <td>{item}</td>
-            <td>{this.state.items.tunics[item] ? 1 : 0}</td>
-          </tr>))}
+            <tr onClick={() => { app.local.world.save.tunics[item] = !app.local.world.save.tunics[item]; this.setState({ items: app.local.world.save }); app.RenderLocations() }}>
+              <td>{item}</td>
+              <td>{this.state.items.tunics[item] ? 1 : 0}</td>
+            </tr>))}
           {Object.keys(this.state.items.questStatus).map((item) => (
-          <tr onClick={() => {app.local.world.save.questStatus[item] = !app.local.world.save.questStatus[item]; this.setState({items: app.local.world.save}); app.RenderLocations()}}>
-            <td>{item}</td>
-            <td>{this.state.items.questStatus[item] ? 1 : 0}</td>
-          </tr>))}
+            <tr onClick={() => { app.local.world.save.questStatus[item] = !app.local.world.save.questStatus[item]; this.setState({ items: app.local.world.save }); app.RenderLocations() }}>
+              <td>{item}</td>
+              <td>{this.state.items.questStatus[item] ? 1 : 0}</td>
+            </tr>))}
         </tbody>
       </table>
     )
@@ -72,12 +75,13 @@ class Items extends React.Component {
 class Saves extends React.Component {
   list () {
     const files = []
-    for (let i = 0; i < localStorage.length; i++) { 
+    for (let i = 0; i < localStorage.length; i++) {
       files.push(<Save name={localStorage.key(i)} />)
     }
     return files
   }
-  render() {
+
+  render () {
     return (
       <table className='table-striped'>
         <thead>
@@ -96,10 +100,10 @@ class Saves extends React.Component {
 
 class Worlds extends React.Component {
   constructor () {
-    super ()
+    super()
   }
 
-  render() {
+  render () {
     return (
       <table className='table-striped'>
         <thead>
@@ -109,20 +113,19 @@ class Worlds extends React.Component {
           </tr>
         </thead>
         <tbody>
-          {app.worlds.map((world, index) => { return (<World name={'World ' + index} id={index} items={world.locations.Accessible(false, false).filter(location => location.item && location.item.player == myWorld).length}/>) })}
+          {app.worlds.map((world, index) => { return (<World name={'World ' + index} id={index} items={world.locations.Accessible(false, false).filter(location => location.item && location.item.player == myWorld).length} />) })}
         </tbody>
       </table>
     )
   }
 }
 
-
 class ItemPopulation extends React.Component {
   constructor (props) {
-    super (props)
+    super(props)
   }
 
-  render() {
+  render () {
     return (
       <div>
         <p>World Items</p>
@@ -136,28 +139,27 @@ class ItemPopulation extends React.Component {
           <tbody>
             {app.worlds[this.props.id].locations.Accessible(false, true).map(location => {
               if (location.item && (app.worlds.length === 1 || location.item.player == myWorld)) {
-                return <Location id={location.id} item={location.item.item || "Unknown"} name={location.name} />
+                return <Location id={location.id} item={location.item.item || 'Unknown'} name={location.name} />
               }
             })}
           </tbody>
         </table>
       </div>
-    ) 
+    )
   }
 }
 
 class Locations extends React.Component {
   constructor (props) {
-    super (props)
+    super(props)
     this.filter = props.completed || false
     this.showItems = props.showItems || false
 
-    if (!this.filter)
-     locationList = this
-    this.state = {search: ""}
+    if (!this.filter) { locationList = this }
+    this.state = { search: '' }
   }
 
-  render() {
+  render () {
     return (
       <table className='table-striped'>
         <thead>
@@ -167,10 +169,10 @@ class Locations extends React.Component {
         </thead>
         <tbody>
           {!this.state.search ? app.local.world.locations.Accessible(this.filter, false).map(location => (
-      <Location id={location.id} item={this.showItems ? location.item || "Unknown" : null} name={location.name} />)) : 
-      
-        app.local.world.locations.Search(this.state.search).map(location => (
-        <Location id={location.id} item={this.showItems ? location.item || "Unknown" : null} name={location.name} />))}
+            <Location id={location.id} item={this.showItems ? location.item || 'Unknown' : null} name={location.name} />))
+
+            : app.local.world.locations.Search(this.state.search).map(location => (
+              <Location id={location.id} item={this.showItems ? location.item || 'Unknown' : null} name={location.name} />))}
         </tbody>
       </table>
     )
@@ -178,7 +180,7 @@ class Locations extends React.Component {
 }
 
 class Settings extends React.Component {
-  render() {
+  render () {
     return (
       <table className='table-striped'>
         <thead>
@@ -198,22 +200,22 @@ class Settings extends React.Component {
 class Player extends React.Component {
   constructor () {
     super()
-    this.state = { name: save.player_name };
+    this.state = { name: save.player_name }
   }
 
   componentDidMount () {
     this.timer = setInterval(
       () => this.tick(),
       1000
-    );
+    )
   }
 
   componentWillUnmount () {
-    clearInterval(this.timer);
+    clearInterval(this.timer)
   }
 
   tick () {
-    this.setState({ name: save.player_name });
+    this.setState({ name: save.player_name })
   }
 
   render () {
@@ -223,9 +225,8 @@ class Player extends React.Component {
   }
 }
 
-
 class World extends React.Component {
-  render() {
+  render () {
     return (
       <tr onClick={() => ReactDOM.render(<ItemPopulation id={this.props.id} />, document.getElementById('avaliable-root'))}>
         <td>{this.props.name}</td>
@@ -236,7 +237,7 @@ class World extends React.Component {
 }
 
 class Save extends React.Component {
-  render() {
+  render () {
     return (
       <tr onClick={() => LoadState(this.props.name)}>
         <td>{this.props.name}</td>
@@ -247,40 +248,40 @@ class Save extends React.Component {
 }
 
 class Header extends React.Component {
-  render() {
+  render () {
     return (
-      <header className="toolbar toolbar-header">
-        {window.isElectron ? <h1 class="title">Ocarina of Time - Multiworld Autotracker</h1> : null}
+      <header className='toolbar toolbar-header'>
+        {window.isElectron ? <h1 class='title'>Ocarina of Time - Multiworld Autotracker</h1> : null}
 
-        <div class="toolbar-actions">
-          <div class="btn-group">
-            <button onClick={() => eSidebar.setState({page: 0})} class="btn btn-dark btn-default">
-              <span class="icon icon-compass"/>
+        <div class='toolbar-actions'>
+          <div class='btn-group'>
+            <button onClick={() => eSidebar.setState({ page: 0 })} class='btn btn-dark btn-default'>
+              <span class='icon icon-compass' />
             </button>
-            <button onClick={() => eSidebar.setState({page: 1})} class="btn btn-dark  btn-default">
-              <span class="icon icon-download"/>
+            <button onClick={() => eSidebar.setState({ page: 1 })} class='btn btn-dark  btn-default'>
+              <span class='icon icon-download' />
             </button>
-            <button onClick={() => eSidebar.setState({page: 2})} class="btn btn-dark btn-default">
-              <span class="icon icon-network"></span>
+            <button onClick={() => eSidebar.setState({ page: 2 })} class='btn btn-dark btn-default'>
+              <span class='icon icon-network' />
             </button>
-            <button onClick={() => eSidebar.setState({page: 3})} class="btn btn-dark btn-default">
-              <span class="icon icon-network"></span>
+            <button onClick={() => eSidebar.setState({ page: 3 })} class='btn btn-dark btn-default'>
+              <span class='icon icon-network' />
             </button>
-            <button onClick={() => eSidebar.setState({page: 4})} class="btn btn-dark btn-default">
-              <span class="icon icon-cog"></span>
+            <button onClick={() => eSidebar.setState({ page: 4 })} class='btn btn-dark btn-default'>
+              <span class='icon icon-cog' />
             </button>
           </div>
 
-          {window.isElectron ? <div class="btn-group pull-right">
-              <button class="btn btn-default btn-dark pull-right">
-                  <span class="icon icon-minus"></span>
-              </button>
-              <button class="btn btn-default btn-dark pull-right">
-                  <span class="icon icon-doc"></span>
-              </button>
-              <button class="btn btn-default btn-dark pull-right">
-                  <span class="icon icon-cancel"></span>
-              </button>
+          {window.isElectron ? <div class='btn-group pull-right'>
+            <button class='btn btn-default btn-dark pull-right'>
+              <span class='icon icon-minus' />
+            </button>
+            <button class='btn btn-default btn-dark pull-right'>
+              <span class='icon icon-doc' />
+            </button>
+            <button class='btn btn-default btn-dark pull-right'>
+              <span class='icon icon-cancel' />
+            </button>
           </div> : null}
         </div>
       </header>
@@ -293,7 +294,7 @@ class Location extends React.Component {
     super(props)
   }
 
-  render() {
+  render () {
     return (
       <tr onClick={() => ToggleCompleted(this.props)}>
         <td>{this.props.name}</td>
@@ -305,7 +306,7 @@ class Location extends React.Component {
 
 class Sidebar extends React.Component {
   constructor () {
-    super ()
+    super()
     this.state = { page: 0 }
     eSidebar = this
   }
@@ -313,49 +314,49 @@ class Sidebar extends React.Component {
   render () {
     switch (this.state.page) {
       case 0:
-        ReactDOM.render(<Locations/>, document.getElementById('avaliable-root'))
+        ReactDOM.render(<Locations />, document.getElementById('avaliable-root'))
         return (
           <div>
             <input type='file' onInput={(elem) => { SpoilerUploaded(elem.target) }} title='Upload Spoiler' />
-              <Player/>
-              <div className='world_id'>{'World ' + myWorld}</div>
-              <p>Dungeons</p>
-              <Dungeons />
+            <Player />
+            <div className='world_id'>{'World ' + myWorld}</div>
+            <p>Dungeons</p>
+            <Dungeons />
           </div>
-        );
+        )
       case 1:
         return (
           <div>
             <button className='btn btn-default' onClick={() => SaveAlert()}>Save</button>
             <p>Files</p>
-            <Saves/>
+            <Saves />
           </div>
-        );
+        )
       case 2:
         return (
           <div>
             <p>My World ID</p>
-            <input type='number' onInput={(elem) => { myWorld = elem.target.value; }} />
+            <input type='number' onInput={(elem) => { myWorld = elem.target.value }} />
             <p>Worlds</p>
-            <Worlds/>
+            <Worlds />
           </div>
-        );
+        )
       case 3:
         return (
           <div>
             <p>Items</p>
-            <Items/>
+            <Items />
           </div>
-        );
+        )
       case 4:
         return (
           <div>
             <p>Settings</p>
-            <Settings/>
+            <Settings />
           </div>
         )
     }
   }
 }
 
-ReactDOM.render(<Header/>, document.getElementById("header-root"))
+ReactDOM.render(<Header />, document.getElementById('header-root'))

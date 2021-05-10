@@ -10,7 +10,7 @@ const WebServer = new (require('./js/renderer/webserver'))()
 /**
  * @type{import('./public/renderer/electron')}
  */
-const Electron = process.type ? new (require('./js/renderer/electron'))() : {on:() =>{}}
+const Electron = process.type ? new (require('./js/renderer/electron'))() : { on: () => {} }
 
 Electron.on('data', (data) => {
   console.log(data)

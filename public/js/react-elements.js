@@ -250,10 +250,9 @@ class Save extends React.Component {
 class Header extends React.Component {
   render () {
     return (
-      <header className='toolbar toolbar-header'>
-        {window.isElectron ? <span class='title'>Ocarina of Time - Multiworld Autotracker</span> : null}
-
         <div class='toolbar-actions'>
+          <header className='toolbar toolbar-header'>
+          {window.isElectron ? <span class='title'>Ocarina of Time - Multiworld Autotracker</span> : null}
           {window.isElectron ? <div class='btn-group pull-right'>
             <button class='btn btn-default btn-dark pull-right'>
               <span class='icon icon-minus' />

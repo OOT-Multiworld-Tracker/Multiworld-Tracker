@@ -254,13 +254,13 @@ class Header extends React.Component {
         <div className='toolbar-actions'>
           <span class='title'>Ocarina of Time - Multiworld Autotracker</span>
           <div class='btn-group pull-right'>
-            <button class='btn btn-default btn-dark pull-right'>
+            <button class='btn btn-default btn-dark pull-right' onClick={() => require('electron').ipcRenderer.send('packets', 'minimize')}>
               <span class='icon icon-minus' />
             </button>
-            <button class='btn btn-default btn-dark pull-right'>
+            <button class='btn btn-default btn-dark pull-right' onClick={() => require('electron').ipcRenderer.send('packets', 'window_size')}>
               <span class='icon icon-doc' />
             </button>
-            <button class='btn btn-default btn-dark pull-right'>
+            <button class='btn btn-default btn-dark pull-right' onClick={() => require('electron').ipcRenderer.send('packets', 'close')}>
               <span class='icon icon-cancel' />
             </button>
           </div>

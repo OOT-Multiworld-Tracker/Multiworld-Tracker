@@ -264,8 +264,8 @@ class Header extends React.Component {
               <span class='icon icon-cancel' />
             </button>
           </div> : null}
-        </div>
-      </header>
+        </header>
+      </div>
     )
   }
 }

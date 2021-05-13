@@ -1,4 +1,5 @@
 let locationList
+let sidebarButtons
 
 class Dungeons extends React.Component {
   constructor () {
@@ -281,6 +282,38 @@ class Location extends React.Component {
         <td>{this.props.name}</td>
         {this.props.item ? <td>{this.props.item}</td> : null}
       </tr>
+    )
+  }
+}
+
+class SidebarButtons extends React.Component {
+  constructor () {
+    super()
+    this.state = { uploaded: false }
+    sidebarButtons = this
+  }
+
+  render () {
+    return (
+      <div className="btn-group">
+        <button onClick={() => eSidebar.setState({ page: 0 })} class='btn btn-dark btn-default'>
+          <span class='icon icon-compass' />
+        </button>
+        <button onClick={() => eSidebar.setState({ page: 1 })} class='btn btn-dark  btn-default'>
+          <span class='icon icon-download' />
+        </button>
+        {this.state.uploaded ?
+          <button onClick={() => eSidebar.setState({ page: 2 })} class='btn btn-dark btn-default'>
+            <span class='icon icon-network' />
+          </button>
+          : null}
+        <button onClick={() => eSidebar.setState({ page: 3 })} class='btn btn-dark btn-default'>
+          <span class='icon icon-tag' />
+        </button>
+        <button onClick={() => eSidebar.setState({ page: 4 })} class='btn btn-dark btn-default'>
+          <span class='icon icon-cog' />
+        </button>
+      </div>
     )
   }
 }

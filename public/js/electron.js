@@ -1,6 +1,6 @@
 window.isElectron = typeof require !== 'undefined'
 
-if (require) {
+if (window.isElectron) {
   require('electron').ipcRenderer.on('packet', (event, data) => {
     const parsed = JSON.parse(data)
     console.log(parsed)

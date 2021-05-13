@@ -172,6 +172,8 @@ function SpoilerUploaded (data) {
   $.getJSON(URL.createObjectURL(data.files[0]), (data) => {
     ParseSpoilerLog(data)
   })
+
+  sidebarButtons.setState({ uploaded: true })
 }
 
 function MapToArray (map) {

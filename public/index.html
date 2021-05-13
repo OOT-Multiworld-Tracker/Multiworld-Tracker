@@ -5,97 +5,7 @@
     <title>Hello World!</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photon/0.1.2-alpha/css/photon.min.css" integrity="sha512-iYU5oLP7U/WlxMbfqwzP7shmTUzivS/4EbkLi33k/tzwSCb4GZDU3oDo6WYSsDZgYXsuhzqrkCseWcZW3QCBLQ==" crossorigin="anonymous" />
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-
-    <style>
-        body {
-            color: #dadada
-        }
-
-        tbody {
-            background-color: #4e4e4e;
-        }
-
-        .table-striped tr:nth-child(even) {
-            background-color: #333;
-        }
-
-        thead {
-            background-color: #222;
-        }
-
-        th {
-            border: none;
-            font-weight: bolder
-        }
-
-        *::-webkit-scrollbar {
-            width: 12px;
-        }
-
-        *::-webkit-scrollbar-thumb {
-            background-color: #222;
-            border-radius: 20px;
-        }
-
-        *::-webkit-scrollbar-button {
-            width: 5px;
-            border-radius: 5px;
-        }
-
-        .toolbar-actions, .title {
-            background-color: #1D1E26;
-            color: #dadada;
-            margin: 0;
-            margin-top: 0!important;
-            padding: 3px;
-        }
-
-        .toolbar-header {
-            border: none;
-        }
-
-        .btn {
-            background: none;
-            background-color: #4e4e4e;
-            border: none;
-            color: #dadada;
-            border-radius: 0;
-        }
-
-        .btn-dark {
-            background: none;
-        }
-        
-        input[type="button" i] {
-            background-color: #4e4e4e;
-        }
-
-        .btn .icon {
-            color: #dadada
-        }
-
-        .btn-group .btn+.btn {
-            border: none
-        }
-
-        .pane-md {
-            background-color: #1d1E26;
-            overflow-y: auto;
-        }
-
-        .sidebar {
-            background-color: #1d1E26;
-            margin: 0;
-            padding: 3px;
-        }
-
-        .pane {
-            background-color: #373740;
-            margin: 0;
-            padding: 3px;
-            border: none
-        }
-    </style>
+    <link rel="stylesheet" href="css/global.css"/>
 </head>
 
 <body>
@@ -106,23 +16,8 @@
             <div class="">
                 <div class="pane-group">
                     <div class="pane-md">
-                        <div class='btn-group'>
-                            <button onclick="eSidebar.setState({ page: 0 })" class='btn btn-dark btn-default'>
-                              <span class='icon icon-compass' />
-                            </button>
-                            <button onclick="eSidebar.setState({ page: 1 })" class='btn btn-dark  btn-default'>
-                              <span class='icon icon-download' />
-                            </button>
-                            <button onclick="eSidebar.setState({ page: 2 })" class='btn btn-dark btn-default'>
-                              <span class='icon icon-network' />
-                            </button>
-                            <button onclick="eSidebar.setState({ page: 3 })" class='btn btn-dark btn-default'>
-                              <span class='icon icon-network' />
-                            </button>
-                            <button onclick="eSidebar.setState({ page: 4 })" class='btn btn-dark btn-default'>
-                              <span class='icon icon-cog' />
-                            </button>
-                          </div>
+                        <div class="sidebar-buttons">
+                        </div>
                         <div class="sidebar">
                             
                         </div>

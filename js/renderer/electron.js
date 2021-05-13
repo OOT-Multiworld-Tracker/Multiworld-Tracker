@@ -1,5 +1,6 @@
 const { app, BrowserWindow, ipcMain } = require('electron')
 const EventEmitter = require('events')
+const { autoUpdater } = require('electron-updater')
 
 class ElectronRenderer extends EventEmitter {
   constructor () {
@@ -45,7 +46,32 @@ class ElectronRenderer extends EventEmitter {
       this.emit('data', data)
     })
 
-    this.LoadWindow('index.html')
+    this.LoadUpdater()
+    autoUpdater.checkForUpdates()
+
+    autoUpdater.on('update-not-available', () => {
+      console.log('Client up to date')
+      this.LoadWindow('index.html')
+    })
+
+    autoUpdater.on('error', (err) => {
+      console.log('Error: ' + err)
+      //this.LoadWindow('index.html')
+      this.SendData(`Client Error: ${err}`)
+    })
+
+    autoUpdater.on('download-progress', (progress) => {
+      this.SendData(`${progress.bytesPerSecond} - ${progress.percent}%`)
+    })
+
+    autoUpdater.on('update-downloaded', _ => {
+      console.log('Update complete')
+      autoUpdater.quitAndInstall()
+    })
+  }
+
+  LoadUpdater () {
+    this.window.loadFile('public/update.html')
   }
 
   /**

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photon/0.1.2-alpha/css/photon.min.css" integrity="sha512-iYU5oLP7U/WlxMbfqwzP7shmTUzivS/4EbkLi33k/tzwSCb4GZDU3oDo6WYSsDZgYXsuhzqrkCseWcZW3QCBLQ==" crossorigin="anonymous" />
+
+    <style>
+        body {
+            color: #dadada
+        }
+
+        tbody {
+            background-color: #4e4e4e;
+        }
+
+        .table-striped tr:nth-child(even) {
+            background-color: #333;
+        }
+
+        thead {
+            background-color: #222;
+        }
+
+        th {
+            border: none;
+            font-weight: bolder
+        }
+
+        *::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        *::-webkit-scrollbar-thumb {
+            background-color: #222;
+            border-radius: 20px;
+        }
+
+        *::-webkit-scrollbar-button {
+            width: 5px;
+            border-radius: 5px;
+        }
+
+        .toolbar-actions, .title {
+            background-color: #1D1E26;
+            color: #dadada;
+            margin: 0;
+            margin-top: 0!important;
+            padding: 3px;
+        }
+
+        .toolbar-header {
+            border: none;
+        }
+
+        .btn {
+            background: none;
+            background-color: #4e4e4e;
+            border: none;
+            color: #dadada;
+            border-radius: 0;
+        }
+
+        .btn-dark {
+            background: none;
+        }
+        
+        input[type="button" i] {
+            background-color: #4e4e4e;
+        }
+
+        .btn .icon {
+            color: #dadada
+        }
+
+        .btn-group .btn+.btn {
+            border: none
+        }
+
+        .sidebar {
+            background-color: #1d1E26;
+            margin: 0;
+            padding: 3px;
+            overflow-y: auto;
+        }
+
+        .pane {
+            background-color: #373740;
+            margin: 0;
+            padding: 3px;
+            border: none
+        }
+    </style>
+</head>
+
+<body>
+    <div class="window">
+        <div id="header-root"></div>
+
+        <div class="window-content">
+            <div class="">
+                <div class="pane-group">
+                    <div class="pane padded">
+                        <p id="status">Checking for Updates</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    require('electron').ipcRenderer.on('packet', (event, data) => {
+        console.log(data)
+        document.getElementById("status").innerHTML = data
+    })
+</script>

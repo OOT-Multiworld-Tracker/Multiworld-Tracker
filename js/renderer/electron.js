@@ -56,8 +56,7 @@ class ElectronRenderer extends EventEmitter {
 
     autoUpdater.on('error', (err) => {
       console.log('Error: ' + err)
-      //this.LoadWindow('index.html')
-      this.SendData(`Client Error: ${err}`)
+      this.LoadWindow('index.html')
     })
 
     autoUpdater.on('download-progress', (progress) => {

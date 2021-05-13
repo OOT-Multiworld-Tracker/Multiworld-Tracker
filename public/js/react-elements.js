@@ -250,10 +250,10 @@ class Save extends React.Component {
 class Header extends React.Component {
   render () {
     return (
-        <div class='toolbar-actions'>
-          <header className='toolbar toolbar-header'>
-          {window.isElectron ? <span class='title'>Ocarina of Time - Multiworld Autotracker</span> : null}
-          {window.isElectron ? <div class='btn-group pull-right'>
+      <header className='toolbar toolbar-header'>
+        <div className='toolbar-actions'>
+          <span class='title'>Ocarina of Time - Multiworld Autotracker</span>
+          <div class='btn-group pull-right'>
             <button class='btn btn-default btn-dark pull-right'>
               <span class='icon icon-minus' />
             </button>
@@ -263,9 +263,9 @@ class Header extends React.Component {
             <button class='btn btn-default btn-dark pull-right'>
               <span class='icon icon-cancel' />
             </button>
-          </div> : null}
-        </header>
-      </div>
+          </div>
+        </div>
+      </header>
     )
   }
 }
@@ -340,4 +340,5 @@ class Sidebar extends React.Component {
   }
 }
 
-ReactDOM.render(<Header />, document.getElementById('header-root'))
+if (window.isElectron)
+  ReactDOM.render(<Header />, document.getElementById('header-root'))

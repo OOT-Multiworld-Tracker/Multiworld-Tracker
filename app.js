@@ -1,6 +1,8 @@
 /**
  * @type{import('./public/networking/auto_tracker')}
  */
+const { autoUpdater } = require('electron-updater')
+autoUpdater.checkForUpdatesAndNotify()
 
 const AutoTracker = new (require('./js/networking/auto_tracker'))()
 AutoTracker.Initalize() // Initalize the emulator-linked auto tracker.

@@ -295,17 +295,17 @@ class SidebarButtons extends React.Component {
 
   render () {
     return (
-      <div className="btn-group">
+      <div className='btn-group'>
         <button onClick={() => eSidebar.setState({ page: 0 })} class='btn btn-dark btn-default'>
           <span class='icon icon-compass' />
         </button>
         <button onClick={() => eSidebar.setState({ page: 1 })} class='btn btn-dark  btn-default'>
           <span class='icon icon-download' />
         </button>
-        {this.state.uploaded ?
-          <button onClick={() => eSidebar.setState({ page: 2 })} class='btn btn-dark btn-default'>
+        {this.state.uploaded
+          ? <button onClick={() => eSidebar.setState({ page: 2 })} class='btn btn-dark btn-default'>
             <span class='icon icon-network' />
-          </button>
+            </button>
           : null}
         <button onClick={() => eSidebar.setState({ page: 3 })} class='btn btn-dark btn-default'>
           <span class='icon icon-tag' />
@@ -373,5 +373,4 @@ class Sidebar extends React.Component {
   }
 }
 
-if (window.isElectron)
-  ReactDOM.render(<Header />, document.getElementById('header-root'))
+if (window.isElectron) { ReactDOM.render(<Header />, document.getElementById('header-root')) }

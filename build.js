@@ -27,3 +27,11 @@ function CopyDirectory (directory) {
 }
 
 fs.copyFileSync('app.js', 'builder/app/app.js')
+
+/**
+ * Update the version within the built package.
+ */
+const packageJs = require('./package.json')
+const builtPackage = require('./builder/app/package.json')
+builtPackage.version = packageJs.version
+fs.writeFileSync('builder/app/package.json', JSON.stringify(builtPackage, null, 1))

@@ -12,6 +12,10 @@
     "url": "git+https://github.com/OOT-Multiworld-Tracker/Multiworld-Tracker.git"
   },
   "build": {
+    "productName": "Multiworld Tracker",
+    "directories": {
+      "app": "builder/app"
+    },
     "nsis": {
       "perMachine": true,
       "shortcutName": "Multiworld Tracker"
@@ -29,6 +33,8 @@
     "ws": "^7.4.4"
   },
   "devDependencies": {
+    "@node-minify/babel-minify": "^6.2.0",
+    "@node-minify/core": "^6.2.0",
     "electron": "^12.0.7",
     "electron-builder": "^22.11.3"
   }

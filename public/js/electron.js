@@ -7,8 +7,11 @@ if (window.isElectron) {
 
     switch (parsed.payload) {
       case 0:
-        app.local.world.save = parsed.data.save
-        app.worlds[myWorld - 1].save = parsed.data.save
+        Object.keys(parsed.data.save).forEach((key) => {
+          app.local.world.items[key].value = parsed.data.save[key]
+        })
+
+        app.worlds[myWorld - 1].items = app.local.world.items
         app.RenderLocations()
         break
       case 1:

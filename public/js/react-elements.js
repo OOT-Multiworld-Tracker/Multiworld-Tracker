@@ -37,10 +37,6 @@ class Items extends React.Component {
     this.state = { items: app.local.world.save }
   }
 
-  renderGrid () {
-    return // Unimplemented
-  }
-
   render () {
     return (
       <table className='table-striped'>
@@ -51,27 +47,11 @@ class Items extends React.Component {
           </tr>
         </thead>
         <tbody>
-          {Object.values(app.local.world.items).map((item) => {if (item instanceof Item) { return (
+          {Object.values(app.local.world.items).map((item) => {return (
             <tr onClick={() => { item.Toggle(); this.setState({ items: app.local.world.save }); app.RenderLocations() }}>
               <td>{item.name}</td>
               <td>{item.value}</td>
-            </tr>)} else {
-              if (item instanceof KeyManager) {
-                return Object.keys(item).map((key) => {
-                  return (<tr onClick={() => { item[key].Toggle(); this.setState({ items: app.local.world.save }); app.RenderLocations() }}>
-                    <td>{item[key].name}</td>
-                    <td>{item[key].value}</td>
-                  </tr>)
-                })
-              } else {
-                return Object.values(item).map((value) => {
-                  return (<tr onClick={() => { value.Toggle(); this.setState({ items: app.local.world.save }); app.RenderLocations() }}>
-                    <td>{value.name}</td>
-                    <td>{value.value}</td>
-                  </tr>)
-                })
-              }
-              } })}
+            </tr>)})}
         </tbody>
       </table>
     )

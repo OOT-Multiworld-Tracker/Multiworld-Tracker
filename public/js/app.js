@@ -42,30 +42,24 @@ class ItemManager {
     this.bombs = new Item('Bomb Bag', [0, 30, 40, 50])
     this.bombchus = new Item('Bombchus', [0, 20])
     this.magicBeans = new Item('Magic Beans', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
-    this.slingShot = new Item('Slingshot', [0, 20, 30, 40])
-    this.bow = new Item('Bow', [0, 30, 40, 50])
-    this.arrows = {
-      fire: new Item('Fire Arrows', [0, 1]),
-      ice: new Item('Ice Arrows', [0, 1]),
-      light: new Item('Light Arrows', [0, 1])
-    }
-    this.magic = {
-      din: new Item('Din\'s Fire', [0, 1]),
-      farore: new Item('Farores\'s Wind', [0, 1]),
-      nayru: new Item('Nayru\'s Love', [0, 1])
-    }
+    this.fairySlingshot = new Item('Slingshot', [0, 20, 30, 40])
+    this.fairyBow = new Item('Bow', [0, 30, 40, 50])
+    this.fireArrows = new Item('Fire Arrows', [0, 1])
+    this.iceArrows = new Item('Ice Arrows', [0, 1])
+    this.lightArrows = new Item('Light Arrows', [0, 1])
+    this.dinsFire = new Item('Din\'s Fire', [0, 1])
+    this.faroresWind = new Item('Farores\'s Wind', [0, 1])
+    this.nayru = new Item('Nayru\'s Love', [0, 1])
     this.ocarina = new Item('Ocarina', [0, 'Saria\'s Ocarina', 'Ocarina of Time'])
     this.hookshot = new Item('Hookshot', [0, 'Hookshot', 'Longshot'])
     this.lensOfTruth = new Item('Lens of Truth', [0, 1])
     this.boomerang = new Item('Boomerang', [0, 1])
     this.megatonHammer = new Item('Megaton Hammer', [0, 1])
-    this.bottles = {
-      bottle_1: new Item('Bottle 1', [0, 1]),
-      bottle_2: new Item('Bottle 2', [0, 1]),
-      bottle_3: new Item('Bottle 3', [0, 1]),
-      bottle_4: new Item('Bottle 4', [0, 1])
-    }
-    this.childTradeItem = new Item('Child Trading', [0, 43])
+    this.bottle_1 = new Item('Bottle 1', [0, 1])
+    this.bottle_2 = new Item('Bottle 2', [0, 1])
+    this.bottle_3 = new Item('Bottle 3', [0, 1])
+    this.bottle_4 = new Item('Bottle 4', [0, 1])
+    this.childTradeItem = new Item('Child Trading', [0, 34])
     this.adultTradeItem = new Item('Adult Trading', [0, 43])
     this.wallet = new Item('Wallet', [0, 99, 200, 500, 999])
     this.swimming = new Item('Swimming', [0, 'Silver Scale', 'Gold Scale'])
@@ -75,6 +69,9 @@ class ItemManager {
     this.biggoronSword = new Item('Biggoron Sword', [0, 1])
     this.goronTunic = new Item('Goron Tunic', [0, 1])
     this.zoraTunic = new Item('Zora Tunic', [0, 1])
+    this.dekuShield = new Item('Deku Shield', [0, 1])
+    this.hylianShield = new Item('Hylian Shield', [0, 1])
+    this.mirrorShield = new Item('Mirror Shield', [0, 1])
     this.gerudoMembershipCard = new Item('Gerudo Membership Card', [0, 1])
     this.stoneOfAgony = new Item('Stone of Agony', [0, 1])
     this.goldSkulltulas = new Item('Gold Skulltulas', [0, 10, 20, 30, 40, 50])
@@ -126,6 +123,10 @@ class Item {
 
   Icon () {
     return `imgs/${this.name.replace(' ', '_').toLowerCase()}.png`
+  }
+
+  Index () {
+    return this.values.indexOf(this.value)
   }
 
   /**

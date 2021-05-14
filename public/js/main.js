@@ -257,7 +257,6 @@ function CanDamage (world = { save, settings, locations: MapToArray(locations) }
 
 function CanExitForest (world = app.local.world) {
   const save = world.save
-  const locations = world.locations
   return settings.open_forest !== 'closed' || world.locations.Array()[0].completed || HasExplosives(world) || save.inventory.swimming >= 1 || (CanUseMagic(world) && save.inventory.dinsFire)
 }
 

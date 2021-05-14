@@ -76,19 +76,17 @@ class ItemManager {
     this.stoneOfAgony = new Item('Stone of Agony', [0, 1])
     this.goldSkulltulas = new Item('Gold Skulltulas', [0, 10, 20, 30, 40, 50])
     this.heartPieces = new Item('Heart Pieces', [0, 4, 8, 12, 16, 20, 24, 28, 32])
-    this.songs = {
-      zeldaLullaby: new Item('Zelda\'s Lullaby', [0, 1]),
-      eponasSong: new Item('Epona\'s Song', [0, 1]),
-      sunsSong: new Item('Sun\'s Song', [0, 1]),
-      songOfTime: new Item('Song Of Time', [0, 1]),
-      songOfStorms: new Item('Song Of Storms', [0, 1]),
-      preludeOfLight: new Item('Prelude Of Light', [0, 1]),
-      minuetOfForest: new Item('Minuet Of Forest', [0, 1]),
-      boleroOfFire: new Item('Bolero Of Fire', [0, 1]),
-      serenadeOfWater: new Item('Serenade Of Water', [0, 1]),
-      nocturneOfShadow: new Item('Nocturne Of Shadow', [0, 1]),
-      requiemOfSpirit: new Item('Requiem Of Spirit', [0, 1])
-    }
+    this.zeldaLullaby = new Item('Zelda\'s Lullaby', [0, 1])
+    this.eponasSong = new Item('Epona\'s Song', [0, 1])
+    this.sunsSong = new Item('Sun\'s Song', [0, 1])
+    this.songOfTime = new Item('Song Of Time', [0, 1])
+    this.songOfStorms = new Item('Song Of Storms', [0, 1])
+    this.preludeOfLight = new Item('Prelude Of Light', [0, 1])
+    this.minuetOfForest = new Item('Minuet Of Forest', [0, 1])
+    this.boleroOfFire = new Item('Bolero Of Fire', [0, 1])
+    this.serenadeOfWater = new Item('Serenade Of Water', [0, 1])
+    this.nocturneOfShadow = new Item('Nocturne Of Shadow', [0, 1])
+    this.requiemOfSpirit = new Item('Requiem Of Spirit', [0, 1])
     this.medallion = {
       light: new Item('Light Medallion', [0, 1]),
       forest: new Item('Forest Medallion', [0, 1]),

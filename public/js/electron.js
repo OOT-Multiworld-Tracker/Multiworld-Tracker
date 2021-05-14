@@ -8,7 +8,7 @@ if (window.isElectron) {
     switch (parsed.payload) {
       case 0:
         Object.keys(parsed.data.save).forEach((key) => {
-          app.local.world.items[key].value = parsed.data.save[key]
+          app.local.world.items[key].Set(parsed.data.save[key])
         })
 
         app.worlds[myWorld - 1].items = app.local.world.items

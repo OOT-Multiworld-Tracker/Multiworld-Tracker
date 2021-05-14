@@ -129,6 +129,10 @@ class Item {
     return this.values.indexOf(this.value)
   }
 
+  Set (index) {
+    this.value = this.values[index]
+  }
+
   /**
    * Toggles through the avaliable values
    */

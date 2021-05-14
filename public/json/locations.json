@@ -614,7 +614,7 @@
     },
     {
       "name": "LH Freestanding PoH",
-      "logic": "(world) => CanBecomeAdult(world) && world.items.ocarina.Index() >= 1 && world.save.inventory.hookshot >= 1"
+      "logic": "(world) => CanBecomeAdult(world) && world.items.ocarina.Index() >= 1 && world.items.hookshot.Index() >= 1"
     },
     {
       "name": "LH Sun",
@@ -652,47 +652,47 @@
     },
     {
       "name": "GF Gerudo Membership Card",
-      "logic": "(world) => CanBecomeAdult(world) && (world.save.inventory.hookshot == 2 || (world.items.ocarina.Index() >= 1 && world.save.questStatus.eponasSong))"
+      "logic": "(world) => CanBecomeAdult(world) && (world.items.hookshot.Index() == 2 || (world.items.ocarina.Index() >= 1 && world.save.questStatus.eponasSong))"
     },
     {
       "name": "GF Chest",
-      "logic": "(world) => CanBecomeAdult(world) && (world.save.inventory.hookshot == 2 || (world.items.ocarina.Index() >= 1 && world.save.questStatus.eponasSong))"
+      "logic": "(world) => CanBecomeAdult(world) && (world.items.hookshot.Index() == 2 || (world.items.ocarina.Index() >= 1 && world.save.questStatus.eponasSong))"
     },
     {
       "name": "GF HBA 1000 Points",
-      "logic": "(world) => CanBecomeAdult(world) && world.save.questStatus.gerudoMembershipCard && (world.save.inventory.hookshot == 2 || (world.items.ocarina.Index() >= 1 && world.save.questStatus.eponasSong))"
+      "logic": "(world) => CanBecomeAdult(world) && world.save.questStatus.gerudoMembershipCard && (world.items.hookshot.Index() == 2 || (world.items.ocarina.Index() >= 1 && world.save.questStatus.eponasSong))"
     },
     {
       "name": "GF HBA 1500 Points",
-      "logic": "(world) => CanBecomeAdult(world) && world.save.questStatus.gerudoMembershipCard && (world.save.inventory.hookshot == 2 || (world.items.ocarina.Index() >= 1 && world.save.questStatus.eponasSong))"
+      "logic": "(world) => CanBecomeAdult(world) && world.save.questStatus.gerudoMembershipCard && (world.items.hookshot.Index() == 2 || (world.items.ocarina.Index() >= 1 && world.save.questStatus.eponasSong))"
     },
     {
       "name": "Wasteland Bombchu Salesman",
-      "logic": "(world) => world.save.inventory.hookshot == 2 && world.save.questStatus.gerudoMembershipCard"
+      "logic": "(world) => world.items.hookshot.Index() == 2 && world.save.questStatus.gerudoMembershipCard"
     },
     {
       "name": "Wasteland Chest",
-      "logic": "(world) => world.save.inventory.hookshot == 2 && world.save.questStatus.gerudoMembershipCard"
+      "logic": "(world) => world.items.hookshot.Index() == 2 && world.save.questStatus.gerudoMembershipCard"
     },
     {
       "name": "Colossus Great Fairy Reward",
-      "logic": "(world) => (world.items.ocarina.Index() >= 1 && world.save.questStatus.requiemOfSpirit) || (world.save.questStatus.gerudoMembershipCard && world.save.inventory.hookshot == 2)"
+      "logic": "(world) => (world.items.ocarina.Index() >= 1 && world.save.questStatus.requiemOfSpirit) || (world.save.questStatus.gerudoMembershipCard && world.items.hookshot.Index() == 2)"
     },
     {
       "name": "Colossus Freestanding PoH",
-      "logic": "(world) => (world.items.ocarina.Index() >= 1 && world.save.questStatus.requiemOfSpirit) || (world.save.questStatus.gerudoMembershipCard && world.save.inventory.hookshot == 2)"
+      "logic": "(world) => (world.items.ocarina.Index() >= 1 && world.save.questStatus.requiemOfSpirit) || (world.save.questStatus.gerudoMembershipCard && world.items.hookshot.Index() == 2)"
     },
     {
       "name": "Colossus Deku Scrub Grotto Front",
-      "logic": "(world) => IsScrubSanity(world) && (world.items.ocarina.Index() >= 1 && world.save.questStatus.requiemOfSpirit) || (world.save.questStatus.gerudoMembershipCard && world.save.inventory.hookshot == 2) && CanStunDeku(world)"
+      "logic": "(world) => IsScrubSanity(world) && (world.items.ocarina.Index() >= 1 && world.save.questStatus.requiemOfSpirit) || (world.save.questStatus.gerudoMembershipCard && world.items.hookshot.Index() == 2) && CanStunDeku(world)"
     },
     {
       "name": "Colossus Deku Scrub Grotto Rear",
-      "logic": "(world) => IsScrubSanity(world) && (world.items.ocarina.Index() >= 1 && world.save.questStatus.requiemOfSpirit) || (world.save.questStatus.gerudoMembershipCard && world.save.inventory.hookshot == 2) && CanStunDeku(world)"
+      "logic": "(world) => IsScrubSanity(world) && (world.items.ocarina.Index() >= 1 && world.save.questStatus.requiemOfSpirit) || (world.save.questStatus.gerudoMembershipCard && world.items.hookshot.Index() == 2) && CanStunDeku(world)"
     },
     {
       "name": "OGC Great Fairy Reward",
-      "logic": "(world) => (world.items.ocarina.Index() >= 1 && world.save.questStatus.requiemOfSpirit && world.save.questStatus.zeldasLullaby) || (world.save.questStatus.gerudoMembershipCard && world.save.inventory.hookshot == 2) && CanStunDeku(world) && HasExplosives()"
+      "logic": "(world) => (world.items.ocarina.Index() >= 1 && world.save.questStatus.requiemOfSpirit && world.save.questStatus.zeldasLullaby) || (world.save.questStatus.gerudoMembershipCard && world.items.hookshot.Index() == 2) && CanStunDeku(world) && HasExplosives()"
     },
     {
       "name": "Deku Tree Slingshot Room Side Chest",
@@ -712,7 +712,7 @@
     {
       "name": "Deku Tree Basement Chest",
       "preExit": true,
-      "logic": "(world) => dungeons[0].mq == false && world.save.swords.kokiriSword && world.save.shields.dekuShield && world.save.inventory.dekuNuts"
+      "logic": "(world) => dungeons[0].mq == false && world.save.swords.kokiriSword && world.save.shields.dekuShield && world.items.dekuNuts.value > 0"
     },
     {
       "name": "Deku Tree GS Compass Room",
@@ -848,7 +848,7 @@
     },
     {
       "name": "Dodongos Cavern King Dodongo Heart",
-      "logic": "(world) => CanEnterDodongo(world) && (world.items.bombs.value > 0 || world.items.strength.value >=1) && (world.save.inventory.dekuSticks || world.save.swords.kokiriSword)"
+      "logic": "(world) => CanEnterDodongo(world) && (world.items.bombs.value > 0 || world.items.strength.value >=1) && (world.items.dekuSticks.value > 0 || world.save.swords.kokiriSword)"
     },
     {
       "name": "Jabu Jabus Belly MQ First Room Side Chest",
@@ -904,7 +904,7 @@
     },
     {
       "name": "Jabu Jabus Belly Barinade Heart",
-      "logic": "(world) => CanEnterJabu(world) && world.items.boomerang.value === 1 && (world.save.inventory.dekuSticks || world.save.swords.kokiriSword)"
+      "logic": "(world) => CanEnterJabu(world) && world.items.boomerang.value === 1 && (world.items.dekuSticks.value > 0 || world.save.swords.kokiriSword)"
     },
     {
       "name": "Bottom of the Well Front Left Fake Wall Chest",

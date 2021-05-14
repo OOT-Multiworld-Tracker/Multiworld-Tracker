@@ -1,4 +1,5 @@
 # Multiworld-Tracker
+[![CI](https://github.com/OOT-Multiworld-Tracker/Multiworld-Tracker/actions/workflows/main.yml/badge.svg)](https://github.com/OOT-Multiworld-Tracker/Multiworld-Tracker/actions/workflows/main.yml)
 
 ## Usage
 If you want to launch the application without the autotracking electron client, you may use `node .` to launch a browser-only copy accessible via port 8081. To use the electron client, you can launch it via `electron .` or `npx electron .`. This version of the client supports autotracking and world autofill.

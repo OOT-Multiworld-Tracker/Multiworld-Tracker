@@ -47,26 +47,27 @@ class Items extends React.Component {
           </tr>
         </thead>
         <tbody>
-          {Object.keys(this.state.items.inventory).map((item) => (
-            <tr onClick={() => { app.local.world.save.inventory[item] = !app.local.world.save.inventory[item]; this.setState({ items: app.local.world.save }); app.RenderLocations() }}>
-              <td>{item}</td>
-              <td>{this.state.items.inventory[item] ? 1 : 0}</td>
-            </tr>))}
-          {Object.keys(this.state.items.swords).map((item) => (
-            <tr onClick={() => { app.local.world.save.swords[item] = !app.local.world.save.swords[item]; this.setState({ items: app.local.world.save }); app.RenderLocations() }}>
-              <td>{item}</td>
-              <td>{this.state.items.swords[item] ? 1 : 0}</td>
-            </tr>))}
-          {Object.keys(this.state.items.tunics).map((item) => (
-            <tr onClick={() => { app.local.world.save.tunics[item] = !app.local.world.save.tunics[item]; this.setState({ items: app.local.world.save }); app.RenderLocations() }}>
-              <td>{item}</td>
-              <td>{this.state.items.tunics[item] ? 1 : 0}</td>
-            </tr>))}
-          {Object.keys(this.state.items.questStatus).map((item) => (
-            <tr onClick={() => { app.local.world.save.questStatus[item] = !app.local.world.save.questStatus[item]; this.setState({ items: app.local.world.save }); app.RenderLocations() }}>
-              <td>{item}</td>
-              <td>{this.state.items.questStatus[item] ? 1 : 0}</td>
-            </tr>))}
+          {Object.values(app.local.world.items).map((item) => {if (item instanceof Item) { return (
+            <tr onClick={() => { item.Toggle(); this.setState({ items: app.local.world.save }); app.RenderLocations() }}>
+              <td>{item.name}</td>
+              <td>{item.value}</td>
+            </tr>)} else {
+              if (item instanceof KeyManager) {
+                return Object.keys(item).map((key) => {
+                  return (<tr onClick={() => { item[key].Toggle(); this.setState({ items: app.local.world.save }); app.RenderLocations() }}>
+                    <td>{item[key].name}</td>
+                    <td>{item[key].value}</td>
+                  </tr>)
+                })
+              } else {
+                return Object.values(item).map((value) => {
+                  return (<tr onClick={() => { value.Toggle(); this.setState({ items: app.local.world.save }); app.RenderLocations() }}>
+                    <td>{value.name}</td>
+                    <td>{value.value}</td>
+                  </tr>)
+                })
+              }
+              } })}
         </tbody>
       </table>
     )

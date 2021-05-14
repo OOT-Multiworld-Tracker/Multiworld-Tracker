@@ -37,6 +37,10 @@ class Items extends React.Component {
     this.state = { items: app.local.world.save }
   }
 
+  renderGrid () {
+    return // Unimplemented
+  }
+
   render () {
     return (
       <table className='table-striped'>

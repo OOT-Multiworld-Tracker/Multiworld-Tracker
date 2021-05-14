@@ -124,6 +124,10 @@ class Item {
     this.value = values[0]
   }
 
+  Icon () {
+    return `imgs/${this.name.replace(' ', '_').toLowerCase()}.png`
+  }
+
   /**
    * Toggles through the avaliable values
    */

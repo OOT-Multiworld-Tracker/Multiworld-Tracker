@@ -7,8 +7,16 @@ if (window.isElectron) {
 
     switch (parsed.payload) {
       case 0:
-        Object.keys(parsed.data.save).forEach((key) => {
-          app.local.world.items[key].Set(parsed.data.save[key])
+        Object.keys(parsed.data.save.inventory).forEach((key) => {
+          if (app.local.world.items[key] !== undefined) {
+            if (parsed.data.save.inventory[key] === true) {
+              parsed.data.save.inventory[key] = 1
+            } else if (parsed.data.save.inventory[key] === false) {
+              parsed.data.save.inventory[key] = 0
+            }
+
+            app.local.world.items[key].Set(parsed.data.save.inventory[key])
+          }
         })
 
         app.worlds[myWorld - 1].items = app.local.world.items
@@ -38,6 +46,17 @@ function NetworkSerialize (map, data) {
 function NetworkDeserialize (world, data) {
   if (!world) { return app.worlds.push(new GameWorld(data.save, dungeons)) }
 
-  world.save = data.save
+  Object.keys(data.save.inventory).forEach((key) => {
+    if (world.items[key] !== undefined) {
+      if (data.save.inventory[key] === true) {
+        data.save.inventory[key] = 1
+      } else if (data.save.inventory[key] === false) {
+        data.save.inventory[key] = 0
+      }
+
+      world.items[key].Set(data.save.inventory[key])
+    }
+  })
+
   world.locations.Array().forEach((location, index) => { location.completed = data.locations[index] })
 }

@@ -49,7 +49,7 @@ class ItemManager {
     this.lightArrows = new Item('Light Arrows', [0, 1])
     this.dinsFire = new Item('Din\'s Fire', [0, 1])
     this.faroresWind = new Item('Farores\'s Wind', [0, 1])
-    this.nayru = new Item('Nayru\'s Love', [0, 1])
+    this.nayrusLove = new Item('Nayru\'s Love', [0, 1])
     this.ocarina = new Item('Ocarina', [0, 'Saria\'s Ocarina', 'Ocarina of Time'])
     this.hookshot = new Item('Hookshot', [0, 'Hookshot', 'Longshot'])
     this.lensOfTruth = new Item('Lens of Truth', [0, 1])

@@ -189,7 +189,7 @@ class LocationManager {
     return this.Accessible().filter((location) => {
       let valid = true
       keywords.forEach(keyword => {
-        if (!location.name.toLowerCase().includes(keyword)) {
+        if (!location.name.toLowerCase().includes(keyword.toLowerCase())) {
           valid = false
         }
       })

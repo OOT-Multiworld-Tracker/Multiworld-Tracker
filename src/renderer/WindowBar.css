@@ -1,0 +1,31 @@
+.toolbar-actions, .title {
+    background-color: #1D1E26;
+    color: #dadada;
+    margin: 0;
+    margin-top: 0!important;
+    padding: 3px;
+}
+
+.toolbar-header {
+    border: none;
+}
+
+.btn {
+    background: none;
+    background-color: #4e4e4e;
+    border: none;
+    color: #dadada;
+    border-radius: 0;
+}
+
+.btn .icon {
+    color: #dadada
+}
+
+.btn-group .btn+.btn {
+    border: none
+}
+
+.btn-dark {
+    background: none;
+}

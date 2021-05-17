@@ -1,42 +1,123 @@
 {
   "name": "multiworld-tracker",
-  "version": "1.1.1",
-  "description": "An ocarina of time multiworld tracker.",
-  "main": "app.js",
+  "version": "2.0.0",
+  "author": "matthe815",
+  "description": "A multiworld tracker for ocarina of time.",
+  "license": "MIT",
+  "main": "./dist/electron/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx electron .",
-    "build": "node build.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/OOT-Multiworld-Tracker/Multiworld-Tracker.git"
+    "build": "node .electron-react/build.js && electron-builder",
+    "build:dir": "node .electron-react/build.js && electron-builder --dir",
+    "build:clean": "cross-env BUILD_TARGET=clean node .electron-react/build.js",
+    "build:web": "cross-env BUILD_TARGET=web node .electron-react/build.js",
+    "dev": "node .electron-react/dev-runner.js",
+    "lint": "eslint --ext .js,.jsx -f ./node_modules/eslint-friendly-formatter src",
+    "lint:fix": "eslint --ext .js,.jsx -f ./node_modules/eslint-friendly-formatter --fix src",
+    "pack": "npm run pack:main && npm run pack:renderer",
+    "pack:main": "cross-env NODE_ENV=production webpack --progress --colors --config .electron-react/webpack.main.config.js",
+    "pack:renderer": "cross-env NODE_ENV=production webpack --progress --colors --config .electron-react/webpack.renderer.config.js",
+    "postinstall": "npm run lint:fix",
+    "test": "npm run test:unit && npm run test:e2e",
+    "test:unit": "jest -c jest.unit.config.js",
+    "test:e2e": "npm run pack && jest -c jest.e2e.config.js"
   },
   "build": {
-    "productName": "Multiworld Tracker",
+    "productName": "multiworld-tracker",
+    "appId": "com.multiworldtracker.tracker",
     "directories": {
-      "app": "builder/app"
+      "output": "build"
     },
-    "nsis": {
-      "perMachine": true,
-      "shortcutName": "Multiworld Tracker"
+    "files": [
+      "dist/electron/**/*"
+    ],
+    "dmg": {
+      "contents": [
+        {
+          "x": 410,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+          "x": 130,
+          "y": 150,
+          "type": "file"
+        }
+      ]
+    },
+    "mac": {
+      "icon": "build/icons/icon.icns"
+    },
+    "win": {
+      "icon": "build/icons/icon.ico"
+    },
+    "linux": {
+      "icon": "build/icons"
     }
   },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/OOT-Multiworld-Tracker/Multiworld-Tracker/issues"
-  },
-  "homepage": "https://github.com/OOT-Multiworld-Tracker/Multiworld-Tracker#readme",
   "dependencies": {
-    "electron-updater": "^4.3.9",
-    "express": "^4.17.1",
-    "ws": "^7.4.4"
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
   },
   "devDependencies": {
-    "@node-minify/babel-minify": "^6.2.0",
-    "@node-minify/core": "^6.2.0",
-    "electron": "^12.0.7",
-    "electron-builder": "^22.11.3"
+    "@babel/core": "^7.8.4",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+    "@babel/plugin-transform-runtime": "^7.8.3",
+    "@babel/preset-env": "^7.8.4",
+    "@babel/preset-react": "^7.8.3",
+    "@babel/runtime": "^7.8.4",
+    "ajv": "^6.11.0",
+    "babel-eslint": "^10.0.3",
+    "babel-jest": "^25.1.0",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-istanbul": "^6.0.0",
+    "babel-register": "^6.26.0",
+    "babili-webpack-plugin": "^0.1.2",
+    "cfonts": "^2.5.1",
+    "chai": "^4.2.0",
+    "chalk": "^3.0.0",
+    "copy-webpack-plugin": "^5.1.1",
+    "cross-env": "^7.0.0",
+    "css-loader": "^3.4.2",
+    "del": "^5.1.0",
+    "devtron": "^1.4.0",
+    "electron": "^7.1.11",
+    "electron-updater": "^4.3.9",
+    "ws": "^7.4.4",
+    "electron-builder": "^22.3.2",
+    "electron-debug": "^3.0.1",
+    "electron-devtools-installer": "^2.2.4",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "enzyme-to-json": "^3.4.4",
+    "eslint": "^6.8.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-friendly-formatter": "^4.0.1",
+    "eslint-loader": "^3.0.3",
+    "eslint-plugin-html": "^6.0.0",
+    "eslint-plugin-import": "^2.20.0",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.18.0",
+    "eslint-plugin-standard": "^4.0.1",
+    "file-loader": "^5.0.2",
+    "html-webpack-plugin": "^3.2.0",
+    "inject-loader": "^4.0.1",
+    "jest": "^25.1.0",
+    "less-loader": "^5.0.0",
+    "mini-css-extract-plugin": "^0.9.0",
+    "multispinner": "^0.2.1",
+    "node-loader": "^0.6.0",
+    "node-sass": "^4.13.1",
+    "react-hot-loader": "^4.12.19",
+    "sass-loader": "^8.0.2",
+    "spectron": "^10.0.0",
+    "style-loader": "^1.1.3",
+    "url-loader": "^3.0.0",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.2",
+    "webpack-hot-middleware": "^2.25.0",
+    "webpack-merge": "^4.2.2"
   }
 }

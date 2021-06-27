@@ -1,0 +1,6 @@
+.pane-md, .sidebar {
+    background-color: #1d1E26;
+    overflow-y: auto;
+    margin: 0;
+    padding: 3px;
+}

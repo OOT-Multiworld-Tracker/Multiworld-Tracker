@@ -1,0 +1,10 @@
+body {
+    color: white
+}
+
+.pane {
+    background-color: #373740;
+    margin: 0;
+    padding: 3px;
+    border: none
+}

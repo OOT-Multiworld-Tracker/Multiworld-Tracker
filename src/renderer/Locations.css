@@ -1,0 +1,16 @@
+tbody {
+    background-color: #4e4e4e;
+}
+
+.table-striped tr:nth-child(even) {
+    background-color: #333;
+}
+
+thead {
+    background-color: #222;
+}
+
+th {
+    border: none;
+    font-weight: bolder
+}

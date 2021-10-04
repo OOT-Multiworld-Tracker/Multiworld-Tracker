@@ -53,7 +53,7 @@
     },
     {
       "name": "Song from Ocarina of Time",
-      "logic": "(world) => world.items.kokiriEmerald.value === 1 && world.items.goronRuby.value === 1 && world.items.zoraSapphire.value === 1"
+      "logic": "(world) => world.save.questStatus.kokiriEmerald && world.save.questStatus.goronRuby && world.save.questStatus.zoraSapphire"
     },
     {
       "name": "Song from Windmill",
@@ -81,7 +81,7 @@
     },
     {
       "name": "Sheik at Temple",
-      "logic": "(world) => CanBecomeAdult(world) && world.items.spiritMedallion.value === 1"
+      "logic": "(world) => CanBecomeAdult(world) && world.save.questStatus.spiritMedallion"
     },
     {
       "name": "KF Midos Top Left Chest",

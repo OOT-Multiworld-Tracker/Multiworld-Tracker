@@ -54,39 +54,39 @@ class ElectronRenderer extends EventEmitter {
       this.emit('data', data)
     })
 
-    this.LoadUpdater()
-    autoUpdater.checkForUpdates()
+    this.LoadWindow()
+    // autoUpdater.checkForUpdates()
 
-    autoUpdater.on('update-not-available', () => {
-      console.log('Client up to date')
-      this.LoadWindow('index.html')
-    })
+    // autoUpdater.on('update-not-available', () => {
+    //   console.log('Client up to date')
+    //   this.LoadWindow('index.html')
+    // })
 
-    autoUpdater.on('error', (err) => {
-      console.log('Error: ' + err)
-      this.LoadWindow('index.html')
-    })
+    // autoUpdater.on('error', (err) => {
+    //   console.log('Error: ' + err)
+    //   this.LoadWindow('index.html')
+    // })
 
-    autoUpdater.on('download-progress', (progress) => {
-      this.SendData(`${progress.bytesPerSecond} - ${progress.percent}%`)
-    })
+    // autoUpdater.on('download-progress', (progress) => {
+    //   this.SendData(`${progress.bytesPerSecond} - ${progress.percent}%`)
+    // })
 
-    autoUpdater.on('update-downloaded', async _ => {
-      console.log('Update complete')
-      const file = await this.window.getRepresentedFilename()
+    // autoUpdater.on('update-downloaded', async _ => {
+    //   console.log('Update complete')
+    //   const file = await this.window.getRepresentedFilename()
 
-      switch (file) {
-        case 'index.html':
-          this.SendData({ payload: 2, data: 'update' })
-          break
-        case 'update.html':
-          autoUpdater.quitAndInstall()
-      }
-    })
+    //   switch (file) {
+    //     case 'index.html':
+    //       this.SendData({ payload: 2, data: 'update' })
+    //       break
+    //     case 'update.html':
+    //       autoUpdater.quitAndInstall()
+    //   }
+    // })
 
-    setInterval(() => {
-      autoUpdater.checkForUpdates()
-    }, 600000)
+    // setInterval(() => {
+    //   autoUpdater.checkForUpdates()
+    // }, 600000)
   }
 
   LoadUpdater () {
@@ -98,7 +98,6 @@ class ElectronRenderer extends EventEmitter {
    */
   LoadWindow (file) {
     this.window.loadURL('http://localhost:8081')
-    autoUpdater.checkForUpdates()
   }
 
   /**

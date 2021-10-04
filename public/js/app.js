@@ -88,14 +88,14 @@ class ItemManager {
     this.nocturneOfShadow = new Item('Nocturne Of Shadow', [0, 1])
     this.requiemOfSpirit = new Item('Requiem Of Spirit', [0, 1])
     this.kokiriEmerald = new Item('Kokiri Emerald', [0, 1])
-    this.goronRuby = new Item('Kokiri Emerald', [0, 1])
-    this.zoraSapphire = new Item('Kokiri Emerald', [0, 1])
-    this.lightMedallion = new Item('Kokiri Emerald', [0, 1])
-    this.forestMedallion = new Item('Kokiri Emerald', [0, 1])
-    this.waterMedallion = new Item('Kokiri Emerald', [0, 1])
-    this.fireMedallion = new Item('Kokiri Emerald', [0, 1])
-    this.spiritMedallion = new Item('Kokiri Emerald', [0, 1])
-    this.shadowMedallion = new Item('Kokiri Emerald', [0, 1])
+    this.goronRuby = new Item('Goron Ruby', [0, 1])
+    this.zoraSapphire = new Item('Zora Sapphire', [0, 1])
+    this.lightMedallion = new Item('Light Medallion', [0, 1])
+    this.forestMedallion = new Item('Forest Medallion', [0, 1])
+    this.waterMedallion = new Item('Water Medallion', [0, 1])
+    this.fireMedallion = new Item('Fire Medallion', [0, 1])
+    this.spiritMedallion = new Item('Spirit Medallion', [0, 1])
+    this.shadowMedallion = new Item('Shadow Medallion', [0, 1])
     this.medallion = {
       light: new Item('Light Medallion', [0, 1]),
       forest: new Item('Forest Medallion', [0, 1]),

@@ -239,7 +239,7 @@ function ToggleCompleted (props) {
 
 // Mixins
 function CanStunDeku (world = app.worlds[0]) {
-  return world.items.fairySlingshot.Index() > 0 || world.items.boomerang.Index() > 0 || world.items.dekuSticks.Index() > 0 || (world.items.bombBag.Index() > 0 || world.items.bombchus.Index() > 0) || world.items.dekuNuts.Index() > 0 || world.items.dinsFire.Index() > 0 || world.items.kokiriSword.Index() > 0 || world.items.dekuShield.Index() > 0
+  return world.items.fairySlingshot.Index() > 0 || world.items.boomerang.Index() > 0 || world.items.dekuSticks.Index() > 0 || (world.items.bombs.Index() > 0 || world.items.bombchus.Index() > 0) || world.items.dekuNuts.Index() > 0 || world.items.dinsFire.Index() > 0 || world.items.kokiriSword.Index() > 0 || world.items.dekuShield.Index() > 0
 }
 
 function HasExplosives (world = app.worlds[0]) {
@@ -247,7 +247,7 @@ function HasExplosives (world = app.worlds[0]) {
 }
 
 function CanDamage (world = app.worlds[0]) {
-  return world.items.kokiriSword.Index() > 0 || world.items.bombchus.Index() > 0 || world.items.bombBag.Index() > 0 || world.items.dekuSticks.Index() > 0 || (CanUseMagic(world) && world.items.dinsFire.Index() > 0) || (save.age == 1 && world.items.fairySlingshot.Index() > 0)
+  return world.items.kokiriSword.Index() > 0 || world.items.bombchus.Index() > 0 || world.items.bombs.Index() > 0 || world.items.dekuSticks.Index() > 0 || (CanUseMagic(world) && world.items.dinsFire.Index() > 0) || (save.age == 1 && world.items.fairySlingshot.Index() > 0)
 }
 
 function CanExitForest (world = app.worlds[0]) {

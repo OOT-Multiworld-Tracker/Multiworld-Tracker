@@ -1,12 +1,10 @@
-const { app } = require('electron')
-
 let locationList
 let sidebarButtons
 
 class Dungeons extends React.Component {
   constructor () {
     super()
-    this.state = { dungeons }
+    this.state = { dungeons: app.local.world.dungeons }
   }
 
   render () {
@@ -19,9 +17,9 @@ class Dungeons extends React.Component {
           </tr>
         </thead>
         <tbody>
-          {dungeons.map((dungeon) => {
+          {app.local.world.dungeons.map((dungeon) => {
             return (
-              <tr onClick={() => { dungeon.mq = !dungeon.mq; this.setState({ dungeons }) }}>
+              <tr onClick={() => { dungeon.mq = !dungeon.mq; this.setState({ dungeons: app.local.world.dungeons }) }}>
                 <td>{dungeon.name}</td>
                 <td>{dungeon.mq == true ? 'Master' : 'Vanilla'}</td>
               </tr>
@@ -52,7 +50,7 @@ class Items extends React.Component {
           {Object.values(app.local.world.items).map((item) => {return (
             <tr onClick={() => { item.Toggle(); this.setState({ items: app.local.world.save }); app.RenderLocations() }}>
               <td>{item.name}</td>
-              <td>{item.value == "0" ? "None" : item.value == "1" ? "Have" : item.value}</td>
+              <td>{item.value == "0" ? "None" : (item.value == "1" ? "Have" : item.value)}</td>
             </tr>)})}
         </tbody>
       </table>
@@ -340,7 +338,7 @@ class Sidebar extends React.Component {
         return (
           <div>
             <p>My World ID</p>
-            <input type='number' onInput={(elem) => { myWorld = elem.target.value; eSidebar.render(); app.local.world = app.worlds[myWorld-1] }} />
+            <input type='number' onInput={(elem) => { myWorld = elem.target.value; eSidebar.render(); app.local.world = app.worlds[myWorld - 1] }} />
             <p>Worlds</p>
             <Worlds />
           </div>

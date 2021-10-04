@@ -1,3 +1,5 @@
+const { app } = require('electron')
+
 let locationList
 let sidebarButtons
 
@@ -338,7 +340,7 @@ class Sidebar extends React.Component {
         return (
           <div>
             <p>My World ID</p>
-            <input type='number' onInput={(elem) => { myWorld = elem.target.value }} />
+            <input type='number' onInput={(elem) => { myWorld = elem.target.value; eSidebar.render(); app.local.world = app.worlds[myWorld-1] }} />
             <p>Worlds</p>
             <Worlds />
           </div>

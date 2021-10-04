@@ -198,7 +198,7 @@ function ParseSpoilerLog (log) {
       app.local.world.dungeons[i].mq = log.dungeons['World 1'][Object.keys(log.dungeons['World 1'])[i]] === 'mq'
     }
   } else {
-    app.worlds.push({ save, locations: log.locations })
+    app.worlds.push(new GameWorld(save, dungeons, log.locations ))
 
     for (let i = 0; i < Object.keys(log.dungeons).length; i++) {
       app.local.world.dungeons[i].mq = log.dungeons[Object.keys(log.dungeons)[i]] === 'mq'
@@ -214,9 +214,7 @@ function ParseLocations (locations, spoiler = null) {
     data.forEach((location, index) => {
       location.id = index
 
-      if (location.logic) {
-        location.logic = eval(location.logic)
-      }
+      if (location.logic) { location.logic = eval(location.logic) }
 
       if (spoiler) { location.item = spoiler[index] }
       locations.set(location.id, location)
@@ -235,112 +233,112 @@ function IsAccessible (location, world) {
 function ToggleCompleted (props) {
   app.local.world.locations.Array()[props.id].completed = !app.local.world.locations.Array()[props.id].completed
   // Serialize and compress a packet for sending
-  if (window.isElectron) { require('electron').ipcRenderer.send('packets', JSON.stringify({ world: myWorld - 1, save: { swords: save.swords, shields: save.shields, inventory: save.inventory, questStatus: save.questStatus }, locations: NetworkSerialize(app.local.world.locations.Array(), 'completed') }).replace(/true/g, '1').replace(/false/g, '0')) }
+  if (window.isElectron) { require('electron').ipcRenderer.send('packets', JSON.stringify({ world: myWorld - 1, save: { swords: save.swords, shields: save.shields, inventory: save, questStatus: save.questStatus }, locations: NetworkSerialize(app.local.world.locations.Array(), 'completed') }).replace(/true/g, '1').replace(/false/g, '0')) }
   app.RenderLocations()
 }
 
 // Mixins
-function CanStunDeku (world = { save, settings, locations: MapToArray(locations) }) {
-  const save = world.save
-  return save.inventory.fairySlingshot || save.inventory.boomerang || save.inventory.dekuSticks || (save.inventory.bombBag || save.inventory.bombchus) || save.inventory.dekuNuts || save.inventory.dinsFire || save.swords.kokiriSword || save.shields.dekuShield
+function CanStunDeku (world = app.local.world) {
+  const save = world.items
+  return save.fairySlingshot || save.boomerang || save.dekuSticks || (save.bombBag || save.bombchus) || save.dekuNuts || save.dinsFire || save.swords.kokiriSword || save.shields.dekuShield
 }
 
-function HasExplosives (world = { save, settings, locations: MapToArray(locations) }) {
+function HasExplosives (world = app.local.world) {
   const save = world.save
-  return save.inventory.bombBag || save.inventory.bombchus
+  return save.bombBag || save.bombchus
 }
 
-function CanDamage (world = { save, settings, locations: MapToArray(locations) }) {
+function CanDamage (world = app.local.world) {
   const save = world.save
-  return save.swords.kokiriSword || save.inventory.bombchus || save.inventory.bombBag || save.inventory.dekuSticks || (CanUseMagic(world) && save.inventory.dinsFire) || (save.age == 1 && save.inventory.fairySlingshot)
+  return save.swords.kokiriSword || save.bombchus || save.bombBag || save.dekuSticks || (CanUseMagic(world) && save.dinsFire) || (save.age == 1 && save.fairySlingshot)
 }
 
 function CanExitForest (world = app.local.world) {
   const save = world.save
-  return settings.open_forest !== 'closed' || world.locations.Array()[0].completed || HasExplosives(world) || save.inventory.swimming >= 1 || (CanUseMagic(world) && save.inventory.dinsFire)
+  return settings.open_forest !== 'closed' || world.locations.Array()[0].completed || HasExplosives(world) || save.swimming >= 1 || (CanUseMagic(world) && save.dinsFire)
 }
 
-function CanLightFires (world = { save, settings, locations: MapToArray(locations) }) {
+function CanLightFires (world = app.local.world) {
   const save = world.save
-  return save.inventory.dekuSticks || (CanUseMagic(world) && save.inventory.dinsFire) || (save.age == 1 && CanUseMagic(world) && save.inventory.fairyBow && save.inventory.fireArrows)
+  return save.dekuSticks || (CanUseMagic(world) && save.dinsFire) || (save.age == 1 && CanUseMagic(world) && save.fairyBow && save.fireArrows)
 }
 
-function CanUseMagic (world = { save, settings, locations: MapToArray(locations) }) {
+function CanUseMagic (world = app.local.world) {
   const save = world.save
   return save.magic_meter_size > 1
 }
 
-function CanBecomeAdult (world = { save, settings, locations: MapToArray(locations) }) {
+function CanBecomeAdult (world = app.local.world) {
   const save = world.save
-  return settings.open_door_of_time || (save.inventory.ocarina >= 1 && save.questStatus.songOfTime)
+  return settings.open_door_of_time || (save.ocarina >= 1 && save.questStatus.songOfTime)
 }
 
 // Area Entry Mixins
-function CanEnterDodongo (world = { save, settings, locations: MapToArray(locations) }) {
+function CanEnterDodongo (world = app.local.world) {
   const save = world.save
-  return CanEnterDeathMountain(world) && (save.inventory.strength >= 1 || HasExplosives(world))
+  return CanEnterDeathMountain(world) && (save.strength >= 1 || HasExplosives(world))
 }
 
-function CanEnterDeathMountain (world = { save, settings, locations: MapToArray(locations) }) {
+function CanEnterDeathMountain (world = app.local.world) {
   const save = world.save
-  return settings.open_kakariko || (save.inventory.childTradeItem >= 2 || HasExplosives(world))
+  return settings.open_kakariko || (save.childTradeItem >= 2 || HasExplosives(world))
 }
 
-function CanEnterZorasRiver (world = { save, settings, locations: MapToArray(locations) }) {
+function CanEnterZorasRiver (world = app.local.world) {
   const save = world.save
-  return save.inventory.swimming >= 1 || HasExplosives(world) || (CanBecomeAdult(world) && save.inventory.megatonHammer)
+  return save.swimming >= 1 || HasExplosives(world) || (CanBecomeAdult(world) && save.megatonHammer)
 }
 
-function CanEnterZorasDomain (world = { save, settings, locations: MapToArray(locations) }) {
+function CanEnterZorasDomain (world = app.local.world) {
   const save = world.save
-  return save.inventory.swimming >= 1 || (HasExplosives(world) || (CanBecomeAdult(world) && save.inventory.megatonHammer) && (save.inventory.ocarina >= 1 && save.questStatus.sariasSong))
+  return save.swimming >= 1 || (HasExplosives(world) || (CanBecomeAdult(world) && save.megatonHammer) && (save.ocarina >= 1 && save.questStatus.sariasSong))
 }
 
-function CanEnterJabu (world = { save, settings, locations: MapToArray(locations) }) {
+function CanEnterJabu (world = app.local.world) {
   const save = world.save
   return CanEnterZorasDomain(world)
 }
 
-function CanEnterForest (world = { save, settings, locations: MapToArray(locations) }) {
+function CanEnterForest (world = app.local.world) {
   const save = world.save
-  return CanBecomeAdult(world) && save.inventory.hookshot >= 1 && save.inventory.ocarina >= 1 && save.questStatus.sariasSong
+  return CanBecomeAdult(world) && save.hookshot >= 1 && save.ocarina >= 1 && save.questStatus.sariasSong
 }
 
-function CanEnterFire (world = { save, settings, locations: MapToArray(locations) }) {
+function CanEnterFire (world = app.local.world) {
   const save = world.save
-  return CanBecomeAdult(world) && CanEnterDMC(world) && save.inventory.hookshot >= 1
+  return CanBecomeAdult(world) && CanEnterDMC(world) && save.hookshot >= 1
 }
 
-function CanEnterIce (world = { save, settings, locations: MapToArray(locations) }) {
+function CanEnterIce (world = app.local.world) {
   const save = world.save
   return CanBecomeAdult(world) && CanEnterWater(world)
 }
 
-function CanEnterDMC (world = { save, settings, locations: MapToArray(locations) }) {
+function CanEnterDMC (world = app.local.world) {
   return HasExplosives(world)
 }
 
-function CanEnterWater (world = { save, settings, locations: MapToArray(locations) }) {
+function CanEnterWater (world = app.local.world) {
   const save = world.save
-  return CanBecomeAdult(world) && save.boots.ironBoots && save.inventory.hookshot >= 1
+  return CanBecomeAdult(world) && save.boots.ironBoots && save.hookshot >= 1
 }
 
-function CanEnterShadow (world = { save, settings, locations: MapToArray(locations) }) {
+function CanEnterShadow (world = app.local.world) {
   const save = world.save
-  return CanBecomeAdult(world) && save.inventory.hookshot >= 1 && (save.inventory.ocarina >= 1 && save.questStatus.nocturneOfShadow) && save.inventory.lensOfTruth
+  return CanBecomeAdult(world) && save.hookshot >= 1 && (save.ocarina >= 1 && save.questStatus.nocturneOfShadow) && save.lensOfTruth
 }
 
-function CanEnterSpirit (world = { save, settings, locations: MapToArray(locations) }) {
+function CanEnterSpirit (world = app.local.world) {
   const save = world.save
-  return (save.inventory.ocarina >= 1 && save.questStatus.requiemOfSpirit) || (CanBecomeAdult() && save.questStatus.gerudoMembershipCard && (save.inventory.hookshot == 2 || save.inventory.ocarina >= 1 && save.questStatus.eponasSong))
+  return (save.ocarina >= 1 && save.questStatus.requiemOfSpirit) || (CanBecomeAdult() && save.questStatus.gerudoMembershipCard && (save.hookshot == 2 || save.ocarina >= 1 && save.questStatus.eponasSong))
 }
 
-function CanEnterGtG (world = { save, settings, locations: MapToArray(locations) }) {
+function CanEnterGtG (world = app.local.world) {
   const save = world.save
-  return (CanBecomeAdult() && save.questStatus.gerudoMembershipCard && (save.inventory.hookshot == 2 || save.inventory.ocarina >= 1 && save.questStatus.eponasSong))
+  return (CanBecomeAdult() && save.questStatus.gerudoMembershipCard && (save.hookshot == 2 || save.ocarina >= 1 && save.questStatus.eponasSong))
 }
 
-function CanEnterGC (world = { save, settings, locations: MapToArray(locations) }) {
+function CanEnterGC (world = app.local.world) {
   const save = world.save
   return (CanBecomeAdult() && save.questStatus.lightMedallion && save.questStatus.spiritMedallion && save.questStatus.shadowMedallion)
 }

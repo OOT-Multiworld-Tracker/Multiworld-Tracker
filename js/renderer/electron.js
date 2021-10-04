@@ -71,10 +71,22 @@ class ElectronRenderer extends EventEmitter {
       this.SendData(`${progress.bytesPerSecond} - ${progress.percent}%`)
     })
 
-    autoUpdater.on('update-downloaded', _ => {
+    autoUpdater.on('update-downloaded', async _ => {
       console.log('Update complete')
-      autoUpdater.quitAndInstall()
+      const file = await this.window.getRepresentedFilename()
+
+      switch (file) {
+        case 'index.html':
+          this.SendData({ payload: 2, data: 'update' })
+          break
+        case 'update.html':
+          autoUpdater.quitAndInstall()
+      }
     })
+
+    setInterval(() => {
+      autoUpdater.checkForUpdates()
+    }, 600000)
   }
 
   LoadUpdater () {
@@ -86,6 +98,7 @@ class ElectronRenderer extends EventEmitter {
    */
   LoadWindow (file) {
     this.window.loadURL('http://localhost:8081')
+    autoUpdater.checkForUpdates()
   }
 
   /**

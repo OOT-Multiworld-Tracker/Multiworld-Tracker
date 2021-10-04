@@ -2,6 +2,11 @@ window.isElectron = typeof require !== 'undefined'
 
 if (window.isElectron) {
   require('electron').ipcRenderer.on('packet', (event, data) => {
+    console.log(data)
+    document.getElementById("status").innerHTML = data
+})
+
+  require('electron').ipcRenderer.on('packet', (event, data) => {
     const parsed = JSON.parse(data)
     console.log(parsed)
 
@@ -25,8 +30,12 @@ if (window.isElectron) {
       case 1:
         // Scene payload
         break
+      case 2:
+        // Update payload
+        break
       case 3:
         console.log('Received other map tracker')
+        console.log(parsed)
         if (app.worlds[parsed.data.world] == app.local.world) // Prevent lost progress through mistakes or attempted trolls.
         { return }
 

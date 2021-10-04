@@ -50,7 +50,7 @@ class Items extends React.Component {
           {Object.values(app.local.world.items).map((item) => {return (
             <tr onClick={() => { item.Toggle(); this.setState({ items: app.local.world.save }); app.RenderLocations() }}>
               <td>{item.name}</td>
-              <td>{item.value}</td>
+              <td>{item.value == "0" ? "None" : item.value}</td>
             </tr>)})}
         </tbody>
       </table>
@@ -240,6 +240,9 @@ class Header extends React.Component {
         <div className='toolbar-actions'>
           <span class='title'>Ocarina of Time - Multiworld Autotracker</span>
           <div class='btn-group pull-right'>
+            <button class='btn btn-default btn-dark pull-right'>
+              <span class='icon icon-download' />
+            </button>
             <button class='btn btn-default btn-dark pull-right' onClick={() => require('electron').ipcRenderer.send('packets', 'minimize')}>
               <span class='icon icon-minus' />
             </button>

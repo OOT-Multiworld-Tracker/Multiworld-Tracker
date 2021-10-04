@@ -50,7 +50,7 @@ class Items extends React.Component {
           {Object.values(app.local.world.items).map((item) => {return (
             <tr onClick={() => { item.Toggle(); this.setState({ items: app.local.world.save }); app.RenderLocations() }}>
               <td>{item.name}</td>
-              <td>{item.value == "0" ? "None" : item.value}</td>
+              <td>{item.value == "0" ? "None" : item.value == "1" ? "Have" : item.value}</td>
             </tr>)})}
         </tbody>
       </table>

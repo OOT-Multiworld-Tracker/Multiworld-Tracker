@@ -239,7 +239,7 @@ function ToggleCompleted (props) {
 
 // Mixins
 function CanStunDeku (world = app.worlds[0]) {
-  return world.items.fairySlingshot || world.items.boomerang || world.items.dekuSticks || (world.items.bombBag || world.items.bombchus) || world.items.dekuNuts || world.items.dinsFire || save.swords.kokiriSword || save.shields.dekuShield
+  return world.items.fairySlingshot.Index() > 0 || world.items.boomerang.Index() > 0 || world.items.dekuSticks.Index() > 0 || (world.items.bombBag.Index() > 0 || world.items.bombchus.Index() > 0) || world.items.dekuNuts.Index() > 0 || world.items.dinsFire.Index() > 0 || world.items.kokiriSword.Index() > 0 || world.items.dekuShield.Index() > 0
 }
 
 function HasExplosives (world = app.worlds[0]) {
@@ -247,15 +247,15 @@ function HasExplosives (world = app.worlds[0]) {
 }
 
 function CanDamage (world = app.worlds[0]) {
-  return world.items.kokiriSword || world.items.bombchus || world.items.bombBag || world.items.dekuSticks || (CanUseMagic(world) && world.items.dinsFire) || (save.age == 1 && world.items.fairySlingshot)
+  return world.items.kokiriSword.Index() > 0 || world.items.bombchus.Index() > 0 || world.items.bombBag.Index() > 0 || world.items.dekuSticks.Index() > 0 || (CanUseMagic(world) && world.items.dinsFire.Index() > 0) || (save.age == 1 && world.items.fairySlingshot.Index() > 0)
 }
 
-function CanExitForest (world = app.local.world) {
-  return settings.open_forest !== 'closed' || world.locations.Array()[0].completed || HasExplosives(world) || world.items.swimming >= 1 || (CanUseMagic(world) && world.items.dinsFire)
+function CanExitForest (world = app.worlds[0]) {
+  return settings.open_forest !== 'closed' || world.locations.Array()[0].completed || HasExplosives(world) || world.items.swimming.Index() >= 1 || (CanUseMagic(world) && world.items.dinsFire.Index() > 0)
 }
 
 function CanLightFires (world = app.worlds[0]) {
-  return world.items.dekuSticks || (CanUseMagic(world) && world.items.dinsFire) || (save.age == 1 && CanUseMagic(world) && world.items.fairyBow && world.items.fireArrows)
+  return world.items.dekuSticks.Index() > 0 || (CanUseMagic(world) && world.items.dinsFire.Index() > 0) || (save.age == 1 && CanUseMagic(world) && world.items.fairyBow.Index() > 0 && world.items.fireArrows.Index() > 0)
 }
 
 function CanUseMagic (world = app.worlds[0]) {
@@ -264,24 +264,24 @@ function CanUseMagic (world = app.worlds[0]) {
 
 function CanBecomeAdult (world = app.worlds[0]) {
   const save = world.save
-  return settings.open_door_of_time || (world.items.ocarina >= 1 && save.questStatus.songOfTime)
+  return settings.open_door_of_time || (world.items.ocarina.Index() >= 1 && save.questStatus.songOfTime.Index() > 0)
 }
 
 // Area Entry Mixins
 function CanEnterDodongo (world = app.worlds[0]) {
-  return CanEnterDeathMountain(world) && (world.items.strength >= 1 || HasExplosives(world))
+  return CanEnterDeathMountain(world) && (world.items.strength.Index() >= 1 || HasExplosives(world))
 }
 
 function CanEnterDeathMountain (world = app.worlds[0]) {
-  return settings.open_kakariko || (world.items.childTradeItem >= 2 || HasExplosives(world))
+  return settings.open_kakariko || (world.items.childTradeItem.Index() >= 2 || HasExplosives(world))
 }
 
 function CanEnterZorasRiver (world = app.worlds[0]) {
-  return world.items.swimming >= 1 || HasExplosives(world) || (CanBecomeAdult(world) && world.items.megatonHammer)
+  return world.items.swimming.Index() >= 1 || HasExplosives(world) || (CanBecomeAdult(world) && world.items.megatonHammer.Index() > 0)
 }
 
 function CanEnterZorasDomain (world = app.worlds[0]) {
-  return world.items.swimming >= 1 || (HasExplosives(world) || (CanBecomeAdult(world) && world.items.megatonHammer) && (world.items.ocarina >= 1 && save.questStatus.sariasSong))
+  return world.items.swimming.Index() >= 1 || (HasExplosives(world) || (CanBecomeAdult(world) && world.items.megatonHammer.Index() > 0) && (world.items.ocarina.Index() >= 1 && save.questStatus.sariasSong.Index() > 0))
 }
 
 function CanEnterJabu (world = app.worlds[0]) {
@@ -289,11 +289,11 @@ function CanEnterJabu (world = app.worlds[0]) {
 }
 
 function CanEnterForest (world = app.worlds[0]) {
-  return CanBecomeAdult(world) && world.items.hookshot >= 1 && world.items.ocarina >= 1 && save.questStatus.sariasSong
+  return CanBecomeAdult(world) && world.items.hookshot.Index() >= 1 && world.items.ocarina.Index() >= 1 && save.questStatus.sariasSong.Index() > 0
 }
 
 function CanEnterFire (world = app.worlds[0]) {
-  return CanBecomeAdult(world) && CanEnterDMC(world) && world.items.hookshot >= 1
+  return CanBecomeAdult(world) && CanEnterDMC(world) && world.items.hookshot.Index() >= 1
 }
 
 function CanEnterIce (world = app.worlds[0]) {
@@ -310,19 +310,19 @@ function CanEnterWater (world = app.worlds[0]) {
 }
 
 function CanEnterShadow (world = app.worlds[0]) {
-  return CanBecomeAdult(world) && world.items.hookshot >= 1 && (world.items.ocarina >= 1 && save.questStatus.nocturneOfShadow) && world.items.lensOfTruth
+  return CanBecomeAdult(world) && world.items.hookshot.Index() >= 1 && (world.items.ocarina.Index() >= 1 && save.questStatus.nocturneOfShadow.Index() > 0) && world.items.lensOfTruth.Index() > 0
 }
 
 function CanEnterSpirit (world = app.worlds[0]) {
-  return (world.items.ocarina >= 1 && save.questStatus.requiemOfSpirit) || (CanBecomeAdult() && save.questStatus.gerudoMembershipCard && (world.items.hookshot == 2 || world.items.ocarina >= 1 && save.questStatus.eponasSong))
+  return (world.items.ocarina.Index() >= 1 && save.questStatus.requiemOfSpirit.Index() > 0) || (CanBecomeAdult() && save.questStatus.gerudoMembershipCard.Index() > 0 && (world.items.hookshot.Index() == 2 || world.items.ocarina.Index() >= 1 && save.questStatus.eponasSong.Index() > 0))
 }
 
 function CanEnterGtG (world = app.worlds[0]) {
-  return (CanBecomeAdult() && save.questStatus.gerudoMembershipCard && (world.items.hookshot == 2 || world.items.ocarina >= 1 && save.questStatus.eponasSong))
+  return (CanBecomeAdult() && save.questStatus.gerudoMembershipCard.Index() > 0 && (world.items.hookshot.Index() == 2 || world.items.ocarina.Index() >= 1 && save.questStatus.eponasSong.Index() > 0))
 }
 
 function CanEnterGC (world = app.worlds[0]) {
-  return (CanBecomeAdult() && save.questStatus.lightMedallion && save.questStatus.spiritMedallion && save.questStatus.shadowMedallion)
+  return (CanBecomeAdult() && save.questStatus.lightMedallion.Index() > 0 && save.questStatus.spiritMedallion.Index() > 0 && save.questStatus.shadowMedallion.Index() > 0)
 }
 
 function ShopRandomized (world = app.local.world, count = 0) {

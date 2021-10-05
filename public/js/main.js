@@ -199,12 +199,15 @@ function ParseSpoilerLog (log) {
         app.worlds[index].dungeons[i].mq = world[Object.keys(world)[i]] === 'mq'
       }
     })
-    
   } else {
-    app.worlds.push(new GameWorld(save, dungeons, log.locations ))
+    console.log("Loading singleplayer world")
+    app.worlds.push(new GameWorld(save, Array.from(dungeons), log.locations))
+
+
 
     for (let i = 0; i < Object.keys(log.dungeons).length; i++) {
-      app.local.world.dungeons[i].mq = log.dungeons[Object.keys(log.dungeons)[i]] === 'mq'
+      console.log(log.dungeons[Object.keys(log.dungeons)[i]])
+      app.worlds[0].dungeons[i].mq = log.dungeons[Object.keys(log.dungeons)[i]] === 'mq'
     }
   }
 
@@ -216,12 +219,13 @@ function ParseSpoilerLog (log) {
 function ParseLocations (locations, spoiler = null) {
   $.getJSON('/json/locations.json', (data) => {
     locationJson = data
+    let worldCount = app.worlds.length
     data.forEach((location, index) => {
       location.id = index
 
       if (location.logic) { location.logic = eval(location.logic) }
 
-      if (spoiler) { location.item = spoiler[index] }
+      if (spoiler) { location.item = spoiler[worldCount > 1 ? index : location.name] }
       locations.set(location.id, location)
     })
 

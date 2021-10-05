@@ -99,7 +99,7 @@ class Worlds extends React.Component {
           </tr>
         </thead>
         <tbody>
-          {app.worlds.map((world, index) => { return (<World name={'World ' + index} id={index} items={world.locations.Accessible(false, false).filter(location => location.item && location.item.player == myWorld).length} />) })}
+          {app.worlds.map((world, index) => { return (<World name={'World ' + index} id={index} items={world.locations.Accessible(false, false).filter(location => location.item && (app.worlds.length === 1 || location.item.player == myWorld)).length} />) })}
         </tbody>
       </table>
     )

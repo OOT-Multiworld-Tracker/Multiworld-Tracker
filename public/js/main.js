@@ -156,12 +156,26 @@ function SaveState (fileName) {
 
 function LoadState (fileName) {
   const file = JSON.parse(localStorage.getItem(fileName))
-  app.local.world.dungeons = file.dungeons
   app.global.settings = file.settings
   app.local.world.save = file.save
+  app.local.world.items = new ItemManager(app.local.world)
 
-  file.locations.forEach((location) => {
-    app.local.world.locations.All().set(location.id, location)
+  Object.keys(app.local.world.save.inventory).forEach((key) => {
+    if (app.local.world.items[key] !== undefined) {
+      if (app.local.world.save.inventory[key] === true) {
+        app.local.world.save.inventory[key] = 1
+      } else if (app.local.world.save.inventory[key] === false) {
+        app.local.world.save.inventory[key] = 0
+      }
+
+      app.local.world.items[key].Set(app.local.world.save.inventory[key])
+    }
+  })
+
+  console.log(app.worlds[0].locations)
+  console.log(file.locations)
+  file.locations.forEach((location, index) => {
+    if (location.completed) app.worlds[0].locations.All().get(location.id).completed = location.completed
   })
 
   ReactDOM.render(<Sidebar />, document.getElementsByClassName('sidebar')[0])
@@ -273,7 +287,7 @@ function CanUseMagic (world = app.local.world) {
 
 function CanBecomeAdult (world = app.local.world) {
   const save = world.save
-  return settings.open_door_of_time || (world.items.ocarina.Index() >= 1 && save.questStatus.songOfTime.Index() > 0)
+  return settings.open_door_of_time || (world.items.ocarina.Index() >= 1 && save.questStatus.songOfTime > 0)
 }
 
 // Area Entry Mixins
@@ -298,7 +312,7 @@ function CanEnterJabu (world = app.local.world) {
 }
 
 function CanEnterForest (world = app.local.world) {
-  return CanBecomeAdult(world) && world.items.hookshot.Index() >= 1 && world.items.ocarina.Index() >= 1 && save.questStatus.sariasSong.Index() > 0
+  return CanBecomeAdult(world) && world.items.hookshot.Index() >= 1 && world.items.ocarina.Index() >= 1 && save.questStatus.sariasSong > 0
 }
 
 function CanEnterFire (world = app.local.world) {
@@ -319,19 +333,19 @@ function CanEnterWater (world = app.local.world) {
 }
 
 function CanEnterShadow (world = app.local.world) {
-  return CanBecomeAdult(world) && world.items.hookshot.Index() >= 1 && (world.items.ocarina.Index() >= 1 && save.questStatus.nocturneOfShadow.Index() > 0) && world.items.lensOfTruth.Index() > 0
+  return CanBecomeAdult(world) && world.items.hookshot.Index() >= 1 && (world.items.ocarina.Index() >= 1 && save.questStatus.nocturneOfShadow > 0) && world.items.lensOfTruth.Index() > 0
 }
 
 function CanEnterSpirit (world = app.local.world) {
-  return (world.items.ocarina.Index() >= 1 && save.questStatus.requiemOfSpirit.Index() > 0) || (CanBecomeAdult() && save.questStatus.gerudoMembershipCard.Index() > 0 && (world.items.hookshot.Index() == 2 || world.items.ocarina.Index() >= 1 && save.questStatus.eponasSong.Index() > 0))
+  return (world.items.ocarina.Index() >= 1 && save.questStatus.requiemOfSpirit > 0) || (CanBecomeAdult() && save.questStatus.gerudoMembershipCard > 0 && (world.items.hookshot.Index() == 2 || world.items.ocarina.Index() >= 1 && save.questStatus.eponasSong > 0))
 }
 
 function CanEnterGtG (world = app.local.world) {
-  return (CanBecomeAdult() && save.questStatus.gerudoMembershipCard.Index() > 0 && (world.items.hookshot.Index() == 2 || world.items.ocarina.Index() >= 1 && save.questStatus.eponasSong.Index() > 0))
+  return (CanBecomeAdult() && save.questStatus.gerudoMembershipCard > 0 && (world.items.hookshot.Index() == 2 || world.items.ocarina.Index() >= 1 && save.questStatus.eponasSong.Index() > 0))
 }
 
 function CanEnterGC (world = app.local.world) {
-  return (CanBecomeAdult() && save.questStatus.lightMedallion.Index() > 0 && save.questStatus.spiritMedallion.Index() > 0 && save.questStatus.shadowMedallion.Index() > 0)
+  return (CanBecomeAdult() && save.questStatus.lightMedallion > 0 && save.questStatus.spiritMedallion > 0 && save.questStatus.shadowMedallion > 0)
 }
 
 function ShopRandomized (world = app.local.world, count = 0) {

@@ -99,7 +99,7 @@ class Worlds extends React.Component {
           </tr>
         </thead>
         <tbody>
-          {app.worlds.map((world, index) => { return (<World name={'World ' + index} id={index} items={world.locations.Accessible(false, false).filter(location => location.item && (app.worlds.length === 1 || location.item.player == myWorld)).length} />) })}
+          {app.worlds.map((world, index) => { return (<World name={world.save.player_name} id={index} items={world.locations.Accessible(false, false).filter(location => location.item && (app.worlds.length === 1 || location.item.player == myWorld)).length} />) })}
         </tbody>
       </table>
     )
@@ -186,7 +186,7 @@ class Settings extends React.Component {
 class Player extends React.Component {
   constructor () {
     super()
-    this.state = { name: save.player_name }
+    this.state = { name: app.local.world.save.player_name }
   }
 
   componentDidMount () {
@@ -201,12 +201,12 @@ class Player extends React.Component {
   }
 
   tick () {
-    this.setState({ name: save.player_name })
+    this.setState({ name: app.local.world.save.player_name })
   }
 
   render () {
     return app.worlds.length == 1 ? (
-      <div className='character_name'>{this.state.name}</div>
+      <div className='character_name'>{app.local.world.save.player_name}</div>
     ) : (<div>World {this.state.name}</div>)
   }
 }

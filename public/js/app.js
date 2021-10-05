@@ -55,10 +55,10 @@ class ItemManager {
     this.lensOfTruth = new Item('Lens of Truth', [0, 1])
     this.boomerang = new Item('Boomerang', [0, 1])
     this.megatonHammer = new Item('Megaton Hammer', [0, 1])
-    this.bottle_1 = new Item('Bottle 1', [0, 1])
-    this.bottle_2 = new Item('Bottle 2', [0, 1])
-    this.bottle_3 = new Item('Bottle 3', [0, 1])
-    this.bottle_4 = new Item('Bottle 4', [0, 1])
+    this.bottle_1 = new Bottle('Bottle 1')
+    this.bottle_2 = new Bottle('Bottle 2')
+    this.bottle_3 = new Bottle('Bottle 3')
+    this.bottle_4 = new Bottle('Bottle 4')
     this.childTradeItem = new Item('Child Trading', [0, 34])
     this.adultTradeItem = new Item('Adult Trading', [0, 43])
     this.wallet = new Item('Wallet', [0, 99, 200, 500, 999])
@@ -151,6 +151,16 @@ class Item {
     } else {
       this.value = this.values[index + 1]
     }
+  }
+}
+
+class Bottle extends Item {
+  constructor (name) {
+    super(name, [0])
+    this.values[0] = 0
+    this.values[1] = 1
+    this.values[22] = 'Bottle'
+    this.values[255] = 'None'
   }
 }
 

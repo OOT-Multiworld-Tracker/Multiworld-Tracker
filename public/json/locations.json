@@ -695,156 +695,161 @@
       "logic": "(world) => (world.items.ocarina.Index() >= 1 && world.save.questStatus.requiemOfSpirit && world.save.questStatus.zeldasLullaby) || (world.save.questStatus.gerudoMembershipCard && world.items.hookshot.Index() == 2) && CanStunDeku(world) && HasExplosives()"
     },
     {
+      "name": "Deku Tree Lobby Chest",
+      "preExit": true,
+      "logic": "(world) => world.dungeons[0].mq == false && world.save.swords.kokiriSword && world.save.shields.dekuShield"
+    },
+    {
       "name": "Deku Tree Slingshot Room Side Chest",
       "preExit": true,
-      "logic": "(world) => dungeons[0].mq == false && world.save.swords.kokiriSword && world.save.shields.dekuShield"
+      "logic": "(world) => world.dungeons[0].mq == false && world.save.swords.kokiriSword && world.save.shields.dekuShield"
     },
     {
       "name": "Deku Tree Slingshot Chest",
       "preExit": true,
-      "logic": "(world) => dungeons[0].mq == false && world.save.swords.kokiriSword && world.save.shields.dekuShield"
+      "logic": "(world) => world.dungeons[0].mq == false && world.save.swords.kokiriSword && world.save.shields.dekuShield"
     },
     {
       "name": "Deku Tree Compass Room Side Chest",
       "preExit": true,
-      "logic": "(world) => dungeons[0].mq == false && world.save.swords.kokiriSword && world.save.shields.dekuShield" 
+      "logic": "(world) => world.dungeons[0].mq == false && world.save.swords.kokiriSword && world.save.shields.dekuShield" 
     },
     {
       "name": "Deku Tree Basement Chest",
       "preExit": true,
-      "logic": "(world) => dungeons[0].mq == false && world.save.swords.kokiriSword && world.save.shields.dekuShield && world.items.dekuNuts.value > 0"
+      "logic": "(world) => world.dungeons[0].mq == false && world.save.swords.kokiriSword && world.save.shields.dekuShield && world.items.dekuNuts.value > 0"
     },
     {
       "name": "Deku Tree GS Compass Room",
       "preExit": true,
-      "logic": "(world) => dungeons[0].mq == false && world.save.swords.kokiriSword && world.save.shields.dekuShield && CanDamage(world)"
+      "logic": "(world) => world.dungeons[0].mq == false && world.save.swords.kokiriSword && world.save.shields.dekuShield && CanDamage(world)"
     },
     {
       "name": "Deku Tree GS Basement Vines",
       "preExit": true,
-      "logic": "(world) => dungeons[0].mq == false && world.save.swords.kokiriSword && world.save.shields.dekuShield && world.items.fairySlingshot.value > 0"
+      "logic": "(world) => world.dungeons[0].mq == false && world.save.swords.kokiriSword && world.save.shields.dekuShield && world.items.fairySlingshot.value > 0"
     },
     {
       "name": "Deku Tree GS Basement Gate",
       "preExit": true,
-      "logic": "(world) => dungeons[0].mq == false && world.save.swords.kokiriSword && world.save.shields.dekuShield"
+      "logic": "(world) => world.dungeons[0].mq == false && world.save.swords.kokiriSword && world.save.shields.dekuShield"
     },
     {
       "name": "Deku Tree GS Basement Back Room",
       "preExit": true,
-      "logic": "(world) => dungeons[0].mq == false && world.save.swords.kokiriSword && world.save.shields.dekuShield"
+      "logic": "(world) => world.dungeons[0].mq == false && world.save.swords.kokiriSword && world.save.shields.dekuShield"
     },
     {
       "name": "Deku Tree Queen Gohma Heart",
       "preExit": true,
-      "logic": "(world) => dungeons[0].mq == false && world.save.swords.kokiriSword && world.save.shields.dekuShield && world.items.fairySlingshot.value > 0"
+      "logic": "(world) => world.dungeons[0].mq == false && world.save.swords.kokiriSword && world.save.shields.dekuShield && world.items.fairySlingshot.value > 0"
     },
     {
       "name": "Deku Tree MQ Map Chest",
       "preExit": true,
-      "logic": "(world) => dungeons[0].mq == true && world.save.swords.kokiriSword && world.save.shields.dekuShield"
+      "logic": "(world) => world.dungeons[0].mq == true && world.save.swords.kokiriSword && world.save.shields.dekuShield"
     },
     {
       "name": "Deku Tree MQ Slingshot Chest",
       "preExit": true,
-      "logic": "(world) => dungeons[0].mq == true && world.save.swords.kokiriSword && world.save.shields.dekuShield && CanLightFires(world)"
+      "logic": "(world) => world.dungeons[0].mq == true && world.save.swords.kokiriSword && world.save.shields.dekuShield && CanLightFires(world)"
     },
     {
       "name": "Deku Tree MQ Slingshot Room Back Chest",
       "preExit": true,
-      "logic": "(world) => dungeons[0].mq == true && world.save.swords.kokiriSword && world.save.shields.dekuShield"
+      "logic": "(world) => world.dungeons[0].mq == true && world.save.swords.kokiriSword && world.save.shields.dekuShield"
     },
     {
       "name": "Deku Tree MQ Compass",
       "preExit": true,
-      "logic": "(world) => dungeons[0].mq == true && world.save.swords.kokiriSword && world.save.shields.dekuShield && CanStunDeku(world)"
+      "logic": "(world) => world.dungeons[0].mq == true && world.save.swords.kokiriSword && world.save.shields.dekuShield && CanStunDeku(world)"
     },
     {
       "name": "Deku Tree MQ Basement Chest",
       "preExit": true,
-      "logic": "(world) => dungeons[0].mq == true && world.save.swords.kokiriSword && world.save.shields.dekuShield"
+      "logic": "(world) => world.dungeons[0].mq == true && world.save.swords.kokiriSword && world.save.shields.dekuShield"
     },
     {
       "name": "Deku Tree MQ Before Spinning Log Chest",
       "preExit": true,
-      "logic": "(world) => dungeons[0].mq == true && world.save.swords.kokiriSword && world.save.shields.dekuShield"
+      "logic": "(world) => world.dungeons[0].mq == true && world.save.swords.kokiriSword && world.save.shields.dekuShield"
     },
     {
       "name": "Deku Tree MQ After Spinning Log Chest",
       "preExit": true,
-      "logic": "(world) => dungeons[0].mq == true && world.save.swords.kokiriSword && world.save.shields.dekuShield && world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfTime == true"
+      "logic": "(world) => world.dungeons[0].mq == true && world.save.swords.kokiriSword && world.save.shields.dekuShield && world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfTime == true"
     },
     {
       "name": "Deku Tree MQ GS Lobby",
       "preExit": true,
-      "logic": "(world) => dungeons[0].mq == true && world.save.swords.kokiriSword && world.save.shields.dekuShield"
+      "logic": "(world) => world.dungeons[0].mq == true && world.save.swords.kokiriSword && world.save.shields.dekuShield"
     },
     {
       "name": "Deku Tree MQ GS Compass Room",
       "preExit": true,
-      "logic": "(world) => dungeons[0].mq == true && world.save.swords.kokiriSword && world.save.shields.dekuShield && world.items.boomerang.value === 1 && (world.items.bombs.value > 0 || world.items.bombchus.value > 0)"
+      "logic": "(world) => world.dungeons[0].mq == true && world.save.swords.kokiriSword && world.save.shields.dekuShield && world.items.boomerang.value === 1 && (world.items.bombs.value > 0 || world.items.bombchus.value > 0)"
     },
     {
       "name": "Deku Tree MQ GS Basement Graves Room",
       "preExit": true,
-      "logic": "(world) => dungeons[0].mq == true && world.save.swords.kokiriSword && world.save.shields.dekuShield && world.items.boomerang.value === 1"
+      "logic": "(world) => world.dungeons[0].mq == true && world.save.swords.kokiriSword && world.save.shields.dekuShield && world.items.boomerang.value === 1"
     },
     {
       "name": "Deku Tree MQ GS Basement Back Room",
       "preExit": true,
-      "logic": "(world) => dungeons[0].mq == true && world.save.swords.kokiriSword && world.save.shields.dekuShield && world.items.boomerang.value === 1"
+      "logic": "(world) => world.dungeons[0].mq == true && world.save.swords.kokiriSword && world.save.shields.dekuShield && world.items.boomerang.value === 1"
     },
     {
       "name": "Dodongos Cavern Bomb Flower Platform Chest",
-      "logic": "(world) => dungeons[1].mq == false && CanEnterDodongo(world)"
+      "logic": "(world) => world.dungeons[1].mq == false && CanEnterDodongo(world)"
     },
     {
       "name": "Dodongos Cavern Bomb Bag Chest",
-      "logic": "(world) => dungeons[1].mq == false &&CanEnterDodongo(world)"
+      "logic": "(world) => world.dungeons[1].mq == false &&CanEnterDodongo(world)"
     },
     {
       "name": "Dodongos Cavern End of Bridge Chest",
-      "logic": "(world) => dungeons[1].mq == false &&CanEnterDodongo(world)"
+      "logic": "(world) => world.dungeons[1].mq == false &&CanEnterDodongo(world)"
     },
     {
       "name": "Dodongos Cavern Deku Scrub Side Room Near Dodongos",
-      "logic": "(world) => IsScrubSanity(world) && dungeons[1].mq == false &&CanEnterDodongo(world)"
+      "logic": "(world) => IsScrubSanity(world) && world.dungeons[1].mq == false &&CanEnterDodongo(world)"
     },
     {
       "name": "Dodongos Cavern Deku Scrub Lobby",
-      "logic": "(world) => IsScrubSanity(world) && dungeons[1].mq == false &&CanEnterDodongo(world)"
+      "logic": "(world) => IsScrubSanity(world) && world.dungeons[1].mq == false &&CanEnterDodongo(world)"
     },
     {
       "name": "Dodongos Cavern Deku Scrub Near Bomb Bag Left",
-      "logic": "(world) => IsScrubSanity(world) && dungeons[1].mq == false &&CanEnterDodongo(world)"
+      "logic": "(world) => IsScrubSanity(world) && world.dungeons[1].mq == false &&CanEnterDodongo(world)"
     },
     {
       "name": "Dodongos Cavern Deku Scrub Near Bomb Bag Right",
-      "logic": "(world) => IsScrubSanity(world) && dungeons[1].mq == false &&CanEnterDodongo(world)"
+      "logic": "(world) => IsScrubSanity(world) && world.dungeons[1].mq == false &&CanEnterDodongo(world)"
     },
     {
       "name": "Dodongos Cavern GS Side Room Near Lower Lizalfos",
-      "logic": "(world) => dungeons[1].mq == false &&CanEnterDodongo(world)"
+      "logic": "(world) => world.dungeons[1].mq == false &&CanEnterDodongo(world)"
     },
     {
       "name": "Dodongos Cavern GS Scarecrow",
-      "logic": "(world) => dungeons[1].mq == false &&CanEnterDodongo(world)"
+      "logic": "(world) => world.dungeons[1].mq == false &&CanEnterDodongo(world)"
     },
     {
       "name": "Dodongos Cavern GS Alcove Above Stairs",
-      "logic": "(world) => dungeons[1].mq == false &&CanEnterDodongo(world)"
+      "logic": "(world) => world.dungeons[1].mq == false &&CanEnterDodongo(world)"
     },
     {
       "name": "Dodongos Cavern GS Vines Above Stairs",
-      "logic": "(world) => dungeons[1].mq == false &&CanEnterDodongo(world)"
+      "logic": "(world) => world.dungeons[1].mq == false &&CanEnterDodongo(world)"
     },
     {
       "name": "Dodongos Cavern GS Back Room",
-      "logic": "(world) => dungeons[1].mq == false && CanEnterDodongo(world)"
+      "logic": "(world) => world.dungeons[1].mq == false && CanEnterDodongo(world)"
     },
     {
       "name": "Dodongos Cavern Boss Room Chest",
-      "logic": "(world) => dungeons[1].mq == false && CanEnterDodongo(world)"
+      "logic": "(world) => world.dungeons[1].mq == false && CanEnterDodongo(world)"
     },
     {
       "name": "Dodongos Cavern King Dodongo Heart",
@@ -852,55 +857,55 @@
     },
     {
       "name": "Jabu Jabus Belly MQ First Room Side Chest",
-      "logic": "(world) => dungeons[2].mq == true && CanEnterJabu(world) && world.items.fairySlingshot.value > 0"
+      "logic": "(world) => world.dungeons[2].mq == true && CanEnterJabu(world) && world.items.fairySlingshot.value > 0"
     },
     {
       "name": "Jabu Jabus Belly MQ Second Room Lower Chest",
-      "logic": "(world) => dungeons[2].mq == true && CanEnterJabu(world) && world.items.fairySlingshot.value > 0"
+      "logic": "(world) => world.dungeons[2].mq == true && CanEnterJabu(world) && world.items.fairySlingshot.value > 0"
     },
     {
       "name": "Jabu Jabus Belly MQ Basement Near Switches Chest",
-      "logic": "(world) => dungeons[2].mq == true && CanEnterJabu(world) && world.items.fairySlingshot.value > 0"
+      "logic": "(world) => world.dungeons[2].mq == true && CanEnterJabu(world) && world.items.fairySlingshot.value > 0"
     },
     {
       "name": "Jabu Jabus Belly MQ Basement Near Vines Chest",
-      "logic": "(world) => dungeons[2].mq == true && CanEnterJabu(world) && world.items.fairySlingshot.value > 0"
+      "logic": "(world) => world.dungeons[2].mq == true && CanEnterJabu(world) && world.items.fairySlingshot.value > 0"
     },
     {
       "name": "Jabu Jabus Belly MQ Boomerang Room Small Chest",
-      "logic": "(world) => dungeons[2].mq == true && CanEnterJabu(world) && world.items.fairySlingshot.value > 0"
+      "logic": "(world) => world.dungeons[2].mq == true && CanEnterJabu(world) && world.items.fairySlingshot.value > 0"
     },
     {
       "name": "Jabu Jabus Belly MQ Boomerang Chest",
-      "logic": "(world) => dungeons[2].mq == true && CanEnterJabu(world) && world.items.fairySlingshot.value > 0"
+      "logic": "(world) => world.dungeons[2].mq == true && CanEnterJabu(world) && world.items.fairySlingshot.value > 0"
     },
     {
       "name": "Jabu Jabus Belly MQ Falling Like Like Room Chest",
-      "logic": "(world) => dungeons[2].mq == true && CanEnterJabu(world) && world.items.fairySlingshot.value > 0"
+      "logic": "(world) => world.dungeons[2].mq == true && CanEnterJabu(world) && world.items.fairySlingshot.value > 0"
     },
     {
       "name": "Jabu Jabus Belly MQ Second Room Upper Chest",
-      "logic": "(world) => dungeons[2].mq == true && CanEnterJabu(world) && world.items.fairySlingshot.value > 0"
+      "logic": "(world) => world.dungeons[2].mq == true && CanEnterJabu(world) && world.items.fairySlingshot.value > 0"
     },
     {
       "name": "Jabu Jabus Belly MQ Near Boss Chest",
-      "logic": "(world) => dungeons[2].mq == true && CanEnterJabu(world) && world.items.fairySlingshot.value > 0"
+      "logic": "(world) => world.dungeons[2].mq == true && CanEnterJabu(world) && world.items.fairySlingshot.value > 0"
     },
     {
       "name": "Jabu Jabus Belly MQ GS Boomerang Chest Room",
-      "logic": "(world) => dungeons[2].mq == true && CanEnterJabu(world) && world.items.fairySlingshot.value > 0"
+      "logic": "(world) => world.dungeons[2].mq == true && CanEnterJabu(world) && world.items.fairySlingshot.value > 0"
     },
     {
       "name": "Jabu Jabus Belly MQ GS Tailpasaran Room",
-      "logic": "(world) => dungeons[2].mq == true && CanEnterJabu(world) && world.items.fairySlingshot.value > 0"
+      "logic": "(world) => world.dungeons[2].mq == true && CanEnterJabu(world) && world.items.fairySlingshot.value > 0"
     },
     {
       "name": "Jabu Jabus Belly MQ GS Invisible Enemies Room",
-      "logic": "(world) => dungeons[2].mq == true && CanEnterJabu(world) && world.items.fairySlingshot.value > 0"
+      "logic": "(world) => world.dungeons[2].mq == true && CanEnterJabu(world) && world.items.fairySlingshot.value > 0"
     },
     {
       "name": "Jabu Jabus Belly MQ GS Near Boss",
-      "logic": "(world) => dungeons[2].mq == true && CanEnterJabu(world) && world.items.fairySlingshot.value > 0"
+      "logic": "(world) => world.dungeons[2].mq == true && CanEnterJabu(world) && world.items.fairySlingshot.value > 0"
     },
     {
       "name": "Jabu Jabus Belly Barinade Heart",
@@ -908,63 +913,63 @@
     },
     {
       "name": "Bottom of the Well Front Left Fake Wall Chest",
-      "logic": "(world) => dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfStorms"
+      "logic": "(world) => world.dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfStorms"
     },
     {
       "name": "Bottom of the Well Front Center Bombable Chest",
-      "logic": "(world) => dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfStorms && HasExplosives(world)"
+      "logic": "(world) => world.dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfStorms && HasExplosives(world)"
     },
     {
       "name": "Bottom of the Well Back Left Bombable Chest",
-      "logic": "(world) => dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfStorms && HasExplosives(world)"
+      "logic": "(world) => world.dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfStorms && HasExplosives(world)"
     },
     {
       "name": "Bottom of the Well Underwater Left Chest",
-      "logic": "(world) => dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfStorms && world.save.questStatus.zeldasLullaby"
+      "logic": "(world) => world.dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfStorms && world.save.questStatus.zeldasLullaby"
     },
     {
       "name": "Bottom of the Well Freestanding Key",
-      "logic": "(world) => dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfStorms"
+      "logic": "(world) => world.dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfStorms"
     },
     {
       "name": "Bottom of the Well Center Skulltula Chest",
-      "logic": "(world) => dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfStorms"
+      "logic": "(world) => world.dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfStorms"
     },
     {
       "name": "Bottom of the Well Right Bottom Fake Wall Chest",
-      "logic": "(world) => dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfStorms"
+      "logic": "(world) => world.dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfStorms"
     },
     {
       "name": "Bottom of the Well Fire Keese Chest",
-      "logic": "(world) => dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfStorms"
+      "logic": "(world) => world.dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfStorms"
     },
     {
       "name": "Bottom of the Well Like Like Chest",
-      "logic": "(world) => dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfStorms"
+      "logic": "(world) => world.dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfStorms"
     },
     {
       "name": "Bottom of the Well Underwater Front Chest",
-      "logic": "(world) => dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfStorms && world.save.questStatus.zeldasLullaby"
+      "logic": "(world) => world.dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfStorms && world.save.questStatus.zeldasLullaby"
     },
     {
       "name": "Bottom of the Well Invisible Chest",
-      "logic": "(world) => dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfStorms && CanUseMagic(world) && world.items.lensOfTruth.value === 1"
+      "logic": "(world) => world.dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfStorms && CanUseMagic(world) && world.items.lensOfTruth.value === 1"
     },
     {
       "name": "Bottom of the Well Lens of Truth Chest",
-      "logic": "(world) => dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfStorms"
+      "logic": "(world) => world.dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfStorms"
     },
     {
       "name": "Bottom of the Well GS West Inner Room",
-      "logic": "(world) => dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfStorms && world.items.boomerang.value === 1"
+      "logic": "(world) => world.dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfStorms && world.items.boomerang.value === 1"
     },
     {
       "name": "Bottom of the Well GS East Inner Room",
-      "logic": "(world) => dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfStorms && world.items.boomerang.value === 1"
+      "logic": "(world) => world.dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfStorms && world.items.boomerang.value === 1"
     },
     {
       "name": "Bottom of the Well GS Like Like Cage",
-      "logic": "(world) => dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfStorms && world.items.boomerang.value === 1"
+      "logic": "(world) => world.dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfStorms && world.items.boomerang.value === 1"
     },
     {
       "name": "Forest Temple First Room Chest",
@@ -1240,103 +1245,103 @@
     },
     {
       "name": "Spirit Temple MQ Entrance Front Left Chest",
-      "logic": "(world) => CanBecomeAdult(world) && dungeons[8].mq == true && CanEnterSpirit(world)"
+      "logic": "(world) => CanBecomeAdult(world) && world.dungeons[8].mq == true && CanEnterSpirit(world)"
     },
     {
       "name": "Spirit Temple MQ Entrance Back Right Chest",
-      "logic": "(world) => CanBecomeAdult(world) && dungeons[8].mq == true && CanEnterSpirit(world)"
+      "logic": "(world) => CanBecomeAdult(world) && world.dungeons[8].mq == true && CanEnterSpirit(world)"
     },
     {
       "name": "Spirit Temple MQ Entrance Front Right Chest",
-      "logic": "(world) => CanBecomeAdult(world) && dungeons[8].mq == true && CanEnterSpirit(world)"
+      "logic": "(world) => CanBecomeAdult(world) && world.dungeons[8].mq == true && CanEnterSpirit(world)"
     },
     {
       "name": "Spirit Temple MQ Entrance Back Left Chest",
-      "logic": "(world) => CanBecomeAdult(world) && dungeons[8].mq == true && CanEnterSpirit(world)"
+      "logic": "(world) => CanBecomeAdult(world) && world.dungeons[8].mq == true && CanEnterSpirit(world)"
     },
     {
       "name": "Spirit Temple MQ Map Room Enemy Chest",
-      "logic": "(world) => CanBecomeAdult(world) && dungeons[8].mq == true && CanEnterSpirit(world)"
+      "logic": "(world) => CanBecomeAdult(world) && world.dungeons[8].mq == true && CanEnterSpirit(world)"
     },
     {
       "name": "Spirit Temple MQ Child Climb North Chest",
-      "logic": "(world) => CanBecomeAdult(world) && dungeons[8].mq == true && CanEnterSpirit(world)"
+      "logic": "(world) => CanBecomeAdult(world) && world.dungeons[8].mq == true && CanEnterSpirit(world)"
     },
     {
       "name": "Spirit Temple MQ Child Climb South Chest",
-      "logic": "(world) => CanBecomeAdult(world) && dungeons[8].mq == true && CanEnterSpirit(world)"
+      "logic": "(world) => CanBecomeAdult(world) && world.dungeons[8].mq == true && CanEnterSpirit(world)"
     },
     {
       "name": "Spirit Temple MQ Silver Block Hallway Chest",
-      "logic": "(world) => CanBecomeAdult(world) && dungeons[8].mq == true && CanEnterSpirit(world)"
+      "logic": "(world) => CanBecomeAdult(world) && world.dungeons[8].mq == true && CanEnterSpirit(world)"
     },
     {
       "name": "Spirit Temple MQ Sun Block Room Chest",
-      "logic": "(world) => CanBecomeAdult(world) && dungeons[8].mq == true && CanEnterSpirit(world)"
+      "logic": "(world) => CanBecomeAdult(world) && world.dungeons[8].mq == true && CanEnterSpirit(world)"
     },
     {
       "name": "Spirit Temple Silver Gauntlets Chest",
-      "logic": "(world) => CanBecomeAdult(world) && dungeons[8].mq == true && CanEnterSpirit(world)"
+      "logic": "(world) => CanBecomeAdult(world) && world.dungeons[8].mq == true && CanEnterSpirit(world)"
     },
     {
       "name": "Spirit Temple MQ Child Hammer Switch Chest",
-      "logic": "(world) => CanBecomeAdult(world) && dungeons[8].mq == true && CanEnterSpirit(world)"
+      "logic": "(world) => CanBecomeAdult(world) && world.dungeons[8].mq == true && CanEnterSpirit(world)"
     },
     {
       "name": "Spirit Temple MQ Statue Room Lullaby Chest",
-      "logic": "(world) => CanBecomeAdult(world) && dungeons[8].mq == true && CanEnterSpirit(world)"
+      "logic": "(world) => CanBecomeAdult(world) && world.dungeons[8].mq == true && CanEnterSpirit(world)"
     },
     {
       "name": "Spirit Temple MQ Statue Room Invisible Chest",
-      "logic": "(world) => CanBecomeAdult(world) && dungeons[8].mq == true && CanEnterSpirit(world)"
+      "logic": "(world) => CanBecomeAdult(world) && world.dungeons[8].mq == true && CanEnterSpirit(world)"
     },
     {
       "name": "Spirit Temple MQ Leever Room Chest",
-      "logic": "(world) => CanBecomeAdult(world) && dungeons[8].mq == true && CanEnterSpirit(world)"
+      "logic": "(world) => CanBecomeAdult(world) && world.dungeons[8].mq == true && CanEnterSpirit(world)"
     },
     {
       "name": "Spirit Temple MQ Symphony Room Chest",
-      "logic": "(world) => CanBecomeAdult(world) && dungeons[8].mq == true && CanEnterSpirit(world)"
+      "logic": "(world) => CanBecomeAdult(world) && world.dungeons[8].mq == true && CanEnterSpirit(world)"
     },
     {
       "name": "Spirit Temple MQ Beamos Room Chest",
-      "logic": "(world) => CanBecomeAdult(world) && dungeons[8].mq == true && CanEnterSpirit(world)"
+      "logic": "(world) => CanBecomeAdult(world) && world.dungeons[8].mq == true && CanEnterSpirit(world)"
     },
     {
       "name": "Spirit Temple MQ Chest Switch Chest",
-      "logic": "(world) => CanBecomeAdult(world) && dungeons[8].mq == true && CanEnterSpirit(world)"
+      "logic": "(world) => CanBecomeAdult(world) && world.dungeons[8].mq == true && CanEnterSpirit(world)"
     },
     {
       "name": "Spirit Temple MQ Boss Key Chest",
-      "logic": "(world) => CanBecomeAdult(world) && dungeons[8].mq == true && CanEnterSpirit(world)"
+      "logic": "(world) => CanBecomeAdult(world) && world.dungeons[8].mq == true && CanEnterSpirit(world)"
     },
     {
       "name": "Spirit Temple Mirror Shield Chest",
-      "logic": "(world) => CanBecomeAdult(world) && dungeons[8].mq == true && CanEnterSpirit(world)"
+      "logic": "(world) => CanBecomeAdult(world) && world.dungeons[8].mq == true && CanEnterSpirit(world)"
     },
     {
       "name": "Spirit Temple MQ Mirror Puzzle Invisible Chest",
-      "logic": "(world) => CanBecomeAdult(world) && dungeons[8].mq == true && CanEnterSpirit(world)"
+      "logic": "(world) => CanBecomeAdult(world) && world.dungeons[8].mq == true && CanEnterSpirit(world)"
     },
     {
       "name": "Spirit Temple MQ GS Sun Block Room",
-      "logic": "(world) => CanBecomeAdult(world) && dungeons[8].mq == true && CanEnterSpirit(world)"
+      "logic": "(world) => CanBecomeAdult(world) && world.dungeons[8].mq == true && CanEnterSpirit(world)"
     },
     {
       "name": "Spirit Temple MQ GS Leever Room",
-      "logic": "(world) => CanBecomeAdult(world) && dungeons[8].mq == true && CanEnterSpirit(world)"
+      "logic": "(world) => CanBecomeAdult(world) && world.dungeons[8].mq == true && CanEnterSpirit(world)"
     },
     {
       "name": "Spirit Temple MQ GS Symphony Room",
-      "logic": "(world) => CanBecomeAdult(world) && dungeons[8].mq == true && CanEnterSpirit(world)"
+      "logic": "(world) => CanBecomeAdult(world) && world.dungeons[8].mq == true && CanEnterSpirit(world)"
     },
     {
       "name": "Spirit Temple MQ GS Nine Thrones Room West",
-      "logic": "(world) => CanBecomeAdult(world) && dungeons[8].mq == true && CanEnterSpirit(world)"
+      "logic": "(world) => CanBecomeAdult(world) && world.dungeons[8].mq == true && CanEnterSpirit(world)"
     },
     {
       "name": "Spirit Temple MQ GS Nine Thrones Room North",
-      "logic": "(world) => CanBecomeAdult(world) && dungeons[8].mq == true && CanEnterSpirit(world)"
+      "logic": "(world) => CanBecomeAdult(world) && world.dungeons[8].mq == true && CanEnterSpirit(world)"
     },
     {
       "name": "Spirit Temple Twinrova Heart",
@@ -1344,23 +1349,23 @@
     },
     {
       "name": "Ice Cavern MQ Freestanding PoH",
-      "logic": "(world) => CanBecomeAdult(world) && dungeons[9].mq == true && CanEnterIce(world)"
+      "logic": "(world) => CanBecomeAdult(world) && world.dungeons[9].mq == true && CanEnterIce(world)"
     },
     {
       "name": "Ice Cavern MQ Iron Boots Chest",
-      "logic": "(world) => CanBecomeAdult(world) && dungeons[9].mq == true && CanEnterIce(world)"
+      "logic": "(world) => CanBecomeAdult(world) && world.dungeons[9].mq == true && CanEnterIce(world)"
     },
     {
       "name": "Ice Cavern MQ GS Red Ice",
-      "logic": "(world) => CanBecomeAdult(world) && dungeons[9].mq == true && CanEnterIce(world)"
+      "logic": "(world) => CanBecomeAdult(world) && world.dungeons[9].mq == true && CanEnterIce(world)"
     },
     {
       "name": "Ice Cavern MQ GS Ice Block",
-      "logic": "(world) => CanBecomeAdult(world) && dungeons[9].mq == true && CanEnterIce(world)"
+      "logic": "(world) => CanBecomeAdult(world) && world.dungeons[9].mq == true && CanEnterIce(world)"
     },
     {
       "name": "Ice Cavern MQ GS Scarecrow",
-      "logic": "(world) => CanBecomeAdult(world) && dungeons[9].mq == true && CanEnterIce(world)"
+      "logic": "(world) => CanBecomeAdult(world) && world.dungeons[9].mq == true && CanEnterIce(world)"
     },
     {
       "name": "Gerudo Training Grounds Lobby Left Chest",
@@ -1452,78 +1457,78 @@
     },
     {
       "name": "Ganons Castle MQ Forest Trial Freestanding Key",
-      "logic": "(world) => CanBecomeAdult(world) && dungeons[11].mq == true && CanEnterGC(world)"
+      "logic": "(world) => CanBecomeAdult(world) && world.dungeons[11].mq == true && CanEnterGC(world)"
     },
     {
       "name": "Ganons Castle MQ Forest Trial Eye Switch Chest",
-      "logic": "(world) => CanBecomeAdult(world) && dungeons[11].mq == true && CanEnterGC(world)"
+      "logic": "(world) => CanBecomeAdult(world) && world.dungeons[11].mq == true && CanEnterGC(world)"
     },
     {
       "name": "Ganons Castle MQ Forest Trial Frozen Eye Switch Chest",
-      "logic": "(world) => CanBecomeAdult(world) && dungeons[11].mq == true && CanEnterGC(world)"
+      "logic": "(world) => CanBecomeAdult(world) && world.dungeons[11].mq == true && CanEnterGC(world)"
     },
     {
       "name": "Ganons Castle MQ Water Trial Chest",
-      "logic": "(world) => CanBecomeAdult(world) && dungeons[11].mq == true && CanEnterGC(world)"
+      "logic": "(world) => CanBecomeAdult(world) && world.dungeons[11].mq == true && CanEnterGC(world)"
     },
     {
       "name": "Ganons Castle MQ Shadow Trial Bomb Flower Chest",
-      "logic": "(world) => CanBecomeAdult(world) && dungeons[11].mq == true && CanEnterGC(world)"
+      "logic": "(world) => CanBecomeAdult(world) && world.dungeons[11].mq == true && CanEnterGC(world)"
     },
     {
       "name": "Ganons Castle MQ Shadow Trial Eye Switch Chest",
-      "logic": "(world) => CanBecomeAdult(world) && dungeons[11].mq == true && CanEnterGC(world)"
+      "logic": "(world) => CanBecomeAdult(world) && world.dungeons[11].mq == true && CanEnterGC(world)"
     },
     {
       "name": "Ganons Castle MQ Light Trial Lullaby Chest",
-      "logic": "(world) => CanBecomeAdult(world) && dungeons[11].mq == true && CanEnterGC(world)"
+      "logic": "(world) => CanBecomeAdult(world) && world.dungeons[11].mq == true && CanEnterGC(world)"
     },
     {
       "name": "Ganons Castle MQ Spirit Trial First Chest",
-      "logic": "(world) => CanBecomeAdult(world) && dungeons[11].mq == true && CanEnterGC(world)"
+      "logic": "(world) => CanBecomeAdult(world) && world.dungeons[11].mq == true && CanEnterGC(world)"
     },
     {
       "name": "Ganons Castle MQ Spirit Trial Invisible Chest",
-      "logic": "(world) => CanBecomeAdult(world) && dungeons[11].mq == true && CanEnterGC(world)"
+      "logic": "(world) => CanBecomeAdult(world) && world.dungeons[11].mq == true && CanEnterGC(world)"
     },
     {
       "name": "Ganons Castle MQ Spirit Trial Sun Front Left Chest",
-      "logic": "(world) => CanBecomeAdult(world) && dungeons[11].mq == true && CanEnterGC(world)"
+      "logic": "(world) => CanBecomeAdult(world) && world.dungeons[11].mq == true && CanEnterGC(world)"
     },
     {
       "name": "Ganons Castle MQ Spirit Trial Sun Back Left Chest",
-      "logic": "(world) => CanBecomeAdult(world) && dungeons[11].mq == true && CanEnterGC(world)"
+      "logic": "(world) => CanBecomeAdult(world) && world.dungeons[11].mq == true && CanEnterGC(world)"
     },
     {
       "name": "Ganons Castle MQ Spirit Trial Sun Back Right Chest",
-      "logic": "(world) => CanBecomeAdult(world) && dungeons[11].mq == true && CanEnterGC(world)"
+      "logic": "(world) => CanBecomeAdult(world) && world.dungeons[11].mq == true && CanEnterGC(world)"
     },
     {
       "name": "Ganons Castle MQ Spirit Trial Golden Gauntlets Chest",
-      "logic": "(world) => CanBecomeAdult(world) && dungeons[11].mq == true && CanEnterGC(world)"
+      "logic": "(world) => CanBecomeAdult(world) && world.dungeons[11].mq == true && CanEnterGC(world)"
     },
     {
       "name": "Ganons Castle MQ Deku Scrub Left",
-      "logic": "(world) => CanBecomeAdult(world) && dungeons[11].mq == true && CanEnterGC(world)"
+      "logic": "(world) => CanBecomeAdult(world) && world.dungeons[11].mq == true && CanEnterGC(world)"
     },
     {
       "name": "Ganons Castle MQ Deku Scrub Center-Left",
-      "logic": "(world) => CanBecomeAdult(world) && dungeons[11].mq == true && CanEnterGC(world)"
+      "logic": "(world) => CanBecomeAdult(world) && world.dungeons[11].mq == true && CanEnterGC(world)"
     },
     {
       "name": "Ganons Castle MQ Deku Scrub Center",
-      "logic": "(world) => CanBecomeAdult(world) && dungeons[11].mq == true && CanEnterGC(world)"
+      "logic": "(world) => CanBecomeAdult(world) && world.dungeons[11].mq == true && CanEnterGC(world)"
     },
     {
       "name": "Ganons Castle MQ Deku Scrub Center-Right",
-      "logic": "(world) => CanBecomeAdult(world) && dungeons[11].mq == true && CanEnterGC(world)"
+      "logic": "(world) => CanBecomeAdult(world) && world.dungeons[11].mq == true && CanEnterGC(world)"
     },
     {
       "name": "Ganons Castle MQ Deku Scrub Right",
-      "logic": "(world) => CanBecomeAdult(world) && dungeons[11].mq == true && CanEnterGC(world)"
+      "logic": "(world) => CanBecomeAdult(world) && world.dungeons[11].mq == true && CanEnterGC(world)"
     },
     {
       "name": "Ganons Tower Boss Key Chest",
-      "logic": "(world) => CanBecomeAdult(world) && dungeons[11].mq == true && CanEnterGC(world)"
+      "logic": "(world) => CanBecomeAdult(world) && world.dungeons[11].mq == true && CanEnterGC(world)"
     }
   ]

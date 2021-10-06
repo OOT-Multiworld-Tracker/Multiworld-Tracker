@@ -15,7 +15,7 @@
         <div class="window-content">
             <div class="">
                 <div class="pane-group">
-                    <div class="pane-md">
+                    <div class="pane-md" style="min-width: 240px">
                         <div class="sidebar-buttons">
                         </div>
                         <div class="sidebar">
@@ -23,7 +23,7 @@
                         </div>
                     </div>
                     <div class="pane padded">                        
-                        <input class="btn btn-default" onchange="app.SearchLocations(this.value)" placeholder="Click Here to Search" style="width: 40%; cursor: pointer; color: white; text-align: left"/>
+                        <input class="form-control search-bar" onchange="app.SearchLocations(this.value)" placeholder="Click Here to Search" style="width: 100%; cursor: pointer; color: white; text-align: left"/>
 
                         <p>Accessible Locations</p>
                         <div id="avaliable-root"></div>

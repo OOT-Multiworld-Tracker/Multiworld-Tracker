@@ -244,6 +244,7 @@ function ParseLocations (locations, spoiler = null) {
     })
 
     app.RenderLocations()
+    eSidebar.setState({accessible: app.local.world.locations.Accessible().length})
   })
 
   return locations
@@ -258,6 +259,7 @@ function ToggleCompleted (props) {
   // Serialize and compress a packet for sending
   if (window.isElectron) { require('electron').ipcRenderer.send('packets', JSON.stringify({ world: myWorld - 1, save: { swords: app.local.world.save.swords, shields: app.local.world.save.shields, inventory: app.local.world.save.inventory, questStatus: app.local.world.save.questStatus }, locations: NetworkSerialize(app.local.world.locations.Array(), 'completed') }).replace(/true/g, '1').replace(/false/g, '0')) }
   app.RenderLocations()
+  eSidebar.setState({accessible: app.local.world.locations.Accessible().length, completed: app.local.world.locations.Accessible(true).length})
 }
 
 // Mixins

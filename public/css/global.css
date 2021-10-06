@@ -6,6 +6,45 @@ tbody {
     background-color: #4e4e4e;
 }
 
+.form-control {
+    border-radius: 0px;
+    background: #1d1E26;
+    border: none;
+    margin-bottom: 4px;
+    border-bottom: 1px solid #4e4e4e;
+}
+
+.progress {
+    background-color: #333;
+    height: 16px;
+    margin-top: 4px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(rgb(17, 100, 148), rgb(42, 139, 196));
+}
+
+.search-bar {
+    background: #4e4e4e;
+    color: #dadada;
+    margin-bottom: 4px;
+}
+
+hr {
+    background-color: #4e4e4e;
+}
+
+input#file-upload-button {
+    background-color: #4e4e4e;
+    color: #dadada;
+}
+
+.character_name {
+    cursor: pointer;
+}
+
 .table-striped tr:nth-child(even) {
     background-color: #333;
 }
@@ -16,7 +55,7 @@ thead {
 
 th {
     border: none;
-    font-weight: bolder
+    font-weight: bolder;
 }
 
 *::-webkit-scrollbar {

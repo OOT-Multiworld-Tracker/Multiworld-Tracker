@@ -140,9 +140,27 @@ let uploadedSpoiler
 const app = new App()
 const myWorld = 1
 
+setTimeout(() => {
+  if (localStorage.getItem('save-autosave') != null) {
+    LoadState('save-autosave')
+  }
+}, 1000)
+
 function SaveAlert () {
   SaveState(`${save.player_name}-${save.seed}`)
 }
+
+function Autosave () {
+  SaveState('autosave')
+}
+
+function StartOver() {
+  app.worlds = [new GameWorld(save, dungeons)]
+  app.local.world = app.worlds[0]
+  eSidebar.setState({completed: 0, accessible: 9})
+}
+
+setInterval(Autosave, 10000)
 
 function SaveState (fileName) {
   const saveFile = {}
@@ -217,8 +235,6 @@ function ParseSpoilerLog (log) {
     console.log("Loading singleplayer world")
     app.worlds.push(new GameWorld(save, Array.from(dungeons), log.locations))
 
-
-
     for (let i = 0; i < Object.keys(log.dungeons).length; i++) {
       console.log(log.dungeons[Object.keys(log.dungeons)[i]])
       app.worlds[0].dungeons[i].mq = log.dungeons[Object.keys(log.dungeons)[i]] === 'mq'
@@ -239,11 +255,18 @@ function ParseLocations (locations, spoiler = null) {
 
       if (location.logic) { location.logic = eval(location.logic) }
 
+      if (uploadedSpoiler) {
+        uploadedSpoiler.settings.disabled_locations.forEach((locale) => {
+          if (locale === location.name) location.completed = true
+        })
+      }
+
       if (spoiler) { location.item = spoiler[worldCount > 1 ? index : location.name] }
       locations.set(location.id, location)
     })
 
     app.RenderLocations()
+    eSidebar.setState({accessible: app.local.world.locations.Accessible().length, completed: app.local.world.locations.Accessible(true).length})
   })
 
   return locations
@@ -258,6 +281,7 @@ function ToggleCompleted (props) {
   // Serialize and compress a packet for sending
   if (window.isElectron) { require('electron').ipcRenderer.send('packets', JSON.stringify({ world: myWorld - 1, save: { swords: app.local.world.save.swords, shields: app.local.world.save.shields, inventory: app.local.world.save.inventory, questStatus: app.local.world.save.questStatus }, locations: NetworkSerialize(app.local.world.locations.Array(), 'completed') }).replace(/true/g, '1').replace(/false/g, '0')) }
   app.RenderLocations()
+  eSidebar.setState({accessible: app.local.world.locations.Accessible().length, completed: app.local.world.locations.Accessible(true).length})
 }
 
 // Mixins

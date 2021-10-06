@@ -73,7 +73,6 @@ class Saves extends React.Component {
         <thead>
           <tr>
             <th>File</th>
-            <th>Status</th>
           </tr>
         </thead>
         <tbody>
@@ -176,7 +175,7 @@ class Settings extends React.Component {
           </tr>
         </thead>
         <tbody>
-          {Object.keys(app.global.settings).map((setting) => (<tr><td>{setting}</td><td>{app.global.settings[setting]}</td></tr>))}
+          {Object.keys(app.global.settings).map((setting) => (<tr><td>{setting}</td><td>{(app.global.settings[setting] == true ? "Yes" : (app.global.settings[setting] == false ? "No" : app.global.settings[setting]))}</td></tr>))}
         </tbody>
       </table>
     )
@@ -184,9 +183,9 @@ class Settings extends React.Component {
 }
 
 class Player extends React.Component {
-  constructor () {
-    super()
-    this.state = { name: app.local.world.save.player_name }
+  constructor (props) {
+    super(props)
+    this.state = { name: this.props.save.player_name }
   }
 
   componentDidMount () {
@@ -201,13 +200,41 @@ class Player extends React.Component {
   }
 
   tick () {
-    this.setState({ name: app.local.world.save.player_name })
+    this.setState({ name: this.props.save.player_name })
+  }
+
+  generateContainers () {
+    const elements = []
+    for (let i = 0; i < this.props.save.heart_containers; i++) {
+      elements.push(<span className='heart-container'><img src='/images/container.png' width='16' /></span>)
+
+      if (elements.length === 10) elements.push(<br />)
+    }
+    return elements
+  }
+
+  generateItemList () {
+    const elements = []
+
+    Object.values(app.worlds[0].items).forEach(item => {
+      if (item.Icon !== undefined && elements.length < 30) elements.push(<span className={item.Index() > 0 ? 'item active' : 'item'}><img src={item.Icon()} width='24' /></span>)
+      if ((elements.length != 1 && elements.length % 10 === 1) || elements.length == 10) elements.push(<br />)
+    })
+
+    return elements
+  }
+
+  openStats () {
+
   }
 
   render () {
-    return app.worlds.length == 1 ? (
-      <div className='character_name'>{app.local.world.save.player_name}</div>
-    ) : (<div>World {this.state.name}</div>)
+    return (
+      <div class="player">
+        <div className='character_name' onClick={() => this.openStats()}>{this.props.save.player_name}</div>
+        <div className='heart_containers'>{this.generateContainers()}</div>
+      </div>
+    )
   }
 }
 
@@ -227,7 +254,6 @@ class Save extends React.Component {
     return (
       <tr onClick={() => LoadState(this.props.name)}>
         <td>{this.props.name}</td>
-        <td />
       </tr>
     )
   }
@@ -282,34 +308,45 @@ class SidebarButtons extends React.Component {
   }
 
   render () {
-    return (
-      <div className='btn-group'>
-        <button onClick={() => eSidebar.setState({ page: 0 })} class='btn btn-dark btn-default'>
-          <span class='icon icon-compass' />
-        </button>
-        <button onClick={() => eSidebar.setState({ page: 1 })} class='btn btn-dark  btn-default'>
-          <span class='icon icon-download' />
-        </button>
-        {this.state.uploaded
-          ? <button onClick={() => eSidebar.setState({ page: 2 })} class='btn btn-dark btn-default'>
-            <span class='icon icon-network' />
-            </button>
-          : null}
-        <button onClick={() => eSidebar.setState({ page: 3 })} class='btn btn-dark btn-default'>
-          <span class='icon icon-tag' />
-        </button>
-        <button onClick={() => eSidebar.setState({ page: 4 })} class='btn btn-dark btn-default'>
-          <span class='icon icon-cog' />
-        </button>
-      </div>
-    )
+  return (
+    <select className='form-control' onChange={(e) => { eSidebar.setState({ page: parseInt(e.target.value) }) }} >
+      <option value='0'>Home</option>
+      <option value='1'>Saves</option>
+      <option value='3'>Items</option>
+      <option value='4'>Settings</option>
+      <hr/>
+      {this.state.uploaded ? <option value='2'>Worlds</option> : <option value='2' disabled>Worlds</option>}
+    </select>
+  )
   }
+  //   return (
+  //     <div className='btn-group'>
+  //       <button onClick={() => eSidebar.setState({ page: 0 })} class='btn btn-dark btn-default'>
+  //         <span class='icon icon-compass' />
+  //       </button>
+  //       <button onClick={() => eSidebar.setState({ page: 1 })} class='btn btn-dark  btn-default'>
+  //         <span class='icon icon-download' />
+  //       </button>
+  //       {this.state.uploaded
+  //         ? <button onClick={() => eSidebar.setState({ page: 2 })} class='btn btn-dark btn-default'>
+  //           <span class='icon icon-network' />
+  //           </button>
+  //         : null}
+  //       <button onClick={() => eSidebar.setState({ page: 3 })} class='btn btn-dark btn-default'>
+  //         <span class='icon icon-tag' />
+  //       </button>
+  //       <button onClick={() => eSidebar.setState({ page: 4 })} class='btn btn-dark btn-default'>
+  //         <span class='icon icon-cog' />
+  //       </button>
+  //     </div>
+  //   )
+  // }
 }
 
 class Sidebar extends React.Component {
   constructor () {
     super()
-    this.state = { page: 0 }
+    this.state = { page: 0, accessible: 0, completed: 0 }
     eSidebar = this
   }
 
@@ -319,17 +356,40 @@ class Sidebar extends React.Component {
         ReactDOM.render(<Locations />, document.getElementById('avaliable-root'))
         return (
           <div>
-            <input type='file' onInput={(elem) => { SpoilerUploaded(elem.target) }} title='Upload Spoiler' />
-            <Player />
-            <div className='world_id'>{'World ' + myWorld}</div>
-            <p>Dungeons</p>
-            <Dungeons />
+            <span>Locations</span>
+            <table class='table table-striped table-hover'>
+              <thead>
+                <tr>
+                  <th>Type</th>
+                  <th>Count</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Avaliable</td>
+                  <td>{this.state.accessible}</td>
+                </tr>
+                <tr>
+                  <td>Completed</td>
+                  <td>{this.state.completed}</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" style={{width: (this.state.completed / app.local.world.locations.All().size)*100 + "%"}}></div>
+            </div>
+            <br/>
+            {
+              app.worlds.map((world) => { return <Player save={world.save} /> })
+            }
+            <br/>
           </div>
         )
       case 1:
         return (
           <div>
             <button className='btn btn-default' onClick={() => SaveAlert()}>Save</button>
+            <button className='btn btn-default' onClick={() => StartOver()}>Start Over</button>
             <p>Files</p>
             <Saves />
           </div>
@@ -353,8 +413,11 @@ class Sidebar extends React.Component {
       case 4:
         return (
           <div>
+            <input type='file' onInput={(elem) => { SpoilerUploaded(elem.target) }} title='Upload Spoiler' />
             <p>Settings</p>
             <Settings />
+            <p>Dungeons</p>
+            <Dungeons />
           </div>
         )
     }

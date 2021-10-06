@@ -96,17 +96,6 @@ class ItemManager {
     this.fireMedallion = new Item('Fire Medallion', [0, 1])
     this.spiritMedallion = new Item('Spirit Medallion', [0, 1])
     this.shadowMedallion = new Item('Shadow Medallion', [0, 1])
-    this.medallion = {
-      light: new Item('Light Medallion', [0, 1]),
-      forest: new Item('Forest Medallion', [0, 1]),
-      water: new Item('Water Medallion', [0, 1]),
-      fire: new Item('Fire Medallion', [0, 1]),
-      spirit: new Item('Spirit Medallion', [0, 1]),
-      shadow: new Item('Shadow Medallion', [0, 1]),
-      kokiri: new Item('Kokiri Emerald', [0, 1]),
-      goron: new Item('Goron Ruby', [0, 1]),
-      zora: new Item('Zora Sapphire', [0, 1])
-    }
     this.forestTemple = new KeyManager()
   }
 }
@@ -129,7 +118,7 @@ class Item {
   }
 
   Icon () {
-    return `imgs/${this.name.replace(' ', '_').toLowerCase()}.png`
+    return `/images/${this.name.replace(' ', '_').toLowerCase()}.png`
   }
 
   Index () {
@@ -159,7 +148,19 @@ class Bottle extends Item {
     super(name, [0])
     this.values[0] = 0
     this.values[1] = 1
-    this.values[22] = 'Bottle'
+    this.values[20] = 'Empty Bottle'
+    this.values[21] = 'Red Potion'
+    this.values[22] = 'Green Potion'
+    this.values[23] = 'Blue Potion'
+    this.values[24] = 'Fairy'
+    this.values[25] = 'Fish'
+    this.values[26] = 'Milk'
+    this.values[27] = 'Ruto\'s Letter'
+    this.values[28] = 'Blue Fire'
+    this.values[29] = 'Bug'
+    this.values[30] = 'Big Poe'
+    this.values[31] = 'Milk'
+    this.values[32] = 'Poe'
     this.values[255] = 'None'
   }
 }

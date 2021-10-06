@@ -35,6 +35,8 @@ if (window.isElectron) {
         if (app.worlds[parsed.data.world] == app.local.world) // Prevent lost progress through mistakes or attempted trolls.
         { return }
 
+        app.worlds[parsed.data.world].save = parsed.data.save
+
         NetworkDeserialize(app.worlds[parsed.data.world], parsed.data)
         console.log(parsed.data)
         break

@@ -151,7 +151,13 @@ function SaveAlert () {
 }
 
 function Autosave () {
-  SaveState('save-autosave')
+  SaveState('autosave')
+}
+
+function StartOver() {
+  app.worlds = [new GameWorld(save, dungeons)]
+  app.local.world = app.worlds[0]
+  eSidebar.setState({completed: 0, accessible: 9})
 }
 
 setInterval(Autosave, 10000)

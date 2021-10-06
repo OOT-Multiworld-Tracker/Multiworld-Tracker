@@ -217,7 +217,7 @@ class Player extends React.Component {
     const elements = []
 
     Object.values(app.worlds[0].items).forEach(item => {
-      if (item.Icon !== undefined) elements.push(<span className={item.Index() > 0 ? 'item active' : 'item'}><img src={item.Icon()} width='24' /></span>)
+      if (item.Icon !== undefined && elements.length < 30) elements.push(<span className={item.Index() > 0 ? 'item active' : 'item'}><img src={item.Icon()} width='24' /></span>)
       if ((elements.length != 1 && elements.length % 10 === 1) || elements.length == 10) elements.push(<br />)
     })
 
@@ -233,7 +233,6 @@ class Player extends React.Component {
       <div class="player">
         <div className='character_name' onClick={() => this.openStats()}>{this.props.save.player_name}</div>
         <div className='heart_containers'>{this.generateContainers()}</div>
-        <div className='held_items'>{this.generateItemList()}</div>
       </div>
     )
   }
@@ -390,6 +389,7 @@ class Sidebar extends React.Component {
         return (
           <div>
             <button className='btn btn-default' onClick={() => SaveAlert()}>Save</button>
+            <button className='btn btn-default' onClick={() => StartOver()}>Start Over</button>
             <p>Files</p>
             <Saves />
           </div>

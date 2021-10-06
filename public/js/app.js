@@ -148,7 +148,19 @@ class Bottle extends Item {
     super(name, [0])
     this.values[0] = 0
     this.values[1] = 1
-    this.values[22] = 'Bottle'
+    this.values[20] = 'Empty Bottle'
+    this.values[21] = 'Red Potion'
+    this.values[22] = 'Green Potion'
+    this.values[23] = 'Blue Potion'
+    this.values[24] = 'Fairy'
+    this.values[25] = 'Fish'
+    this.values[26] = 'Milk'
+    this.values[27] = 'Ruto\'s Letter'
+    this.values[28] = 'Blue Fire'
+    this.values[29] = 'Bug'
+    this.values[30] = 'Big Poe'
+    this.values[31] = 'Milk'
+    this.values[32] = 'Poe'
     this.values[255] = 'None'
   }
 }

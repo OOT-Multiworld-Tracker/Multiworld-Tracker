@@ -239,12 +239,18 @@ function ParseLocations (locations, spoiler = null) {
 
       if (location.logic) { location.logic = eval(location.logic) }
 
+      if (uploadedSpoiler) {
+        uploadedSpoiler.settings.disabled_locations.forEach((locale) => {
+          if (locale === location.name) location.completed = true
+        })
+      }
+
       if (spoiler) { location.item = spoiler[worldCount > 1 ? index : location.name] }
       locations.set(location.id, location)
     })
 
     app.RenderLocations()
-    eSidebar.setState({accessible: app.local.world.locations.Accessible().length})
+    eSidebar.setState({accessible: app.local.world.locations.Accessible().length, completed: app.local.world.locations.Accessible(true).length})
   })
 
   return locations

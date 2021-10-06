@@ -1,5 +1,6 @@
 let locationList
 let sidebarButtons
+let appheader
 
 class Dungeons extends React.Component {
   constructor () {
@@ -260,12 +261,21 @@ class Save extends React.Component {
 }
 
 class Header extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = { connected: false }
+    appheader = this
+  }
+
   render () {
     return (
       <header className='toolbar toolbar-header'>
         <div className='toolbar-actions'>
           <span class='title'>Ocarina of Time - Multiworld Autotracker</span>
           <div class='btn-group pull-right'>
+            <button class='btn btn-default btn-dark pull-right'>
+              <span class={this.state.connected ? 'icon icon-check' : 'icon icon-cancel'}></span>
+            </button>
             <button class='btn btn-default btn-dark pull-right'>
               <span class='icon icon-download' />
             </button>

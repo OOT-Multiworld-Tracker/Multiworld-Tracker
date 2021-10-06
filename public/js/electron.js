@@ -40,6 +40,10 @@ if (window.isElectron) {
         NetworkDeserialize(app.worlds[parsed.data.world], parsed.data)
         console.log(parsed.data)
         break
+      case 4: // Connection payload
+        console.log('Received connection payload')
+        appheader.setState({connected: parsed.data})
+        break;
     }
   })
 }

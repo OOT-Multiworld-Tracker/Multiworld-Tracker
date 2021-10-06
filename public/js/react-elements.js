@@ -175,7 +175,7 @@ class Settings extends React.Component {
           </tr>
         </thead>
         <tbody>
-          {Object.keys(app.global.settings).map((setting) => (<tr><td>{setting}</td><td>{app.global.settings[setting]}</td></tr>))}
+          {Object.keys(app.global.settings).map((setting) => (<tr><td>{setting}</td><td>{(app.global.settings[setting] == true ? "Yes" : (app.global.settings[setting] == false ? "No" : app.global.settings[setting]))}</td></tr>))}
         </tbody>
       </table>
     )

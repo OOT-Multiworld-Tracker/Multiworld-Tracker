@@ -140,9 +140,21 @@ let uploadedSpoiler
 const app = new App()
 const myWorld = 1
 
+setTimeout(() => {
+  if (localStorage.getItem('save-autosave') != null) {
+    LoadState('save-autosave')
+  }
+}, 1000)
+
 function SaveAlert () {
   SaveState(`${save.player_name}-${save.seed}`)
 }
+
+function Autosave () {
+  SaveState('save-autosave')
+}
+
+setInterval(Autosave, 10000)
 
 function SaveState (fileName) {
   const saveFile = {}

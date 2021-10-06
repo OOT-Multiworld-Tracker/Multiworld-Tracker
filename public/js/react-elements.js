@@ -204,12 +204,23 @@ class Player extends React.Component {
   }
 
   generateContainers () {
-    let elements=[];
-    for (let i=0;i<this.props.save.heart_containers;i++){
-      elements.push(<span className="heart-container"><img src="/images/container.png" width="16"/></span>);
-      if (elements.length==10)
-        elements.push(<br/>);
+    const elements = []
+    for (let i = 0; i < this.props.save.heart_containers; i++) {
+      elements.push(<span className='heart-container'><img src='/images/container.png' width='16' /></span>)
+
+      if (elements.length === 10) elements.push(<br />)
     }
+    return elements
+  }
+
+  generateItemList () {
+    const elements = []
+
+    Object.values(app.worlds[0].items).forEach(item => {
+      if (item.Icon !== undefined) elements.push(<span className={item.Index() > 0 ? 'item active' : 'item'}><img src={item.Icon()} width='24' /></span>)
+      if ((elements.length != 1 && elements.length % 10 === 1) || elements.length == 10) elements.push(<br />)
+    })
+
     return elements
   }
 
@@ -222,6 +233,7 @@ class Player extends React.Component {
       <div class="player">
         <div className='character_name' onClick={() => this.openStats()}>{this.props.save.player_name}</div>
         <div className='heart_containers'>{this.generateContainers()}</div>
+        <div className='held_items'>{this.generateItemList()}</div>
       </div>
     )
   }

@@ -6,6 +6,14 @@ tbody {
     background-color: #4e4e4e;
 }
 
+.item {
+    opacity: 0.4;
+}
+
+.active {
+    opacity: 1;
+}
+
 .form-control {
     border-radius: 0px;
     background: #1d1E26;

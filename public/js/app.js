@@ -96,17 +96,6 @@ class ItemManager {
     this.fireMedallion = new Item('Fire Medallion', [0, 1])
     this.spiritMedallion = new Item('Spirit Medallion', [0, 1])
     this.shadowMedallion = new Item('Shadow Medallion', [0, 1])
-    this.medallion = {
-      light: new Item('Light Medallion', [0, 1]),
-      forest: new Item('Forest Medallion', [0, 1]),
-      water: new Item('Water Medallion', [0, 1]),
-      fire: new Item('Fire Medallion', [0, 1]),
-      spirit: new Item('Spirit Medallion', [0, 1]),
-      shadow: new Item('Shadow Medallion', [0, 1]),
-      kokiri: new Item('Kokiri Emerald', [0, 1]),
-      goron: new Item('Goron Ruby', [0, 1]),
-      zora: new Item('Zora Sapphire', [0, 1])
-    }
     this.forestTemple = new KeyManager()
   }
 }
@@ -129,7 +118,7 @@ class Item {
   }
 
   Icon () {
-    return `imgs/${this.name.replace(' ', '_').toLowerCase()}.png`
+    return `/images/${this.name.replace(' ', '_').toLowerCase()}.png`
   }
 
   Index () {

@@ -217,8 +217,6 @@ function ParseSpoilerLog (log) {
     console.log("Loading singleplayer world")
     app.worlds.push(new GameWorld(save, Array.from(dungeons), log.locations))
 
-
-
     for (let i = 0; i < Object.keys(log.dungeons).length; i++) {
       console.log(log.dungeons[Object.keys(log.dungeons)[i]])
       app.worlds[0].dungeons[i].mq = log.dungeons[Object.keys(log.dungeons)[i]] === 'mq'

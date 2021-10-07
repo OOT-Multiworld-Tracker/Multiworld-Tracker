@@ -1,6 +1,6 @@
 {
   "name": "multiworld-tracker",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "An ocarina of time multiworld tracker.",
   "main": "app.js",
   "scripts": {
@@ -14,9 +14,6 @@
   },
   "build": {
     "productName": "Multiworld Tracker",
-    "directories": {
-      "app": "builder/app"
-    },
     "nsis": {
       "perMachine": true,
       "shortcutName": "Multiworld Tracker"

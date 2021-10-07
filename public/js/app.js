@@ -6,7 +6,7 @@ class App {
     }
 
     this.global = {
-      settings
+      settings: new SettingsManager()
     }
 
     this.worlds = [new GameWorld(save, dungeons)] // Spawn with a default world instance.
@@ -96,29 +96,38 @@ class ItemManager {
     this.fireMedallion = new Item('Fire Medallion', [0, 1])
     this.spiritMedallion = new Item('Spirit Medallion', [0, 1])
     this.shadowMedallion = new Item('Shadow Medallion', [0, 1])
-    this.forestTemple = new KeyManager()
+
+    this.forestTemple = new KeyManager('Forest Temple')
+    this.fireTemple = new KeyManager('Fire Temple')
+    this.waterTemple = new KeyManager('Water Temple')
+    this.spiritTemple = new KeyManager('Spirit Temple')
+    this.shadowTemple = new KeyManager('Shadow Temple')
   }
 }
 
 class KeyManager {
-  constructor (world, dungeon) {
+  constructor (dungeon) {
+    this.name = dungeon
     this.smallKeys = new Item('Small Key', [0, 1, 2, 3])
     this.bigKey = new Item('Big Key', [0, 1])
   }
 }
 
-class Item {
+/**
+ * A switch that can be toggled between many preset values before looping back to the first value.
+ */
+class ValueSwitch {
   constructor (name, values) {
-    this.name = name
     /**
-     * @type {Object[]}
+     * @type {String}
      */
-    this.values = values
-    this.value = values[0]
-  }
+    this.name = name
 
-  Icon () {
-    return `/images/${this.name.replace(' ', '_').toLowerCase()}.png`
+    /**
+    * @type {Object[]}
+    */
+    this.values = values
+    this.value = this.values[0]
   }
 
   Index () {
@@ -143,6 +152,12 @@ class Item {
   }
 }
 
+class Item extends ValueSwitch {
+  Icon () {
+    return `/images/${this.name.replace(' ', '_').toLowerCase()}.png`
+  }
+}
+
 class Bottle extends Item {
   constructor (name) {
     super(name, [0])
@@ -162,6 +177,51 @@ class Bottle extends Item {
     this.values[31] = 'Milk'
     this.values[32] = 'Poe'
     this.values[255] = 'None'
+  }
+}
+
+class SettingsManager {
+  constructor (spoiler) {
+    console.log(spoiler)
+    this.openForest = new ValueSwitch('Open Forest', ['open', 'closed'])
+    this.openKakariko = new ValueSwitch('Open Kakariko', ['open', 'closed'])
+    this.openDoorOfTime = new ValueSwitch('Open Door Of Time', [false, true])
+    this.zoraFountain = new ValueSwitch('Zora Fountain', ['open', 'closed'])
+    this.gerudoFortress = new ValueSwitch('Gerudo Fortress', ['vanilla', 'fast', 'open'])
+    this.bridge = new ValueSwitch('Bridge', ['vanilla', 'stones', 'medallions', 'skulltulas', 'open'])
+    this.bridgeStones = new ValueSwitch('Bridge Stones', [0, 1, 2, 3, 4, 5, 6])
+    this.triforceHunt = new ValueSwitch('Triforce Hunt', [false, true])
+    this.bombchusInLogic = new ValueSwitch('Bombchus in Logic', [false, true])
+    this.skipChildZelda = new ValueSwitch('Skip Child Zelda', [false, true])
+    this.shuffleKokiriSword = new ValueSwitch('Shuffle Kokiri Sword', [false, true])
+    this.shuffleOcarinas = new ValueSwitch('Shuffle Ocarinas', [false, true])
+    this.shuffleWeirdEgg = new ValueSwitch('Shuffle Weird Egg', [false, true])
+    this.shuffleGerudoCard = new ValueSwitch('Shuffle Gerudo Card', [false, true])
+    this.shuffleSongItems = new ValueSwitch('Shuffle Song Items', ['vanilla', 'shuffle', 'random'])
+    this.shuffleCows = new ValueSwitch('Shuffle Cows', [false, true])
+    this.shuffleBeans = new ValueSwitch('Shuffle Beans', [false, true])
+    this.shuffleMedigoronCarpetSalesman = new ValueSwitch('Shuffle Medigoron Carpet Salesman', [false, true])
+    this.shuffleScrubs = new ValueSwitch('Shuffle Scrubs', [false, 'low', 'high'])
+    this.shopSanity = new ValueSwitch('Shop Sanity', ['none', 1, 2, 3, 4])
+    this.tokenSanity = new ValueSwitch('Token Sanity', ['vanilla', 'dungeon', 'overworld', 'all'])
+
+    if (spoiler) {
+      Object.keys(this).forEach(key => {
+        console.log(key)
+        if (spoiler[this[key].name.toLowerCase().replace(/ /g, '_')]) {
+          console.log(spoiler[this[key].name.toLowerCase().replace(/ /g, '_')])
+          this[key].value = spoiler[this[key].name.toLowerCase().replace(/ /g, '_')]
+        }
+      })
+    }
+  }
+
+  Serialize () {
+    const map = {}
+    Object.keys(this).forEach(key => {
+      map[this[key].name.toLowerCase().replace(/ /g, '_')] = this[key].value
+    })
+    return map
   }
 }
 

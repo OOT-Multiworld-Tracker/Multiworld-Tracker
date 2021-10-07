@@ -1,5 +1,6 @@
 let locationList
 let sidebarButtons
+let appheader
 
 class Dungeons extends React.Component {
   constructor () {
@@ -47,11 +48,33 @@ class Items extends React.Component {
           </tr>
         </thead>
         <tbody>
-          {Object.values(app.local.world.items).map((item) => {return (
-            <tr onClick={() => { item.Toggle(); this.setState({ items: app.local.world.save }); app.RenderLocations() }}>
-              <td>{item.name}</td>
-              <td>{item.value == "0" ? "None" : (item.value == "1" ? "Have" : item.value)}</td>
-            </tr>)})}
+          {Object.values(app.local.world.items).map((item) => {
+            if (item instanceof KeyManager) {
+              return [(
+                <tr key={item.name}>
+                  <th>{item.name}</th>
+                  <th>Have</th>
+                </tr>
+              ), (
+                <tr key={item.smallKeys.name} onClick={() => { item.smallKeys.Toggle(); this.setState({ items: app.local.world.save }); app.RenderLocations() }}>
+                  <td>{item.smallKeys.name}</td>
+                  <td>{item.smallKeys.value}</td>
+                </tr>
+              ), (
+                <tr key={item.bigKey.name} onClick={() => { item.bigKey.Toggle(); this.setState({ items: app.local.world.save }); app.RenderLocations() }}>
+                  <td>{item.bigKey.name}</td>
+                  <td>{item.bigKey.value}</td>
+                </tr>
+              )]
+            }
+
+            return (
+              <tr key={item.name} onClick={() => { item.Toggle(); this.setState({ items: app.local.world.save }); app.RenderLocations() }}>
+                <td>{item.name}</td>
+                <td>{item.value === '0' ? 'None' : (item.value === '1' ? 'Have' : item.value)}</td>
+              </tr>
+            )
+          })}
         </tbody>
       </table>
     )
@@ -165,6 +188,16 @@ class Locations extends React.Component {
 }
 
 class Settings extends React.Component {
+  constructor () {
+    super()
+    this.state = { settings: app.global.settings }
+  }
+
+  changeSetting (id) {
+    app.global.settings[id].Toggle()
+    this.setState({ settings: app.global.settings })
+  }
+
   render () {
     return (
       <table className='table-striped'>
@@ -175,7 +208,7 @@ class Settings extends React.Component {
           </tr>
         </thead>
         <tbody>
-          {Object.keys(app.global.settings).map((setting) => (<tr><td>{setting}</td><td>{(app.global.settings[setting] == true ? "Yes" : (app.global.settings[setting] == false ? "No" : app.global.settings[setting]))}</td></tr>))}
+          {Object.keys(app.global.settings).map((setting) => (<tr onClick={() => this.changeSetting(setting)}><td>{app.global.settings[setting].name}</td><td>{(app.global.settings[setting].value == true ? "Yes" : (app.global.settings[setting].value == false ? "No" : app.global.settings[setting].value))}</td></tr>))}
         </tbody>
       </table>
     )
@@ -260,12 +293,21 @@ class Save extends React.Component {
 }
 
 class Header extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = { connected: false }
+    appheader = this
+  }
+
   render () {
     return (
       <header className='toolbar toolbar-header'>
         <div className='toolbar-actions'>
           <span class='title'>Ocarina of Time - Multiworld Autotracker</span>
           <div class='btn-group pull-right'>
+            <button class='btn btn-default btn-dark pull-right'>
+              <span class={this.state.connected ? 'icon icon-check' : 'icon icon-cancel'}></span>
+            </button>
             <button class='btn btn-default btn-dark pull-right'>
               <span class='icon icon-download' />
             </button>

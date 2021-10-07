@@ -98,12 +98,45 @@
             flex-direction: column;
         }
 
-        .status {
-            font-weight: bolder
+        #status {
+            font-weight: bolder;
+            font-size: 18px;
+        }
+
+        .progress {
+            background-color: #4e4e4e;
+            border-radius: 2px;
+            width: 50%;
+            height: 16px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            background-color: #dadada;
+            border-radius: 2px;
+            width: 20%;
+            height: 100%;
+
+            animation-duration: 3s;
+            animation-iteration-count: infinite;
+            animation-name: progress;
+        }
+
+        @keyframes progress {
+            from {
+                margin-left: -20%;
+            }
+
+            to {
+                margin-left: 100%;
+            }
         }
 
         .icon {
-            background-image: url(/images/icon.png)
+            background-image: url(/images/icon.png);
+            background-size: 128px;
+            width: 128px;
+            height: 128px;
         }
     </style>
 </head>
@@ -118,6 +151,9 @@
                     <div class="pane padded">
                         <div class="icon"></div>
                         <p id="status">Checking for Updates</p>
+                        <div class="progress">
+                            <div class="progress-bar"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -127,7 +163,12 @@
 </html>
 <script>
     require('electron').ipcRenderer.on('packet', (event, data) => {
-        console.log(data)
-        document.getElementById("status").innerHTML = data
+        const packet = JSON.parse(data)
+        if (packet.payload === 2) {
+            console.log(packet)
+            document.getElementById("status").innerHTML = "Downloading Update"
+            document.getElementById("progress-bar").style.width = packet.percent + "%"  
+            document.getElementById("progress-bar").style.animationName = "none"
+        }
     })
 </script>

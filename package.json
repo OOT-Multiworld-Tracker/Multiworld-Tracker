@@ -14,9 +14,6 @@
   },
   "build": {
     "productName": "Multiworld Tracker",
-    "directories": {
-      "app": "build"
-    },
     "nsis": {
       "perMachine": true,
       "shortcutName": "Multiworld Tracker"

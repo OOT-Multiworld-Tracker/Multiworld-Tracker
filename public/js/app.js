@@ -96,12 +96,18 @@ class ItemManager {
     this.fireMedallion = new Item('Fire Medallion', [0, 1])
     this.spiritMedallion = new Item('Spirit Medallion', [0, 1])
     this.shadowMedallion = new Item('Shadow Medallion', [0, 1])
-    this.forestTemple = new KeyManager()
+
+    this.forestTemple = new KeyManager('Forest Temple')
+    this.fireTemple = new KeyManager('Fire Temple')
+    this.waterTemple = new KeyManager('Water Temple')
+    this.spiritTemple = new KeyManager('Spirit Temple')
+    this.shadowTemple = new KeyManager('Shadow Temple')
   }
 }
 
 class KeyManager {
-  constructor (world, dungeon) {
+  constructor (dungeon) {
+    this.name = dungeon
     this.smallKeys = new Item('Small Key', [0, 1, 2, 3])
     this.bigKey = new Item('Big Key', [0, 1])
   }

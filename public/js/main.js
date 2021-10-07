@@ -165,7 +165,7 @@ setInterval(Autosave, 10000)
 function SaveState (fileName) {
   const saveFile = {}
   Object.assign(saveFile, { dungeons: app.local.world.dungeons })
-  Object.assign(saveFile, { settings: app.global.settings })
+  Object.assign(saveFile, { settings: app.global.settings.Serialize() })
   Object.assign(saveFile, { save: app.local.world.save })
   Object.assign(saveFile, { locations: app.local.world.locations.Array() })
 
@@ -174,7 +174,7 @@ function SaveState (fileName) {
 
 function LoadState (fileName) {
   const file = JSON.parse(localStorage.getItem(fileName))
-  app.global.settings = file.settings
+  app.global.settings = new SettingsManager(file.settings)
   app.local.world.save = file.save
   app.local.world.items = new ItemManager(app.local.world)
 
@@ -216,7 +216,7 @@ function MapToArray (map) {
 
 function ParseSpoilerLog (log) {
   console.log(log)
-  settings = log.settings
+  app.global.settings = new SettingsManager(log.settings)
   uploadedSpoiler = log
   save.seed = log[':seed']
   app.worlds = []
@@ -266,7 +266,7 @@ function ParseLocations (locations, spoiler = null) {
     })
 
     app.RenderLocations()
-    eSidebar.setState({accessible: app.local.world.locations.Accessible().length, completed: app.local.world.locations.Accessible(true).length})
+    eSidebar.setState({ accessible: app.local.world.locations.Accessible().length, completed: app.local.world.locations.Accessible(true).length })
   })
 
   return locations

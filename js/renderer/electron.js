@@ -73,7 +73,7 @@ class ElectronRenderer extends EventEmitter {
     })
 
     autoUpdater.on('download-progress', (progress) => {
-      this.SendData(`${progress.bytesPerSecond} - ${progress.percent}%`)
+      this.SendData(JSON.stringify({payload: 2, data: { progress: progress.bytesPerSecond, percent: progress.percent } }))
     })
 
     autoUpdater.on('update-downloaded', async _ => {

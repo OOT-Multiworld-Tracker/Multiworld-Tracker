@@ -15,7 +15,7 @@
   "build": {
     "productName": "Multiworld Tracker",
     "directories": {
-      "app": "builder/app"
+      "app": "build"
     },
     "nsis": {
       "perMachine": true,

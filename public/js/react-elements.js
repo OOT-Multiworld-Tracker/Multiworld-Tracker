@@ -179,7 +179,7 @@ class Locations extends React.Component {
     return (
       <div>
         <div class='btn-group' style={{width: '100%', marginBottom: '4px'}}>
-          <select class='btn btn-default' style={{width: '33.34%', marginRight: '1px'}} onChange={(e) => this.setState({ scene: e.target.value })}><option value='-1'>None</option>{scenes.map((scene) => { if (this.checkLocation(String(scene.id))) return (<option key={scene.id} value={scene.id}>{scene.name}</option>); else return null })}</select>
+          <select class='btn btn-default' style={{width: '33.34%', marginRight: '1px'}} value={this.state.scene} onChange={(e) => this.setState({ scene: e.target.value })}><option value='-1'>None</option>{scenes.map((scene) => { if (this.checkLocation(String(scene.id))) return (<option key={scene.id} value={scene.id}>{scene.name}</option>); else return null })}</select>
           <button class='btn btn-default' style={{width: '33.34%'}} onClick={() => this.displaySection(0)}>Accessible</button>
           <button class='btn btn-default' style={{width: '33.34%'}} onClick={() => this.displaySection(1)}>Completed</button>
         </div>
@@ -366,7 +366,7 @@ class SidebarButtons extends React.Component {
 
   render () {
   return (
-    <select className='form-control' onChange={(e) => { eSidebar.setState({ page: parseInt(e.target.value) }) }} >
+    <select className='form-control' onChange={(e) => { eSidebar.setState({ page: parseInt(e.target.value) }) }}>
       <option value='0'>Home</option>
       <option value='1'>Saves</option>
       <option value='3'>Items</option>

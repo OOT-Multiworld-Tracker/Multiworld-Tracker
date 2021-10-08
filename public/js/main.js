@@ -1,4 +1,6 @@
 const locations = new Map()
+var scenes = []
+ParseScenes()
 let locationJson = []
 
 const save = {
@@ -270,6 +272,14 @@ function ParseLocations (locations, spoiler = null) {
   })
 
   return locations
+}
+
+function ParseScenes () {
+  $.getJSON('/json/scenes.json', (data) => {
+    scenes = data
+  })
+
+  return scenes
 }
 
 function IsAccessible (location, world) {

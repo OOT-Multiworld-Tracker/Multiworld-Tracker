@@ -164,25 +164,40 @@ class Locations extends React.Component {
     this.showItems = props.showItems || false
 
     if (!this.filter) { locationList = this }
-    this.state = { search: '' }
+    this.state = { search: '', page: 0, scene: -1, accessible: [] }
+  }
+
+  displaySection (page) {
+    this.setState({ page, accessible: (!this.state.search ? app.local.world.locations.Accessible(this.state.page === 1) : app.local.world.locations.Search(this.state.search)) })
+  }
+
+  checkLocation (scene) {
+    return this.state.accessible.some(location => location.scene === scene)
   }
 
   render () {
     return (
-      <table className='table-striped'>
-        <thead>
-          <tr>
-            <th>Location</th>
-          </tr>
-        </thead>
-        <tbody>
-          {!this.state.search ? app.local.world.locations.Accessible(this.filter, false).map(location => (
-            <Location id={location.id} item={this.showItems ? location.item || 'Unknown' : null} name={location.name} />))
+      <div>
+        <div class='btn-group' style={{width: '100%', marginBottom: '4px'}}>
+          <select class='btn btn-default' style={{width: '33.34%', marginRight: '1px'}} onChange={(e) => this.setState({ scene: e.target.value })}><option value='-1'>None</option>{scenes.map((scene) => { if (this.checkLocation(String(scene.id))) return (<option key={scene.id} value={scene.id}>{scene.name}</option>); else return null })}</select>
+          <button class='btn btn-default' style={{width: '33.34%'}} onClick={() => this.displaySection(0)}>Accessible</button>
+          <button class='btn btn-default' style={{width: '33.34%'}} onClick={() => this.displaySection(1)}>Completed</button>
+        </div>
+        <table className='table-striped'>
+          <thead>
+            <tr>
+              <th>Location</th>
+            </tr>
+          </thead>
+          <tbody>
+            {!this.state.search ? app.local.world.locations.Accessible(this.state.page === 1, false, this.state.scene).map(location => (
+              <Location id={location.id} item={this.showItems ? location.item || 'Unknown' : null} name={location.name} />))
 
-            : app.local.world.locations.Search(this.state.search).map(location => (
-              <Location id={location.id} item={this.showItems ? location.item || 'Unknown' : null} name={location.name} />))}
-        </tbody>
-      </table>
+              : app.local.world.locations.Search(this.state.search, this.state.scene, this.state.page).map(location => (
+                <Location id={location.id} item={this.showItems ? location.item || 'Unknown' : null} name={location.name} />))}
+          </tbody>
+        </table>
+      </div>
     )
   }
 }
@@ -361,28 +376,6 @@ class SidebarButtons extends React.Component {
     </select>
   )
   }
-  //   return (
-  //     <div className='btn-group'>
-  //       <button onClick={() => eSidebar.setState({ page: 0 })} class='btn btn-dark btn-default'>
-  //         <span class='icon icon-compass' />
-  //       </button>
-  //       <button onClick={() => eSidebar.setState({ page: 1 })} class='btn btn-dark  btn-default'>
-  //         <span class='icon icon-download' />
-  //       </button>
-  //       {this.state.uploaded
-  //         ? <button onClick={() => eSidebar.setState({ page: 2 })} class='btn btn-dark btn-default'>
-  //           <span class='icon icon-network' />
-  //           </button>
-  //         : null}
-  //       <button onClick={() => eSidebar.setState({ page: 3 })} class='btn btn-dark btn-default'>
-  //         <span class='icon icon-tag' />
-  //       </button>
-  //       <button onClick={() => eSidebar.setState({ page: 4 })} class='btn btn-dark btn-default'>
-  //         <span class='icon icon-cog' />
-  //       </button>
-  //     </div>
-  //   )
-  // }
 }
 
 class Sidebar extends React.Component {
@@ -467,3 +460,4 @@ class Sidebar extends React.Component {
 }
 
 if (window.isElectron) { ReactDOM.render(<Header />, document.getElementById('header-root')) }
+ReactDOM.render(<Locations />, document.getElementById('avaliable-root'))

@@ -22,10 +22,9 @@ if (window.isElectron) {
         app.local.world.save = parsed.data.save
         app.worlds[myWorld - 1].items = app.local.world.items
         app.RenderLocations()
-        locationList.setState({ scene: parsed.data.save.scene })
         break
       case 1:
-        // Scene payload
+        locationList.setState({ scene: parsed.data.scene })
         break
       case 2:
         // Update payload

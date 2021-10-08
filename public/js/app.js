@@ -13,9 +13,9 @@ class App {
     this.local.world = this.worlds[0]
   }
 
-  RenderLocations () {
-    ReactDOM.render(<Locations />, document.getElementById('avaliable-root'))
-    ReactDOM.render(<Locations completed='true' />, document.getElementById('completed-root'))
+  RenderLocations (page, scene) {
+    const accessible = app.local.world.locations.Accessible(locationList.state.page === 1, false, locationList.state.scene)
+    locationList.setState({ accessible })
   }
 
   SearchLocations (term) {
@@ -255,8 +255,8 @@ class LocationManager {
   / Lists all accessible locations for the world. Filters by save and accessibility.
   / @returns {Location[]}
   */
-  Accessible (complete = false, showItems = false) {
-    return this.Array().filter(location => (IsAccessible(location, this.world) && complete === false && !location.completed) || (complete && location.completed === true))
+  Accessible (complete = false, showItems = false, scene = locationList.state.scene) {
+    return this.Array().filter(location => (location.scene == scene || scene == -1) && (IsAccessible(location, this.world) && complete === false && !location.completed) || (complete && location.completed === true))
   }
 
   /**
@@ -264,9 +264,9 @@ class LocationManager {
    * @param {String} term A full string containing keywords
    * @returns {Location[]}
    */
-  Search (term) {
+  Search (term, scene = locationList.state.scene, page = locationList.state.page) {
     const keywords = term.split(' ')
-    return this.Accessible().filter((location) => {
+    return (page === 0 ? this.Accessible(false, false, scene) : this.Get(true, scene)).filter((location) => {
       let valid = true
       keywords.forEach(keyword => {
         if (!location.name.toLowerCase().includes(keyword.toLowerCase())) {
@@ -282,7 +282,7 @@ class LocationManager {
    * @param {boolean} completed Completion flag
    * @returns {Location[]}
    */
-  Get (completed = false) {
-    return this.Array().filter(location => IsAccessible(location, this.local.world)).filter(location => location.completed === completed)
+  Get (completed = false, scene = -1) {
+    return this.Array().filter(location => (location.scene == scene || scene == -1) && location.completed === completed)
   }
 }

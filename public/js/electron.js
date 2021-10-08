@@ -25,7 +25,7 @@ if (window.isElectron) {
         locationList.setState({ scene: parsed.data.save.scene })
         break
       case 1:
-        // Scene payload
+        locationList.setState({ scene: parsed.data.scene })
         break
       case 2:
         // Update payload

@@ -16,6 +16,7 @@ class App {
   RenderLocations (page, scene) {
     const accessible = app.local.world.locations.Accessible(locationList.state.page === 1, false, locationList.state.scene)
     locationList.setState({ accessible })
+    eSidebar.setState({ accessible: accessible.length })
   }
 
   SearchLocations (term) {

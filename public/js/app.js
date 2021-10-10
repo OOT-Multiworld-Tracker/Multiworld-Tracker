@@ -60,9 +60,9 @@ class ItemManager {
     this.bottle_2 = new Bottle('Bottle 2')
     this.bottle_3 = new Bottle('Bottle 3')
     this.bottle_4 = new Bottle('Bottle 4')
-    this.childTradeItem = new Item('Child Trading', [0, 34])
-    this.adultTradeItem = new Item('Adult Trading', [0, 43])
-    this.wallet = new Item('Wallet', [0, 99, 200, 500, 999])
+    this.childTradeItem = new TradeItem('Child Trading')
+    this.adultTradeItem = new TradeItem('Adult Trading')
+    this.wallet = new Item('Wallet', [99, 200, 500, 999])
     this.swimming = new Item('Swimming', [0, 'Silver Scale', 'Gold Scale'])
     this.strength = new Item('Strength Upgrade', [0, 'Goron\'s Bracelet', 'Silver Gauntlet', 'Golden Gauntlet'])
     this.kokiriSword = new Item('Kokiri Sword', [0, 1])
@@ -77,7 +77,7 @@ class ItemManager {
     this.stoneOfAgony = new Item('Stone of Agony', [0, 1])
     this.goldSkulltulas = new Item('Gold Skulltulas', [0, 10, 20, 30, 40, 50])
     this.heartPieces = new Item('Heart Pieces', [0, 4, 8, 12, 16, 20, 24, 28, 32])
-    this.zeldaLullaby = new Item('Zelda\'s Lullaby', [0, 1])
+    this.zeldasLullaby = new Item('Zelda\'s Lullaby', [0, 1])
     this.eponasSong = new Item('Epona\'s Song', [0, 1])
     this.sunsSong = new Item('Sun\'s Song', [0, 1])
     this.songOfTime = new Item('Song Of Time', [0, 1])
@@ -156,6 +156,26 @@ class ValueSwitch {
 class Item extends ValueSwitch {
   Icon () {
     return `/images/${this.name.replace(' ', '_').toLowerCase()}.png`
+  }
+}
+
+class TradeItem extends Item {
+  constructor (name) {
+    super(name, [0])
+    this.values[0] = 0
+    this.values[33] = 'Weird Egg'
+    this.values[34] = 'Chicken'
+    this.values[35] = 'Zelda\'s Letter'
+    this.values[36] = 'Spooky Mask'
+    this.values[37] = 'Keaton Mask'
+    this.values[38] = 'Skull Mask'
+    this.values[39] = 'Bunny Hood'
+    this.values[40] = 'Zora Mask'
+    this.values[41] = 'Goron Mask'
+    this.values[42] = 'Gerudo Mask'
+    this.values[43] = 'Mask of Truth'
+    this.values[44] = 'Claim Check'
+    this.values[255] = 'None'
   }
 }
 

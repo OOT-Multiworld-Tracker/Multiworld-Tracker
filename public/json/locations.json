@@ -39,13 +39,13 @@
     },
     {
         "name": "Song from Impa",
-        "logic": "(world) => world.items.childTradeItem.value >= 34",
+        "logic": "(world) => world.items.childTradeItem.Index() >= 34",
         "scene": "95"
     },
     {
         "name": "Song from Malon",
-        "logic": "(world) => world.items.ocarina.Index() >= 1 && world.items.childTradeItem.value >= 34",
-        "scene": "95"
+        "logic": "(world) => world.items.ocarina.Index() >= 1 && world.items.childTradeItem.Index() >= 34",
+        "scene": "99"
     },
     {
         "name": "Malon Egg",
@@ -68,7 +68,7 @@
     },
     {
         "name": "Song from Windmill",
-        "logic": "(world) => world.items.ocarina.Index() >= 1",
+        "logic": "(world) => CanBecomeAdult(world) && world.items.ocarina.Index() >= 1",
         "scene": "82"
     },
     {
@@ -104,22 +104,22 @@
     {
         "name": "KF Midos Top Left Chest",
         "preExit": true,
-        "scene": "85"
+        "scene": "40"
     },
     {
         "name": "KF Midos Top Right Chest",
         "preExit": true,
-        "scene": "85"
+        "scene": "40"
     },
     {
         "name": "KF Midos Bottom Left Chest",
         "preExit": true,
-        "scene": "85"
+        "scene": "40"
     },
     {
         "name": "KF Midos Bottom Right Chest",
         "preExit": true,
-        "scene": "85"
+        "scene": "40"
     },
     {
         "name": "KF Kokiri Sword Chest",
@@ -238,7 +238,7 @@
     },
     {
         "name": "HF Tektite Grotto Freestanding PoH",
-        "logic": "(world) => HasExplosives(world)",
+        "logic": "(world) => HasExplosives(world) && (world.items.swimming.Index() == 2 || (CanBecomeAdult(world) && world.save.boots.ironBoots))",
         "scene": "81"
     },
     {
@@ -351,12 +351,13 @@
     },
     {
         "name": "HC Great Fairy Reward",
-        "logic": "(world) => HasExplosives(world)",
+        "logic": "(world) => HasExplosives(world) && world.items.zeldasLullaby.value > 0",
         "scene": "95"
     },
     {
         "name": "LLR Talons Chickens",
-        "scene": "99"
+        "scene": "99",
+        "logic": "(world) => world.items.childTradeItem.Index() >= 34"
     },
     {
         "name": "LLR Freestanding PoH",
@@ -398,7 +399,8 @@
     },
     {
         "name": "Kak Man on Roof",
-        "scene": "82"
+        "scene": "82",
+        "logic": "(world) => world.items.hookshot.Index() > 0"
     },
     {
         "name": "Kak Open Grotto Chest",
@@ -485,12 +487,12 @@
     },
     {
         "name": "Graveyard Heart Piece Grave Chest",
-        "logic": "(world) => HasExplosives(world) && CanLightFires(world)",
+        "logic": "(world) => world.items.ocarina.Index() > 0 && world.save.questStatus.sunsSong",
         "scene": "83"
     },
     {
         "name": "Graveyard Composers Grave Chest",
-        "logic": "(world) => world.items.ocarina.Index() >= 1",
+        "logic": "(world) => (world.items.ocarina.Index() > 0 && world.save.questStatus.zeldasLullaby) && HasExplosives(world) && CanLightFires(world)",
         "scene": "83"
     },
     {
@@ -529,7 +531,7 @@
     },
     {
         "name": "DMT Great Fairy Reward",
-        "logic": "(world) => CanEnterDeathMountain(world) && world.items.ocarina.Index() >= 1 && world.save.questStatus.zeldasLullaby && HasExplosives(world)",
+        "logic": "(world) => CanEnterDeathMountain(world) && world.items.ocarina.Index() >= 1 && world.items.ocarina.Index() > 0 && world.save.questStatus.zeldasLullaby && HasExplosives(world)",
         "scene": "96"
     },
     {
@@ -579,17 +581,17 @@
     },
     {
         "name": "GC Deku Scrub Grotto Left",
-        "logic": "(world) => CanEnterDeathMountain(world) && IsScrubSanity(world)",
+        "logic": "(world) => CanEnterDeathMountain(world) && IsScrubSanity(world) && world.items.ocarina.Index() > 0 && world.items.songOfTime.value > 0 && (CanBecomeAdult(world) && world.items.hookshot.Index() == 2)",
         "scene": "98"
     },
     {
         "name": "GC Deku Scrub Grotto Center",
-        "logic": "(world) => CanEnterDeathMountain(world) && IsScrubSanity(world)",
+        "logic": "(world) => CanEnterDeathMountain(world) && IsScrubSanity(world) && world.items.ocarina.Index() > 0 && world.items.songOfTime.value > 0 && (CanBecomeAdult(world) && world.items.hookshot.Index() == 2)",
         "scene": "98"
     },
     {
         "name": "GC Deku Scrub Grotto Right",
-        "logic": "(world) => CanEnterDeathMountain(world) && IsScrubSanity(world)",
+        "logic": "(world) => CanEnterDeathMountain(world) && IsScrubSanity(world) && world.items.ocarina.Index() > 0 && world.items.songOfTime.value > 0 && (CanBecomeAdult(world) && world.items.hookshot.Index() == 2)",
         "scene": "98"
     },
     {
@@ -629,7 +631,7 @@
     },
     {
         "name": "DMC Great Fairy Reward",
-        "logic": "(world) => CanEnterDeathMountain(world) && world.items.ocarina.Index() >= 1 && world.save.questStatus.zeldasLullaby && HasExplosives(world)",
+        "logic": "(world) => CanEnterDeathMountain(world) && world.items.ocarina.Index() >= 1 && world.items.zeldasLullaby.value > 0 && world.save.questStatus.zeldasLullaby && HasExplosives(world)",
         "scene": "97"
     },
     {
@@ -669,7 +671,7 @@
     },
     {
         "name": "ZR Frogs Ocarina Game",
-        "logic": "(world) => CanEnterZorasRiver(world) && world.items.ocarina.Index() >= 1",
+        "logic": "(world) => CanEnterZorasRiver(world) && world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfStorms && world.items.songOfTime.value > 0 && world.items.zeldasLullaby.value > 0 && world.items.sunsSong.value > 0 && world.items.eponasSong.value > 0",
         "scene": "84"
     },
     {
@@ -729,7 +731,7 @@
     },
     {
         "name": "ZF Great Fairy Reward",
-        "logic": "(world) => CanEnterZorasDomain(world) && HasExplosives(world)",
+        "logic": "(world) => CanEnterZorasDomain(world) && HasExplosives(world) && (world.items.ocarina.Index() > 0 && world.items.zeldasLullaby.value > 0)",
         "scene": "89"
     },
     {
@@ -801,12 +803,12 @@
     },
     {
         "name": "GV Deku Scrub Grotto Front",
-        "logic": "(world) => IsScrubSanity(world) && CanStunDeku(world)",
+        "logic": "(world) => CanBecomeAdult(world) && (world.items.ocarina.Index() >= 1 && world.items.songOfStorms.value > 0) && IsScrubSanity(world) && CanStunDeku(world)",
         "scene": "90"
     },
     {
         "name": "GV Deku Scrub Grotto Rear",
-        "logic": "(world) => IsScrubSanity(world) && CanStunDeku(world)",
+        "logic": "(world) => CanBecomeAdult(world) && (world.items.ocarina.Index() >= 1 && world.items.songOfStorms.value > 0) && IsScrubSanity(world) && CanStunDeku(world)",
         "scene": "90"
     },
     {
@@ -841,7 +843,7 @@
     },
     {
         "name": "Colossus Great Fairy Reward",
-        "logic": "(world) => (world.items.ocarina.Index() >= 1 && world.save.questStatus.requiemOfSpirit) || (world.save.questStatus.gerudoMembershipCard && world.items.hookshot.Index() == 2)",
+        "logic": "(world) => (world.items.ocarina.Index() >= 1 && world.save.questStatus.requiemOfSpirit && world.items.zeldasLullaby.value > 0) || (world.save.questStatus.gerudoMembershipCard && world.items.hookshot.Index() == 2)",
         "scene": "92"
     },
     {
@@ -1051,12 +1053,77 @@
     },
     {
         "name": "Dodongos Cavern Boss Room Chest",
-        "logic": "(world) => world.dungeons[1].mq == false && CanEnterDodongo(world)",
+        "logic": "(world) => CanEnterDodongo(world)",
         "scene": "1"
     },
     {
         "name": "Dodongos Cavern King Dodongo Heart",
-        "logic": "(world) => CanEnterDodongo(world) && (world.items.bombs.value > 0 || world.items.strength.value >=1) && (world.items.dekuSticks.value > 0 || world.save.swords.kokiriSword)",
+        "logic": "(world) => CanEnterDodongo(world) && (world.items.bombs.value > 0 || world.items.strength.Index() >=1) && (world.items.dekuSticks.value > 0 || world.save.swords.kokiriSword)",
+        "scene": "1"
+    },
+    {
+        "name": "Dodongos Cavern MQ Bomb Bag Chest",
+        "logic": "(world) => world.dungeons[1].mq == true && world.items.fairySlingshot.value > 0 && CanEnterDodongo(world)",
+        "scene": "1"
+    },
+    {
+        "name": "Dodongos Cavern MQ Torch Puzzle Room Chest",
+        "logic": "(world) => world.dungeons[1].mq == true && CanEnterDodongo(world)",
+        "scene": "1"
+    },
+    {
+        "name": "Dodongos Cavern MQ Larvae Room Chest",
+        "logic": "(world) => world.dungeons[1].mq == true && CanEnterDodongo(world)",
+        "scene": "1"
+    },
+    {
+        "name": "Dodongos Cavern MQ Under Grave Chest",
+        "logic": "(world) => world.dungeons[1].mq == true && CanEnterDodongo(world)",
+        "scene": "1"
+    },
+    {
+        "name": "Dodongos Cavern MQ Deku Scrub Lobby Front",
+        "logic": "(world) => IsScrubSanity(world) && world.dungeons[1].mq == true && CanEnterDodongo(world)",
+        "scene": "1"
+    },
+    {
+        "name": "Dodongos Cavern MQ Deku Scrub Lobby Rear",
+        "logic": "(world) => IsScrubSanity(world) && world.dungeons[1].mq == true && CanEnterDodongo(world)",
+        "scene": "1"
+    },
+    {
+        "name": "Dodongos Cavern MQ Deku Scrub Side Room Near Lower Lizalfos",
+        "logic": "(world) => IsScrubSanity(world) && world.dungeons[1].mq == true && CanEnterDodongo(world)",
+        "scene": "1"
+    },
+    {
+        "name": "Dodongos Cavern MQ Deku Scrub Staircase",
+        "logic": "(world) => IsScrubSanity(world) && world.dungeons[1].mq == true && CanEnterDodongo(world)",
+        "scene": "1"
+    },
+    {
+        "name": "Dodongos Cavern MQ GS Scrub Room",
+        "logic": "(world) => IsTokenSanity(world) && world.items.fairySlingshot.value > 0 && world.items.boomerang.value > 0 && world.dungeons[1].mq == true && CanEnterDodongo(world)",
+        "scene": "1"
+    },
+    {
+        "name": "Dodongos Cavern MQ GS Larvae Room",
+        "logic": "(world) => IsTokenSanity(world) && world.dungeons[1].mq == true && CanEnterDodongo(world)",
+        "scene": "1"
+    },
+    {
+        "name": "Dodongos Cavern MQ GS Lizalfos Room",
+        "logic": "(world) => IsTokenSanity(world) && world.dungeons[1].mq == true && CanEnterDodongo(world)",
+        "scene": "1"
+    },
+    {
+        "name": "Dodongos Cavern MQ GS Song of Time Block Room",
+        "logic": "(world) => IsTokenSanity(world) && world.dungeons[1].mq == true && CanEnterDodongo(world) && world.items.ocarina.Index() > 0 && world.items.songOfTime.Index() > 0",
+        "scene": "1"
+    },
+    {
+        "name": "Dodongos Cavern MQ GS Back Area",
+        "logic": "(world) => IsTokenSanity(world) && world.dungeons[1].mq == true && CanEnterDodongo(world)",
         "scene": "1"
     },
     {

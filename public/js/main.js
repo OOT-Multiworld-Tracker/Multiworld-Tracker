@@ -179,6 +179,7 @@ function LoadState (fileName) {
   app.global.settings = new SettingsManager(file.settings)
   app.local.world.save = file.save
   app.local.world.items = new ItemManager(app.local.world)
+  app.local.world.dungeons = file.dungeons
 
   Object.keys(app.local.world.save.inventory).forEach((key) => {
     if (app.local.world.items[key] !== undefined) {
@@ -192,8 +193,6 @@ function LoadState (fileName) {
     }
   })
 
-  console.log(app.worlds[0].locations)
-  console.log(file.locations)
   file.locations.forEach((location, index) => {
     if (location.completed) app.worlds[0].locations.All().get(location.id).completed = location.completed
   })
@@ -287,6 +286,7 @@ function IsAccessible (location, world) {
 }
 
 function ToggleCompleted (props) {
+  console.log(props.id)
   app.local.world.locations.Array()[props.id].completed = !app.local.world.locations.Array()[props.id].completed
   // Serialize and compress a packet for sending
   if (window.isElectron) { require('electron').ipcRenderer.send('packets', JSON.stringify({ world: myWorld - 1, save: { swords: app.local.world.save.swords, shields: app.local.world.save.shields, inventory: app.local.world.save.inventory, questStatus: app.local.world.save.questStatus }, locations: NetworkSerialize(app.local.world.locations.Array(), 'completed') }).replace(/true/g, '1').replace(/false/g, '0')) }
@@ -330,7 +330,7 @@ function CanEnterDodongo (world = app.local.world) {
 }
 
 function CanEnterDeathMountain (world = app.local.world) {
-  return settings.open_kakariko || (world.items.childTradeItem.Index() >= 2 || HasExplosives(world))
+  return settings.open_kakariko || (world.items.childTradeItem.value >= 34 || HasExplosives(world))
 }
 
 function CanEnterZorasRiver (world = app.local.world) {
@@ -375,7 +375,7 @@ function CanEnterSpirit (world = app.local.world) {
 }
 
 function CanEnterGtG (world = app.local.world) {
-  return (CanBecomeAdult() && save.questStatus.gerudoMembershipCard > 0 && (world.items.hookshot.Index() == 2 || world.items.ocarina.Index() >= 1 && save.questStatus.eponasSong.Index() > 0))
+  return (CanBecomeAdult() && save.questStatus.gerudoMembershipCard > 0 && (world.items.hookshot.Index() === 2 || (world.items.ocarina.Index() >= 1 && save.questStatus.eponasSong.Index()) > 0))
 }
 
 function CanEnterGC (world = app.local.world) {
@@ -383,9 +383,13 @@ function CanEnterGC (world = app.local.world) {
 }
 
 function ShopRandomized (world = app.local.world, count = 0) {
-  return app.global.settings.shopsanity >= count
+  return app.global.settings.shopSanity.value >= count
 }
 
 function IsScrubSanity (world = app.local.world) {
-  return app.global.settings.shuffle_scrubs !== 'none'
+  return app.global.settings.shuffleScrubs.value !== 'none'
+}
+
+function IsTokenSanity (world = app.local.world) {
+  return app.global.settings.tokenSanity.value !== 'vanilla'
 }

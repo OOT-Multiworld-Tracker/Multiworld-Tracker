@@ -107,10 +107,6 @@ class Saves extends React.Component {
 }
 
 class Worlds extends React.Component {
-  constructor () {
-    super()
-  }
-
   render () {
     return (
       <table className='table-striped'>
@@ -129,10 +125,6 @@ class Worlds extends React.Component {
 }
 
 class ItemPopulation extends React.Component {
-  constructor (props) {
-    super(props)
-  }
-
   render () {
     return (
       <div>
@@ -148,11 +140,43 @@ class ItemPopulation extends React.Component {
             {app.worlds[this.props.id].locations.Accessible(false, true).map(location => {
               if (location.item && (app.worlds.length === 1 || location.item.player == myWorld)) {
                 return <Location id={location.id} item={location.item.item || 'Unknown'} name={location.name} />
-              }
+              } else return null
             })}
           </tbody>
         </table>
       </div>
+    )
+  }
+}
+
+let locationDropdown
+
+class LocationDropdown extends React.Component {
+  constructor () {
+    super()
+    this.state = { open: false, id: 0, left: 0, top: 0 }
+    locationDropdown = this
+  }
+
+  render () {
+    return (
+      this.state.open
+        ? (
+          <div className='dropdown' style={{ left: this.state.left, top: this.state.top }}>
+            <ul>
+              <li onClick={() => ToggleCompleted(this.state)}>Toggle Completed</li>
+              <li>Set Item</li>
+              <li className='dropdown-button'>Set Tag >
+              <div className='dropdown side' style={{ left: '180px', bottom: '0px' }}>
+                <ul>
+                  <li>Set Useless</li>
+                  <li>Set Reminder</li>
+                </ul>
+              </div></li>
+            </ul>
+          </div>
+          )
+        : null
     )
   }
 }
@@ -178,25 +202,18 @@ class Locations extends React.Component {
   render () {
     return (
       <div>
+        <LocationDropdown />
         <div class='btn-group' style={{width: '100%', marginBottom: '4px'}}>
-          <select class='btn btn-default' style={{width: '33.34%', marginRight: '1px'}} value={this.state.scene} onChange={(e) => this.setState({ scene: e.target.value })}><option value='-1'>None</option>{scenes.map((scene) => { if (this.checkLocation(String(scene.id))) return (<option key={scene.id} value={scene.id}>{scene.name}</option>); else return null })}</select>
+          <select class='btn btn-default' style={{width: '33.34%', marginRight: '1px'}} value={this.state.scene} onChange={(e) => this.setState({ scene: e.target.value })}><option value='-1'>None</option>{scenes.map((scene) => { if (this.checkLocation(String(scene.id))) return (<option key={scene.id} value={scene.id}>{scene.name}</option>); else { if (this.state.scene == scene.id) { this.setState({ scene: -1 }); return null; } } })}</select>
           <button class='btn btn-default' style={{width: '33.34%'}} onClick={() => this.displaySection(0)}>Accessible</button>
           <button class='btn btn-default' style={{width: '33.34%'}} onClick={() => this.displaySection(1)}>Completed</button>
         </div>
-        <table className='table-striped'>
-          <thead>
-            <tr>
-              <th>Location</th>
-            </tr>
-          </thead>
-          <tbody>
-            {!this.state.search ? app.local.world.locations.Accessible(this.state.page === 1, false, this.state.scene).map(location => (
-              <Location id={location.id} item={this.showItems ? location.item || 'Unknown' : null} name={location.name} />))
-
-              : app.local.world.locations.Search(this.state.search, this.state.scene, this.state.page).map(location => (
-                <Location id={location.id} item={this.showItems ? location.item || 'Unknown' : null} name={location.name} />))}
-          </tbody>
-        </table>
+        <div className='location-list'>
+          {(!this.state.search
+            ? app.local.world.locations.Accessible(this.state.page === 1, false, this.state.scene)
+            : app.local.world.locations.Search(this.state.search, this.state.scene, this.state.page)).map(location => (
+              <Location key={location.id} id={location.id} item={this.showItems ? location.item || 'Unknown' : null} name={location.name} />))}
+        </div>
       </div>
     )
   }
@@ -265,7 +282,7 @@ class Player extends React.Component {
     const elements = []
 
     Object.values(app.worlds[0].items).forEach(item => {
-      if (item.Icon !== undefined && elements.length < 30) elements.push(<span className={item.Index() > 0 ? 'item active' : 'item'}><img src={item.Icon()} width='24' /></span>)
+      if (item.Icon !== undefined && elements.length < 30) elements.push(<span key={item} className={item.Index() > 0 ? 'item active' : 'item'}><img src={item.Icon()} width='24' /></span>)
       if ((elements.length != 1 && elements.length % 10 === 1) || elements.length == 10) elements.push(<br />)
     })
 
@@ -278,7 +295,7 @@ class Player extends React.Component {
 
   render () {
     return (
-      <div class="player">
+      <div className='player'>
         <div className='character_name' onClick={() => this.openStats()}>{this.props.save.player_name}</div>
         <div className='heart_containers'>{this.generateContainers()}</div>
       </div>
@@ -318,22 +335,22 @@ class Header extends React.Component {
     return (
       <header className='toolbar toolbar-header'>
         <div className='toolbar-actions'>
-          <span class='title'>Ocarina of Time - Multiworld Autotracker</span>
-          <div class='btn-group pull-right'>
-            <button class='btn btn-default btn-dark pull-right'>
-              <span class={this.state.connected ? 'icon icon-check' : 'icon icon-cancel'}></span>
+          <span className='title'>Ocarina of Time - Multiworld Autotracker</span>
+          <div className='btn-group pull-right'>
+            <button className='btn btn-default btn-dark pull-right'>
+              <span className={this.state.connected ? 'icon icon-check' : 'icon icon-cancel'} />
             </button>
-            <button class='btn btn-default btn-dark pull-right'>
-              <span class='icon icon-download' />
+            <button className='btn btn-default btn-dark pull-right'>
+              <span className='icon icon-download' />
             </button>
-            <button class='btn btn-default btn-dark pull-right' onClick={() => require('electron').ipcRenderer.send('packets', 'minimize')}>
-              <span class='icon icon-minus' />
+            <button className='btn btn-default btn-dark pull-right' onClick={() => require('electron').ipcRenderer.send('packets', 'minimize')}>
+              <span className='icon icon-minus' />
             </button>
-            <button class='btn btn-default btn-dark pull-right' onClick={() => require('electron').ipcRenderer.send('packets', 'window_size')}>
-              <span class='icon icon-doc' />
+            <button className='btn btn-default btn-dark pull-right' onClick={() => require('electron').ipcRenderer.send('packets', 'window_size')}>
+              <span className='icon icon-doc' />
             </button>
-            <button class='btn btn-default btn-dark pull-right' onClick={() => require('electron').ipcRenderer.send('packets', 'close')}>
-              <span class='icon icon-cancel' />
+            <button className='btn btn-default btn-dark pull-right' onClick={() => require('electron').ipcRenderer.send('packets', 'close')}>
+              <span className='icon icon-cancel' />
             </button>
           </div>
         </div>
@@ -343,17 +360,24 @@ class Header extends React.Component {
 }
 
 class Location extends React.Component {
-  constructor (props) {
-    super(props)
+  contextMenu (id, e) {
+    console.log(e)
+    locationDropdown.setState({ open: true, id, left: e.pageX - 240, top: e.pageY - 22 })
   }
 
   render () {
     return (
-      <tr onClick={() => ToggleCompleted(this.props)}>
-        <td>{this.props.name}</td>
-        {this.props.item ? <td>{this.props.item}</td> : null}
-      </tr>
+      <div className='location' onClick={() => ToggleCompleted(this.props)} onContextMenu={(e) => { e.preventDefault(); this.contextMenu(this.props.id, e) }}>
+        <div className='location-name'>{this.props.name}</div>
+        <div className='location-items'>{this.props.items}</div>
+      </div>
     )
+    // return (
+    //   <tr onClick={() => ToggleCompleted(this.props)}>
+    //     <td>{this.props.name}</td>
+    //     {this.props.item ? <td>{this.props.item}</td> : null}
+    //   </tr>
+    // )
   }
 }
 

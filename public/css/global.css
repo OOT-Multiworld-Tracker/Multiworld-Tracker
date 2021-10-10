@@ -2,6 +2,60 @@ body {
     color: #dadada
 }
 
+.location-list {
+    padding: 4px;
+}
+
+.location {
+    padding: 4px;
+}
+
+.dropdown {
+    position: absolute;
+    z-index: 999;
+    background-color: #333;
+    border-radius: 4px;
+    width: 200px;
+}
+
+.dropdown ul {
+    padding: 12px;
+    margin: 0;
+}
+
+.dropdown ul li {
+    text-decoration: none;
+    list-style: none;
+    padding: 5px;
+}
+
+.side {
+    display: none;
+}
+
+.dropdown-button:hover .side {
+    display: block;
+}
+
+.side:hover {
+    display: block;
+}
+
+.dropdown ul li:hover {
+    background-color: #555;
+    color: #fff;
+    cursor: pointer;
+}
+
+.location:hover, .location-name:hover {
+    background-color: #555;
+    cursor:pointer;
+}
+
+.location:active {
+    background-color: #666;
+}
+
 tbody {
     background-color: #4e4e4e;
 }

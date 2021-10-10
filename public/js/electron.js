@@ -3,7 +3,7 @@ window.isElectron = typeof require !== 'undefined'
 if (window.isElectron) {
   require('electron').ipcRenderer.on('packet', (event, data) => {
     const parsed = JSON.parse(data)
-    console.log(parsed)
+    appheader.setState({ connected: true })
 
     switch (parsed.payload) {
       case 0:
@@ -16,6 +16,18 @@ if (window.isElectron) {
             }
 
             app.local.world.items[key].Set(parsed.data.save.inventory[key])
+          }
+        })
+
+        Object.keys(parsed.data.save.questStatus).forEach((key) => {
+          if (app.local.world.items[key] !== undefined) {
+            if (parsed.data.save.questStatus[key] === true) {
+              parsed.data.save.questStatus[key] = 1
+            } else if (parsed.data.save.questStatus[key] === false) {
+              parsed.data.save.questStatus[key] = 0
+            }
+
+            app.local.world.items[key].Set(parsed.data.save.questStatus[key])
           }
         })
 

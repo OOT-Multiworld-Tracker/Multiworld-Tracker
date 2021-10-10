@@ -92,16 +92,9 @@ class Saves extends React.Component {
 
   render () {
     return (
-      <table className='table-striped'>
-        <thead>
-          <tr>
-            <th>File</th>
-          </tr>
-        </thead>
-        <tbody>
-          {this.list()}
-        </tbody>
-      </table>
+      <div className='location-list'>
+        {this.list()}
+      </div>
     )
   }
 }
@@ -204,9 +197,9 @@ class Locations extends React.Component {
       <div>
         <LocationDropdown />
         <div class='btn-group' style={{width: '100%', marginBottom: '4px'}}>
-          <select class='btn btn-default' style={{width: '33.34%', marginRight: '1px'}} value={this.state.scene} onChange={(e) => this.setState({ scene: e.target.value })}><option value='-1'>None</option>{scenes.map((scene) => { if (this.checkLocation(String(scene.id))) return (<option key={scene.id} value={scene.id}>{scene.name}</option>); else { if (this.state.scene == scene.id) { this.setState({ scene: -1 }); return null; } } })}</select>
-          <button class='btn btn-default' style={{width: '33.34%'}} onClick={() => this.displaySection(0)}>Accessible</button>
-          <button class='btn btn-default' style={{width: '33.34%'}} onClick={() => this.displaySection(1)}>Completed</button>
+          <select class='btn btn-bottom btn-default' style={{width: '33.34%', marginRight: '1px'}} value={this.state.scene} onChange={(e) => this.setState({ scene: e.target.value })}><option value='-1'>None</option>{scenes.map((scene) => { if (this.checkLocation(String(scene.id))) return (<option key={scene.id} value={scene.id}>{scene.name}</option>); else { if (this.state.scene == scene.id) { this.setState({ scene: -1 }); return null; } } })}</select>
+          <button class='btn btn-bottom btn-default' style={{width: '33.34%'}} onClick={() => this.displaySection(0)}>Accessible</button>
+          <button class='btn btn-bottom btn-default' style={{width: '33.34%'}} onClick={() => this.displaySection(1)}>Completed</button>
         </div>
         <div className='location-list'>
           {(!this.state.search
@@ -317,9 +310,9 @@ class World extends React.Component {
 class Save extends React.Component {
   render () {
     return (
-      <tr onClick={() => LoadState(this.props.name)}>
-        <td>{this.props.name}</td>
-      </tr>
+      <div className='location' onClick={() => LoadState(this.props.name)}>
+        <div className='location-name'>{this.props.name}</div>
+      </div>
     )
   }
 }
@@ -447,9 +440,12 @@ class Sidebar extends React.Component {
       case 1:
         return (
           <div>
-            <button className='btn btn-default' onClick={() => SaveAlert()}>Save</button>
-            <button className='btn btn-default' onClick={() => StartOver()}>Start Over</button>
-            <p>Files</p>
+            <button className='btn btn-dark' style={{ marginBottom: '4px', width: '100%', backgroundColor: 'rgb(113 47 47)' }} onClick={() => StartOver()}>Start Over</button>
+            <br/>
+            <div style={{display: "inline", fontWeight: 'bolder'}}>
+              Files
+              <span style={{float: "right", fontWeight: 'bolder' }} onClick={() => SaveAlert()} className = 'btn btn-default icon icon-plus' />
+            </div>
             <Saves />
           </div>
         )
@@ -473,6 +469,8 @@ class Sidebar extends React.Component {
         return (
           <div>
             <input type='file' onInput={(elem) => { SpoilerUploaded(elem.target) }} title='Upload Spoiler' />
+            <p>Tracker Settings</p>
+            
             <p>Settings</p>
             <Settings />
             <p>Dungeons</p>

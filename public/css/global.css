@@ -56,6 +56,10 @@ body {
     background-color: #666;
 }
 
+.location-name {
+    font-weight: 250;
+}
+
 tbody {
     background-color: #4e4e4e;
 }
@@ -89,9 +93,10 @@ tbody {
 }
 
 .search-bar {
-    background: #4e4e4e;
-    color: #dadada;
+    background: #4a4949;
+    color: #eaeaea!important;
     margin-bottom: 4px;
+    border-radius: 6px;
 }
 
 hr {
@@ -148,10 +153,19 @@ th {
 
 .btn {
     background: none;
-    background-color: #4e4e4e;
     border: none;
     color: #dadada;
     border-radius: 0;
+    padding: 5px;
+}
+
+.btn-bottom {
+    border-bottom: 1px solid #4e4e4e!important;
+}
+
+.btn:hover {
+    background-color: #555;
+    cursor: pointer;
 }
 
 .btn-dark {

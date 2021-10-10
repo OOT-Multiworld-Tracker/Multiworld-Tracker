@@ -78,6 +78,13 @@ tbody {
     border: none;
     margin-bottom: 4px;
     border-bottom: 1px solid #4e4e4e;
+    cursor: pointer;
+}
+
+.badge {
+    background-color: #1D1E26;
+    padding: 4px;
+    border-radius: 5px;
 }
 
 .progress {
@@ -93,10 +100,11 @@ tbody {
 }
 
 .search-bar {
-    background: #4a4949;
-    color: #eaeaea!important;
-    margin-bottom: 4px;
+    background: #1d1E26;
+    margin: 0;
     border-radius: 6px;
+    cursor: text;
+    z-index: 2;
 }
 
 hr {

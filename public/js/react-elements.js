@@ -181,33 +181,40 @@ class Locations extends React.Component {
     this.showItems = props.showItems || false
 
     if (!this.filter) { locationList = this }
-    this.state = { search: '', page: 0, scene: -1, accessible: [] }
+    this.state = { search: '', page: 0, scene: -1 }
   }
 
   displaySection (page) {
-    this.setState({ page, accessible: (!this.state.search ? app.local.world.locations.Accessible(this.state.page === 1) : app.local.world.locations.Search(this.state.search)) })
+    this.setState({ page })
   }
 
-  checkLocation (scene) {
-    return this.state.accessible.some(location => location.scene === scene)
+  getScenes () {
+    const accessible = app.local.world.locations.Accessible(this.state.page == 1, false, this.state.scene)
+    const sceneList = scenes.map((scene) => { if (this.checkLocation(accessible, String(scene.id))) return (<option key={scene.id} value={scene.id}>{scene.name}</option>); else { if (this.state.scene == scene.id) { this.setState({ scene: -1 }); return null; } } })
+
+    return sceneList
+  }
+
+  checkLocation (accessible, scene) {
+    return accessible.some(location => location.scene === scene)
   }
 
   render () {
     return (
-      <div>
+      <React.Fragment>
         <LocationDropdown />
         <div class='btn-group' style={{width: '100%', marginBottom: '4px'}}>
-          <select class='btn btn-bottom btn-default' style={{width: '33.34%', marginRight: '1px'}} value={this.state.scene} onChange={(e) => this.setState({ scene: e.target.value })}><option value='-1'>None</option>{scenes.map((scene) => { if (this.checkLocation(String(scene.id))) return (<option key={scene.id} value={scene.id}>{scene.name}</option>); else { if (this.state.scene == scene.id) { this.setState({ scene: -1 }); return null; } } })}</select>
-          <button class='btn btn-bottom btn-default' style={{width: '33.34%'}} onClick={() => this.displaySection(0)}>Accessible</button>
-          <button class='btn btn-bottom btn-default' style={{width: '33.34%'}} onClick={() => this.displaySection(1)}>Completed</button>
+          <select class='btn btn-bottom btn-default' style={{width: '33.34%', marginRight: '1px'}} value={this.state.scene} onChange={(e) => this.setState({ scene: e.target.value })}><option value='-1'>None</option>{this.getScenes()}</select>
+          <button class='btn btn-bottom btn-default' style={{width: '33.34%', backgroundColor: this.state.page===0 ? "#444" : null}} onClick={() => this.displaySection(0)}>Accessible <span class='badge'>{app.local.world.locations.Accessible(false, false, -1).length}</span></button>
+          <button class='btn btn-bottom btn-default' style={{width: '33.34%', backgroundColor: this.state.page===1 ? "#444" : null }} onClick={() => this.displaySection(1)}>Completed <span class='badge'>{app.local.world.locations.Get(true).length}</span></button>
         </div>
         <div className='location-list'>
-          {(!this.state.search
+          {(!this.props.search
             ? app.local.world.locations.Accessible(this.state.page === 1, false, this.state.scene)
-            : app.local.world.locations.Search(this.state.search, this.state.scene, this.state.page)).map(location => (
+            : app.local.world.locations.Search(this.props.search, this.state.scene, this.state.page)).map(location => (
               <Location key={location.id} id={location.id} item={this.showItems ? location.item || 'Unknown' : null} name={location.name} />))}
         </div>
-      </div>
+      </React.Fragment>
     )
   }
 }
@@ -358,32 +365,34 @@ class Location extends React.Component {
     locationDropdown.setState({ open: true, id, left: e.pageX - 240, top: e.pageY - 22 })
   }
 
+  hasRareItem () {
+    return Object.values(app.local.world.items).some((item) => (item.name === app.local.world.locations.Array()[this.props.id].item) || (item.name === app.local.world.locations.Array()[this.props.id].item.item))
+  }
+
   render () {
     return (
-      <div className='location' onClick={() => ToggleCompleted(this.props)} onContextMenu={(e) => { e.preventDefault(); this.contextMenu(this.props.id, e) }}>
+      <div className='location' style={{ backgroundColor: (app.global.tracker.highlightImportantItems.value == true && this.hasRareItem()) ? {backgroundColor: "#cbef28"} : ""}} onClick={() => ToggleCompleted(this.props)} onContextMenu={(e) => { e.preventDefault(); this.contextMenu(this.props.id, e) }}>
         <div className='location-name'>{this.props.name}</div>
         <div className='location-items'>{this.props.items}</div>
       </div>
     )
-    // return (
-    //   <tr onClick={() => ToggleCompleted(this.props)}>
-    //     <td>{this.props.name}</td>
-    //     {this.props.item ? <td>{this.props.item}</td> : null}
-    //   </tr>
-    // )
   }
 }
 
 class SidebarButtons extends React.Component {
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
     this.state = { uploaded: false }
-    sidebarButtons = this
+    this.handleChange = this.handleChange.bind(this)
+  }
+
+  handleChange (e) {
+    this.props.onChange(e)
   }
 
   render () {
   return (
-    <select className='form-control' onChange={(e) => { eSidebar.setState({ page: parseInt(e.target.value) }) }}>
+    <select className='form-control' onChange={this.handleChange}>
       <option value='0'>Home</option>
       <option value='1'>Saves</option>
       <option value='3'>Items</option>
@@ -396,50 +405,25 @@ class SidebarButtons extends React.Component {
 }
 
 class Sidebar extends React.Component {
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
     this.state = { page: 0, accessible: 0, completed: 0 }
-    eSidebar = this
   }
 
   render () {
-    switch (this.state.page) {
+    switch (parseInt(this.props.page)) {
       case 0:
-        ReactDOM.render(<Locations />, document.getElementById('avaliable-root'))
         return (
-          <div>
-            <span>Locations</span>
-            <table class='table table-striped table-hover'>
-              <thead>
-                <tr>
-                  <th>Type</th>
-                  <th>Count</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Avaliable</td>
-                  <td>{this.state.accessible}</td>
-                </tr>
-                <tr>
-                  <td>Completed</td>
-                  <td>{this.state.completed}</td>
-                </tr>
-              </tbody>
-            </table>
-            <div class="progress">
-              <div class="progress-bar" role="progressbar" style={{width: (this.state.completed / app.local.world.locations.All().size)*100 + "%"}}></div>
-            </div>
-            <br/>
+          <React.Fragment>
             {
               app.worlds.map((world) => { return <Player save={world.save} /> })
             }
             <br/>
-          </div>
+          </React.Fragment>
         )
       case 1:
         return (
-          <div>
+          <React.Fragment>
             <button className='btn btn-dark' style={{ marginBottom: '4px', width: '100%', backgroundColor: 'rgb(113 47 47)' }} onClick={() => StartOver()}>Start Over</button>
             <br/>
             <div style={{display: "inline", fontWeight: 'bolder'}}>
@@ -447,39 +431,101 @@ class Sidebar extends React.Component {
               <span style={{float: "right", fontWeight: 'bolder' }} onClick={() => SaveAlert()} className = 'btn btn-default icon icon-plus' />
             </div>
             <Saves />
-          </div>
+          </React.Fragment>
         )
       case 2:
         return (
-          <div>
+          <React.Fragment>
             <p>My World ID</p>
             <input type='number' onInput={(elem) => { myWorld = elem.target.value; eSidebar.render(); app.local.world = app.worlds[myWorld - 1] }} />
             <p>Worlds</p>
             <Worlds />
-          </div>
+          </React.Fragment>
         )
       case 3:
         return (
-          <div>
+          <React.Fragment>
             <p>Items</p>
             <Items />
-          </div>
+          </React.Fragment>
         )
       case 4:
         return (
-          <div>
+          <React.Fragment>
             <input type='file' onInput={(elem) => { SpoilerUploaded(elem.target) }} title='Upload Spoiler' />
             <p>Tracker Settings</p>
-            
+
             <p>Settings</p>
             <Settings />
             <p>Dungeons</p>
             <Dungeons />
-          </div>
+          </React.Fragment>
         )
     }
   }
 }
 
-if (window.isElectron) { ReactDOM.render(<Header />, document.getElementById('header-root')) }
-ReactDOM.render(<Locations />, document.getElementById('avaliable-root'))
+class SearchBar extends React.Component {
+  constructor (props) {
+    super(props)
+    this.handleChange = this.handleChange.bind(this)
+  }
+
+  handleChange (e) {
+    this.props.onChange(e)
+  }
+
+  render() {
+    return (
+      <input type='text' className='form-control search-bar' onChange={this.handleChange} placeholder='Search...'/>
+    )
+  }
+}
+
+const WorldContext = React.createContext('world');
+
+class Application extends React.Component {
+  constructor () {
+    super()
+    this.state = {world: app.local.world, search: '', sidebar: 0}
+
+    this.handleSearch = this.handleSearch.bind(this)
+    this.handleSidebar = this.handleSidebar.bind(this)
+  }
+
+  handleSearch (e) {
+    this.setState({ search: e.target.value })
+  }
+
+  handleSidebar (e) {
+    this.setState({ sidebar: e.target.value })
+  }
+
+  render () {
+    return (
+      <div className='window'>
+        <Header />
+        <WorldContext.Provider value={this.state.world}>
+          <div className='window-content'>
+            <div className='pane-group'>
+              <div class="pane-md" style={{width: '240px'}}>
+                <SidebarButtons onChange={this.handleSidebar} />
+                <Sidebar page={this.state.sidebar} />
+              </div>
+              <div class="pane">
+                <SearchBar onChange={this.handleSearch}/>
+                <Locations search={this.state.search} />
+              </div>
+            </div>
+          </div>
+        </WorldContext.Provider>
+      </div>
+    )
+  }
+}
+
+ReactDOM.render(<Application />, document.getElementById('root'))
+
+
+//if (window.isElectron) { ReactDOM.render(<Header />, document.getElementById('header-root')) }
+//ReactDOM.render(<Locations />, document.getElementById('avaliable-root'))

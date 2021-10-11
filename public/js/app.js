@@ -6,7 +6,8 @@ class App {
     }
 
     this.global = {
-      settings: new SettingsManager()
+      settings: new SettingsManager(),
+      tracker: new TrackerSettings()
     }
 
     this.worlds = [new GameWorld(save, dungeons)] // Spawn with a default world instance.
@@ -21,6 +22,12 @@ class App {
 
   SearchLocations (term) {
     locationList.setState({ search: term })
+  }
+}
+
+class TrackerSettings {
+  constructor () {
+    this.highlightImportantItems = new ValueSwitch('Highlight Important Items', [false, true])
   }
 }
 

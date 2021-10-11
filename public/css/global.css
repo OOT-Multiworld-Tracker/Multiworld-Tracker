@@ -10,10 +10,62 @@ body {
     padding: 4px;
 }
 
+.location-name, .location-items {
+    display: inline;
+}
+
+.list {
+    padding: 4px;
+}
+
+.list .list-header {
+    font-weight: bold;
+}
+
+.list .list-header span {
+    float: right;
+}
+
+.location-items {
+    float: right;
+}
+
+.modal-layer {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(31, 31, 31, 0.5);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal {
+    background-color: #1D1E26;
+    width: 25%;
+    max-height: 60%;
+    overflow: auto;
+    border-radius: 5px;
+    margin: 0;
+    padding: 8px;
+    z-index: 1000;
+}
+
+.modal p {
+    margin: 0;
+    margin-bottom: 3px;
+    font-weight: bold;
+}
+
+.modal .btn {
+    width: 100%;
+    background-color: #555;
+}
+
 .dropdown {
     position: absolute;
     z-index: 999;
-    background-color: #333;
+    background-color: #1d1E26;
     border-radius: 4px;
     width: 200px;
 }
@@ -78,6 +130,13 @@ tbody {
     border: none;
     margin-bottom: 4px;
     border-bottom: 1px solid #4e4e4e;
+    cursor: pointer;
+}
+
+.badge {
+    background-color: #1D1E26;
+    padding: 4px;
+    border-radius: 5px;
 }
 
 .progress {
@@ -93,10 +152,11 @@ tbody {
 }
 
 .search-bar {
-    background: #4a4949;
-    color: #eaeaea!important;
-    margin-bottom: 4px;
+    background: #1d1E26;
+    margin: 0;
     border-radius: 6px;
+    cursor: text;
+    z-index: 2;
 }
 
 hr {
@@ -170,6 +230,10 @@ th {
 
 .btn-dark {
     background: none;
+}
+
+.btn-warning {
+    background-color: #722424!important;
 }
 
 input[type="button" i] {

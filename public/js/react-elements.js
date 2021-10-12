@@ -199,7 +199,6 @@ class Locations extends React.Component {
 
     return sceneList
   }
-
   checkLocation (accessible, scene) {
     return accessible.some(location => location.scene === scene)
   }
@@ -652,7 +651,7 @@ class Application extends React.Component {
     this.setState({ saves: Object.keys(localStorage) })
     this.closeModal(e)
   }
-
+  
   closeModal (e) {
     this.setState({ display: 0 })
   }

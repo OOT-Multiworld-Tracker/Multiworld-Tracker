@@ -608,7 +608,7 @@ class CreateSaveModal extends React.Component {
 
 const AppContext = React.createContext('app');
 
-class Application extends React.Component {
+const Application = Sentry.withProfiler(class Application extends React.Component {
   constructor () {
     super()
     this.state = {world: app.local.world, search: '', sidebar: 0, display: 0, saves: [], locations: app.local.world.locations}
@@ -687,7 +687,9 @@ class Application extends React.Component {
               </div>
               <div class="pane">
                 <SearchBar onChange={this.handleSearch}/>
-                <Locations onDropdownClick={this.handleDropdown} locations={this.state.locations} search={this.state.search} />
+                <Sentry.ErrorBoundary fallback={<p>Locations Failed to Load</p>}>
+                  <Locations onDropdownClick={this.handleDropdown} locations={this.state.locations} search={this.state.search} />
+                </Sentry.ErrorBoundary>
               </div>
             </div>
           </div>
@@ -695,7 +697,7 @@ class Application extends React.Component {
       </div>
     )
   }
-}
+})
 
 ReactDOM.render(<Application />, document.getElementById('root'))
 

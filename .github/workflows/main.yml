@@ -31,3 +31,6 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           release: true
+
+      - name: Sentry Release
+        uses: getsentry/action-release@v1.1.6

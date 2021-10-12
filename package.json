@@ -26,6 +26,8 @@
   },
   "homepage": "https://github.com/OOT-Multiworld-Tracker/Multiworld-Tracker#readme",
   "dependencies": {
+    "@sentry/react": "^6.13.3",
+    "@sentry/tracing": "^6.13.3",
     "electron-updater": "^4.3.9",
     "electron-webpack": "^2.8.2",
     "express": "^4.17.1",

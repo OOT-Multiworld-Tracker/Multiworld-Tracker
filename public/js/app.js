@@ -1,5 +1,8 @@
-class App {
+const { EventEmitter } = require('events')
+
+class App extends EventEmitter {
   constructor () {
+    super()
     this.local = {
       world: null,
       scene: -1
@@ -7,7 +10,8 @@ class App {
 
     this.global = {
       settings: new SettingsManager(),
-      tracker: new TrackerSettings()
+      tracker: new TrackerSettings(),
+      connected: false
     }
 
     this.worlds = [new GameWorld(save, dungeons)] // Spawn with a default world instance.
@@ -16,8 +20,7 @@ class App {
 
   RenderLocations (page, scene) {
     const accessible = app.local.world.locations.Accessible(locationList.state.page === 1, false, locationList.state.scene)
-    locationList.setState({ accessible })
-    eSidebar.setState({ accessible: accessible.length, completed: app.local.world.locations.Get(true).length })
+    locationList.forceUpdate()
   }
 
   SearchLocations (term) {
@@ -87,6 +90,7 @@ class ItemManager {
     this.zeldasLullaby = new Item('Zelda\'s Lullaby', [0, 1])
     this.eponasSong = new Item('Epona\'s Song', [0, 1])
     this.sunsSong = new Item('Sun\'s Song', [0, 1])
+    this.sariasSong = new Item('Saria\'s Song', [0, 1])
     this.songOfTime = new Item('Song Of Time', [0, 1])
     this.songOfStorms = new Item('Song Of Storms', [0, 1])
     this.preludeOfLight = new Item('Prelude Of Light', [0, 1])

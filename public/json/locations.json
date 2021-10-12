@@ -641,17 +641,17 @@
     },
     {
         "name": "DMC Deku Scrub Grotto Left",
-        "logic": "(world) => CanEnterDeathMountain(world) && HasExplosives(world) && IsScrubSanity(world)",
+        "logic": "(world) => CanBecomeAdult(world) && CanEnterDeathMountain(world) && HasExplosives(world) && IsScrubSanity(world)",
         "scene": "97"
     },
     {
         "name": "DMC Deku Scrub Grotto Center",
-        "logic": "(world) => CanEnterDeathMountain(world) && HasExplosives(world) && IsScrubSanity(world)",
+        "logic": "(world) => CanBecomeAdult(world) && CanEnterDeathMountain(world) && HasExplosives(world) && IsScrubSanity(world)",
         "scene": "97"
     },
     {
         "name": "DMC Deku Scrub Grotto Right",
-        "logic": "(world) => CanEnterDeathMountain(world) && HasExplosives(world) && IsScrubSanity(world)",
+        "logic": "(world) => CanBecomeAdult(world) && CanEnterDeathMountain(world) && HasExplosives(world) && IsScrubSanity(world)",
         "scene": "97"
     },
     {
@@ -686,12 +686,12 @@
     },
     {
         "name": "ZR Deku Scrub Grotto Front",
-        "logic": "(world) => CanEnterZorasRiver(world) && IsScrubSanity(world)",
+        "logic": "(world) => CanEnterZorasRiver(world) && IsScrubSanity(world) && world.items.ocarina.Index() > 0 && world.items.songOfStorms.value > 0",
         "scene": "84"
     },
     {
         "name": "ZR Deku Scrub Grotto Rear",
-        "logic": "(world) => CanEnterZorasRiver(world) && IsScrubSanity(world)",
+        "logic": "(world) => CanEnterZorasRiver(world) && IsScrubSanity(world) && world.items.ocarina.Index() > 0 && world.items.songOfStorms.value > 0",
         "scene": "84"
     },
     {
@@ -1127,68 +1127,98 @@
         "scene": "1"
     },
     {
+        "name": "Jabu Jabus Belly Boomerang Chest",
+        "logic": "(world) => world.dungeons[3].mq == false && CanEnterJabu(world) && world.items.fairySlingshot.value > 0",
+        "scene": "2"
+    },
+    {
+        "name": "Jabu Jabus Belly Deku Scrub",
+        "logic": "(world) => world.dungeons[3].mq == false && CanEnterJabu(world) && world.items.fairySlingshot.value > 0",
+        "scene": "2"
+    },
+    {
+        "name": "Jabu Jabus Belly GS Water Switch Room",
+        "logic": "(world) => world.dungeons[3].mq == false && CanEnterJabu(world) && world.items.fairySlingshot.value > 0",
+        "scene": "2"
+    },
+    {
+        "name": "Jabu Jabus Belly GS Lobby Basement Lower",
+        "logic": "(world) => world.dungeons[3].mq == false && CanEnterJabu(world) && world.items.fairySlingshot.value > 0 && world.items.boomerang.value > 0",
+        "scene": "2"
+    },
+    {
+        "name": "Jabu Jabus Belly GS Lobby Basement Upper",
+        "logic": "(world) => world.dungeons[3].mq == false && CanEnterJabu(world) && world.items.fairySlingshot.value > 0 && world.items.boomerang.value > 0",
+        "scene": "2"
+    },
+    {
+        "name": "Jabu Jabus Belly GS Near Boss",
+        "logic": "(world) => world.dungeons[3].mq == false && CanEnterJabu(world) && world.items.fairySlingshot.value > 0",
+        "scene": "2"
+    },  
+    {
         "name": "Jabu Jabus Belly MQ First Room Side Chest",
-        "logic": "(world) => world.dungeons[2].mq == true && CanEnterJabu(world) && world.items.fairySlingshot.value > 0",
+        "logic": "(world) => world.dungeons[3].mq == true && CanEnterJabu(world) && world.items.fairySlingshot.value > 0",
         "scene": "2"
     },
     {
         "name": "Jabu Jabus Belly MQ Second Room Lower Chest",
-        "logic": "(world) => world.dungeons[2].mq == true && CanEnterJabu(world) && world.items.fairySlingshot.value > 0",
+        "logic": "(world) => world.dungeons[3].mq == true && CanEnterJabu(world) && world.items.fairySlingshot.value > 0",
         "scene": "2"
     },
     {
         "name": "Jabu Jabus Belly MQ Basement Near Switches Chest",
-        "logic": "(world) => world.dungeons[2].mq == true && CanEnterJabu(world) && world.items.fairySlingshot.value > 0",
+        "logic": "(world) => world.dungeons[3].mq == true && CanEnterJabu(world) && world.items.fairySlingshot.value > 0",
         "scene": "2"
     },
     {
         "name": "Jabu Jabus Belly MQ Basement Near Vines Chest",
-        "logic": "(world) => world.dungeons[2].mq == true && CanEnterJabu(world) && world.items.fairySlingshot.value > 0",
+        "logic": "(world) => world.dungeons[3].mq == true && CanEnterJabu(world) && world.items.fairySlingshot.value > 0",
         "scene": "2"
     },
     {
         "name": "Jabu Jabus Belly MQ Boomerang Room Small Chest",
-        "logic": "(world) => world.dungeons[2].mq == true && CanEnterJabu(world) && world.items.fairySlingshot.value > 0",
+        "logic": "(world) => world.dungeons[3].mq == true && CanEnterJabu(world) && world.items.fairySlingshot.value > 0",
         "scene": "2"
     },
     {
         "name": "Jabu Jabus Belly MQ Boomerang Chest",
-        "logic": "(world) => world.dungeons[2].mq == true && CanEnterJabu(world) && world.items.fairySlingshot.value > 0",
+        "logic": "(world) => world.dungeons[3].mq == true && CanEnterJabu(world) && world.items.fairySlingshot.value > 0",
         "scene": "2"
     },
     {
         "name": "Jabu Jabus Belly MQ Falling Like Like Room Chest",
-        "logic": "(world) => world.dungeons[2].mq == true && CanEnterJabu(world) && world.items.fairySlingshot.value > 0",
+        "logic": "(world) => world.dungeons[3].mq == true && CanEnterJabu(world) && world.items.fairySlingshot.value > 0",
         "scene": "2"
     },
     {
         "name": "Jabu Jabus Belly MQ Second Room Upper Chest",
-        "logic": "(world) => world.dungeons[2].mq == true && CanEnterJabu(world) && world.items.fairySlingshot.value > 0",
+        "logic": "(world) => world.dungeons[3].mq == true && CanEnterJabu(world) && world.items.fairySlingshot.value > 0",
         "scene": "2"
     },
     {
         "name": "Jabu Jabus Belly MQ Near Boss Chest",
-        "logic": "(world) => world.dungeons[2].mq == true && CanEnterJabu(world) && world.items.fairySlingshot.value > 0",
+        "logic": "(world) => world.dungeons[3].mq == true && CanEnterJabu(world) && world.items.fairySlingshot.value > 0",
         "scene": "2"
     },
     {
         "name": "Jabu Jabus Belly MQ GS Boomerang Chest Room",
-        "logic": "(world) => world.dungeons[2].mq == true && CanEnterJabu(world) && world.items.fairySlingshot.value > 0",
+        "logic": "(world) => world.dungeons[3].mq == true && CanEnterJabu(world) && world.items.fairySlingshot.value > 0",
         "scene": "2"
     },
     {
         "name": "Jabu Jabus Belly MQ GS Tailpasaran Room",
-        "logic": "(world) => world.dungeons[2].mq == true && CanEnterJabu(world) && world.items.fairySlingshot.value > 0",
+        "logic": "(world) => world.dungeons[3].mq == true && CanEnterJabu(world) && world.items.fairySlingshot.value > 0",
         "scene": "2"
     },
     {
         "name": "Jabu Jabus Belly MQ GS Invisible Enemies Room",
-        "logic": "(world) => world.dungeons[2].mq == true && CanEnterJabu(world) && world.items.fairySlingshot.value > 0",
+        "logic": "(world) => world.dungeons[3].mq == true && CanEnterJabu(world) && world.items.fairySlingshot.value > 0",
         "scene": "2"
     },
     {
         "name": "Jabu Jabus Belly MQ GS Near Boss",
-        "logic": "(world) => world.dungeons[2].mq == true && CanEnterJabu(world) && world.items.fairySlingshot.value > 0",
+        "logic": "(world) => world.dungeons[3].mq == true && CanEnterJabu(world) && world.items.fairySlingshot.value > 0",
         "scene": "2"
     },
     {
@@ -1273,82 +1303,157 @@
     },
     {
         "name": "Forest Temple First Room Chest",
-        "logic": "(world) => CanBecomeAdult(world) && CanEnterForest(world)",
+        "logic": "(world) => world.dungeons[4].mq == false && CanBecomeAdult(world) && CanEnterForest(world)",
         "scene": "3"
     },
     {
         "name": "Forest Temple First Stalfos Chest",
-        "logic": "(world) => CanBecomeAdult(world) && CanEnterForest(world)",
+        "logic": "(world) => world.dungeons[4].mq == false && CanBecomeAdult(world) && CanEnterForest(world)",
         "scene": "3"
     },
     {
         "name": "Forest Temple Raised Island Courtyard Chest",
-        "logic": "(world) => CanBecomeAdult(world) && CanEnterForest(world)",
+        "logic": "(world) => world.dungeons[4].mq == false && CanBecomeAdult(world) && CanEnterForest(world)",
         "scene": "3"
     },
     {
         "name": "Forest Temple Well Chest",
-        "logic": "(world) => CanBecomeAdult(world) && CanEnterForest(world) && world.items.fairyBow.value === 1",
+        "logic": "(world) => world.dungeons[4].mq == false && CanBecomeAdult(world) && CanEnterForest(world) && world.items.fairyBow.value === 1",
         "scene": "3"
     },
     {
         "name": "Forest Temple Eye Switch Chest",
-        "logic": "(world) => CanBecomeAdult(world) && CanEnterForest(world) && world.items.fairyBow.value === 1",
+        "logic": "(world) => world.dungeons[4].mq == false && CanBecomeAdult(world) && CanEnterForest(world) && world.items.fairyBow.value === 1",
         "scene": "3"
     },
     {
         "name": "Forest Temple Boss Key Chest",
-        "logic": "(world) => CanBecomeAdult(world) && CanEnterForest(world) && world.items.fairyBow.value === 1",
+        "logic": "(world) => world.dungeons[4].mq == false && CanBecomeAdult(world) && CanEnterForest(world) && world.items.fairyBow.value === 1",
         "scene": "3"
     },
     {
         "name": "Forest Temple Floormaster Chest",
-        "logic": "(world) => CanBecomeAdult(world) && CanEnterForest(world)",
+        "logic": "(world) => world.dungeons[4].mq == false && CanBecomeAdult(world) && CanEnterForest(world)",
         "scene": "3"
     },
     {
         "name": "Forest Temple Red Poe Chest",
-        "logic": "(world) => CanBecomeAdult(world) && CanEnterForest(world)",
+        "logic": "(world) => world.dungeons[4].mq == false && CanBecomeAdult(world) && CanEnterForest(world)",
         "scene": "3"
     },
     {
         "name": "Forest Temple Bow Chest",
-        "logic": "(world) => CanBecomeAdult(world) && CanEnterForest(world)",
+        "logic": "(world) => world.dungeons[4].mq == false && CanBecomeAdult(world) && CanEnterForest(world)",
         "scene": "3"
     },
     {
         "name": "Forest Temple Falling Ceiling Room Chest",
-        "logic": "(world) => CanBecomeAdult(world) && CanEnterForest(world)",
+        "logic": "(world) => world.dungeons[4].mq == false && CanBecomeAdult(world) && CanEnterForest(world)",
         "scene": "3"
     },
     {
         "name": "Forest Temple Basement Chest",
-        "logic": "(world) => CanBecomeAdult(world) && CanEnterForest(world)",
+        "logic": "(world) => world.dungeons[4].mq == false && CanBecomeAdult(world) && CanEnterForest(world)",
         "scene": "3"
     },
     {
         "name": "Forest Temple GS First Room",
-        "logic": "(world) => CanBecomeAdult(world) && CanEnterForest(world)",
+        "logic": "(world) => world.dungeons[4].mq == false && CanBecomeAdult(world) && CanEnterForest(world)",
         "scene": "3"
     },
     {
         "name": "Forest Temple GS Lobby",
-        "logic": "(world) => CanBecomeAdult(world) && CanEnterForest(world)",
+        "logic": "(world) => world.dungeons[4].mq == false && CanBecomeAdult(world) && CanEnterForest(world)",
         "scene": "3"
     },
     {
         "name": "Forest Temple GS Raised Island Courtyard",
-        "logic": "(world) => CanBecomeAdult(world) && CanEnterForest(world)",
+        "logic": "(world) =>world.dungeons[4].mq == false && CanBecomeAdult(world) && CanEnterForest(world)",
         "scene": "3"
     },
     {
         "name": "Forest Temple GS Level Island Courtyard",
-        "logic": "(world) => CanBecomeAdult(world) && CanEnterForest(world)",
+        "logic": "(world) => world.dungeons[4].mq == false && CanBecomeAdult(world) && CanEnterForest(world)",
         "scene": "3"
     },
     {
         "name": "Forest Temple GS Basement",
-        "logic": "(world) => CanBecomeAdult(world) && CanEnterForest(world)",
+        "logic": "(world) => world.dungeons[4].mq == false && CanBecomeAdult(world) && CanEnterForest(world)",
+        "scene": "3"
+    },
+    {
+        "name": "Forest Temple MQ First Room Chest",
+        "logic": "(world) => world.dungeons[4].mq == true && CanBecomeAdult(world) && CanEnterForest(world)",
+        "scene": "3"
+    },
+    {
+        "name": "Forest Temple MQ Wolfos Chest",
+        "logic": "(world) => world.dungeons[4].mq == true && CanBecomeAdult(world) && CanEnterForest(world) && (world.items.ocarina.Index() > 0 && world.items.songOfTime.value > 0)",
+        "scene": "3"
+    },
+    {
+        "name": "Forest Temple MQ Well Chest",
+        "logic": "(world) => world.dungeons[4].mq == true && CanBecomeAdult(world) && CanEnterForest(world)",
+        "scene": "3"
+    },
+    {
+        "name": "Forest Temple MQ Raised Island Courtyard Lower Chest",
+        "logic": "(world) => world.dungeons[4].mq == true && CanBecomeAdult(world) && CanEnterForest(world)",
+        "scene": "3"
+    },
+    {
+        "name": "Forest Temple MQ Raised Island Courtyard Upper Chest",
+        "logic": "(world) => world.dungeons[4].mq == true && CanBecomeAdult(world) && CanEnterForest(world)",
+        "scene": "3"
+    },
+    {
+        "name": "Forest Temple MQ Boss Key Chest",
+        "logic": "(world) => world.dungeons[4].mq == true && CanBecomeAdult(world) && CanEnterForest(world)",
+        "scene": "3"
+    },
+    {
+        "name": "Forest Temple MQ Redead Chest",
+        "logic": "(world) => world.dungeons[4].mq == true && CanBecomeAdult(world) && CanEnterForest(world)",
+        "scene": "3"
+    },
+    {
+        "name": "Forest Temple MQ Bow Chest",
+        "logic": "(world) => world.dungeons[4].mq == true && CanBecomeAdult(world) && CanEnterForest(world)",
+        "scene": "3"
+    },
+    {
+        "name": "Forest Temple MQ Falling Ceiling Room Chest",
+        "logic": "(world) => world.dungeons[4].mq == true && CanBecomeAdult(world) && CanEnterForest(world)",
+        "scene": "3"
+    },
+    {
+        "name": "Forest Temple MQ Basement Chest",
+        "logic": "(world) => world.dungeons[4].mq == true && CanBecomeAdult(world) && CanEnterForest(world)",
+        "scene": "3"
+    },
+    {
+        "name": "Forest Temple MQ GS First Hallway",
+        "logic": "(world) => world.dungeons[4].mq == true && CanBecomeAdult(world) && CanEnterForest(world)",
+        "scene": "3"
+    },
+    {
+        "name": "Forest Temple MQ GS Raised Island Courtyard",
+        "logic": "(world) => world.dungeons[4].mq == true && CanBecomeAdult(world) && CanEnterForest(world)",
+        "scene": "3"
+    },
+    {
+        "name": "Forest Temple MQ GS Level Island Courtyard",
+        "logic": "(world) => world.dungeons[4].mq == true && CanBecomeAdult(world) && CanEnterForest(world)",
+        "scene": "3"
+    },
+    {
+        "name": "Forest Temple MQ GS Well",
+        "logic": "(world) => world.dungeons[4].mq == true && CanBecomeAdult(world) && CanEnterForest(world)",
+        "scene": "3"
+    },
+    {
+        "name": "Forest Temple MQ GS Block Push Room",
+        "logic": "(world) => world.dungeons[4].mq == true && CanBecomeAdult(world) && CanEnterForest(world) && world.items.forestTemple.smallKeys.value > 0",
         "scene": "3"
     },
     {
@@ -1363,72 +1468,72 @@
     },
     {
         "name": "Fire Temple MQ Megaton Hammer Chest",
-        "logic": "(world) => CanBecomeAdult(world) && CanEnterFire(world)",
+        "logic": "(world) => CanBecomeAdult(world) && CanEnterFire(world) && (world.items.hookshot.Index() > 0 || world.items.megatonHammer.value > 0) && world.items.fireTemple.smallKeys.value > 0",
         "scene": "4"
     },
     {
         "name": "Fire Temple MQ Near Boss Chest",
-        "logic": "(world) => CanBecomeAdult(world) && CanEnterFire(world)",
+        "logic": "(world) => CanBecomeAdult(world) && CanEnterFire(world) && world.items.fireTemple.smallKeys.value > 1",
         "scene": "4"
     },
     {
         "name": "Fire Temple MQ Big Lava Room Blocked Door Chest",
-        "logic": "(world) => CanBecomeAdult(world) && CanEnterFire(world)",
+        "logic": "(world) => CanBecomeAdult(world) && CanEnterFire(world) && world.items.fireTemple.smallKeys.value > 1",
         "scene": "4"
     },
     {
         "name": "Fire Temple MQ Boss Key Chest",
-        "logic": "(world) => CanBecomeAdult(world) && CanEnterFire(world)",
+        "logic": "(world) => CanBecomeAdult(world) && CanEnterFire(world) && world.items.fireTemple.smallKeys.value > 1",
         "scene": "4"
     },
     {
         "name": "Fire Temple MQ Lizalfos Maze Side Room Chest",
-        "logic": "(world) => CanBecomeAdult(world) && CanEnterFire(world)",
+        "logic": "(world) => CanBecomeAdult(world) && CanEnterFire(world) && world.items.fireTemple.smallKeys.value > 1",
         "scene": "4"
     },
     {
         "name": "Fire Temple MQ Lizalfos Maze Upper Chest",
-        "logic": "(world) => CanBecomeAdult(world) && CanEnterFire(world)",
+        "logic": "(world) => CanBecomeAdult(world) && CanEnterFire(world) && world.items.fireTemple.smallKeys.value > 1",
         "scene": "4"
     },
     {
         "name": "Fire Temple MQ Lizalfos Maze Lower Chest",
-        "logic": "(world) => CanBecomeAdult(world) && CanEnterFire(world)",
+        "logic": "(world) => CanBecomeAdult(world) && CanEnterFire(world) && world.items.fireTemple.smallKeys.value > 1",
         "scene": "4"
     },
     {
         "name": "Fire Temple MQ Freestanding Key",
-        "logic": "(world) => CanBecomeAdult(world) && CanEnterFire(world)",
+        "logic": "(world) => CanBecomeAdult(world) && CanEnterFire(world) && world.items.fireTemple.smallKeys.value > 1",
         "scene": "4"
     },
     {
         "name": "Fire Temple MQ Chest On Fire",
-        "logic": "(world) => CanBecomeAdult(world) && CanEnterFire(world)",
+        "logic": "(world) => CanBecomeAdult(world) && CanEnterFire(world) && world.items.fireTemple.smallKeys.value > 1",
         "scene": "4"
     },
     {
         "name": "Fire Temple MQ GS Big Lava Room Open Door",
-        "logic": "(world) => CanBecomeAdult(world) && CanEnterFire(world)",
+        "logic": "(world) => CanBecomeAdult(world) && CanEnterFire(world) && world.items.megatonHammer.value > 0",
         "scene": "4"
     },
     {
         "name": "Fire Temple MQ GS Skull On Fire",
-        "logic": "(world) => CanBecomeAdult(world) && CanEnterFire(world)",
+        "logic": "(world) => CanBecomeAdult(world) && CanEnterFire(world) && world.items.fireTemple.smallKeys.value > 1",
         "scene": "4"
     },
     {
         "name": "Fire Temple MQ GS Fire Wall Maze Center",
-        "logic": "(world) => CanBecomeAdult(world) && CanEnterFire(world)",
+        "logic": "(world) => CanBecomeAdult(world) && CanEnterFire(world) && world.items.fireTemple.smallKeys.value > 1",
         "scene": "4"
     },
     {
         "name": "Fire Temple MQ GS Fire Wall Maze Side Room",
-        "logic": "(world) => CanBecomeAdult(world) && CanEnterFire(world)",
+        "logic": "(world) => CanBecomeAdult(world) && CanEnterFire(world) && world.items.fireTemple.smallKeys.value > 1",
         "scene": "4"
     },
     {
         "name": "Fire Temple MQ GS Above Fire Wall Maze",
-        "logic": "(world) => CanBecomeAdult(world) && CanEnterFire(world)",
+        "logic": "(world) => CanBecomeAdult(world) && CanEnterFire(world) && world.items.fireTemple.smallKeys.value > 1",
         "scene": "4"
     },
     {

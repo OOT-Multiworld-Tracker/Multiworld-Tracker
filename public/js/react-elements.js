@@ -83,16 +83,20 @@ class Saves extends React.Component {
   list () {
     const files = []
     for (let i = 0; i < localStorage.length; i++) {
-      files.push(<Save onClick={this.props.onSaveClick} name={localStorage.key(i)} />)
+      files.push(
+        <ListItem onClick={(e) => { this.props.onSaveClick(e, localStorage.key(i)) }}>
+          {localStorage.key(i)}
+        </ListItem>
+      )
     }
     return files
   }
 
   render () {
     return (
-      <div className='location-list'>
+      <List>
         {this.list()}
-      </div>
+      </List>
     )
   }
 }
@@ -209,12 +213,12 @@ class Locations extends React.Component {
           <button class='btn btn-bottom btn-default' style={{width: '33.34%', backgroundColor: this.state.page===0 ? "#444" : null}} onClick={() => this.displaySection(0)}>Accessible <span class='badge'>{app.local.world.locations.Accessible(false, false, -1).length}</span></button>
           <button class='btn btn-bottom btn-default' style={{width: '33.34%', backgroundColor: this.state.page===1 ? "#444" : null }} onClick={() => this.displaySection(1)}>Completed <span class='badge'>{app.local.world.locations.Get(true).length}</span></button>
         </div>
-        <div className='location-list'>
+        <List>
           {(!this.props.search
             ? app.local.world.locations.Accessible(this.state.page === 1, false, this.state.scene)
             : app.local.world.locations.Search(this.props.search, this.state.scene, this.state.page)).map(location => (
               <Location key={location.id} id={location.id} item={location.display ? location.display.name : "None"} name={location.name} />))}
-        </div>
+        </List>
       </React.Fragment>
     )
   }
@@ -222,7 +226,6 @@ class Locations extends React.Component {
 
 class Location extends React.Component {
   contextMenu (id, e) {
-    console.log(e)
     locationDropdown.setState({ open: true, id, left: e.pageX - 240, top: e.pageY - 22 })
   }
 
@@ -232,10 +235,10 @@ class Location extends React.Component {
 
   render () {
     return (
-      <div className='location' style={{ backgroundColor: (app.global.tracker.highlightImportantItems.value == true && this.hasRareItem()) ? {backgroundColor: "#cbef28"} : ""}} onClick={() => ToggleCompleted(this.props)} onContextMenu={(e) => { e.preventDefault(); this.contextMenu(this.props.id, e) }}>
+      <ListItem style={{ backgroundColor: (app.global.tracker.highlightImportantItems.value == true && this.hasRareItem()) ? {backgroundColor: "#cbef28"} : ""}} onClick={() => ToggleCompleted(this.props)} onContextMenu={(e) => { e.preventDefault(); this.contextMenu(this.props.id, e) }}>
         <div className='location-name'>{this.props.name}</div>
         <div className='location-items'>{this.props.item}</div>
-      </div>
+      </ListItem>
     )
   }
 }
@@ -271,7 +274,7 @@ class Settings extends React.Component {
 class Player extends React.Component {
   constructor (props) {
     super(props)
-    this.state = { name: this.props.save.player_name }
+    this.state = { save: this.props.save }
   }
 
   componentDidMount () {
@@ -286,12 +289,12 @@ class Player extends React.Component {
   }
 
   tick () {
-    this.setState({ name: this.props.save.player_name })
+    this.setState({ save: app.local.world.save })
   }
 
   generateContainers () {
     const elements = []
-    for (let i = 0; i < this.props.save.heart_containers; i++) {
+    for (let i = 0; i < this.state.save.heart_containers; i++) {
       elements.push(<span className='heart-container'><img src='/images/container.png' width='16' /></span>)
 
       if (elements.length === 10) elements.push(<br />)
@@ -302,8 +305,28 @@ class Player extends React.Component {
   render () {
     return (
       <div className='player'>
-        <div className='character_name' onClick={() => this.openStats()}>{this.props.save.player_name}</div>
+        <div className='character_name' onClick={() => this.openStats()}>{this.state.save.player_name}</div>
         <div className='heart_containers'>{this.generateContainers()}</div>
+      </div>
+    )
+  }
+}
+
+class List extends React.Component {
+  render () {
+    return (
+      <div className='list'>
+        {this.props.children}
+      </div>
+    )
+  }
+}
+
+class ListItem extends React.Component {
+  render () {
+    return (
+      <div onClick={this.props.onClick} onContextMenu={this.props.onContextMenu} className='list-item'>
+        {this.props.children}
       </div>
     )
   }
@@ -320,17 +343,9 @@ class World extends React.Component {
   }
 }
 
-class Save extends React.Component {
-  render () {
-    return (
-      <div className='location' onClick={(e) => { this.props.onClick(e, this.props.name) }}>
-        <div className='location-name'>{this.props.name}</div>
-      </div>
-    )
-  }
-}
-
 class Header extends React.Component {
+  static contextType = AppContext;
+
   constructor (props) {
     super(props)
     this.state = { connected: false }
@@ -343,7 +358,7 @@ class Header extends React.Component {
           <span className='title'>Ocarina of Time - Multiworld Autotracker</span>
           <div className='btn-group pull-right'>
             <button className='btn btn-default btn-dark pull-right'>
-              <span className={this.state.connected ? 'icon icon-check' : 'icon icon-cancel'} />
+              <span className={app.global.connected ? 'icon icon-check' : 'icon icon-cancel'} />
             </button>
             <button className='btn btn-default btn-dark pull-right'>
               <span className='icon icon-download' />
@@ -392,12 +407,13 @@ class SidebarButtons extends React.Component {
 class Sidebar extends React.Component {
   constructor (props) {
     super(props)
-    this.state = { page: 0, accessible: 0, completed: 0 }
+    this.state = { page: 0 }
 
     this.handleChange = this.handleChange.bind(this)
+    
     this.pages = [this.homePage(), this.savePage(), this.worldPage(), this.itemPage(), this.settingsPage()];
   }
-
+  
   renderPage () {
     return this.pages[parseInt(this.state.page)]
   }
@@ -408,7 +424,7 @@ class Sidebar extends React.Component {
 
   homePage () {
     return (
-      app.worlds.map((world) => { return <Player save={world.save} /> })
+      app.worlds.map((world, index) => { return <Player save={app.local.world.save} /> })
     )
   }
 
@@ -418,8 +434,8 @@ class Sidebar extends React.Component {
         <button className='btn btn-dark' style={{ marginBottom: '4px', width: '100%', backgroundColor: 'rgb(113 47 47)' }} onClick={() => StartOver()}>Start Over</button>
         <br/>
         <div class='list'>
-          <div class='list-header'>Files <span onClick={() => SaveAlert()} className = 'btn btn-default icon icon-plus' /></div>
-          <div class='list-content'><Saves onSaveClick={this.props.onModal} /></div>
+          <div class='list-header'>Files <span onClick={this.props.onSave} className = 'btn btn-default icon icon-plus' /></div>
+          <div class='list-content'><Saves saves={this.props.saves} onSaveClick={this.props.onModal} /></div>
         </div>
       </React.Fragment>
     )
@@ -491,6 +507,22 @@ class ModalLayer extends React.Component {
   }
 }
 
+class Modal extends React.Component {
+  constructor (props) {
+    super(props)
+  }
+
+  render () {
+    return (
+      <div className='modal' onClick={this.props.onClick}>
+        <div className='modal-header'>{this.props.title}</div>
+        <div className='modal-content'>{this.props.content}</div>
+        {this.props.footer ? <div className='modal-footer'>{this.props.footer}</div> : null}
+      </div>
+    )
+  }
+}
+
 class ItemModal extends React.Component {
   constructor (props) {
     super(props)
@@ -500,18 +532,24 @@ class ItemModal extends React.Component {
   render () {
     console.log(this.props)
     return (
-      <div className='modal' onClick={(e) => e.stopPropagation()}>
-        <div className='location' onClick={e => {app.local.world.locations.locations.get(this.props.location).display = {name: "None"}; e.stopPropagation(); this.closeModal(e)}}>
-          <div className='location-name'>None</div>
-        </div>
-        {Object.values(app.local.world.items).map((item) => {
-          return (
-            <div className='location' onClick={e => {app.local.world.locations.locations.get(this.props.location).display = {name: item.name}; e.stopPropagation(); this.closeModal(e)}}>
-              <div className='location-name'>{item.name}</div>
-            </div>
-          )
-        })}
-      </div>
+      <Modal
+        onClick={(e) => e.stopPropagation()}
+        title='Item' 
+        content={
+          <List>
+            <ListItem onClick={e => {app.local.world.locations.locations.get(this.props.location).display = {name: "None"}; e.stopPropagation(); this.closeModal(e)}}>
+              <div className='location-name'>None</div>
+            </ListItem>
+            {Object.values(app.local.world.items).map((item) => {
+              return (
+                <ListItem onClick={e => {app.local.world.locations.locations.get(this.props.location).display = {name: item.name}; e.stopPropagation(); this.closeModal(e)}}>
+                  <div className='location-name'>{item.name}</div>
+                </ListItem>
+              )
+            })}
+          </List>
+        }
+      />
     )
   }
 }
@@ -523,41 +561,77 @@ class SaveModal extends React.Component {
   }
 
   render () {
-    const save = JSON.parse(localStorage.getItem(this.props.save)).save;
-    console.log(save)
+    const save = JSON.parse(localStorage.getItem(this.props.save));
     return (
-      <div className='modal' onClick={(e) => e.stopPropagation()}>
-        <p>{this.props.save}</p>
-        <Player save={save}/>
-        <div className='progress'>
-          <div className='progress-bar' style={{width: '20%'}}/>
-        </div>
-        <button className='btn btn-default' style={{width: '50%'}}onClick={() => {this.closeModal(); LoadState(this.props.save)}}>Load</button>
-        <button className='btn btn-warning' style={{width: '50%'}} onClick={() => {this.closeModal(); localStorage.removeItem(this.props.save)}}>Delete</button>
-      </div>
+      <Modal
+        onClick={(e) => e.stopPropagation()}
+        title={this.props.save}
+        content={
+          <React.Fragment>
+            <Player save={save.save}/>
+            <div className='progress'>
+              <div className='progress-bar' style={{width: (save.locations.filter((loc) => (loc.completed　&& loc.completed == true)).length / save.locations.length) * 100 + '%'}}>{save.locations.filter((loc) => (loc.completed　&& loc.completed == true)).length}</div>
+            </div>
+          </React.Fragment>
+        }
+        footer={
+          <React.Fragment>
+            <button className='btn btn-default' style={{width: '50%'}}onClick={() => {this.closeModal(); LoadState(this.props.save)}}>Load</button>
+            <button className='btn btn-warning' style={{width: '50%'}} onClick={() => {this.closeModal(); localStorage.removeItem(this.props.save)}}>Delete</button>
+          </React.Fragment>
+        }
+      />
     )
   }
 }
 
-const WorldContext = React.createContext('world');
+class CreateSaveModal extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = { name: '' }
+    this.closeModal = this.props.onSave.bind(this);
+  }
+
+  render () {
+    return (
+      <Modal
+        onClick={(e) => e.stopPropagation()}
+        title={this.state.name}
+        content={
+          <input type='text' className='form-control' placeholder='Save Name' onChange={(e) => {this.setState({name: e.target.value})}}/>
+        }
+        footer={
+          <button className='btn btn-default' style={{width: '100%'}} onClick={() => {this.closeModal(); SaveState(this.state.name)}}>Save</button>
+        }
+      />)
+  }
+}
+
+const AppContext = React.createContext('app');
 
 class Application extends React.Component {
   constructor () {
     super()
-    this.state = {world: app.local.world, search: '', sidebar: 0, display: 0}
+    this.state = {world: app.local.world, search: '', sidebar: 0, display: 0, saves: [], locations: app.local.world.locations}
 
     this.handleSearch = this.handleSearch.bind(this)
     this.handleDropdown = this.handleDropdown.bind(this)
     this.closeModal = this.closeModal.bind(this)
     this.setItem = this.setItem.bind(this)
     this.handleSidebarModal = this.handleSidebarModal.bind(this)
+    this.handleCreateSave = this.handleCreateSave.bind(this)
+    this.handleSaveCreated = this.handleSaveCreated.bind(this)
 
     this.selectedLocation = 0;
     this.selectedSave = 0;
+
+    app.on('loaded', (save) => {
+      this.setState({locations: app.local.world.locations})
+    })
   }
 
   handleSearch (e) {
-    this.setState({ search: e.target.value })
+    this.setState({ locations: app.local.world.locations, search: e.target.value })
   }
 
   handleDropdown (e, id) {
@@ -570,6 +644,15 @@ class Application extends React.Component {
     this.setState({ display: 2 })
   }
 
+  handleCreateSave (e) {
+    this.setState({ display: 3 })
+  }
+
+  handleSaveCreated (e) {
+    this.setState({ saves: Object.keys(localStorage) })
+    this.closeModal(e)
+  }
+
   closeModal (e) {
     this.setState({ display: 0 })
   }
@@ -580,6 +663,8 @@ class Application extends React.Component {
         return <ItemModal onItemSet={this.setItem} location={this.selectedLocation}/>
       case 2:
         return <SaveModal onSaveLoad={this.closeModal} save={this.selectedSave} />
+      case 3:
+        return <CreateSaveModal onSave={this.handleSaveCreated} />
     }
   }
 
@@ -592,22 +677,22 @@ class Application extends React.Component {
     return (
       <div className='window'>
         <Header />
-        <WorldContext.Provider value={this.state.world}>
+        <AppContext.Provider value={app}>
           <div className='window-content'>
             <ModalLayer onOutsideClick={this.closeModal} display={this.state.display > 0}>
               {this.getModal()}
             </ModalLayer>
             <div className='pane-group'>
               <div class="pane-md" style={{width: '240px'}}>
-                <Sidebar onModal={this.handleSidebarModal} page={this.state.sidebar} />
+                <Sidebar onSave={this.handleCreateSave} onModal={this.handleSidebarModal} saves={this.state.saves} page={this.state.sidebar} />
               </div>
               <div class="pane">
                 <SearchBar onChange={this.handleSearch}/>
-                <Locations onDropdownClick={this.handleDropdown} search={this.state.search} />
+                <Locations onDropdownClick={this.handleDropdown} locations={this.state.locations} search={this.state.search} />
               </div>
             </div>
           </div>
-        </WorldContext.Provider>
+        </AppContext.Provider>
       </div>
     )
   }

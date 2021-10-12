@@ -164,41 +164,64 @@ function StartOver() {
 
 setInterval(Autosave, 10000)
 
-function SaveState (fileName) {
-  const saveFile = {}
-  Object.assign(saveFile, { dungeons: app.local.world.dungeons })
-  Object.assign(saveFile, { settings: app.global.settings.Serialize() })
-  Object.assign(saveFile, { save: app.local.world.save })
-  Object.assign(saveFile, { locations: app.local.world.locations.Array() })
+class SaveUtils {
+  static GetFiles () {
+    return Object.keys(localStorage)
+  }
 
-  localStorage.setItem(`save-${fileName}`, JSON.stringify(saveFile))
+  static async Save (name) {
+    return new Promise((resolve, reject) => {
+      const saveFile = {}
+      Object.assign(saveFile, { dungeons: app.local.world.dungeons })
+      Object.assign(saveFile, { settings: app.global.settings.Serialize() })
+      Object.assign(saveFile, { save: app.local.world.save })
+      Object.assign(saveFile, { locations: app.local.world.locations.Array() })
+
+      localStorage.setItem(`save-${name}`, JSON.stringify(saveFile))
+
+      app.emit('saved', saveFile)
+      return resolve(saveFile)
+    })
+  }
+
+  static async Load (name) {
+    return new Promise((resolve, reject) => {
+      const file = JSON.parse(localStorage.getItem(name))
+      app.global.settings = new SettingsManager(file.settings)
+      app.local.world.save = file.save
+      app.local.world.items = new ItemManager(app.local.world)
+      app.local.world.dungeons = file.dungeons
+
+      Object.keys(app.local.world.save.inventory).forEach((key) => {
+        if (app.local.world.items[key] !== undefined) {
+          if (app.local.world.save.inventory[key] === true) {
+            app.local.world.save.inventory[key] = 1
+          } else if (app.local.world.save.inventory[key] === false) {
+            app.local.world.save.inventory[key] = 0
+          }
+
+          app.local.world.items[key].Set(app.local.world.save.inventory[key])
+        }
+      })
+
+      file.locations.forEach((location, index) => {
+        if (location.completed) app.worlds[0].locations.locations.get(location.id).completed = location.completed
+        if (location.item) app.worlds[0].locations.locations.get(location.id).item = location.item
+        if (location.display) app.worlds[0].locations.locations.get(location.id).display = location.display
+      })
+
+      app.emit('loaded', file)
+      return resolve(file)
+    })
+  }
+}
+
+function SaveState (fileName) {
+  SaveUtils.Save(fileName)
 }
 
 function LoadState (fileName) {
-  const file = JSON.parse(localStorage.getItem(fileName))
-  app.global.settings = new SettingsManager(file.settings)
-  app.local.world.save = file.save
-  app.local.world.items = new ItemManager(app.local.world)
-  app.local.world.dungeons = file.dungeons
-
-  Object.keys(app.local.world.save.inventory).forEach((key) => {
-    if (app.local.world.items[key] !== undefined) {
-      if (app.local.world.save.inventory[key] === true) {
-        app.local.world.save.inventory[key] = 1
-      } else if (app.local.world.save.inventory[key] === false) {
-        app.local.world.save.inventory[key] = 0
-      }
-
-      app.local.world.items[key].Set(app.local.world.save.inventory[key])
-    }
-  })
-
-  file.locations.forEach((location, index) => {
-    if (location.completed) app.worlds[0].locations.All().get(location.id).completed = location.completed
-  })
-
-  ReactDOM.render(<Sidebar />, document.getElementsByClassName('sidebar')[0])
-  app.RenderLocations()
+  SaveUtils.Load(fileName)
 }
 
 function SpoilerUploaded (data) {
@@ -206,13 +229,19 @@ function SpoilerUploaded (data) {
     ParseSpoilerLog(data)
   })
 
-  sidebarButtons.setState({ uploaded: true })
+  app.emit('spoilered uploaded', data)
 }
 
 function MapToArray (map) {
   const array = []
   map.forEach((value) => array.push(value))
   return array
+}
+
+class SpoilerUtils {
+  static async Parse () {
+    
+  }
 }
 
 function ParseSpoilerLog (log) {
@@ -244,7 +273,7 @@ function ParseSpoilerLog (log) {
 
   app.local.world = app.worlds[myWorld-1]
 
-  ReactDOM.render(<Sidebar />, document.getElementsByClassName('sidebar')[0])
+  app.emit('spoiler parsed', log)
 }
 
 function ParseLocations (locations, spoiler = null) {
@@ -267,7 +296,6 @@ function ParseLocations (locations, spoiler = null) {
     })
 
     app.RenderLocations()
-    eSidebar.setState({ accessible: app.local.world.locations.Accessible().length, completed: app.local.world.locations.Accessible(true).length })
   })
 
   return locations
@@ -346,7 +374,7 @@ function CanEnterJabu (world = app.local.world) {
 }
 
 function CanEnterForest (world = app.local.world) {
-  return CanBecomeAdult(world) && world.items.hookshot.Index() >= 1 && world.items.ocarina.Index() >= 1 && save.questStatus.sariasSong > 0
+  return CanBecomeAdult(world) && world.items.hookshot.Index() >= 1 && (world.items.ocarina.Index() >= 1 && (world.items.sariasSong.value > 0 || world.items.minuetOfForest.value > 0))
 }
 
 function CanEnterFire (world = app.local.world) {

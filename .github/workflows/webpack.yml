@@ -3,6 +3,8 @@ name: NodeJS with Webpack
 on:
   push:
     branches: [ webpack ]
+    
+  workflow_dispatch:
 
 jobs:    
   # This workflow contains a single job called "build"

@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require('electron')
+const { app, BrowserWindow, ipcMain, protocol } = require('electron')
 const EventEmitter = require('events')
 const { autoUpdater } = require('electron-updater')
 
@@ -13,7 +13,6 @@ class ElectronRenderer extends EventEmitter {
 
     app.whenReady().then(() => {
       this.CreateWindow()
-
       app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) {
           this.CreateWindow()
@@ -38,6 +37,7 @@ class ElectronRenderer extends EventEmitter {
       frame: false,
       webPreferences: {
         contextIsolation: false,
+        enableRemoteModule: true,
         nodeIntegration: true
       }
     })

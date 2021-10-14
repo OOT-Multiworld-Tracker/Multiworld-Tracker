@@ -4,16 +4,17 @@
     <meta charset="UTF-8">
     <title>Ocarina of Time - Multiworld Tracker</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photon/0.1.2-alpha/css/photon.min.css" integrity="sha512-iYU5oLP7U/WlxMbfqwzP7shmTUzivS/4EbkLi33k/tzwSCb4GZDU3oDo6WYSsDZgYXsuhzqrkCseWcZW3QCBLQ==" crossorigin="anonymous" />
-    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
     <link rel="stylesheet" href="css/global.css"/>
+    <script src='js/mixins.js'></script>
 </head>
 
-<body onclick="locationDropdown.setState({ open: false })">
+<body>
     <div id="root" />
 </body>
 
-<script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
-<script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+<script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+<script src="/dist/bundle.js"></script>
 <script>if (typeof module === 'object') {window.module = module; module = undefined;};</script>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script>if (window.module) module = window.module;</script>
@@ -26,16 +27,11 @@ const { Integrations } = require("@sentry/tracing");
 Sentry.init({
   dsn: "https://8957f94163d144e1b2efc135a8a2be1e@o174553.ingest.sentry.io/6000676",
   integrations: [new Integrations.BrowserTracing()],
-
+  release: "ocarina-of-time-multiworld@v" + process.env.npm_package_version,
+  environment: process.env.NODE_ENV,
   // Set tracesSampleRate to 1.0 to capture 100%
   // of transactions for performance monitoring.
   // We recommend adjusting this value in production
   tracesSampleRate: 1.0,
-});
+})
 </script>
-<script src="/js/app.js" type="text/babel"></script>
-<script src="/js/main.js"  type="text/babel"></script>
-<script src="/js/electron.js"  type="text/babel"></script>
-
-<script src="/js/react-elements.js"  type="text/babel"></script>
-<script src="/js/react.js" type="text/babel"></script>

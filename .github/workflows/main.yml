@@ -34,7 +34,15 @@ jobs:
     
     steps:
       - uses: actions/checkout@v2
-      
+     
+      - name: Get latest release
+        uses: rez0n/actions-github-release@main
+        id: node_release
+        env:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          repository: "OOT-Multiworld-Tracker/Multiworld-Tracker"
+          type: "stable"
+        
       - name: Sentry Release
         uses: getsentry/action-release@v1.1.6
         env:
@@ -43,3 +51,4 @@ jobs:
           SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
         with:
           environment: production
+          version: ${{ steps.node_release.outputs.release }}

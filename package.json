@@ -1,12 +1,12 @@
 {
   "name": "multiworld-tracker",
-  "version": "1.1.5",
+  "version": "2.0.0",
   "description": "An ocarina of time multiworld tracker.",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npx electron .",
-    "build": "node build.js"
+    "dev": "webpack --config webpack.config.js --mode=development && npx electron .",
+    "test": "webpack --config webpack.config.js --mode=production && npx electron ."
   },
   "repository": {
     "type": "git",
@@ -14,11 +14,17 @@
   },
   "build": {
     "productName": "Multiworld Tracker",
+    "generateUpdatesFilesForAllChannels": true,
     "nsis": {
       "perMachine": true,
       "shortcutName": "Multiworld Tracker"
     }
   },
+  "browser": {
+    "fs": false,
+    "path": false,
+    "os": false
+  },  
   "author": "",
   "license": "ISC",
   "bugs": {
@@ -26,17 +32,27 @@
   },
   "homepage": "https://github.com/OOT-Multiworld-Tracker/Multiworld-Tracker#readme",
   "dependencies": {
+    "@babel/preset-react": "^7.14.5",
     "@sentry/react": "^6.13.3",
     "@sentry/tracing": "^6.13.3",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.2.2",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
     "electron-updater": "^4.3.9",
     "electron-webpack": "^2.8.2",
     "express": "^4.17.1",
+    "react": "^17.0.2",
     "ws": "^7.4.4"
   },
   "devDependencies": {
     "@node-minify/babel-minify": "^6.2.0",
     "@node-minify/core": "^6.2.0",
     "electron": "^12.1.0",
-    "electron-builder": "^22.11.7"
+    "electron-builder": "^22.11.7",
+    "html-webpack-plugin": "^5.3.2",
+    "react-dom": "^17.0.2",
+    "webpack": "^5.38.1",
+    "webpack-cli": "^4.7.2"
   }
 }

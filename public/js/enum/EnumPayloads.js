@@ -1,0 +1,7 @@
+export const ElectronPayloads = {
+  SAVE_UPDATED: 0,
+  SCENE_UPDATED: 1,
+  UNUSED: 2,
+  OTHER_TRACKER_UPDATE: 3,
+  CONNECTION_UPDATE: 4
+}

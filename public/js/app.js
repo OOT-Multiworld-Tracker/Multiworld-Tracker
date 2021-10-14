@@ -143,6 +143,10 @@ export class NetworkManager {
           app.emit('items updated', app.local.world.items)
           break
 
+        case ElectronPayloads.CHEST_OPENED:
+          console.log(parsed.data)
+          break
+
         case ElectronPayloads.SCENE_UPDATED:
           app.emit('scene updated', parsed.data.scene)
           break

@@ -10,7 +10,7 @@ export default class ModalLayer extends React.Component {
     return (
       this.props.display === true
         ? (
-          <div className='modal-layer' style={{ display: this.props.display ? 'block' : 'none' }} onClick={this.handleOutsideClick}>
+          <div className='modal-layer' style={{ display: this.props.display ? 'flex' : 'none' }} onClick={this.handleOutsideClick}>
             {this.props.children}
           </div>
           )

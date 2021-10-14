@@ -1,19 +1,12 @@
-# This is a basic workflow to help you get started with Actions
+name: NodeJS with Webpack
 
-name: Make Production
-
-# Controls when the action will run. 
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [ legacy ]
-
-  # Allows you to run this workflow manually from the Actions tab
+    branches: [ webpack ]
+    
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
-jobs:
-
+jobs:    
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
@@ -21,14 +14,24 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Build
+        run: |
+          npm install
+          npx webpack
 
       - name: Electron Builder Action
         uses: samuelmeuli/action-electron-builder@v1.6.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           release: true
+
   release:
     runs-on: ubuntu-latest
     
@@ -41,7 +44,7 @@ jobs:
         env:
           token: ${{ secrets.GITHUB_TOKEN }}
           repository: "OOT-Multiworld-Tracker/Multiworld-Tracker"
-          type: "stable"
+          type: "latest"
         
       - name: Sentry Release
         uses: getsentry/action-release@v1.1.6
@@ -50,5 +53,5 @@ jobs:
           SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
           SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
         with:
-          environment: production
+          environment: development
           version: ${{ steps.node_release.outputs.release }}

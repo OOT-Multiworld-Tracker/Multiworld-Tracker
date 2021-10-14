@@ -2,7 +2,7 @@ name: Build
 
 on:
   push:
-    branches: [ legacy ]
+    branches: [ master ]
     
   workflow_dispatch:
 

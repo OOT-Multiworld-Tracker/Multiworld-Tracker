@@ -1,4 +1,4 @@
-import { ItemManager, LocationManager } from './AppManagers'
+import { ItemManager, LocationManager } from '../AppManagers'
 
 const save = {
   entrance_index: 205,
@@ -108,9 +108,23 @@ const save = {
  */
 export class GameWorld {
   constructor (app) {
+    /**
+     * The application instance.
+     * @type {App}
+     */
     this.app = app
     this.save = save
+
+    /**
+     * The player's currently held items
+     * @type {ItemManager}
+     */
     this.items = new ItemManager(this)
+
+    /**
+     * The player's location list
+     * @type {LocationManager}
+     */
     this.locations = new LocationManager(this)
     this.dungeons = [{ name: 'Deku Tree', mq: false }, { name: "Dodongo's Cave", mq: false }, { name: 'Bottom of the Well', mq: false }, { name: "Jabu Jabu's Belly", mq: false }, { name: 'Forest Temple', mq: false }, { name: 'Fire Temple', mq: false }, { name: 'Water Temple', mq: false }, { name: 'Shadow Temple', mq: false }, { name: 'Spirit Temple', mq: false }, { name: 'Ice Cavern', mq: false }, { name: 'GTG', mq: false }, { name: "Ganon's Castle", mq: false }]
   }

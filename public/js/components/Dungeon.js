@@ -1,9 +1,6 @@
-import React from 'react';
-import AppContext from './AppContext';
+import React from 'react'
 
 export default class Dungeons extends React.Component {
-  static contextType = AppContext
-  
   constructor () {
     super()
     this.app = this.context

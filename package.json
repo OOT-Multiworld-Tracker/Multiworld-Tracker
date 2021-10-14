@@ -1,12 +1,12 @@
 {
   "name": "multiworld-tracker",
-  "version": "1.1.5",
+  "version": "2.0.0",
   "description": "An ocarina of time multiworld tracker.",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npx electron .",
-    "build": "webpack --config webpack.config.js --mode=development"
+    "dev": "webpack --config webpack.config.js --mode=development && npx electron .",
+    "test": "webpack --config webpack.config.js --mode=production && npx electron ."
   },
   "repository": {
     "type": "git",

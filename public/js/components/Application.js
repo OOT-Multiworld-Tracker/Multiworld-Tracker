@@ -1,4 +1,3 @@
-import AppContext from './AppContext'
 import React from 'react'
 import app from '../app'
 import Header from './Header'
@@ -7,7 +6,6 @@ import SaveModal from './Modals/SaveModal'
 import CreateSaveModal from './Modals/CreateSaveModal'
 import ItemModal from './Modals/ItemModal'
 import Sidebar from './Sidebar'
-import SearchBar from './SearchBar'
 import Locations from './Locations'
 import { ErrorBoundary } from '@sentry/react'
 
@@ -101,7 +99,9 @@ export default class Application extends React.Component {
               </ErrorBoundary>
             </div>
             <div class='pane'>
-              <SearchBar onChange={this.handleSearch} />
+              <ErrorBoundary fallback={<p>Search failed to load</p>}>
+                <input type='text' className='form-control search-bar' onChange={this.handleSearch} placeholder='Search...' />
+              </ErrorBoundary>
               <ErrorBoundary fallback={<p>Locations Failed to Load</p>}>
                 <Locations dropDownOpen={this.state.dropdown} onContextMenu={this.handleContextMenu} onDropdownClick={this.handleDropdown} locations={this.state.locations} search={this.state.search} />
               </ErrorBoundary>
@@ -112,5 +112,3 @@ export default class Application extends React.Component {
     )
   }
 }
-
-Application.contextType = AppContext

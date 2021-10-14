@@ -7,7 +7,6 @@ export default class ModalLayer extends React.Component {
   }
 
   render () {
-    console.log(this.props)
     return (
       this.props.display === true
         ? (

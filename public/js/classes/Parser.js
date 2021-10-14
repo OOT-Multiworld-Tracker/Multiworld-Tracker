@@ -1,8 +1,8 @@
-import { SettingsManager } from './AppManagers'
+import { SettingsManager } from '../AppManagers'
 import { GameWorld } from './GameWorld'
 
-const LocationList = require('./locations.json')
-const SceneList = require('./scenes.json')
+const LocationList = require('../locations.json')
+const SceneList = require('../scenes.json')
 
 export default class Parser {
   static ParseSpoiler (log) {

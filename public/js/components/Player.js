@@ -5,7 +5,6 @@ export default class Player extends React.Component {
   constructor (props) {
     super(props)
     this.state = { save: this.props.save }
-    console.log(this.state)
   }
 
   componentDidMount () {

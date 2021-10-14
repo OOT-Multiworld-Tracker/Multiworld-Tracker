@@ -1,11 +1,12 @@
-import ValueSwitch from './ValueSwitch'
-import { Item, Bottle, TradeItem } from './Item'
+import ValueSwitch from './classes/ValueSwitch'
+import { Item, Bottle, TradeItem } from './classes/Item'
 import { MapToArray } from './Utils'
-import Parser from './Parser'
+import Parser from './classes/Parser'
+import { GameWorld } from './classes/GameWorld'
+import { NetworkManager } from './app'
 
 export class SettingsManager {
   constructor (spoiler) {
-    console.log(spoiler)
     this.openForest = new ValueSwitch('Open Forest', ['open', 'closed'])
     this.openKakariko = new ValueSwitch('Open Kakariko', ['open', 'closed'])
     this.openDoorOfTime = new ValueSwitch('Open Door Of Time', [false, true])
@@ -30,9 +31,7 @@ export class SettingsManager {
 
     if (spoiler) {
       Object.keys(this).forEach(key => {
-        console.log(key)
         if (spoiler[this[key].name.toLowerCase().replace(/ /g, '_')]) {
-          console.log(spoiler[this[key].name.toLowerCase().replace(/ /g, '_')])
           this[key].value = spoiler[this[key].name.toLowerCase().replace(/ /g, '_')]
         }
       })
@@ -168,15 +167,23 @@ export class LocationManager {
     return this.Array().filter(location => (location.scene == scene || scene == -1) && (this.IsAccessible(location, this.world) && complete === false && !location.completed) || (complete && location.completed === true))
   }
 
+  /**
+   * Checks if the item within a world is accessible
+   * @param {Object} location 
+   * @param {GameWorld} world 
+   * @returns {Boolean}
+   */
   IsAccessible (location, world) {
     return (location && (location.preExit === true || CanExitForest(world)) && ((!location.logic || location.logic(world)) && !location.completed))
   }
 
+  /**
+   * Toggle the completion status on/off for a location
+   * @param {*} props 
+   */
   ToggleCompleted (props) {
-    console.log(props.id)
     this.Array()[String(props.id)].completed = !this.Array()[String(props.id)].completed
-    // Serialize and compress a packet for sending
-    //if (window.isElectron) { require('electron').ipcRenderer.send('packets', JSON.stringify({ world: myWorld - 1, save: { swords: app.local.world.save.swords, shields: app.local.world.save.shields, inventory: app.local.world.save.inventory, questStatus: app.local.world.save.questStatus }, locations: NetworkSerialize(app.local.world.locations.Array(), 'completed') }).replace(/true/g, '1').replace(/false/g, '0')) }
+    require('electron').ipcRenderer.send('packets', JSON.stringify({ world: this.world.app.worlds.indexOf(this.world.app.local.world), save: { swords: this.world.app.local.world.save.swords, shields: this.world.app.local.world.save.shields, inventory: this.world.app.local.world.save.inventory, questStatus: this.world.app.local.world.save.questStatus }, locations: NetworkManager.Serialize(this.world.app.local.world.locations.Array(), 'completed') }).replace(/true/g, '1').replace(/false/g, '0'))
   }
 
   /**

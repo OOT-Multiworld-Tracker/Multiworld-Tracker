@@ -5,6 +5,8 @@ export default class Header extends React.Component {
   constructor (props) {
     super(props)
     this.state = { connected: false }
+
+    app.on('connection updated', (status) => this.setState({ connected: status }))
   }
 
   render () {
@@ -14,7 +16,7 @@ export default class Header extends React.Component {
           <span className='title'>Ocarina of Time - Multiworld Autotracker</span>
           <div className='btn-group pull-right'>
             <button className='btn btn-default btn-dark pull-right'>
-              <span className={app.global.connected ? 'icon icon-check' : 'icon icon-cancel'} />
+              <span className={this.state.connected ? 'icon icon-check' : 'icon icon-cancel'} />
             </button>
             <button className='btn btn-default btn-dark pull-right'>
               <span className='icon icon-download' />

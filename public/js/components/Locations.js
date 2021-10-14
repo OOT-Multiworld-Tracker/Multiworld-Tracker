@@ -1,7 +1,8 @@
 import React from 'react'
 import app from '../app'
 import { List, ListItem } from './Lists'
-import Parser from '../Parser'
+import Parser from '../classes/Parser'
+import { ErrorBoundary } from '@sentry/react'
 
 export class LocationDropdown extends React.Component {
   constructor (props) {
@@ -107,10 +108,12 @@ export class Location extends React.Component {
 
   render () {
     return (
-      <ListItem style={{ backgroundColor: (app.global.tracker.highlightImportantItems.value === true && this.hasRareItem()) ? { backgroundColor: '#cbef28' } : '' }} onClick={() => app.local.world.locations.ToggleCompleted(this.props)} onContextMenu={(e) => { e.preventDefault(); this.props.onContextMenu(e, this.props.id) }}>
-        <div className='location-name'>{this.props.name}</div>
-        <div className='location-items'>{this.props.item}</div>
-      </ListItem>
+      <ErrorBoundary fallback={<p>Location Failed to Load</p>}>
+        <ListItem style={{ backgroundColor: (app.global.tracker.highlightImportantItems.value === true && this.hasRareItem()) ? { backgroundColor: '#cbef28' } : '' }} onClick={() => app.local.world.locations.ToggleCompleted(this.props)} onContextMenu={(e) => { e.preventDefault(); this.props.onContextMenu(e, this.props.id) }}>
+          <div className='location-name'>{this.props.name}</div>
+          <div className='location-items'>{this.props.item}</div>
+        </ListItem>
+      </ErrorBoundary>
     )
   }
 }

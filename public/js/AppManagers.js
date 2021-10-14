@@ -168,6 +168,14 @@ export class LocationManager {
   }
 
   /**
+   * List all marked and unmarked by scene
+   * @param {*} scene
+   */
+  GetScene (scene) {
+    return this.Array().filter(location => (location.scene == scene || scene == -1))
+  }
+
+  /**
    * Checks if the item within a world is accessible
    * @param {Object} location 
    * @param {GameWorld} world 

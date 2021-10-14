@@ -926,15 +926,9 @@
         "scene": "0"
     },
     {
-        "name": "Deku Tree MQ Map Chest",
+        "name": "Deku Tree MQ Before Spinning Log Chest",
         "preExit": true,
         "logic": "(world) => world.dungeons[0].mq == true && world.save.swords.kokiriSword && world.save.shields.dekuShield",
-        "scene": "0"
-    },
-    {
-        "name": "Deku Tree MQ Slingshot Chest",
-        "preExit": true,
-        "logic": "(world) => world.dungeons[0].mq == true && world.save.swords.kokiriSword && world.save.shields.dekuShield && CanLightFires(world)",
         "scene": "0"
     },
     {
@@ -950,13 +944,13 @@
         "scene": "0"
     },
     {
-        "name": "Deku Tree MQ Basement Chest",
+        "name": "Deku Tree MQ Map Chest",
         "preExit": true,
         "logic": "(world) => world.dungeons[0].mq == true && world.save.swords.kokiriSword && world.save.shields.dekuShield",
         "scene": "0"
     },
     {
-        "name": "Deku Tree MQ Before Spinning Log Chest",
+        "name": "Deku Tree MQ Basement Chest",
         "preExit": true,
         "logic": "(world) => world.dungeons[0].mq == true && world.save.swords.kokiriSword && world.save.shields.dekuShield",
         "scene": "0"
@@ -967,6 +961,12 @@
         "logic": "(world) => world.dungeons[0].mq == true && world.save.swords.kokiriSword && world.save.shields.dekuShield && world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfTime == true",
         "scene": "0"
     },
+    {
+        "name": "Deku Tree MQ Slingshot Chest",
+        "preExit": true,
+        "logic": "(world) => world.dungeons[0].mq == true && world.save.swords.kokiriSword && world.save.shields.dekuShield && CanLightFires(world)",
+        "scene": "0"
+    },    
     {
         "name": "Deku Tree MQ GS Lobby",
         "preExit": true,

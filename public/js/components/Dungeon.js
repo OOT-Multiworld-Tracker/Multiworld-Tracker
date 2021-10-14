@@ -1,10 +1,11 @@
 import React from 'react'
+import app from '../app'
 
 export default class Dungeons extends React.Component {
   constructor () {
     super()
     this.app = this.context
-    this.state = { dungeons: this.app.local.world.dungeons }
+    this.state = { dungeons: app.local.world.dungeons }
   }
 
   render () {
@@ -17,9 +18,9 @@ export default class Dungeons extends React.Component {
           </tr>
         </thead>
         <tbody>
-          {this.app.local.world.dungeons.map((dungeon) => {
+          {app.local.world.dungeons.map((dungeon) => {
             return (
-              <tr key={dungeon.name} onClick={() => { dungeon.mq = !dungeon.mq; this.setState({ dungeons: this.app.local.world.dungeons }) }}>
+              <tr key={dungeon.name} onClick={() => { dungeon.mq = !dungeon.mq; this.setState({ dungeons: app.local.world.dungeons }) }}>
                 <td>{dungeon.name}</td>
                 <td>{dungeon.mq === true ? 'Master' : 'Vanilla'}</td>
               </tr>

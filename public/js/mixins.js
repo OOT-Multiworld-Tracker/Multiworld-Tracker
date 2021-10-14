@@ -19,7 +19,7 @@ function CanDamage (world) {
 }
 
 function CanExitForest (world) {
-  return world.app.global.settings.open_forest !== 'closed' || world.locations.Array()[0].completed || HasExplosives(world) || world.items.swimming.Index() >= 1 || (CanUseMagic(world) && world.items.dinsFire.Index() > 0)
+  return world.app.global.settings.openForest.value !== 'closed' || world.locations.Array()[0].completed || HasExplosives(world) || world.items.swimming.Index() >= 1 || (CanUseMagic(world) && world.items.dinsFire.Index() > 0)
 }
 
 function CanLightFires (world) {
@@ -84,7 +84,7 @@ function CanEnterSpirit (world) {
 }
 
 function CanEnterGtG (world) {
-  return (CanBecomeAdult(world) && world.save.questStatus.gerudoMembershipCard > 0 && (world.items.hookshot.Index() === 2 || (world.items.ocarina.Index() >= 1 && world.save.questStatus.eponasSong.Index()) > 0))
+  return (CanBecomeAdult(world) && world.items.gerudoMembershipCard > 0 && (world.items.hookshot.Index() === 2 || (world.items.ocarina.Index() >= 1 && world.items.eponasSong.Index()) > 0))
 }
 
 function CanEnterGC (world) {

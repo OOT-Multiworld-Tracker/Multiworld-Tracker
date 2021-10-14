@@ -1,4 +1,4 @@
-import { SettingsManager, ItemManager, TrackerSettings } from './AppManagers'
+import { SettingsManager, ItemManager, TrackerSettings, LocationManager } from './AppManagers'
 import { GameWorld } from './classes/GameWorld'
 import { ElectronPayloads } from './enum/EnumPayloads'
 import { MapToArray } from './Utils'
@@ -63,8 +63,14 @@ export class SaveUtils {
   }
 
   static async Reset () {
-    app.worlds = [new GameWorld(this)]
+    app.global.settings = new SettingsManager()
+    app.worlds = [new GameWorld(app)]
     app.local.world = app.worlds[0]
+    app.local.world.locations = new LocationManager(app.local.world)
+    app.local.world.items = new ItemManager(app.local.world)
+
+    app.emit('loaded', null)
+    app.emit('items updated', app.local.world.items)
   }
 
   /**
@@ -144,7 +150,13 @@ export class NetworkManager {
           break
 
         case ElectronPayloads.CHEST_OPENED:
-          console.log(parsed.data)
+          let switches = JSON.parse(parsed.data.data).object.toString(2).split('').reverse()
+
+          switches.forEach((switchState, index) => {
+            if (switchState === '1') app.local.world.locations.GetScene(parsed.data.scene)[index].completed = Boolean(parseInt(switchState))
+          })
+
+          app.emit('chest opened')
           break
 
         case ElectronPayloads.SCENE_UPDATED:

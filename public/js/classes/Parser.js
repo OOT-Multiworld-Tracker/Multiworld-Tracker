@@ -41,14 +41,15 @@ export default class Parser {
     const locations = new Map()
     console.log(LocationList)
 
-    LocationList.forEach((location, index) => {
+    LocationList.forEach((locale, index) => {
+      const location = Object.assign({}, locale)
       location.id = index
 
-      if (location.logic) { location.logic = eval(location.logic) }
+      if (location.logic) { location.logic = eval(locale.logic) }
 
       if (spoiler) {
         spoiler.settings.disabled_locations.forEach((locale) => {
-          if (locale === location.name) location.completed = true
+          if (locale === locale.name) location.completed = true
         })
 
         location.item = spoiler.locations[worlds.length > 1 ? location.id : location.name]

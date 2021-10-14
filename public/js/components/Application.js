@@ -31,6 +31,10 @@ export default class Application extends React.Component {
     app.on('loaded', (save) => {
       this.setState({ locations: app.local.world.locations })
     })
+
+    app.on('chest opened', () => {
+      this.setState({ locations: app.local.world.locations })
+    })
   }
 
   handleSearch (e) {
@@ -93,7 +97,7 @@ export default class Application extends React.Component {
             {this.getModal()}
           </ModalLayer>
           <div className='pane-group'>
-            <div class='pane-md' style={{ width: '240px' }}>
+            <div class='pane-md' style={{ minWidth: '240px' }}>
               <ErrorBoundary fallback={<p>Sidebar failed to load</p>}>
                 <Sidebar onSave={this.handleCreateSave} onModal={this.handleSidebarModal} saves={this.state.saves} page={this.state.sidebar} />
               </ErrorBoundary>

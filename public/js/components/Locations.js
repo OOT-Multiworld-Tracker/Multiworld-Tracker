@@ -46,6 +46,11 @@ export default class Locations extends React.Component {
 
     this.handleDropdownClick = this.props.onDropdownClick
     this.handleContextMenu = this.handleContextMenu.bind(this)
+
+    app.on('scene updated', (scene) => {
+      console.log(scene)
+      this.setState({ scene })
+    })
   }
 
   handleContextMenu (e, id) {

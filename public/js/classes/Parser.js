@@ -1,3 +1,4 @@
+import { writeFileSync } from 'original-fs'
 import { SettingsManager } from '../AppManagers'
 import { GameWorld } from './GameWorld'
 
@@ -35,6 +36,12 @@ export default class Parser {
     spoiler.emit('spoiler parsed', log)
 
     return spoiler
+  }
+
+  static addLocationID (id, chest) {
+    if (!LocationList[id].chest) LocationList[id].chest = chest
+    console.log(LocationList[id])
+    require('electron').ipcRenderer.send('packets', { payload: 7, LocationList })
   }
 
   static ParseLocations (worlds, spoiler = null) {

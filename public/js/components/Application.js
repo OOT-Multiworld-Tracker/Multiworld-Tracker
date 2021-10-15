@@ -7,7 +7,19 @@ import CreateSaveModal from './Modals/CreateSaveModal'
 import ItemModal from './Modals/ItemModal'
 import Sidebar from './Sidebar'
 import Locations from './Locations'
-import { ErrorBoundary } from '@sentry/react'
+import { init, ErrorBoundary } from '@sentry/react'
+import { Integrations } from '@sentry/tracing'
+
+init({
+  dsn: 'https://8957f94163d144e1b2efc135a8a2be1e@o174553.ingest.sentry.io/6000676',
+  integrations: [new Integrations.BrowserTracing()],
+  release: 'ocarina-of-time-multiworld@v' + process.env.npm_package_version,
+  environment: process.env.NODE_ENV,
+  // Set tracesSampleRate to 1.0 to capture 100%
+  // of transactions for performance monitoring.
+  // We recommend adjusting this value in production
+  tracesSampleRate: 1.0
+})
 
 export default class Application extends React.Component {
   constructor () {

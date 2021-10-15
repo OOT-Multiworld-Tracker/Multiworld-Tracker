@@ -1,5 +1,6 @@
 import { SettingsManager, ItemManager, TrackerSettings, LocationManager } from './AppManagers'
 import { GameWorld } from './classes/GameWorld'
+import Parser from './classes/Parser'
 import { ElectronPayloads } from './enum/EnumPayloads'
 import { MapToArray } from './Utils'
 
@@ -32,6 +33,8 @@ export class App extends EventEmitter {
      */
     this.worlds = [new GameWorld(this)] // Spawn with a default world instance.
     this.local.world = this.worlds[0]
+
+    this.lastChestID = -1
   }
 }
 
@@ -152,8 +155,13 @@ export class NetworkManager {
         case ElectronPayloads.CHEST_OPENED:
           let switches = JSON.parse(parsed.data.data).object.toString(2).split('').reverse()
 
+          app.lastChestID = JSON.parse(parsed.data.data).object
+
           switches.forEach((switchState, index) => {
-            if (switchState === '1') app.local.world.locations.GetScene(parsed.data.scene)[index].completed = Boolean(parseInt(switchState))
+            if (switchState === '1') {
+              app.local.world.locations.GetScene(parsed.data.scene)[index].completed = Boolean(parseInt(switchState))
+              Parser.addLocationID(app.local.world.locations.GetScene(parsed.data.scene)[index].id, app.lastChestID)
+            }
           })
 
           app.emit('chest opened')

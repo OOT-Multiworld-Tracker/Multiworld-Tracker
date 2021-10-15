@@ -26,12 +26,12 @@ export default class Items extends React.Component {
                   <th>Have</th>
                 </tr>
               ), (
-                <tr key={item.smallKeys.name} onClick={() => { item.smallKeys.Toggle(); this.setState({ items: app.local.world.save }); app.RenderLocations() }}>
+                <tr key={item.smallKeys.name} onClick={() => { item.smallKeys.Toggle(); this.setState({ items: app.local.world.save }) }}>
                   <td>{item.smallKeys.name}</td>
                   <td>{item.smallKeys.value}</td>
                 </tr>
               ), (
-                <tr key={item.bigKey.name} onClick={() => { item.bigKey.Toggle(); this.setState({ items: app.local.world.save }); app.RenderLocations() }}>
+                <tr key={item.bigKey.name} onClick={() => { item.bigKey.Toggle(); this.setState({ items: app.local.world.save }) }}>
                   <td>{item.bigKey.name}</td>
                   <td>{item.bigKey.value}</td>
                 </tr>
@@ -39,7 +39,7 @@ export default class Items extends React.Component {
             }
 
             return (
-              <tr key={item.name} onClick={() => { item.Toggle(); this.setState({ items: app.local.world.save }); app.RenderLocations() }}>
+              <tr key={item.name} onClick={() => { item.Toggle(); this.setState({ items: app.local.world.save }) }}>
                 <td>{item.name}</td>
                 <td>{item.value === '0' ? 'None' : (item.value === '1' ? 'Have' : item.value)}</td>
               </tr>

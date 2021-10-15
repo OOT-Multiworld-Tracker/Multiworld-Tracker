@@ -104,32 +104,27 @@
     {
         "name": "KF Midos Top Left Chest",
         "preExit": true,
-        "scene": "40",
-        "chest": 1
+        "scene": "40"
     },
     {
         "name": "KF Midos Top Right Chest",
         "preExit": true,
-        "scene": "40",
-        "chest": 2
+        "scene": "40"
     },
     {
         "name": "KF Midos Bottom Left Chest",
         "preExit": true,
-        "scene": "40",
-        "chest": 4
+        "scene": "40"
     },
     {
         "name": "KF Midos Bottom Right Chest",
         "preExit": true,
-        "scene": "40",
-        "chest": 8
+        "scene": "40"
     },
     {
         "name": "KF Kokiri Sword Chest",
         "preExit": true,
-        "scene": "85",
-        "chest": 1
+        "scene": "85"
     },
     {
         "name": "KF Storms Grotto Chest",
@@ -971,7 +966,7 @@
         "preExit": true,
         "logic": "(world) => world.dungeons[0].mq == true && world.save.swords.kokiriSword && world.save.shields.dekuShield && CanLightFires(world)",
         "scene": "0"
-    },
+    },    
     {
         "name": "Deku Tree MQ GS Lobby",
         "preExit": true,
@@ -1160,7 +1155,7 @@
         "name": "Jabu Jabus Belly GS Near Boss",
         "logic": "(world) => world.dungeons[3].mq == false && CanEnterJabu(world) && world.items.fairySlingshot.value > 0",
         "scene": "2"
-    },
+    },  
     {
         "name": "Jabu Jabus Belly MQ First Room Side Chest",
         "logic": "(world) => world.dungeons[3].mq == true && CanEnterJabu(world) && world.items.fairySlingshot.value > 0",

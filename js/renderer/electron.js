@@ -1,6 +1,7 @@
 const { app, BrowserWindow, ipcMain, protocol } = require('electron')
 const EventEmitter = require('events')
 const { autoUpdater } = require('electron-updater')
+const fs = require('fs')
 
 class ElectronRenderer extends EventEmitter {
   constructor () {
@@ -43,7 +44,10 @@ class ElectronRenderer extends EventEmitter {
     })
 
     ipcMain.on('packets', (e, data) => {
-      if (data === 'close') {
+      if (data.payload === 7) {
+        fs.writeFileSync('public/json/locations.json', JSON.stringify(data.LocationList, null, 4))
+        return console.log(data)
+      } else if (data === 'close') {
         return this.window.close()
       } else if (data === 'window_size') {
         return this.window.isMaximized ? this.window.maximize() : this.window.unmaximize()

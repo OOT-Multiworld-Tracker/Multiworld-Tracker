@@ -1,4 +1,3 @@
-import { writeFileSync } from 'original-fs'
 import { SettingsManager } from '../AppManagers'
 import { GameWorld } from './GameWorld'
 
@@ -6,7 +5,7 @@ const LocationList = require('../locations.json')
 const SceneList = require('../scenes.json')
 
 export default class Parser {
-  static ParseSpoiler (log) {
+  static ParseSpoiler (log, app) {
     const spoiler = { }
 
     spoiler.settings = new SettingsManager(log.settings)
@@ -16,7 +15,7 @@ export default class Parser {
 
     if (spoiler.settings.world_count > 1) {
       Object.values(log.locations).forEach((_, index) => {
-        spoiler.worlds.push(new GameWorld())
+        spoiler.worlds.push(new GameWorld(app))
       })
 
       Object.values(log.dungeons).forEach((world, index) => {
@@ -26,14 +25,12 @@ export default class Parser {
       })
     } else {
       console.log('Loading singleplayer world')
-      spoiler.worlds.push(new GameWorld())
+      spoiler.worlds.push(new GameWorld(app))
 
       for (let i = 0; i < Object.keys(spoiler.log.dungeons).length; i++) {
         spoiler.worlds[0].dungeons[i].mq = log.dungeons[Object.keys(log.dungeons)[i]] === 'mq'
       }
     }
-
-    spoiler.emit('spoiler parsed', log)
 
     return spoiler
   }

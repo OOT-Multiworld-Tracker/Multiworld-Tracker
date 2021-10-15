@@ -1,7 +1,15 @@
 import React from 'react'
+import app from '../app'
 import { List, ListItem } from './Lists'
 
 export default class Saves extends React.Component {
+  constructor () {
+    super()
+    app.on('saved', () => {
+      this.forceUpdate()
+    })
+  }
+
   list () {
     const files = []
     for (let i = 0; i < localStorage.length; i++) {

@@ -6,6 +6,7 @@ import Items from './Items'
 import Dungeons from './Dungeon'
 import Settings from './Settings'
 import Worlds from './Worlds'
+import Parser from '../classes/Parser'
 
 export class SidebarButtons extends React.Component {
   constructor (props) {
@@ -74,9 +75,20 @@ export default class Sidebar extends React.Component {
     )
   }
 
+  handleUploadedSpoiler (e) {
+    $.getJSON(URL.createObjectURL(e.target.files[0]), (data) => {
+      const log = Parser.ParseSpoiler(data, app)
+      app.worlds = log.worlds
+      app.global.settings = log.settings
+
+      app.local.world = app.worlds[0]
+    })
+  }
+
   settingsPage () {
     return (
       <>
+        <input type='file' onChange={this.handleUploadedSpoiler} accept=".json" placeholder="Upload Spoiler" />
         <Settings />
         <br />
         <Dungeons />

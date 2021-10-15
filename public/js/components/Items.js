@@ -6,6 +6,10 @@ export default class Items extends React.Component {
   constructor () {
     super()
     this.state = { items: app.local.world.save }
+
+    app.on('items updated', () => {
+      this.setState({ items: app.local.world.save })
+    })
   }
 
   render () {

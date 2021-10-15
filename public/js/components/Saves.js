@@ -1,12 +1,15 @@
 import React from 'react'
-import app from '../app'
+import app, { SaveUtils } from '../app'
 import { List, ListItem } from './Lists'
 
-export default class Saves extends React.Component {
+export default class Saves extends React.PureComponent {
   constructor () {
     super()
+
+    this.state = { saves: SaveUtils.GetFiles() }
+
     app.on('saved', () => {
-      this.forceUpdate()
+      this.setState({ saves: SaveUtils.GetFiles() })
     })
   }
 

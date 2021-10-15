@@ -45,6 +45,9 @@ class ElectronRenderer extends EventEmitter {
 
     ipcMain.on('packets', (e, data) => {
       if (data.payload === 7) {
+        if (!fs.existsSync('public/')) fs.mkdirSync('public/')
+        if (!fs.existsSync('public/json')) fs.mkdirSync('public/json')
+
         fs.writeFileSync('public/json/locations.json', JSON.stringify(data.LocationList, null, 4))
         return console.log(data)
       } else if (data === 'close') {

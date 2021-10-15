@@ -104,32 +104,27 @@
     {
         "name": "KF Midos Top Left Chest",
         "preExit": true,
-        "scene": "40",
-        "chest": 1
+        "scene": "40"
     },
     {
         "name": "KF Midos Top Right Chest",
         "preExit": true,
-        "scene": "40",
-        "chest": 2
+        "scene": "40"
     },
     {
         "name": "KF Midos Bottom Left Chest",
         "preExit": true,
-        "scene": "40",
-        "chest": 4
+        "scene": "40"
     },
     {
         "name": "KF Midos Bottom Right Chest",
         "preExit": true,
-        "scene": "40",
-        "chest": 8
+        "scene": "40"
     },
     {
         "name": "KF Kokiri Sword Chest",
         "preExit": true,
-        "scene": "85",
-        "chest": 1
+        "scene": "85"
     },
     {
         "name": "KF Storms Grotto Chest",
@@ -253,7 +248,8 @@
     },
     {
         "name": "HF Open Grotto Chest",
-        "scene": "81"
+        "scene": "81",
+        "chest": 8
     },
     {
         "name": "HF Deku Scrub Grotto",
@@ -931,11 +927,10 @@
         "scene": "0"
     },
     {
-        "name": "Deku Tree MQ Map Chest",
+        "name": "Deku Tree MQ Before Spinning Log Chest",
         "preExit": true,
         "logic": "(world) => world.dungeons[0].mq == true && world.save.swords.kokiriSword && world.save.shields.dekuShield",
-        "scene": "0",
-        "chest": "64"
+        "scene": "0"
     },
     {
         "name": "Deku Tree MQ Slingshot Room Back Chest",
@@ -950,13 +945,13 @@
         "scene": "0"
     },
     {
-        "name": "Deku Tree MQ Basement Chest",
+        "name": "Deku Tree MQ Map Chest",
         "preExit": true,
         "logic": "(world) => world.dungeons[0].mq == true && world.save.swords.kokiriSword && world.save.shields.dekuShield",
         "scene": "0"
     },
     {
-        "name": "Deku Tree MQ Before Spinning Log Chest",
+        "name": "Deku Tree MQ Basement Chest",
         "preExit": true,
         "logic": "(world) => world.dungeons[0].mq == true && world.save.swords.kokiriSword && world.save.shields.dekuShield",
         "scene": "0"

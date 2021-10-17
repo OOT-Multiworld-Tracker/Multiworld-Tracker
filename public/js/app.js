@@ -18,7 +18,8 @@ export class App extends EventEmitter {
     this.global = {
       settings: new SettingsManager(),
       tracker: new TrackerSettings(),
-      connected: false
+      connected: false,
+      scene: -1
     }
 
     /**
@@ -158,6 +159,11 @@ export class NetworkManager {
         case ElectronPayloads.SKULLTULA_COLLECTED:
         case ElectronPayloads.CHEST_OPENED:
           app.lastEvent = { payload: parsed.payload, data: JSON.parse(parsed.data.data) } // Make data to be created.
+
+          app.local.world.locations.Accessible(false, false, app.global.scene).forEach((location) => {
+            if (location.event == app.lastEvent) location.completed = true
+          })
+
           app.emit('chest opened')
           break
 

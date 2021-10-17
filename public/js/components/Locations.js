@@ -48,6 +48,7 @@ export default class Locations extends React.Component {
 
     app.on('scene updated', (scene) => {
       console.log(scene)
+      app.global.scene = scene
       this.setState({ scene })
     })
   }

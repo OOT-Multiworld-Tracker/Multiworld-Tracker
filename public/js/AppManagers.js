@@ -193,7 +193,9 @@ export class LocationManager {
    */
   ToggleCompleted (props) {
     this.Array()[String(props.id)].completed = !this.Array()[String(props.id)].completed
-    Parser.addLocationID(props.id, this.world.app.lastChestID)
+
+    Parser.addLocationID(props.id, this.Array()[String(props.id)].completed === false ? -1 : this.world.app.lastChestID)
+
     require('electron').ipcRenderer.send('packets', JSON.stringify({ world: this.world.app.worlds.indexOf(this.world.app.local.world), save: { swords: this.world.app.local.world.save.swords, shields: this.world.app.local.world.save.shields, inventory: this.world.app.local.world.save.inventory, questStatus: this.world.app.local.world.save.questStatus }, locations: this.world.app.networking.Serialize(this.world.app.local.world.locations.Array(), 'completed') }).replace(/true/g, '1').replace(/false/g, '0'))
   }
 

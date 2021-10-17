@@ -153,9 +153,6 @@ export class NetworkManager {
           app.emit('items updated', app.local.world.items)
           break
 
-        case ElectronPayloads.COLLECTABLE_COLLECTED:
-        case ElectronPayloads.EVENT_TRIGGERED:
-        case ElectronPayloads.SKULLTULA_COLLECTED:
         case ElectronPayloads.CHEST_OPENED:
           let switches = JSON.parse(parsed.data.data).object.toString(2).split('').reverse()
 

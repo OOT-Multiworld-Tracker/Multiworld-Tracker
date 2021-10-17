@@ -43,8 +43,7 @@ export default class Parser {
   }
 
   static addLocationID (id, chest) {
-    if (!LocationList[id].chest) LocationList[id].chest = chest
-    console.log(LocationList[id])
+    if ((!LocationList[id].chest || !LocationList[id].chest === -1) || chest === -1) LocationList[id].chest = chest
     require('electron').ipcRenderer.send('packets', { payload: 7, LocationList })
   }
 

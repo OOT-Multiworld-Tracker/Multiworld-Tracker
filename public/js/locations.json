@@ -3,7 +3,7 @@
         "name": "Queen Gohma",
         "preExit": true,
         "logic": "(world) => world.items.kokiriSword.value === 1 && world.items.dekuShield.value === 1 && world.items.fairySlingshot.value > 0",
-        "scene": "0"
+        "scene": "17"
     },
     {
         "name": "King Dodongo",
@@ -923,7 +923,7 @@
         "name": "Deku Tree Queen Gohma Heart",
         "preExit": true,
         "logic": "(world) => world.dungeons[0].mq == false && world.save.swords.kokiriSword && world.save.shields.dekuShield && world.items.fairySlingshot.value > 0",
-        "scene": "0"
+        "scene": "17"
     },
     {
         "name": "Deku Tree MQ Before Spinning Log Chest",

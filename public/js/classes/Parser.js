@@ -1,7 +1,8 @@
+import { existsSync, readFileSync } from 'original-fs'
 import { SettingsManager } from '../AppManagers'
 import { GameWorld } from './GameWorld'
 
-const LocationList = require('../locations.json')
+const LocationList = (existsSync(process.env.APPDATA + '/multiworld-tracker/locations.json')) ? JSON.parse(readFileSync(process.env.APPDATA + '/multiworld-tracker/locations.json')) : require('../locations.json')
 const SceneList = require('../scenes.json')
 
 export default class Parser {

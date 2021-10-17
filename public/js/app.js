@@ -163,7 +163,7 @@ export class NetworkManager {
           app.local.world.locations.Accessible(false, false, app.global.scene).forEach((location) => {
             console.log(app.lastEvent)
             console.log(location.event)
-            
+
             if (location.event == app.lastEvent) location.completed = true
           })
 

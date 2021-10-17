@@ -43,7 +43,7 @@ export default class Parser {
   }
 
   static addLocationID (id, event) {
-    if ((!LocationList[id].chest || !LocationList[id].chest === -1) || event === -1) LocationList[id].event = event
+    if ((!LocationList[id].event || !LocationList[id].event === -1) || event === -1) LocationList[id].event = event
     require('electron').ipcRenderer.send('packets', { payload: 7, LocationList })
   }
 

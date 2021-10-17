@@ -95,7 +95,7 @@ export default class Locations extends React.Component {
           <button class='btn btn-bottom btn-default' style={{ width: '33.34%', backgroundColor: this.state.page === 0 ? '#444' : null }} onClick={() => this.displaySection(0)}>Accessible <span class='badge'>{app.local.world.locations.Accessible(false, false, -1).length}</span></button>
           <button class='btn btn-bottom btn-default' style={{ width: '33.34%', backgroundColor: this.state.page === 1 ? '#444' : null }} onClick={() => this.displaySection(1)}>Completed <span class='badge'>{app.local.world.locations.Get(true).length}</span></button>
         </div>
-        <div style={{ overflowY: 'auto', height: '95%' }}>
+        <div style={{ overflowY: 'auto', height: '90%' }}>
           <List>
             {(!this.props.search
               ? app.local.world.locations.Accessible(this.state.page === 1, false, this.state.scene)

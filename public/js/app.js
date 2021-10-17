@@ -140,18 +140,22 @@ export class NetworkManager {
 
       switch (parsed.payload) {
         case ElectronPayloads.SAVE_UPDATED:
-          const items = Object.assign(Object.assign(Object.assign(Object.assign(Object.assign({}, parsed.data.questStatus), parsed.data.inventory), parsed.data.swords), parsed.data.shields), parsed.data.tunics)
+          const items = Object.assign({}, parsed.data.save.questStatus, parsed.data.save.inventory, parsed.data.save.boots, parsed.data.save.shields, parsed.data.save.tunics, parsed.data.save.swords)
           console.log(items)
 
           Object.keys(items).forEach((key) => {
             if (app.local.world.items[key] === undefined) return // Ignore any keys not within the item manager.
-            app.local.world.items[key].Set(items[key])
+            app.local.world.items[key].Set(items[key] * 1)
           })
 
           app.local.world.save = parsed.data.save // Overwrite the local save with the parsed save.
+          console.log(app.local.world)
           app.emit('items updated', app.local.world.items)
           break
 
+        case ElectronPayloads.COLLECTABLE_COLLECTED:
+        case ElectronPayloads.EVENT_TRIGGERED:
+        case ElectronPayloads.SKULLTULA_COLLECTED:
         case ElectronPayloads.CHEST_OPENED:
           let switches = JSON.parse(parsed.data.data).object.toString(2).split('').reverse()
 

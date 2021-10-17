@@ -164,7 +164,7 @@ export class NetworkManager {
             console.log(app.lastEvent)
             console.log(location.event)
 
-            if (location.event == app.lastEvent) location.completed = true
+            if (JSON.stringify(location.event) == JSON.stringify(app.lastEvent)) location.completed = true
           })
 
           app.emit('chest opened')

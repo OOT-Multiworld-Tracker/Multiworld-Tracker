@@ -1,30 +1,28 @@
 import React from 'react'
 import app from '../app'
+import { List, ListItem } from './Lists'
 
 export default class Settings extends React.Component {
-  constructor () {
-    super()
-    this.state = { settings: app.global.settings }
+  constructor (props) {
+    super(props)
+    this.state = { settings: this.props.settings }
   }
 
   changeSetting (id) {
-    app.global.settings[id].Toggle()
-    this.setState({ settings: app.global.settings })
+    this.props.settings[id].Toggle()
+    this.setState({ settings: this.props.settings })
   }
 
   render () {
     return (
-      <table className='table-striped'>
-        <thead>
-          <tr>
-            <th>Setting</th>
-            <th>Value</th>
-          </tr>
-        </thead>
-        <tbody>
-          {Object.keys(app.global.settings).map((setting) => (<tr key={setting.name} onClick={() => this.changeSetting(setting)}><td>{app.global.settings[setting].name}</td><td>{(app.global.settings[setting].value === true ? 'Yes' : (app.global.settings[setting].value === false ? 'No' : app.global.settings[setting].value))}</td></tr>))}
-        </tbody>
-      </table>
+      <List>
+        {Object.keys(this.props.settings).map((setting) => (
+          <ListItem key={setting.name} onClick={() => this.changeSetting(setting)}>
+            <div className='location-name'>{this.props.settings[setting].name}</div>
+            <div className='location-items'>{(this.props.settings[setting].value === true ? 'Yes' : (this.props.settings[setting].value === false ? 'No' : this.props.settings[setting].value))}</div>
+          </ListItem>)
+        )}
+      </List>
     )
   }
 }

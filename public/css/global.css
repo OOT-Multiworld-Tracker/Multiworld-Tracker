@@ -8,10 +8,26 @@ body {
 
 .list-item {
     padding: 4px;
+    width: 100%;
+    display: flex;
+}
+
+.window-content {
+    overflow-y: unset;
+}
+
+.pane {
+    overflow-y: unset;
 }
 
 .location-name, .location-items {
     display: inline;
+    width: 70%;
+}
+
+.location-items {
+    width: 30%;
+    text-align: right;
 }
 
 .list {
@@ -23,10 +39,6 @@ body {
 }
 
 .list .list-header span {
-    float: right;
-}
-
-.location-items {
     float: right;
 }
 
@@ -139,6 +151,15 @@ tbody {
 
 .active {
     opacity: 1;
+}
+
+.form-control[type=checkbox] {
+    width: auto!important;
+}
+
+label {
+    vertical-align: text-bottom;
+    margin-left: 5px;
 }
 
 .form-control {

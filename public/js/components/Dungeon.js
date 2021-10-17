@@ -1,5 +1,6 @@
 import React from 'react'
 import app from '../app'
+import { List, ListItem } from './Lists'
 
 export default class Dungeons extends React.Component {
   constructor () {
@@ -10,24 +11,16 @@ export default class Dungeons extends React.Component {
 
   render () {
     return (
-      <table className='table-striped'>
-        <thead>
-          <tr>
-            <th>Dungeon</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          {app.local.world.dungeons.map((dungeon) => {
-            return (
-              <tr key={dungeon.name} onClick={() => { dungeon.mq = !dungeon.mq; this.setState({ dungeons: app.local.world.dungeons }) }}>
-                <td>{dungeon.name}</td>
-                <td>{dungeon.mq === true ? 'Master' : 'Vanilla'}</td>
-              </tr>
-            )
-          })}
-        </tbody>
-      </table>
+      <List>
+        {app.local.world.dungeons.map((dungeon) => {
+          return (
+            <ListItem key={dungeon.name} onClick={() => { dungeon.mq = !dungeon.mq; this.setState({ dungeons: app.local.world.dungeons }) }}>
+              <div className='location-name'>{dungeon.name}</div>
+              <div className='location-items'>{dungeon.mq === true ? 'Master' : 'Vanilla'}</div>
+            </ListItem>
+          )
+        })}
+      </List>
     )
   }
 }

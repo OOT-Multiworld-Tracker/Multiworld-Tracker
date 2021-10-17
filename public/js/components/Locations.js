@@ -12,19 +12,18 @@ export class LocationDropdown extends React.Component {
   }
 
   render () {
-    console.log(this.props)
     return (
       this.props.display
         ? (
           <div className='dropdown' style={{ left: this.props.position.left, top: this.props.position.top }}>
             <ul>
               <li onClick={() => app.local.world.locations.ToggleCompleted(this.state)}>Toggle Completed</li>
-              <li onClick={(e) => this.onDropdownClick(e, this.state.id)}>Set Item</li>
+              <li onClick={(e) => this.onDropdownClick(e, 0)}>Set Item</li>
               <li className='dropdown-button'>Set Tag &gt;
                 <div className='dropdown side' style={{ left: '180px', bottom: '0px' }}>
                   <ul>
-                    <li>Set Useless</li>
-                    <li>Set Reminder</li>
+                    <li onClick={(e) => this.onDropdownClick(e, 1)}>Set Useless</li>
+                    <li onClick={(e) => this.onDropdownClick(e, 2)}>Set Reminder</li>
                   </ul>
                 </div>
               </li>
@@ -55,6 +54,7 @@ export default class Locations extends React.Component {
 
   handleContextMenu (e, id) {
     console.log(id)
+    console.log(e)
     this.setState({ dropdown: { left: e.pageX - 240, top: e.pageY - 22 } })
     this.props.onContextMenu(e, id)
   }
@@ -71,7 +71,7 @@ export default class Locations extends React.Component {
         return (<option key={scene.id} value={scene.id}>{scene.name}</option>)
       } else {
         if (this.state.scene === scene.id) {
-          this.setState({ scene: -1 })
+          this.setState({ scene: '-1' })
           return null
         }
 
@@ -95,12 +95,14 @@ export default class Locations extends React.Component {
           <button class='btn btn-bottom btn-default' style={{ width: '33.34%', backgroundColor: this.state.page === 0 ? '#444' : null }} onClick={() => this.displaySection(0)}>Accessible <span class='badge'>{app.local.world.locations.Accessible(false, false, -1).length}</span></button>
           <button class='btn btn-bottom btn-default' style={{ width: '33.34%', backgroundColor: this.state.page === 1 ? '#444' : null }} onClick={() => this.displaySection(1)}>Completed <span class='badge'>{app.local.world.locations.Get(true).length}</span></button>
         </div>
-        <List>
-          {(!this.props.search
-            ? app.local.world.locations.Accessible(this.state.page === 1, false, this.state.scene)
-            : app.local.world.locations.Search(this.props.search, this.state.scene, this.state.page)).map((location, index) => (
-              <Location onContextMenu={this.handleContextMenu} key={index} id={location.id} item={location.display ? location.display.name : 'None'} name={location.name} />))}
-        </List>
+        <div style={{ overflowY: 'auto', height: '95%' }}>
+          <List>
+            {(!this.props.search
+              ? app.local.world.locations.Accessible(this.state.page === 1, false, this.state.scene)
+              : app.local.world.locations.Search(this.props.search, this.state.scene, this.state.page)).map((location, index) => (
+                <Location onContextMenu={this.handleContextMenu} useless={location.useless} important={location.important} key={index} id={location.id} item={location.display ? location.display.name : 'None'} name={location.name} />))}
+          </List>
+        </div>
       </>
     )
   }
@@ -114,9 +116,9 @@ export class Location extends React.PureComponent {
   render () {
     return (
       <ErrorBoundary fallback={<p>Location Failed to Load</p>}>
-        <ListItem style={{ backgroundColor: (app.global.tracker.highlightImportantItems.value === true && this.hasRareItem()) ? { backgroundColor: '#cbef28' } : '' }} onClick={() => app.local.world.locations.ToggleCompleted(this.props)} onContextMenu={(e) => { e.preventDefault(); this.props.onContextMenu(e, this.props.id) }}>
-          <div className='location-name'>{this.props.name}</div>
-          <div className='location-items'>{this.props.item}</div>
+        <ListItem style={{ backgroundColor: ((app.global.tracker.itemHints.Index() === 1 && this.hasRareItem()) || this.props.important) ? '#cbef28' : '' }} onClick={() => app.local.world.locations.ToggleCompleted(this.props)} onContextMenu={(e) => { e.preventDefault(); this.props.onContextMenu(e, this.props.id) }}>
+          <div className='location-name' style={{ color: this.props.useless ? '#666' : null }}>{this.props.name} {app.global.tracker.playerHints.value == true ? <span class='badge'>{app.local.world.locations.Array()[this.props.id].item.player}</span> : null}</div>
+          <div className='location-items'>{app.global.tracker.itemHints.value === 'show items' ? app.local.world.locations.Array()[this.props.id].item.item : this.props.item}</div>
         </ListItem>
       </ErrorBoundary>
     )

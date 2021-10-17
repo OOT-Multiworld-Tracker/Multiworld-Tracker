@@ -13,9 +13,15 @@ export default class Parser {
     spoiler.seed = log[':seed']
     spoiler.worlds = []
 
-    if (spoiler.settings.world_count > 1) {
+    if (spoiler.log.settings.world_count > 1) {
       Object.values(log.locations).forEach((_, index) => {
         spoiler.worlds.push(new GameWorld(app))
+      })
+
+      Object.keys(log.locations).forEach((world, windex) => {
+        Object.values(log.locations[world]).forEach((locale, index) => {
+          spoiler.worlds[windex].locations.Array()[index].item = locale
+        })
       })
 
       Object.values(log.dungeons).forEach((world, index) => {
@@ -43,22 +49,12 @@ export default class Parser {
 
   static ParseLocations (worlds, spoiler = null) {
     const locations = new Map()
-    console.log(LocationList)
 
     LocationList.forEach((locale, index) => {
       const location = Object.assign({}, locale)
       location.id = index
 
       if (location.logic) { location.logic = eval(locale.logic) }
-
-      if (spoiler) {
-        spoiler.settings.disabled_locations.forEach((locale) => {
-          if (locale === locale.name) location.completed = true
-        })
-
-        location.item = spoiler.locations[worlds.length > 1 ? location.id : location.name]
-      }
-
       locations.set(String(index), location)
     })
 

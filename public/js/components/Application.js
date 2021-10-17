@@ -9,6 +9,8 @@ import Sidebar from './Sidebar'
 import Locations from './Locations'
 import { init, ErrorBoundary } from '@sentry/react'
 import { Integrations } from '@sentry/tracing'
+import SpoilerModal from './Modals/LoadSpoiler'
+import Parser from '../classes/Parser'
 
 init({
   dsn: 'https://8957f94163d144e1b2efc135a8a2be1e@o174553.ingest.sentry.io/6000676',
@@ -24,7 +26,6 @@ init({
 export default class Application extends React.Component {
   constructor () {
     super()
-    console.log(app)
     this.state = { world: app.local.world, search: '', dropdown: false, sidebar: 0, display: 0, saves: [], locations: app.local.world.locations }
 
     this.handleSearch = this.handleSearch.bind(this)
@@ -36,6 +37,8 @@ export default class Application extends React.Component {
     this.handleSaveCreated = this.handleSaveCreated.bind(this)
     this.handleContextMenu = this.handleContextMenu.bind(this)
     this.handleWindowClick = this.handleWindowClick.bind(this)
+    this.handleSpoiler = this.handleSpoiler.bind(this)
+    this.handleLoadSpoiler = this.handleLoadSpoiler.bind(this)
 
     this.selectedLocation = 0
     this.selectedSave = 0
@@ -58,7 +61,17 @@ export default class Application extends React.Component {
   }
 
   handleDropdown (e, id) {
-    this.setState({ display: 1 })
+    switch (id) {
+      case 0:
+        this.setState({ display: 1 })
+        break
+      case 1:
+        app.local.world.locations.Array()[this.selectedLocation].useless = !app.local.world.locations.Array()[this.selectedLocation].useless
+        break
+      case 2:
+        app.local.world.locations.Array()[this.selectedLocation].important = !app.local.world.locations.Array()[this.selectedLocation].important
+        break
+    }
   }
 
   handleSidebarModal (e, name) {
@@ -85,6 +98,33 @@ export default class Application extends React.Component {
     this.setState({ dropdown: false })
   }
 
+  handleSpoiler (e) {
+    $.getJSON(URL.createObjectURL(e.target.files[0]), (data) => {
+      const log = Parser.ParseSpoiler(data, app)
+      this.log = log
+      this.setState({ display: 4 })
+    })
+  }
+
+  handleLoadSpoiler (e, options) {
+    app.worlds = this.log.worlds
+    app.global.settings = this.log.settings
+
+    if (!options.dungeons) app.worlds[0].dungeons = [{ name: 'Deku Tree', mq: false }, { name: "Dodongo's Cave", mq: false }, { name: 'Bottom of the Well', mq: false }, { name: "Jabu Jabu's Belly", mq: false }, { name: 'Forest Temple', mq: false }, { name: 'Fire Temple', mq: false }, { name: 'Water Temple', mq: false }, { name: 'Shadow Temple', mq: false }, { name: 'Spirit Temple', mq: false }, { name: 'Ice Cavern', mq: false }, { name: 'GTG', mq: false }, { name: "Ganon's Castle", mq: false }]
+
+    if (options.automark) {
+      app.worlds.forEach((world) => {
+        world.locations.Array().forEach((locale) => {
+          if (this.log.log.settings.disabled_locations.includes(locale.name)) locale.completed = true
+        })
+      })
+    }
+
+    app.local.world = app.worlds[0]
+    $('#spoiler').value = null
+    this.handleModal(e)
+  }
+
   getModal () {
     switch (this.state.display) {
       case 1:
@@ -93,6 +133,8 @@ export default class Application extends React.Component {
         return <SaveModal onSaveLoad={this.handleModal} save={this.selectedSave} />
       case 3:
         return <CreateSaveModal onSave={this.handleSaveCreated} />
+      case 4:
+        return <SpoilerModal onSaveLoad={this.handleLoadSpoiler} log={this.log} />
     }
   }
 
@@ -111,7 +153,7 @@ export default class Application extends React.Component {
           <div className='pane-group'>
             <div class='pane-md' style={{ minWidth: '240px' }}>
               <ErrorBoundary fallback={<p>Sidebar failed to load</p>}>
-                <Sidebar onSave={this.handleCreateSave} onModal={this.handleSidebarModal} saves={this.state.saves} page={this.state.sidebar} />
+                <Sidebar onSave={this.handleCreateSave} onSpoilerUpload={this.handleSpoiler} onModal={this.handleSidebarModal} saves={this.state.saves} page={this.state.sidebar} />
               </ErrorBoundary>
             </div>
             <div class='pane'>

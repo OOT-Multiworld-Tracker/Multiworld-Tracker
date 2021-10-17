@@ -49,7 +49,21 @@ export default class Locations extends React.Component {
     app.on('scene updated', (scene) => {
       console.log(scene)
       app.global.scene = scene
+
       this.setState({ scene })
+
+      Parser.ParseScenes().map((scene) => {
+        if (this.checkLocation(app.local.world.Accessible(false, false, app.global.scene), String(scene.id))) {
+          return (<option key={scene.id} value={scene.id}>{scene.name}</option>)
+        } else {
+          if (this.state.scene === scene.id) {
+            this.setState({ scene: '-1' })
+            return null
+          }
+
+          return null
+        }
+      })
     })
   }
 

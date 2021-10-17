@@ -153,18 +153,11 @@ export class NetworkManager {
           app.emit('items updated', app.local.world.items)
           break
 
+        case ElectronPayloads.COLLECTABLE_COLLECTED:
+        case ElectronPayloads.EVENT_TRIGGERED:
+        case ElectronPayloads.SKULLTULA_COLLECTED:
         case ElectronPayloads.CHEST_OPENED:
-          let switches = JSON.parse(parsed.data.data).object.toString(2).split('').reverse()
-
-          app.lastChestID = JSON.parse(parsed.data.data).object
-
-          switches.forEach((switchState, index) => {
-            if (switchState === '1') {
-              app.local.world.locations.GetScene(parsed.data.scene)[index].completed = Boolean(parseInt(switchState))
-              Parser.addLocationID(app.local.world.locations.GetScene(parsed.data.scene)[index].id, app.lastChestID)
-            }
-          })
-
+          app.lastEvent = { payload: parsed.payload, data: JSON.parse(parsed.data.data) } // Make data to be created.
           app.emit('chest opened')
           break
 

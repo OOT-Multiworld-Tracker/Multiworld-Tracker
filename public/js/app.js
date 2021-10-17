@@ -41,7 +41,7 @@ export class App extends EventEmitter {
 const app = new App()
 
 setTimeout(() => {
-  if (localStorage.getItem('save-autosave') != null) {
+  if (localStorage.getItem('autosave') != null) {
     SaveUtils.Load('autosave')
   }
 }, 1000)
@@ -140,7 +140,7 @@ export class NetworkManager {
 
       switch (parsed.payload) {
         case ElectronPayloads.SAVE_UPDATED:
-          const items = Object.assign(Object.assign({}, parsed.data.questStatus), parsed.data.inventory)
+          const items = Object.assign(Object.assign(Object.assign(Object.assign(Object.assign({}, parsed.data.questStatus), parsed.data.inventory), parsed.data.swords), parsed.data.shields), parsed.data.tunics)
           console.log(items)
 
           Object.keys(items).forEach((key) => {

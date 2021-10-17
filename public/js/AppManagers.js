@@ -79,6 +79,7 @@ export class ItemManager {
     this.bottle_2 = new Bottle('Bottle 2')
     this.bottle_3 = new Bottle('Bottle 3')
     this.bottle_4 = new Bottle('Bottle 4')
+    this.rutosLetter = new Item('Ruto\'s Letter', [0, 1])
     this.childTradeItem = new TradeItem('Child Trading')
     this.adultTradeItem = new TradeItem('Adult Trading')
     this.wallet = new Item('Wallet', [99, 200, 500, 999])
@@ -128,7 +129,8 @@ export class ItemManager {
 
 export class TrackerSettings {
   constructor () {
-    this.highlightImportantItems = new ValueSwitch('Highlight Important Items', [false, true])
+    this.itemHints = new ValueSwitch('Item Hints', [false, 'highlight important', 'show items'])
+    this.playerHints = new ValueSwitch('Player Hints', [false, true])
   }
 }
 

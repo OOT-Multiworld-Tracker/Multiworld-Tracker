@@ -38,7 +38,6 @@ class ElectronRenderer extends EventEmitter {
       frame: false,
       webPreferences: {
         contextIsolation: false,
-        enableRemoteModule: true,
         nodeIntegration: true
       }
     })
@@ -46,9 +45,7 @@ class ElectronRenderer extends EventEmitter {
     ipcMain.on('packets', (e, data) => {
       if (data.payload === 7) {
         if (!fs.existsSync(process.env.APPDATA + '/Multiworld-Tracker')) fs.mkdirSync(process.env.APPDATA + '/Multiworld-Tracker')
-
-        fs.writeFileSync(process.env.APPDATA + '/Multiworld-Tracker/locations.json', JSON.stringify(data.LocationList, null, 4))
-        return console.log(data)
+        return fs.writeFileSync(process.env.APPDATA + '/Multiworld-Tracker/locations.json', JSON.stringify(data.LocationList, null, 4))
       } else if (data === 'close') {
         return this.window.close()
       } else if (data === 'window_size') {
@@ -79,7 +76,7 @@ class ElectronRenderer extends EventEmitter {
     })
 
     autoUpdater.on('download-progress', (progress) => {
-      this.SendData(JSON.stringify({payload: 2, data: { progress: progress.bytesPerSecond, percent: progress.percent } }))
+      this.SendData(JSON.stringify({ payload: 2, data: { progress: progress.bytesPerSecond, percent: progress.percent } }))
     })
 
     autoUpdater.on('update-downloaded', async _ => {

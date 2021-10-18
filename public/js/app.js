@@ -161,9 +161,6 @@ export class NetworkManager {
           app.lastEvent = { payload: parsed.payload, data: JSON.parse(parsed.data.data) } // Make data to be created.
 
           app.local.world.locations.Accessible(false, false, app.global.scene).forEach((location) => {
-            console.log(app.lastEvent)
-            console.log(location.event)
-
             if (JSON.stringify(location.event) == JSON.stringify(app.lastEvent)) location.completed = true
           })
 

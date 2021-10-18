@@ -85,10 +85,13 @@ export class SaveUtils {
   static async Save (name) {
     return new Promise((resolve, reject) => {
       const saveFile = {}
-      Object.assign(saveFile, { dungeons: app.local.world.dungeons })
-      Object.assign(saveFile, { settings: app.global.settings.Serialize() })
-      Object.assign(saveFile, { save: app.local.world.save })
-      Object.assign(saveFile, { locations: app.local.world.locations.Array() })
+
+      Object.assign(saveFile, { // Assign all of the values to the file.
+        dungeons: app.local.world.dungeons,
+        settings: app.global.settings.Serialize(),
+        save: app.local.world.save,
+        locations: app.local.world.locations.Array()
+      })
 
       localStorage.setItem(name, JSON.stringify(saveFile))
 

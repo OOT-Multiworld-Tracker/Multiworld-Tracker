@@ -50,7 +50,9 @@ export default class Locations extends React.Component {
       console.log(scene)
       app.global.scene = scene
 
-      this.setState({ scene: Parser.ParseScenes().some(scene => scene.id == scene) ? scene : -1 })
+      console.log(Parser.ParseScenes().filter(sceneOb => this.checkLocation(app.local.world.locations.Accessible(), scene) && sceneOb.id == scene))
+
+      this.setState({ scene: Parser.ParseScenes().filter(sceneOb => this.checkLocation(app.local.world.locations.Accessible(), scene) && sceneOb.id == scene).length > 0 ? scene : -1 })
     })
   }
 

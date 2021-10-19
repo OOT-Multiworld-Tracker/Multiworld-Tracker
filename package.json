@@ -43,7 +43,7 @@
     "electron-webpack": "^2.8.2",
     "express": "^4.17.1",
     "react": "^17.0.2",
-    "ws": "^7.4.4"
+    "ws": ">=7.4.6"
   },
   "devDependencies": {
     "@node-minify/babel-minify": "^6.2.0",

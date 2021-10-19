@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, ipcRenderer, protocol } = require('electron')
+const { app, BrowserWindow, ipcMain } = require('electron')
 const EventEmitter = require('events')
 const { autoUpdater } = require('electron-updater')
 const fs = require('fs')
@@ -36,69 +36,45 @@ class ElectronRenderer extends EventEmitter {
       width: 1024,
       height: 748,
       frame: false,
-      webPreferences: {
-        contextIsolation: false,
-        nodeIntegration: true
-      }
+      webPreferences: { contextIsolation: false, nodeIntegration: true }
     })
 
-    ipcMain.on('packets', (e, data) => {
+    ipcMain.on('packets', (_, data) => {
       if (data.payload === 7) {
         if (!fs.existsSync(process.env.APPDATA + '/Multiworld-Tracker')) fs.mkdirSync(process.env.APPDATA + '/Multiworld-Tracker')
         return fs.writeFileSync(process.env.APPDATA + '/Multiworld-Tracker/locations.json', JSON.stringify(data.LocationList, null, 4))
-      } else if (data === 'close') {
-        return this.window.close()
-      } else if (data === 'window_size') {
-        return this.window.isMaximized ? this.window.maximize() : this.window.unmaximize()
-      } else if (data === 'minimize') {
-        return this.window.minimize()
-      }
+      } else if (data === 'close') return this.window.close()
+      else if (data === 'window_size') return this.window.isMaximized ? this.window.maximize() : this.window.unmaximize()
+      else if (data === 'minimize') return this.window.minimize()
 
       this.emit('data', data)
     })
 
-    // Debug runner
-    if (process.argv[0].includes('electron')) {
-      return this.LoadWindow('index.html')
-    }
+    // Skip the updating within a development environment
+    if (process.argv[0].includes('electron')) return this.LoadWindow('index.html')
 
-    this.LoadUpdater()
-    autoUpdater.checkForUpdates()
+    this.LoadUpdater() // Load the updater and check for updates
 
-    autoUpdater.on('update-not-available', () => {
-      console.log('Client up to date')
-      this.LoadWindow('index.html')
-    })
-
-    autoUpdater.on('error', (err) => {
-      console.log('Error: ' + err)
-      this.LoadWindow('index.html')
-    })
+    autoUpdater.on('update-not-available', this.LoadWindow('index.html'))
+    autoUpdater.on('error', this.LoadWindow('index.html'))
 
     autoUpdater.on('download-progress', (progress) => {
       this.SendData(JSON.stringify({ payload: 2, data: { progress: progress.bytesPerSecond, percent: progress.percent } }))
     })
 
     autoUpdater.on('update-downloaded', async _ => {
-      console.log('Update complete')
       const file = await this.window.getRepresentedFilename()
 
-      switch (file) {
-        case 'index.html':
-          this.SendData({ payload: 2, data: 'update' })
-          break
-        case 'update.html':
-          autoUpdater.quitAndInstall()
-      }
+      if (file === 'index.html') this.SendData({ payload: 2, data: 'update' }) // If it's the main application, tell the window to show update.
+      else autoUpdater.quitAndInstall() // Quit and install the update if on the updater.
     })
 
-    setInterval(() => {
-      autoUpdater.checkForUpdates()
-    }, 600000)
+    setInterval(() => autoUpdater.checkForUpdates(), 600000)
   }
 
   LoadUpdater () {
     this.window.loadFile('public/update.html')
+    autoUpdater.checkForUpdates()
   }
 
   /**

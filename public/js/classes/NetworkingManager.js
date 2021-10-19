@@ -7,9 +7,7 @@ export class NetworkManager {
     this.app = app
 
     require('electron').ipcRenderer.on('packet', (_, data) => {
-      console.log(data)
-      const parsed = JSON.parse(data)
-      console.log(parsed)
+      const parsed = JSON.parse(String(data))
       let items
 
       switch (parsed.payload) {

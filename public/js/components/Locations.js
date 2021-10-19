@@ -47,18 +47,13 @@ export default class Locations extends React.Component {
     this.handleContextMenu = this.handleContextMenu.bind(this)
 
     app.on('scene updated', (scene) => {
-      console.log(scene)
       app.global.scene = scene
-
-      console.log(Parser.ParseScenes().filter(sceneOb => this.checkLocation(app.local.world.locations.Accessible(), scene) && sceneOb.id == scene))
 
       this.setState({ scene: Parser.ParseScenes().filter(sceneOb => this.checkLocation(app.local.world.locations.Accessible(), scene) && sceneOb.id == scene).length > 0 ? scene : -1 })
     })
   }
 
   handleContextMenu (e, id) {
-    console.log(id)
-    console.log(e)
     this.setState({ dropdown: { left: e.pageX - 240, top: e.pageY - 22 } })
     this.props.onContextMenu(e, id)
   }
@@ -120,7 +115,7 @@ export class Location extends React.PureComponent {
   render () {
     return (
       <ErrorBoundary fallback={<p>Location Failed to Load</p>}>
-        <ListItem style={{ backgroundColor: ((app.global.tracker.itemHints.Index() === 1 && this.hasRareItem()) || this.props.important) ? '#cbef28' : '' }} onClick={() => app.local.world.locations.ToggleCompleted(this.props)} onContextMenu={(e) => { e.preventDefault(); this.props.onContextMenu(e, this.props.id) }}>
+        <ListItem style={{ backgroundColor: ((app.global.tracker.itemHints.Index() === 1 && this.hasRareItem()) || this.props.important) ? '#cbef28' : '' }} onClick={() => app.local.world.locations.ToggleCompleted(this.props.id)} onContextMenu={(e) => { e.preventDefault(); this.props.onContextMenu(e, this.props.id) }}>
           <div className='location-name' style={{ color: this.props.useless ? '#666' : null }}>{this.props.name} {app.global.tracker.playerHints.value == true ? <span class='badge'>{app.local.world.locations.Array()[this.props.id].item.player}</span> : null}</div>
           <div className='location-items'>{app.global.tracker.itemHints.value === 'show items' ? app.local.world.locations.Array()[this.props.id].item.item : this.props.item}</div>
         </ListItem>

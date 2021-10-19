@@ -5,21 +5,25 @@ import { List, ListItem } from './Lists'
 export default class Settings extends React.Component {
   constructor (props) {
     super(props)
-    this.state = { settings: this.props.settings }
+    this.state = { settings: app.global.settings }
+
+    app.on('setting change', settings => {
+      this.setState({ settings })
+    })
   }
 
   changeSetting (id) {
-    this.props.settings[id].Toggle()
-    this.setState({ settings: this.props.settings })
+    app.global.settings[id].Toggle()
+    this.setState({ settings: app.global.settings })
   }
 
   render () {
     return (
       <List>
-        {Object.keys(this.props.settings).map((setting) => (
+        {Object.keys(app.global.settings).map((setting) => (
           <ListItem key={setting.name} onClick={() => this.changeSetting(setting)}>
-            <div className='location-name'>{this.props.settings[setting].name}</div>
-            <div className='location-items'>{(this.props.settings[setting].value === true ? 'Yes' : (this.props.settings[setting].value === false ? 'No' : this.props.settings[setting].value))}</div>
+            <div className='location-name'>{app.global.settings[setting].name}</div>
+            <div className='location-items'>{(app.global.settings[setting].value === true ? 'Yes' : (app.global.settings[setting].value === false ? 'No' : app.global.settings[setting].value))}</div>
           </ListItem>)
         )}
       </List>

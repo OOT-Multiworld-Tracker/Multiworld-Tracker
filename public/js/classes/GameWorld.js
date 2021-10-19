@@ -1,3 +1,4 @@
+import { App } from '../app'
 import { ItemManager, LocationManager } from '../AppManagers'
 
 const save = {
@@ -127,5 +128,24 @@ export class GameWorld {
      */
     this.locations = new LocationManager(this)
     this.dungeons = [{ name: 'Deku Tree', mq: false }, { name: "Dodongo's Cave", mq: false }, { name: 'Bottom of the Well', mq: false }, { name: "Jabu Jabu's Belly", mq: false }, { name: 'Forest Temple', mq: false }, { name: 'Fire Temple', mq: false }, { name: 'Water Temple', mq: false }, { name: 'Shadow Temple', mq: false }, { name: 'Spirit Temple', mq: false }, { name: 'Ice Cavern', mq: false }, { name: 'GTG', mq: false }, { name: "Ganon's Castle", mq: false }]
+  }
+
+  /**
+   * Synchronizes the game world with the other trackers.
+   * @async
+   */
+  Sync () {
+    return new Promise((resolve, reject) => {
+      // Announce the current save-status of your tracker to other trackers.
+      this.world.app.networking.Send({
+        world: this.world.app.worlds.indexOf(this.world.app.local.world),
+        save: this.world.save,
+        locations: this.world.locations,
+        dungeons: this.world.dungeons,
+        items: this.world.items
+      })
+
+      resolve()
+    })
   }
 }

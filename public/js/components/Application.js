@@ -123,6 +123,7 @@ export default class Application extends React.Component {
     app.local.world = app.worlds[0]
     $('#spoiler').value = null
     this.handleModal(e)
+    this.setState({ world: app.local.world, locations: app.local.world.locations })
   }
 
   getModal () {

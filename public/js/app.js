@@ -89,8 +89,10 @@ export class SaveUtils {
         dungeons: app.local.world.dungeons,
         settings: app.global.settings.Serialize(),
         save: app.local.world.save,
-        locations: app.local.world.locations.Array()
+        locations: app.local.world.locations.Array().map((location) => { return { completed: location.completed, item: location.item, display: location.display, name: location.name, preExit: location.preExit, scene: location.scene } })
       })
+
+      console.log(saveFile)
 
       localStorage.setItem(name, JSON.stringify(saveFile))
 

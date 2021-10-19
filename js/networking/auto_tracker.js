@@ -19,7 +19,7 @@ class AutoTracker extends EventEmitter {
       this.socket.send(JSON.stringify({ PAYLOAD: 0 }))
       this.emit('tracker status', true)
     })
-    this.socket.on('message', (data) => { this.emit('data', data) })
+    this.socket.on('message', (data) => { this.emit('data', String(data)) })
   }
 
   Send (data) {

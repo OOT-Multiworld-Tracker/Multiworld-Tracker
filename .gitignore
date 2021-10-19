@@ -4,3 +4,4 @@ dist/
 builder/app/*
 !builder/app/package.json
 *.code-workspace
+out/

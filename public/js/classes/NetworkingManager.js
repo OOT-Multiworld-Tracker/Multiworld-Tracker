@@ -34,6 +34,7 @@ export class NetworkManager {
         case ElectronPayloads.EVENT_TRIGGERED:
         case ElectronPayloads.SKULLTULA_COLLECTED:
         case ElectronPayloads.CHEST_OPENED:
+        case ElectronPayloads.SHOPNUT_BOUGHT:
           this.app.lastEvent = { payload: parsed.payload, data: JSON.parse(parsed.data.data) } // Make data to be created.
 
           this.app.local.world.locations.Accessible(false, false, this.app.global.scene).forEach((location) => {

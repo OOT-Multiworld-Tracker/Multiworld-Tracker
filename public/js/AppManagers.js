@@ -3,20 +3,38 @@ import { Item, Bottle, TradeItem } from './classes/Item'
 import { MapToArray } from './Utils'
 import Parser from './classes/Parser'
 import { GameWorld } from './classes/GameWorld'
-import { NetworkManager } from './app'
 
 export class SettingsManager {
   constructor (spoiler) {
+    /**
+     * Progression-related settings
+     */
     this.openForest = new ValueSwitch('Open Forest', ['open', 'closed'])
     this.openKakariko = new ValueSwitch('Open Kakariko', ['open', 'closed'])
     this.openDoorOfTime = new ValueSwitch('Open Door Of Time', [false, true])
     this.zoraFountain = new ValueSwitch('Zora Fountain', ['open', 'closed'])
     this.gerudoFortress = new ValueSwitch('Gerudo Fortress', ['vanilla', 'fast', 'open'])
+
+    /**
+     * Win conditions
+     */
     this.bridge = new ValueSwitch('Bridge', ['vanilla', 'stones', 'medallions', 'skulltulas', 'open'])
     this.bridgeStones = new ValueSwitch('Bridge Stones', [0, 1, 2, 3, 4, 5, 6])
     this.triforceHunt = new ValueSwitch('Triforce Hunt', [false, true])
+
+    /**
+     * Bombchus able to be used in-place of bombs.
+     */
     this.bombchusInLogic = new ValueSwitch('Bombchus in Logic', [false, true])
+
+    /**
+     * Whether or not to skip zelda -- removes items from pool.
+     */
     this.skipChildZelda = new ValueSwitch('Skip Child Zelda', [false, true])
+
+    /**
+     * Shuffle settings for items / changes avaliable item pool.
+     */
     this.shuffleKokiriSword = new ValueSwitch('Shuffle Kokiri Sword', [false, true])
     this.shuffleOcarinas = new ValueSwitch('Shuffle Ocarinas', [false, true])
     this.shuffleWeirdEgg = new ValueSwitch('Shuffle Weird Egg', [false, true])
@@ -26,6 +44,10 @@ export class SettingsManager {
     this.shuffleBeans = new ValueSwitch('Shuffle Beans', [false, true])
     this.shuffleMedigoronCarpetSalesman = new ValueSwitch('Shuffle Medigoron Carpet Salesman', [false, true])
     this.shuffleScrubs = new ValueSwitch('Shuffle Scrubs', [false, 'low', 'high'])
+
+    /**
+      * Shuffle settings for items / changes avaliable item pool.
+     */
     this.shopSanity = new ValueSwitch('Shop Sanity', ['none', 1, 2, 3, 4])
     this.tokenSanity = new ValueSwitch('Token Sanity', ['vanilla', 'dungeon', 'overworld', 'all'])
 
@@ -57,6 +79,9 @@ export class KeyManager {
 
 export class ItemManager {
   constructor (world) {
+    /**
+     * Basic major items.
+     */
     this.dekuSticks = new Item('Deku Sticks', [0, 10, 20, 30])
     this.dekuNuts = new Item('Deku Nuts', [0, 20, 30, 40])
     this.bombs = new Item('Bomb Bag', [0, 30, 40, 50])
@@ -75,28 +100,58 @@ export class ItemManager {
     this.lensOfTruth = new Item('Lens of Truth', [0, 1])
     this.boomerang = new Item('Boomerang', [0, 1])
     this.megatonHammer = new Item('Megaton Hammer', [0, 1])
+
+    /**
+     * A list of bottles on a special class denoting all bottle values.
+     */
     this.bottle_1 = new Bottle('Bottle 1')
     this.bottle_2 = new Bottle('Bottle 2')
     this.bottle_3 = new Bottle('Bottle 3')
     this.bottle_4 = new Bottle('Bottle 4')
+
     this.rutosLetter = new Item('Ruto\'s Letter', [0, 1])
+
+    /**
+     * All of the trade items.
+     */
     this.childTradeItem = new TradeItem('Child Trading')
     this.adultTradeItem = new TradeItem('Adult Trading')
+
     this.wallet = new Item('Wallet', [99, 200, 500, 999])
     this.swimming = new Item('Swimming', [0, 'Silver Scale', 'Gold Scale'])
     this.strength = new Item('Strength Upgrade', [0, 'Goron\'s Bracelet', 'Silver Gauntlet', 'Golden Gauntlet'])
+
+    /**
+     * Swords
+     */
     this.kokiriSword = new Item('Kokiri Sword', [0, 1])
     this.masterSword = new Item('Master Sword', [0, 1])
     this.biggoronSword = new Item('Biggoron Sword', [0, 1])
+
+    /**
+     * Tunics
+     */
     this.goronTunic = new Item('Goron Tunic', [0, 1])
     this.zoraTunic = new Item('Zora Tunic', [0, 1])
     this.dekuShield = new Item('Deku Shield', [0, 1])
+
+    /**
+     * Shields
+     */
     this.hylianShield = new Item('Hylian Shield', [0, 1])
     this.mirrorShield = new Item('Mirror Shield', [0, 1])
+
+    /**
+     * Quest Status Items
+     */
     this.gerudoMembershipCard = new Item('Gerudo Membership Card', [0, 1])
     this.stoneOfAgony = new Item('Stone of Agony', [0, 1])
     this.goldSkulltulas = new Item('Gold Skulltulas', [0, 10, 20, 30, 40, 50])
     this.heartPieces = new Item('Heart Pieces', [0, 4, 8, 12, 16, 20, 24, 28, 32])
+
+    /**
+     * Songs
+     */
     this.zeldasLullaby = new Item('Zelda\'s Lullaby', [0, 1])
     this.eponasSong = new Item('Epona\'s Song', [0, 1])
     this.sunsSong = new Item('Sun\'s Song', [0, 1])
@@ -119,6 +174,9 @@ export class ItemManager {
     this.spiritMedallion = new Item('Spirit Medallion', [0, 1])
     this.shadowMedallion = new Item('Shadow Medallion', [0, 1])
 
+    /**
+     * Key lists
+     */
     this.forestTemple = new KeyManager('Forest Temple')
     this.fireTemple = new KeyManager('Fire Temple')
     this.waterTemple = new KeyManager('Water Temple')
@@ -138,11 +196,18 @@ export class TrackerSettings {
  * The base manager that controls locations and spoilers.
  */
 export class LocationManager {
-  constructor (world, locations, spoiler) {
+  constructor (world) {
+    /**
+     * The world this location manager is for.
+     * @type {GameWorld}
+     */
     this.world = world
-    this.spoiler = spoiler
-    this.locations = Parser.ParseLocations()
-    console.log(this.locations)
+
+    /**
+     * The locations in this world.
+     * @type {Location[]}
+     */
+    this.locations = Parser.ParseLocations(this)
   }
 
   /**
@@ -166,7 +231,8 @@ export class LocationManager {
   / @returns {Location[]}
   */
   Accessible (complete = false, showItems = false, scene = -1) {
-    return this.Array().filter(location => (location.scene == scene || scene == -1) && (this.IsAccessible(location, this.world) && complete === false && !location.completed) || (complete && location.completed === true))
+    return this.Array().filter(location =>
+      (location.scene == scene || scene == -1) && (this.IsAccessible(location, this.world) && (complete == false && location.completed == false) || (complete == true && location.completed)))
   }
 
   /**
@@ -179,8 +245,8 @@ export class LocationManager {
 
   /**
    * Checks if the item within a world is accessible
-   * @param {Object} location 
-   * @param {GameWorld} world 
+   * @param {Object} location
+   * @param {GameWorld} world
    * @returns {Boolean}
    */
   IsAccessible (location, world) {
@@ -189,14 +255,11 @@ export class LocationManager {
 
   /**
    * Toggle the completion status on/off for a location
-   * @param {*} props 
+   * @param {String} id
+   * @deprecated
    */
-  ToggleCompleted (props) {
-    this.Array()[String(props.id)].completed = !this.Array()[String(props.id)].completed
-
-    Parser.addLocationID(props.id, this.Array()[String(props.id)].completed === false ? -1 : this.world.app.lastEvent)
-
-    require('electron').ipcRenderer.send('packets', JSON.stringify({ world: this.world.app.worlds.indexOf(this.world.app.local.world), save: { swords: this.world.app.local.world.save.swords, shields: this.world.app.local.world.save.shields, inventory: this.world.app.local.world.save.inventory, questStatus: this.world.app.local.world.save.questStatus }, locations: this.world.app.networking.Serialize(this.world.app.local.world.locations.Array(), 'completed') }).replace(/true/g, '1').replace(/false/g, '0'))
+  ToggleCompleted (id) {
+    this.Array()[id].Mark()
   }
 
   /**
@@ -206,6 +269,7 @@ export class LocationManager {
    */
   Search (term, scene = -1, page = 0) {
     const keywords = term.split(' ')
+
     return (page === 0 ? this.Accessible(false, false, scene) : this.Get(true, scene)).filter((location) => {
       let valid = true
       keywords.forEach(keyword => {
@@ -224,5 +288,60 @@ export class LocationManager {
    */
   Get (completed = false, scene = -1) {
     return this.Array().filter(location => (location.scene == scene || scene == -1) && location.completed === completed)
+  }
+}
+
+export class Location {
+  constructor (manager, data) {
+    /**
+     * The manager this location is for.
+     * @type {LocationManager}
+     */
+    this.manager = manager
+
+    /**
+     * The name of the location.
+     * @type {string}
+     */
+    this.name = data.name
+
+    /**
+     * The id of the location.
+     * @type {string}
+     */
+    this.id = data.id
+
+    /**
+     * The scene of the location.
+     * @type {string}
+     */
+    this.scene = data.scene
+
+    /**
+     * Whether the location is accessible before exiting the forest.
+     * @type {boolean}
+     */
+    this.preExit = data.preExit
+
+    /**
+     * Whether the location is completed.
+     * @type {boolean}
+     */
+    this.completed = false
+
+    /**
+     * Whether the location is accessible.
+     * @type {boolean}
+     */
+    this.logic = data.logic
+  }
+
+  /**
+   * Toggle the mark status of the location.
+   */
+  Mark () {
+    this.completed = !this.completed
+    Parser.addLocationID(this.id, this.manager.world.app.lastEvent) // Add the ID of the last event to the location.json
+    this.manager.world.Sync()
   }
 }

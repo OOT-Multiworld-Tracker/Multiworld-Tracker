@@ -1,5 +1,5 @@
 import { existsSync, readFileSync } from 'original-fs'
-import { SettingsManager } from '../AppManagers'
+import { SettingsManager, Location, LocationManager } from '../AppManagers'
 import { GameWorld } from './GameWorld'
 
 const LocationList = (existsSync(process.env.APPDATA + '/multiworld-tracker/locations.json')) ? JSON.parse(readFileSync(process.env.APPDATA + '/multiworld-tracker/locations.json')) : require('../locations.json')
@@ -21,6 +21,7 @@ export default class Parser {
 
       Object.keys(log.locations).forEach((world, windex) => {
         Object.values(log.locations[world]).forEach((locale, index) => {
+          if (!spoiler.worlds[windex].locations.Array()[index]) return
           spoiler.worlds[windex].locations.Array()[index].item = locale
         })
       })
@@ -43,11 +44,16 @@ export default class Parser {
   }
 
   static addLocationID (id, event) {
-    if ((!LocationList[id].event || !LocationList[id].event === -1) || event === -1) LocationList[id].event = event
+    if ((!LocationList[id].event || !LocationList[id].event === -1) && event != -1) LocationList[id].event = event
     require('electron').ipcRenderer.send('packets', { payload: 7, LocationList })
   }
 
-  static ParseLocations (worlds, spoiler = null) {
+  /**
+   * Parse the locations.json into a usable map.
+   * @param {LocationManager} manager
+   * @returns {Map<Location>}
+   */
+  static ParseLocations (manager) {
     const locations = new Map()
 
     LocationList.forEach((locale, index) => {
@@ -55,7 +61,7 @@ export default class Parser {
       location.id = index
 
       if (location.logic) { location.logic = eval(locale.logic) }
-      locations.set(String(index), location)
+      locations.set(String(index), new Location(manager, location))
     })
 
     return locations

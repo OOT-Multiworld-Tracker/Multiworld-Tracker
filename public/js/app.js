@@ -1,3 +1,4 @@
+import { ipcRenderer } from 'electron'
 import { SettingsManager, ItemManager, TrackerSettings, LocationManager } from './AppManagers'
 import { GameWorld } from './classes/GameWorld'
 import Parser from './classes/Parser'
@@ -138,11 +139,13 @@ export class NetworkManager {
   constructor () {
     require('electron').ipcRenderer.on('packet', (_, data) => {
       const parsed = JSON.parse(data)
+      console.log(parsed);
 
       switch (parsed.payload) {
         case ElectronPayloads.SAVE_UPDATED:
           const items = Object.assign({}, parsed.data.save.questStatus, parsed.data.save.inventory, parsed.data.save.boots, parsed.data.save.shields, parsed.data.save.tunics, parsed.data.save.swords)
           console.log(items)
+          console.log(app.lastEvent);
 
           Object.keys(items).forEach((key) => {
             if (app.local.world.items[key] === undefined) return // Ignore any keys not within the item manager.
@@ -153,19 +156,19 @@ export class NetworkManager {
           console.log(app.local.world)
           app.emit('items updated', app.local.world.items)
           break
-
+        
         case ElectronPayloads.COLLECTABLE_COLLECTED:
         case ElectronPayloads.EVENT_TRIGGERED:
         case ElectronPayloads.SKULLTULA_COLLECTED:
         case ElectronPayloads.CHEST_OPENED:
+        case ElectronPayloads.SHOPNUT_BOUGHT:
           app.lastEvent = { payload: parsed.payload, data: JSON.parse(parsed.data.data) } // Make data to be created.
 
           app.local.world.locations.Accessible(false, false, app.global.scene).forEach((location) => {
-            console.log(app.lastEvent)
-            console.log(location.event)
-            
             if (JSON.stringify(location.event) == JSON.stringify(app.lastEvent)) location.completed = true
           })
+
+          console.log(app.lastEvent);
 
           app.emit('chest opened')
           break

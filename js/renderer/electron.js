@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, protocol } = require('electron')
+const { app, BrowserWindow, ipcMain, ipcRenderer, protocol } = require('electron')
 const EventEmitter = require('events')
 const { autoUpdater } = require('electron-updater')
 const fs = require('fs')

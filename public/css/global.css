@@ -20,6 +20,20 @@ body {
     overflow-y: unset;
 }
 
+.character_name {
+    font-size: 1.2em;
+    font-weight: bold;
+    display: flex;
+}
+
+.character_name span {
+    width: 50%
+}
+
+.character_name span:last-child {
+    text-align: right;
+}
+
 .location-name, .location-items {
     display: inline;
     width: 70%;

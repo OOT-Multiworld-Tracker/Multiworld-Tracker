@@ -35,7 +35,7 @@ export default class Player extends React.Component {
   render () {
     return (
       <div className='player'>
-        <div className='character_name' onClick={() => this.openStats()}>{this.state.save.player_name} <img width='16' src='/images/green_rupee.png' />{this.state.save.rupee_count}</div>
+        <div className='character_name' onClick={() => this.openStats()}><span>{this.state.save.player_name}</span> <span><img width='16' src={app.worlds[this.state.world].items.wallet.Index() == 0 ? '/images/green_rupee.png' : '/images/blue_rupee.png'} />{this.state.save.rupee_count}</span></div>
         <div className='heart_containers'>{this.generateContainers()}</div>
       </div>
     )

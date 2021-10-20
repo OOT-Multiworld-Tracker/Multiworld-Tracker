@@ -75,7 +75,7 @@ export default class Sidebar extends React.Component {
   homePage () {
     return (
       <>
-        <input type='number' className='form-control' value={this.state.worldId} max={app.worlds.length+1} min='0' onChange={(e) => { app.global.world = e.target.value; this.setState({ worldId: e.target.value }); app.local.world = app.worlds[app.global.world] }} />
+        <input type='number' className='form-control' value={String(this.state.worldId)} max={app.worlds.length+1} min='0' onChange={(e) => { app.global.world = e.target.value; this.setState({ worldId: e.target.value }); app.local.world = app.worlds[app.global.world] }} />
         <PlayerList />
       </>
     )

@@ -67,14 +67,18 @@
       "packagerConfig": {
         "name": "Multiworld Tracker",
         "icon": "build/icon.ico",
-        "authors": ["Matthe815"]
+        "authors": [
+          "Matthe815"
+        ]
       },
       "makers": [
         {
           "name": "@electron-forge/maker-squirrel",
           "config": {
             "name": "multiworld_tracker",
-            "authors": ["Matthe815"],
+            "authors": [
+              "Matthe815"
+            ],
             "setupIcon": "build/icon.ico"
           }
         },

@@ -58,12 +58,12 @@
     },
     {
         "name": "Song from Composers Grave",
-        "logic": "(world) => (world.items.ocarina.Index() >= 1 && world.save.questStatus.zeldasLullaby) && HasExplosives(world) && CanDamage(world) && (world.items.fairySlingshot.value > 0 || world.items.boomerang.value === 1)",
+        "logic": "(world) => (world.items.ocarina.Index() >= 1 && world.items.zeldasLullaby) && HasExplosives(world) && CanDamage(world) && (world.items.fairySlingshot.value > 0 || world.items.boomerang.value === 1)",
         "scene": "83"
     },
     {
         "name": "Song from Ocarina of Time",
-        "logic": "(world) => world.save.questStatus.kokiriEmerald && world.save.questStatus.goronRuby && world.save.questStatus.zoraSapphire",
+        "logic": "(world) => world.items.kokiriEmerald && world.items.goronRuby && world.items.zoraSapphire",
         "scene": "81"
     },
     {
@@ -98,7 +98,7 @@
     },
     {
         "name": "Sheik at Temple",
-        "logic": "(world) => CanBecomeAdult(world) && world.save.questStatus.spiritMedallion",
+        "logic": "(world) => CanBecomeAdult(world) && world.items.spiritMedallion",
         "scene": "6"
     },
     {
@@ -238,7 +238,7 @@
     },
     {
         "name": "HF Tektite Grotto Freestanding PoH",
-        "logic": "(world) => HasExplosives(world) && (world.items.swimming.Index() == 2 || (CanBecomeAdult(world) && world.save.boots.ironBoots))",
+        "logic": "(world) => HasExplosives(world) && (world.items.swimming.Index() == 2 || (CanBecomeAdult(world) && world.items.ironBoots))",
         "scene": "81"
     },
     {
@@ -346,7 +346,7 @@
     },
     {
         "name": "ToT Light Arrows Cutscene",
-        "logic": "(world) => world.save.questStatus.shadowMedallion && world.save.questStatus.spiritMedallion",
+        "logic": "(world) => world.items.shadowMedallion && world.items.spiritMedallion",
         "scene": "67"
     },
     {
@@ -418,27 +418,27 @@
     },
     {
         "name": "Kak 10 Gold Skulltula Reward",
-        "logic": "(world) => world.save.questStatus.goldSkulltulas >= 10",
+        "logic": "(world) => world.items.goldSkulltulas >= 10",
         "scene": "82"
     },
     {
         "name": "Kak 20 Gold Skulltula Reward",
-        "logic": "(world) => world.save.questStatus.goldSkulltulas >= 20",
+        "logic": "(world) => world.items.goldSkulltulas >= 20",
         "scene": "82"
     },
     {
         "name": "Kak 30 Gold Skulltula Reward",
-        "logic": "(world) => world.save.questStatus.goldSkulltulas >= 30",
+        "logic": "(world) => world.items.goldSkulltulas >= 30",
         "scene": "82"
     },
     {
         "name": "Kak 40 Gold Skulltula Reward",
-        "logic": "(world) => world.save.questStatus.goldSkulltulas >= 40",
+        "logic": "(world) => world.items.goldSkulltulas >= 40",
         "scene": "82"
     },
     {
         "name": "Kak 50 Gold Skulltula Reward",
-        "logic": "(world) => world.save.questStatus.goldSkulltulas >= 50",
+        "logic": "(world) => world.items.goldSkulltulas >= 50",
         "scene": "82"
     },
     {
@@ -487,12 +487,12 @@
     },
     {
         "name": "Graveyard Heart Piece Grave Chest",
-        "logic": "(world) => world.items.ocarina.Index() > 0 && world.save.questStatus.sunsSong",
+        "logic": "(world) => world.items.ocarina.Index() > 0 && world.items.sunsSong",
         "scene": "83"
     },
     {
         "name": "Graveyard Composers Grave Chest",
-        "logic": "(world) => (world.items.ocarina.Index() > 0 && world.save.questStatus.zeldasLullaby) && HasExplosives(world) && CanLightFires(world)",
+        "logic": "(world) => (world.items.ocarina.Index() > 0 && world.items.zeldasLullaby) && HasExplosives(world) && CanLightFires(world)",
         "scene": "83"
     },
     {
@@ -526,12 +526,12 @@
     },
     {
         "name": "DMT Storms Grotto Chest",
-        "logic": "(world) => CanEnterDeathMountain(world) && world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfStorms",
+        "logic": "(world) => CanEnterDeathMountain(world) && world.items.ocarina.Index() >= 1 && world.items.songOfStorms",
         "scene": "96"
     },
     {
         "name": "DMT Great Fairy Reward",
-        "logic": "(world) => CanEnterDeathMountain(world) && world.items.ocarina.Index() >= 1 && world.items.ocarina.Index() > 0 && world.save.questStatus.zeldasLullaby && HasExplosives(world)",
+        "logic": "(world) => CanEnterDeathMountain(world) && world.items.ocarina.Index() >= 1 && world.items.ocarina.Index() > 0 && world.items.zeldasLullaby && HasExplosives(world)",
         "scene": "96"
     },
     {
@@ -541,12 +541,12 @@
     },
     {
         "name": "GC Darunias Joy",
-        "logic": "(world) => CanEnterDeathMountain(world) && world.items.ocarina.Index() >= 1 && world.save.questStatus.sariasSong == true",
+        "logic": "(world) => CanEnterDeathMountain(world) && world.items.ocarina.Index() >= 1 && world.items.sariasSong == true",
         "scene": "98"
     },
     {
         "name": "GC Pot Freestanding PoH",
-        "logic": "(world) => CanEnterDeathMountain(world) && HasExplosives(world) && CanLightFires(world) && ((world.items.ocarina.Index() >= 1 && world.save.questStatus.sariasSong == true) || (CanUseMagic(world) && world.items.dinsFire.value === 1))",
+        "logic": "(world) => CanEnterDeathMountain(world) && HasExplosives(world) && CanLightFires(world) && ((world.items.ocarina.Index() >= 1 && world.items.sariasSong == true) || (CanUseMagic(world) && world.items.dinsFire.value === 1))",
         "scene": "98"
     },
     {
@@ -631,7 +631,7 @@
     },
     {
         "name": "DMC Great Fairy Reward",
-        "logic": "(world) => CanEnterDeathMountain(world) && world.items.ocarina.Index() >= 1 && world.items.zeldasLullaby.value > 0 && world.save.questStatus.zeldasLullaby && HasExplosives(world)",
+        "logic": "(world) => CanEnterDeathMountain(world) && world.items.ocarina.Index() >= 1 && world.items.zeldasLullaby.value > 0 && world.items.zeldasLullaby && HasExplosives(world)",
         "scene": "97"
     },
     {
@@ -666,12 +666,12 @@
     },
     {
         "name": "ZR Frogs in the Rain",
-        "logic": "(world) => CanEnterZorasRiver(world) && world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfStorms",
+        "logic": "(world) => CanEnterZorasRiver(world) && world.items.ocarina.Index() >= 1 && world.items.songOfStorms",
         "scene": "84"
     },
     {
         "name": "ZR Frogs Ocarina Game",
-        "logic": "(world) => CanEnterZorasRiver(world) && world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfStorms && world.items.songOfTime.value > 0 && world.items.zeldasLullaby.value > 0 && world.items.sunsSong.value > 0 && world.items.eponasSong.value > 0",
+        "logic": "(world) => CanEnterZorasRiver(world) && world.items.ocarina.Index() >= 1 && world.items.songOfStorms && world.items.songOfTime.value > 0 && world.items.zeldasLullaby.value > 0 && world.items.sunsSong.value > 0 && world.items.eponasSong.value > 0",
         "scene": "84"
     },
     {
@@ -741,7 +741,7 @@
     },
     {
         "name": "ZF Bottom Freestanding PoH",
-        "logic": "(world) => CanEnterZorasDomain(world) && CanBecomeAdult(world) && world.save.boots.ironBoots",
+        "logic": "(world) => CanEnterZorasDomain(world) && CanBecomeAdult(world) && world.items.ironBoots",
         "scene": "89"
     },
     {
@@ -798,7 +798,7 @@
     },
     {
         "name": "GV Chest",
-        "logic": "(world) => world.save.questStatus.gerudoMembershipCard",
+        "logic": "(world) => world.items.gerudoMembershipCard",
         "scene": "90"
     },
     {
@@ -813,182 +813,182 @@
     },
     {
         "name": "GF Gerudo Membership Card",
-        "logic": "(world) => CanBecomeAdult(world) && (world.items.hookshot.Index() == 2 || (world.items.ocarina.Index() >= 1 && world.save.questStatus.eponasSong))",
+        "logic": "(world) => CanBecomeAdult(world) && (world.items.hookshot.Index() == 2 || (world.items.ocarina.Index() >= 1 && world.items.eponasSong))",
         "scene": "93"
     },
     {
         "name": "GF Chest",
-        "logic": "(world) => CanBecomeAdult(world) && (world.items.hookshot.Index() == 2 || (world.items.ocarina.Index() >= 1 && world.save.questStatus.eponasSong))",
+        "logic": "(world) => CanBecomeAdult(world) && (world.items.hookshot.Index() == 2 || (world.items.ocarina.Index() >= 1 && world.items.eponasSong))",
         "scene": "93"
     },
     {
         "name": "GF HBA 1000 Points",
-        "logic": "(world) => CanBecomeAdult(world) && world.save.questStatus.gerudoMembershipCard && (world.items.hookshot.Index() == 2 || (world.items.ocarina.Index() >= 1 && world.save.questStatus.eponasSong))",
+        "logic": "(world) => CanBecomeAdult(world) && world.items.gerudoMembershipCard && (world.items.hookshot.Index() == 2 || (world.items.ocarina.Index() >= 1 && world.items.eponasSong))",
         "scene": "93"
     },
     {
         "name": "GF HBA 1500 Points",
-        "logic": "(world) => CanBecomeAdult(world) && world.save.questStatus.gerudoMembershipCard && (world.items.hookshot.Index() == 2 || (world.items.ocarina.Index() >= 1 && world.save.questStatus.eponasSong))",
+        "logic": "(world) => CanBecomeAdult(world) && world.items.gerudoMembershipCard && (world.items.hookshot.Index() == 2 || (world.items.ocarina.Index() >= 1 && world.items.eponasSong))",
         "scene": "93"
     },
     {
         "name": "Wasteland Bombchu Salesman",
-        "logic": "(world) => world.items.hookshot.Index() == 2 && world.save.questStatus.gerudoMembershipCard",
+        "logic": "(world) => world.items.hookshot.Index() == 2 && world.items.gerudoMembershipCard",
         "scene": "94"
     },
     {
         "name": "Wasteland Chest",
-        "logic": "(world) => world.items.hookshot.Index() == 2 && world.save.questStatus.gerudoMembershipCard",
+        "logic": "(world) => world.items.hookshot.Index() == 2 && world.items.gerudoMembershipCard",
         "scene": "94"
     },
     {
         "name": "Colossus Great Fairy Reward",
-        "logic": "(world) => (world.items.ocarina.Index() >= 1 && world.save.questStatus.requiemOfSpirit && world.items.zeldasLullaby.value > 0) || (world.save.questStatus.gerudoMembershipCard && world.items.hookshot.Index() == 2)",
+        "logic": "(world) => (world.items.ocarina.Index() >= 1 && world.items.requiemOfSpirit && world.items.zeldasLullaby.value > 0) || (world.items.gerudoMembershipCard && world.items.hookshot.Index() == 2)",
         "scene": "92"
     },
     {
         "name": "Colossus Freestanding PoH",
-        "logic": "(world) => (world.items.ocarina.Index() >= 1 && world.save.questStatus.requiemOfSpirit) || (world.save.questStatus.gerudoMembershipCard && world.items.hookshot.Index() == 2)",
+        "logic": "(world) => (world.items.ocarina.Index() >= 1 && world.items.requiemOfSpirit) || (world.items.gerudoMembershipCard && world.items.hookshot.Index() == 2)",
         "scene": "92"
     },
     {
         "name": "Colossus Deku Scrub Grotto Front",
-        "logic": "(world) => IsScrubSanity(world) && (world.items.ocarina.Index() >= 1 && world.save.questStatus.requiemOfSpirit) || (world.save.questStatus.gerudoMembershipCard && world.items.hookshot.Index() == 2) && CanStunDeku(world)",
+        "logic": "(world) => IsScrubSanity(world) && (world.items.ocarina.Index() >= 1 && world.items.requiemOfSpirit) || (world.items.gerudoMembershipCard && world.items.hookshot.Index() == 2) && CanStunDeku(world)",
         "scene": "92"
     },
     {
         "name": "Colossus Deku Scrub Grotto Rear",
-        "logic": "(world) => IsScrubSanity(world) && (world.items.ocarina.Index() >= 1 && world.save.questStatus.requiemOfSpirit) || (world.save.questStatus.gerudoMembershipCard && world.items.hookshot.Index() == 2) && CanStunDeku(world)",
+        "logic": "(world) => IsScrubSanity(world) && (world.items.ocarina.Index() >= 1 && world.items.requiemOfSpirit) || (world.items.gerudoMembershipCard && world.items.hookshot.Index() == 2) && CanStunDeku(world)",
         "scene": "92"
     },
     {
         "name": "OGC Great Fairy Reward",
-        "logic": "(world) => (world.items.ocarina.Index() >= 1 && world.save.questStatus.requiemOfSpirit && world.save.questStatus.zeldasLullaby) || (world.save.questStatus.gerudoMembershipCard && world.items.hookshot.Index() == 2) && CanStunDeku(world) && HasExplosives()"
+        "logic": "(world) => (world.items.ocarina.Index() >= 1 && world.items.requiemOfSpirit && world.items.zeldasLullaby) || (world.items.gerudoMembershipCard && world.items.hookshot.Index() == 2) && CanStunDeku(world) && HasExplosives()"
     },
     {
         "name": "Deku Tree Lobby Chest",
         "preExit": true,
-        "logic": "(world) => world.dungeons[0].mq == false && world.save.swords.kokiriSword && world.save.shields.dekuShield",
+        "logic": "(world) => world.dungeons[0].mq == false && world.items.kokiriSword && world.items.dekuShield",
         "scene": "0"
     },
     {
         "name": "Deku Tree Slingshot Room Side Chest",
         "preExit": true,
-        "logic": "(world) => world.dungeons[0].mq == false && world.save.swords.kokiriSword && world.save.shields.dekuShield",
+        "logic": "(world) => world.dungeons[0].mq == false && world.items.kokiriSword && world.items.dekuShield",
         "scene": "0"
     },
     {
         "name": "Deku Tree Slingshot Chest",
         "preExit": true,
-        "logic": "(world) => world.dungeons[0].mq == false && world.save.swords.kokiriSword && world.save.shields.dekuShield",
+        "logic": "(world) => world.dungeons[0].mq == false && world.items.kokiriSword && world.items.dekuShield",
         "scene": "0"
     },
     {
         "name": "Deku Tree Compass Room Side Chest",
         "preExit": true,
-        "logic": "(world) => world.dungeons[0].mq == false && world.save.swords.kokiriSword && world.save.shields.dekuShield",
+        "logic": "(world) => world.dungeons[0].mq == false && world.items.kokiriSword && world.items.dekuShield",
         "scene": "0"
     },
     {
         "name": "Deku Tree Basement Chest",
         "preExit": true,
-        "logic": "(world) => world.dungeons[0].mq == false && world.save.swords.kokiriSword && world.save.shields.dekuShield && world.items.dekuNuts.value > 0",
+        "logic": "(world) => world.dungeons[0].mq == false && world.items.kokiriSword && world.items.dekuShield && world.items.dekuNuts.value > 0",
         "scene": "0"
     },
     {
         "name": "Deku Tree GS Compass Room",
         "preExit": true,
-        "logic": "(world) => world.dungeons[0].mq == false && world.save.swords.kokiriSword && world.save.shields.dekuShield && CanDamage(world)",
+        "logic": "(world) => world.dungeons[0].mq == false && world.items.kokiriSword && world.items.dekuShield && CanDamage(world)",
         "scene": "0"
     },
     {
         "name": "Deku Tree GS Basement Vines",
         "preExit": true,
-        "logic": "(world) => world.dungeons[0].mq == false && world.save.swords.kokiriSword && world.save.shields.dekuShield && world.items.fairySlingshot.value > 0",
+        "logic": "(world) => world.dungeons[0].mq == false && world.items.kokiriSword && world.items.dekuShield && world.items.fairySlingshot.value > 0",
         "scene": "0"
     },
     {
         "name": "Deku Tree GS Basement Gate",
         "preExit": true,
-        "logic": "(world) => world.dungeons[0].mq == false && world.save.swords.kokiriSword && world.save.shields.dekuShield",
+        "logic": "(world) => world.dungeons[0].mq == false && world.items.kokiriSword && world.items.dekuShield",
         "scene": "0"
     },
     {
         "name": "Deku Tree GS Basement Back Room",
         "preExit": true,
-        "logic": "(world) => world.dungeons[0].mq == false && world.save.swords.kokiriSword && world.save.shields.dekuShield",
+        "logic": "(world) => world.dungeons[0].mq == false && world.items.kokiriSword && world.items.dekuShield",
         "scene": "0"
     },
     {
         "name": "Deku Tree Queen Gohma Heart",
         "preExit": true,
-        "logic": "(world) => world.dungeons[0].mq == false && world.save.swords.kokiriSword && world.save.shields.dekuShield && world.items.fairySlingshot.value > 0",
+        "logic": "(world) => world.dungeons[0].mq == false && world.items.kokiriSword && world.items.dekuShield && world.items.fairySlingshot.value > 0",
         "scene": "17"
     },
     {
         "name": "Deku Tree MQ Before Spinning Log Chest",
         "preExit": true,
-        "logic": "(world) => world.dungeons[0].mq == true && world.save.swords.kokiriSword && world.save.shields.dekuShield",
+        "logic": "(world) => world.dungeons[0].mq == true && world.items.kokiriSword && world.items.dekuShield",
         "scene": "0"
     },
     {
         "name": "Deku Tree MQ Slingshot Room Back Chest",
         "preExit": true,
-        "logic": "(world) => world.dungeons[0].mq == true && world.save.swords.kokiriSword && world.save.shields.dekuShield",
+        "logic": "(world) => world.dungeons[0].mq == true && world.items.kokiriSword && world.items.dekuShield",
         "scene": "0"
     },
     {
         "name": "Deku Tree MQ Compass",
         "preExit": true,
-        "logic": "(world) => world.dungeons[0].mq == true && world.save.swords.kokiriSword && world.save.shields.dekuShield && CanStunDeku(world)",
+        "logic": "(world) => world.dungeons[0].mq == true && world.items.kokiriSword && world.items.dekuShield && CanStunDeku(world)",
         "scene": "0"
     },
     {
         "name": "Deku Tree MQ Map Chest",
         "preExit": true,
-        "logic": "(world) => world.dungeons[0].mq == true && world.save.swords.kokiriSword && world.save.shields.dekuShield",
+        "logic": "(world) => world.dungeons[0].mq == true && world.items.kokiriSword && world.items.dekuShield",
         "scene": "0"
     },
     {
         "name": "Deku Tree MQ Basement Chest",
         "preExit": true,
-        "logic": "(world) => world.dungeons[0].mq == true && world.save.swords.kokiriSword && world.save.shields.dekuShield",
+        "logic": "(world) => world.dungeons[0].mq == true && world.items.kokiriSword && world.items.dekuShield",
         "scene": "0"
     },
     {
         "name": "Deku Tree MQ After Spinning Log Chest",
         "preExit": true,
-        "logic": "(world) => world.dungeons[0].mq == true && world.save.swords.kokiriSword && world.save.shields.dekuShield && world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfTime == true",
+        "logic": "(world) => world.dungeons[0].mq == true && world.items.kokiriSword && world.items.dekuShield && world.items.ocarina.Index() >= 1 && world.items.songOfTime == true",
         "scene": "0"
     },
     {
         "name": "Deku Tree MQ Slingshot Chest",
         "preExit": true,
-        "logic": "(world) => world.dungeons[0].mq == true && world.save.swords.kokiriSword && world.save.shields.dekuShield && CanLightFires(world)",
+        "logic": "(world) => world.dungeons[0].mq == true && world.items.kokiriSword && world.items.dekuShield && CanLightFires(world)",
         "scene": "0"
     },    
     {
         "name": "Deku Tree MQ GS Lobby",
         "preExit": true,
-        "logic": "(world) => world.dungeons[0].mq == true && world.save.swords.kokiriSword && world.save.shields.dekuShield",
+        "logic": "(world) => world.dungeons[0].mq == true && world.items.kokiriSword && world.items.dekuShield",
         "scene": "0"
     },
     {
         "name": "Deku Tree MQ GS Compass Room",
         "preExit": true,
-        "logic": "(world) => world.dungeons[0].mq == true && world.save.swords.kokiriSword && world.save.shields.dekuShield && world.items.boomerang.value === 1 && (world.items.bombs.value > 0 || world.items.bombchus.value > 0)",
+        "logic": "(world) => world.dungeons[0].mq == true && world.items.kokiriSword && world.items.dekuShield && world.items.boomerang.value === 1 && (world.items.bombs.value > 0 || world.items.bombchus.value > 0)",
         "scene": "0"
     },
     {
         "name": "Deku Tree MQ GS Basement Graves Room",
         "preExit": true,
-        "logic": "(world) => world.dungeons[0].mq == true && world.save.swords.kokiriSword && world.save.shields.dekuShield && world.items.boomerang.value === 1",
+        "logic": "(world) => world.dungeons[0].mq == true && world.items.kokiriSword && world.items.dekuShield && world.items.boomerang.value === 1",
         "scene": "0"
     },
     {
         "name": "Deku Tree MQ GS Basement Back Room",
         "preExit": true,
-        "logic": "(world) => world.dungeons[0].mq == true && world.save.swords.kokiriSword && world.save.shields.dekuShield && world.items.boomerang.value === 1",
+        "logic": "(world) => world.dungeons[0].mq == true && world.items.kokiriSword && world.items.dekuShield && world.items.boomerang.value === 1",
         "scene": "0"
     },
     {
@@ -1058,7 +1058,7 @@
     },
     {
         "name": "Dodongos Cavern King Dodongo Heart",
-        "logic": "(world) => CanEnterDodongo(world) && (world.items.bombs.value > 0 || world.items.strength.Index() >=1) && (world.items.dekuSticks.value > 0 || world.save.swords.kokiriSword)",
+        "logic": "(world) => CanEnterDodongo(world) && (world.items.bombs.value > 0 || world.items.strength.Index() >=1) && (world.items.dekuSticks.value > 0 || world.items.kokiriSword)",
         "scene": "1"
     },
     {
@@ -1223,82 +1223,82 @@
     },
     {
         "name": "Jabu Jabus Belly Barinade Heart",
-        "logic": "(world) => CanEnterJabu(world) && world.items.boomerang.value === 1 && (world.items.dekuSticks.value > 0 || world.save.swords.kokiriSword)",
+        "logic": "(world) => CanEnterJabu(world) && world.items.boomerang.value === 1 && (world.items.dekuSticks.value > 0 || world.items.kokiriSword)",
         "scene": "2"
     },
     {
         "name": "Bottom of the Well Front Left Fake Wall Chest",
-        "logic": "(world) => world.dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfStorms",
+        "logic": "(world) => world.dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.items.songOfStorms",
         "scene": "8"
     },
     {
         "name": "Bottom of the Well Front Center Bombable Chest",
-        "logic": "(world) => world.dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfStorms && HasExplosives(world)",
+        "logic": "(world) => world.dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.items.songOfStorms && HasExplosives(world)",
         "scene": "8"
     },
     {
         "name": "Bottom of the Well Back Left Bombable Chest",
-        "logic": "(world) => world.dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfStorms && HasExplosives(world)",
+        "logic": "(world) => world.dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.items.songOfStorms && HasExplosives(world)",
         "scene": "8"
     },
     {
         "name": "Bottom of the Well Underwater Left Chest",
-        "logic": "(world) => world.dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfStorms && world.save.questStatus.zeldasLullaby",
+        "logic": "(world) => world.dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.items.songOfStorms && world.items.zeldasLullaby",
         "scene": "8"
     },
     {
         "name": "Bottom of the Well Freestanding Key",
-        "logic": "(world) => world.dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfStorms",
+        "logic": "(world) => world.dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.items.songOfStorms",
         "scene": "8"
     },
     {
         "name": "Bottom of the Well Center Skulltula Chest",
-        "logic": "(world) => world.dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfStorms",
+        "logic": "(world) => world.dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.items.songOfStorms",
         "scene": "8"
     },
     {
         "name": "Bottom of the Well Right Bottom Fake Wall Chest",
-        "logic": "(world) => world.dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfStorms",
+        "logic": "(world) => world.dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.items.songOfStorms",
         "scene": "8"
     },
     {
         "name": "Bottom of the Well Fire Keese Chest",
-        "logic": "(world) => world.dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfStorms",
+        "logic": "(world) => world.dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.items.songOfStorms",
         "scene": "8"
     },
     {
         "name": "Bottom of the Well Like Like Chest",
-        "logic": "(world) => world.dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfStorms",
+        "logic": "(world) => world.dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.items.songOfStorms",
         "scene": "8"
     },
     {
         "name": "Bottom of the Well Underwater Front Chest",
-        "logic": "(world) => world.dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfStorms && world.save.questStatus.zeldasLullaby",
+        "logic": "(world) => world.dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.items.songOfStorms && world.items.zeldasLullaby",
         "scene": "8"
     },
     {
         "name": "Bottom of the Well Invisible Chest",
-        "logic": "(world) => world.dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfStorms && CanUseMagic(world) && world.items.lensOfTruth.value === 1",
+        "logic": "(world) => world.dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.items.songOfStorms && CanUseMagic(world) && world.items.lensOfTruth.value === 1",
         "scene": "8"
     },
     {
         "name": "Bottom of the Well Lens of Truth Chest",
-        "logic": "(world) => world.dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfStorms",
+        "logic": "(world) => world.dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.items.songOfStorms",
         "scene": "8"
     },
     {
         "name": "Bottom of the Well GS West Inner Room",
-        "logic": "(world) => world.dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfStorms && world.items.boomerang.value === 1",
+        "logic": "(world) => world.dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.items.songOfStorms && world.items.boomerang.value === 1",
         "scene": "8"
     },
     {
         "name": "Bottom of the Well GS East Inner Room",
-        "logic": "(world) => world.dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfStorms && world.items.boomerang.value === 1",
+        "logic": "(world) => world.dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.items.songOfStorms && world.items.boomerang.value === 1",
         "scene": "8"
     },
     {
         "name": "Bottom of the Well GS Like Like Cage",
-        "logic": "(world) => world.dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfStorms && world.items.boomerang.value === 1",
+        "logic": "(world) => world.dungeons[3].mq == true && world.items.ocarina.Index() >= 1 && world.items.songOfStorms && world.items.boomerang.value === 1",
         "scene": "8"
     },
     {

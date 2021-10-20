@@ -32,7 +32,7 @@ jobs:
         uses: yinxulai/actions-electron-forge@0.05
         with:
           # GitHub authentication token
-          github_token: ${{ secret.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           # Whether the app should be released after a successful build
           release: true
 

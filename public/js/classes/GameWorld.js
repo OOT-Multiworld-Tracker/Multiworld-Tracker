@@ -47,7 +47,7 @@ export class GameWorld {
     return new Promise((resolve, reject) => {
       // Announce the current save-status of your tracker to other trackers.
       this.world.app.networking.Send({
-        world: this.world.app.worlds.indexOf(this.world.app.local.world),
+        world: this.world.app.worlds.indexOf(this.app.global.world),
         save: this.world.save,
         locations: this.world.locations,
         dungeons: this.world.dungeons,

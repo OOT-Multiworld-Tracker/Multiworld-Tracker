@@ -19,23 +19,22 @@ jobs:
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 10
 
       - name: Build
         run: |
           npm install
           npx webpack
 
-      - name: Build/release Electron app
-        uses: samuelmeuli/action-electron-builder@v1
+      - name: Electron Forge Action
+        # You may pin to the exact commit or the version.
+        # uses: yinxulai/actions-electron-forge@456a6517c5241e4d693507b99a30dac8fe622102
+        uses: yinxulai/actions-electron-forge@0.05
         with:
-          # GitHub token, automatically provided to the action
-          # (No need to define this secret in the repo settings)
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-
-          # If the commit is tagged with a version (e.g. "v1.0.0"),
-          # release the app after building
-          release: ${{ startsWith(github.ref, 'refs/tags/v') }}
+          # GitHub authentication token
+          github_token: ${{ secret.GITHUB_TOKEN }}
+          # Whether the app should be released after a successful build
+          release: true
 
   release:
     runs-on: ubuntu-latest

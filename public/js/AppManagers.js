@@ -208,6 +208,8 @@ export class LocationManager {
      * @type {Location[]}
      */
     this.locations = Parser.ParseLocations(this)
+
+    console.log(this.locations)
   }
 
   /**
@@ -334,6 +336,11 @@ export class Location {
      * @type {boolean}
      */
     this.logic = data.logic
+
+    /**
+     * Auto tracking event
+     */
+    this.event = data.event
   }
 
   /**

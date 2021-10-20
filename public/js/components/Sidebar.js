@@ -12,8 +12,9 @@ import { TrackerSettings } from '../AppManagers'
 export class SidebarButtons extends React.Component {
   constructor (props) {
     super(props)
-    this.state = { uploaded: false }
+    this.state = { uploaded: false, worldId: app.global.world }
     this.handleChange = this.handleChange.bind(this)
+
   }
 
   handleChange (e) {
@@ -30,6 +31,26 @@ export class SidebarButtons extends React.Component {
         {this.state.uploaded ? <option value='2'>Worlds</option> : <option value='2' disabled>Worlds</option>}
       </select>
     )
+  }
+}
+
+class PlayerList extends React.Component {
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      worlds: app.worlds
+    }
+
+    app.on('world added', (worlds) => {
+      console.log('world added')
+      this.setState({ worlds })
+      this.forceUpdate()
+    })
+  }
+
+  render () {
+    return app.worlds.map((world, index) => { return <Player key={index} world={index} save={world.save} /> })
   }
 }
 
@@ -53,7 +74,10 @@ export default class Sidebar extends React.Component {
 
   homePage () {
     return (
-      app.worlds.map((world, index) => { return <Player key={index} save={world.save} /> })
+      <>
+        <input type='number' className='form-control' value={this.state.worldId} max={app.worlds.length+1} min='0' onChange={(e) => { app.global.world = e.target.value; this.setState({ worldId: e.target.value }); app.local.world = app.worlds[app.global.world] }} />
+        <PlayerList />
+      </>
     )
   }
 

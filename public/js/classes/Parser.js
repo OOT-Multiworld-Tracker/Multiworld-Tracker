@@ -64,6 +64,7 @@ export default class Parser {
       locations.set(String(index), new Location(manager, location))
     })
 
+    console.log(locations)
     return locations
   }
 

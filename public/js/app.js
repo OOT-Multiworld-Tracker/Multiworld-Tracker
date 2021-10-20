@@ -1,4 +1,3 @@
-import { ipcRenderer } from 'electron'
 import { SettingsManager, ItemManager, TrackerSettings, LocationManager } from './AppManagers'
 import { GameWorld } from './classes/GameWorld'
 import { NetworkManager } from './classes/NetworkingManager'
@@ -18,7 +17,8 @@ export class App extends EventEmitter {
       settings: new SettingsManager(),
       tracker: new TrackerSettings(),
       connected: false,
-      scene: -1
+      scene: -1,
+      world: 0
     }
 
     /**
@@ -83,21 +83,21 @@ export class SaveUtils {
    */
   static async Save (name) {
     return new Promise((resolve, reject) => {
-      const saveFile = {}
+      const saveFiles = []
 
-      Object.assign(saveFile, { // Assign all of the values to the file.
-        dungeons: app.local.world.dungeons,
-        settings: app.global.settings.Serialize(),
-        save: app.local.world.save,
-        locations: app.local.world.locations.Array().map((location) => { return { completed: location.completed, item: location.item, display: location.display, name: location.name, preExit: location.preExit, scene: location.scene } })
+      app.worlds.forEach((world) => {
+        saveFiles.push(Object.assign({}, { // Assign all of the values to the file.
+          dungeons: world.dungeons,
+          settings: app.global.settings.Serialize(),
+          save: world.save,
+          locations: world.locations.Array().map((location) => { return { completed: location.completed, item: location.item, display: location.display, name: location.name, preExit: location.preExit, scene: location.scene } })
+        }))
       })
 
-      console.log(saveFile)
+      localStorage.setItem(name, JSON.stringify(saveFiles))
 
-      localStorage.setItem(name, JSON.stringify(saveFile))
-
-      app.emit('saved', saveFile)
-      return resolve(saveFile)
+      app.emit('saved', saveFiles)
+      return resolve(saveFiles)
     })
   }
 
@@ -109,27 +109,36 @@ export class SaveUtils {
   static async Load (name) {
     return new Promise((resolve, reject) => {
       const file = JSON.parse(localStorage.getItem(name))
-      app.global.settings = new SettingsManager(file.settings)
-      app.local.world.save = file.save
-      app.local.world.items = new ItemManager(app.local.world)
-      app.local.world.dungeons = file.dungeons
 
-      Object.keys(app.local.world.save.inventory).forEach((key) => {
-        if (app.local.world.items[key] !== undefined) {
-          if (app.local.world.save.inventory[key] === true) {
-            app.local.world.save.inventory[key] = 1
-          } else if (app.local.world.save.inventory[key] === false) {
-            app.local.world.save.inventory[key] = 0
-          }
+      app.worlds = []
+      for (let i = 0; i < file.length; i++) app.worlds.push(new GameWorld(app))
+      app.local.world = app.worlds[app.global.world]
 
-          app.local.world.items[key].Set(app.local.world.save.inventory[key])
-        }
-      })
+      file.forEach((world, index) => {
+        app.global.settings = new SettingsManager(world.settings)
+        app.worlds[index].save = world.save
+        app.worlds[index].items = new ItemManager(app.worlds[index])
+        app.worlds[index].dungeons = world.dungeons
 
-      file.locations.forEach((location, index) => {
-        if (location.completed) app.worlds[0].locations.locations.get(String(index)).completed = location.completed
-        if (location.item) app.worlds[0].locations.locations.get(String(index)).item = location.item
-        if (location.display) app.worlds[0].locations.locations.get(String(index)).display = location.display
+        const items = Object.assign({}, // Assign all of the items to the savefile.
+          world.save.questStatus,
+          world.save.inventory,
+          world.save.boots,
+          world.save.shields,
+          world.save.tunics,
+          world.save.swords
+        )
+
+        Object.keys(items).forEach((key) => {
+          if (app.worlds[index].items[key] === undefined) return // Ignore any keys not within the item manager.
+          app.worlds[index].items[key].Set(items[key] * 1)
+        })
+
+        world.locations.forEach((location, index2) => {
+          if (location.completed) app.worlds[index].locations.locations.get(String(index2)).completed = location.completed
+          if (location.item) app.worlds[index].locations.locations.get(String(index2)).item = location.item
+          if (location.display) app.worlds[index].locations.locations.get(String(index2)).display = location.display
+        })
       })
 
       app.emit('loaded', file)

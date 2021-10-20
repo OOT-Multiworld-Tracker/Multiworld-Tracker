@@ -10,7 +10,8 @@ export default class SaveModal extends React.Component {
   }
 
   render () {
-    const save = JSON.parse(localStorage.getItem(this.props.save));
+    const save = JSON.parse(localStorage.getItem(this.props.save))[0];
+    console.log(save)
     return (
       <Modal
         onClick={(e) => e.stopPropagation()}

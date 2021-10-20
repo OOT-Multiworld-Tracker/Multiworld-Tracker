@@ -4,8 +4,7 @@ import app from '../app'
 export default class Player extends React.Component {
   constructor (props) {
     super(props)
-    this.state = { save: this.props.save }
-    this.tick()
+    this.state = { world: this.props.world, save: this.props.save }
   }
 
   componentDidMount () {
@@ -20,7 +19,7 @@ export default class Player extends React.Component {
   }
 
   tick () {
-    this.setState({ save: app.local.world.save })
+    this.setState({ save: app.worlds[this.state.world].save })
   }
 
   generateContainers () {
@@ -36,7 +35,7 @@ export default class Player extends React.Component {
   render () {
     return (
       <div className='player'>
-        <div className='character_name' onClick={() => this.openStats()}>{this.state.save.player_name}</div>
+        <div className='character_name' onClick={() => this.openStats()}>{this.state.save.player_name} <img width='16' src='/images/green_rupee.png' />{this.state.save.rupee_count}</div>
         <div className='heart_containers'>{this.generateContainers()}</div>
       </div>
     )

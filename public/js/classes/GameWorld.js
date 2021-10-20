@@ -1,19 +1,6 @@
 import { App } from '../app'
 import { ItemManager, LocationManager } from '../AppManagers'
 
-const save = {
-  world_time: 11112,
-  world_night_flag: false,
-  death_counter: 0,
-  player_name: 'Link',
-  heart_containers: 3,
-  health: 12,
-  magic_meter_size: 0,
-  magic_current: 0,
-  rupee_count: 0,
-  age: 0
-}
-
 /**
  * A player world instance. Controls everything related to worlds.
  */
@@ -24,7 +11,19 @@ export class GameWorld {
      * @type {App}
      */
     this.app = app
-    this.save = save
+
+    this.save = {
+      world_time: 11112,
+      world_night_flag: false,
+      death_counter: 0,
+      player_name: 'Link',
+      heart_containers: 3,
+      health: 12,
+      magic_meter_size: 0,
+      magic_current: 0,
+      rupee_count: 0,
+      age: 0
+    }
 
     /**
      * The player's currently held items

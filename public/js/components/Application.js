@@ -154,7 +154,7 @@ export default class Application extends React.Component {
           <div className='pane-group'>
             <div class='pane-md' style={{ minWidth: '240px' }}>
               <ErrorBoundary fallback={<p>Sidebar failed to load</p>}>
-                <Sidebar onSave={this.handleCreateSave} onSpoilerUpload={this.handleSpoiler} onModal={this.handleSidebarModal} saves={this.state.saves} page={this.state.sidebar} />
+                <Sidebar onSave={this.handleCreateSave} onSpoilerUpload={this.handleSpoiler} onModal={this.handleSidebarModal} saves={this.state.saves} worlds={app.worlds} page={this.state.sidebar} />
               </ErrorBoundary>
             </div>
             <div class='pane'>

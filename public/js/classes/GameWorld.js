@@ -41,20 +41,15 @@ export class GameWorld {
 
   /**
    * Synchronizes the game world with the other trackers.
-   * @async
    */
   Sync () {
-    return new Promise((resolve, reject) => {
-      // Announce the current save-status of your tracker to other trackers.
-      this.app.networking.Send({
-        world: this.app.worlds.indexOf(this.app.global.world),
-        save: this.save,
-        locations: this.locations.Array().map((location) => { return { completed: location.completed, item: location.item, display: location.display, name: location.name, preExit: location.preExit, scene: location.scene } }),
-        dungeons: this.dungeons,
-        items: this.items
-      })
-
-      resolve()
+    // Announce the current save-status of your tracker to other trackers.
+    this.app.networking.Send({
+      world: this.app.worlds.indexOf(this.app.global.world),
+      save: this.save,
+      locations: this.locations.Array().map((location) => { return { completed: location.completed, item: location.item, display: location.display, name: location.name, preExit: location.preExit, scene: location.scene } }),
+      dungeons: this.dungeons,
+      items: this.items
     })
   }
 }

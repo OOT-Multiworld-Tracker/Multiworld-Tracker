@@ -47,6 +47,7 @@ class ElectronRenderer extends EventEmitter {
       else if (data === 'window_size') return this.window.isMaximized ? this.window.maximize() : this.window.unmaximize()
       else if (data === 'minimize') return this.window.minimize()
 
+      console.log(data)
       this.emit('data', data)
     })
 

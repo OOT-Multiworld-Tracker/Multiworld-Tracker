@@ -78,7 +78,7 @@ export class NetworkManager {
    * @param {Object} data
    */
   Send (data) {
-    require('electron').ipcRenderer.send('packet', JSON.stringify(data))
+    require('electron').ipcRenderer.send('packets', JSON.stringify(data))
   }
 
   /**

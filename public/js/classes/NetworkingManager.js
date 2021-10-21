@@ -27,8 +27,6 @@ export class NetworkManager {
             this.app.local.world.items[key].Set(items[key] * 1)
           })
 
-          console.log(parsed.data);
-
           this.app.global.world = parsed.data.world-1
 
           for (let i=this.app.global.world; i>0; i--) {
@@ -37,6 +35,7 @@ export class NetworkManager {
 
           this.app.local.world.save = parsed.data.save // Overwrite the local save with the parsed save.
           this.app.emit('items updated', this.app.local.world.items)
+          this.app.local.world.Sync()
           break
 
         case ElectronPayloads.COLLECTABLE_COLLECTED:
@@ -47,15 +46,18 @@ export class NetworkManager {
         case ElectronPayloads.SWITCH_CHANGED:
           this.app.lastEvent = { payload: parsed.payload, scene: parsed.data.scene, data: JSON.parse(parsed.data.data) } // Make data to be created.
 
-          this.app.local.world.locations.Accessible(false, false, -1).forEach((location) => {
-            if (JSON.stringify(location.event) == JSON.stringify(this.app.lastEvent)) location.completed = true // If the events match then mark as complete.
+          this.app.local.world.locations.Accessible(false, false, parsed.data.scene).forEach((location) => {
+            if (JSON.stringify(location.event.data) == JSON.stringify(this.app.lastEvent.data)) location.completed = true // If the events match then mark as complete.
           })
 
           this.app.emit('chest opened')
+          this.app.local.world.Sync()
           break
 
         case ElectronPayloads.SCENE_UPDATED:
           this.app.emit('scene updated', parsed.data.scene)
+          this.app.local.world.scene = parsed.data.scene
+          this.app.local.world.Sync()
           break
 
         case ElectronPayloads.OTHER_TRACKER_UPDATE:

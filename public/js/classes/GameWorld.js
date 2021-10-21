@@ -37,6 +37,7 @@ export class GameWorld {
      */
     this.locations = new LocationManager(this)
     this.dungeons = [{ name: 'Deku Tree', mq: false }, { name: "Dodongo's Cave", mq: false }, { name: 'Bottom of the Well', mq: false }, { name: "Jabu Jabu's Belly", mq: false }, { name: 'Forest Temple', mq: false }, { name: 'Fire Temple', mq: false }, { name: 'Water Temple', mq: false }, { name: 'Shadow Temple', mq: false }, { name: 'Spirit Temple', mq: false }, { name: 'Ice Cavern', mq: false }, { name: 'GTG', mq: false }, { name: "Ganon's Castle", mq: false }]
+    this.scene = 0
   }
 
   /**
@@ -49,7 +50,8 @@ export class GameWorld {
       save: this.save,
       locations: this.locations.Array().map((location) => { return { completed: location.completed, item: location.item, display: location.display, name: location.name, preExit: location.preExit, scene: location.scene } }),
       dungeons: this.dungeons,
-      items: this.items
+      items: this.items,
+      scene: this.scene
     })
   }
 }

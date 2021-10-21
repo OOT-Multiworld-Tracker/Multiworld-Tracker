@@ -29,7 +29,12 @@ export class NetworkManager {
 
           console.log(parsed.data);
 
-          this.app.global.world = parsed.data.save.world
+          this.app.global.world = parsed.data.world-1
+
+          for (let i=this.app.global.world; i>0; i--) {
+            this.app.worlds.shift(new GameWorld(this.app))
+          }
+
           this.app.local.world.save = parsed.data.save // Overwrite the local save with the parsed save.
           this.app.emit('items updated', this.app.local.world.items)
           break

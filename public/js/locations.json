@@ -136,25 +136,29 @@
         "name": "KF Shop Item 5",
         "preExit": true,
         "logic": "(world) => ShopRandomized(world, 1)",
-        "scene": "45"
+        "scene": "45",
+        "untrackable": true
     },
     {
         "name": "KF Shop Item 6",
         "preExit": true,
         "logic": "(world) => ShopRandomized(world, 2)",
-        "scene": "45"
+        "scene": "45",
+        "untrackable": true
     },
     {
         "name": "KF Shop Item 7",
         "preExit": true,
         "logic": "(world) => ShopRandomized(world, 3)",
-        "scene": "45"
+        "scene": "45",
+        "untrackable": true
     },
     {
         "name": "KF Shop Item 8",
         "preExit": true,
         "logic": "(world) => ShopRandomized(world, 4)",
-        "scene": "45"
+        "scene": "45",
+        "untrackable": true
     },
     {
         "name": "LW Gift from Saria",
@@ -171,7 +175,8 @@
         "name": "LW Target in Woods",
         "preExit": true,
         "logic": "(world) => world.items.fairySlingshot.value > 0",
-        "scene": "91"
+        "scene": "91",
+        "untrackable": true
     },
     {
         "name": "LW Near Shortcuts Grotto Chest",
@@ -287,62 +292,74 @@
     {
         "name": "Market Bazaar Item 5",
         "logic": "(world) => ShopRandomized(world, 1)",
-        "group": "0"
+        "group": "0",
+        "untrackable": true
     },
     {
         "name": "Market Bazaar Item 6",
         "logic": "(world) => ShopRandomized(world, 2)",
-        "group": "0"
+        "group": "0",
+        "untrackable": true
     },
     {
         "name": "Market Bazaar Item 7",
         "logic": "(world) => ShopRandomized(world, 3)",
-        "group": "0"
+        "group": "0",
+        "untrackable": true
     },
     {
         "name": "Market Bazaar Item 8",
         "logic": "(world) => ShopRandomized(world, 4)",
-        "group": "0"
+        "group": "0",
+        "untrackable": true
     },
     {
         "name": "Market Potion Shop Item 5",
         "logic": "(world) => ShopRandomized(world, 1)",
-        "group": "0"
+        "group": "0",
+        "untrackable": true
     },
     {
         "name": "Market Potion Shop Item 6",
         "logic": "(world) => ShopRandomized(world, 2)",
-        "group": "0"
+        "group": "0",
+        "untrackable": true
     },
     {
         "name": "Market Potion Shop Item 7",
         "logic": "(world) => ShopRandomized(world, 3)",
-        "group": "0"
+        "group": "0",
+        "untrackable": true
     },
     {
         "name": "Market Potion Shop Item 8",
         "logic": "(world) => ShopRandomized(world, 4)",
-        "group": "0"
+        "group": "0",
+        "untrackable": true
     },
     {
         "name": "Market Bombchu Shop Item 5",
         "logic": "(world) => ShopRandomized(world, 1)",
-        "group": "0"
+        "group": "0",
+        "untrackable": true
     },
     {
         "name": "Market Bombchu Shop Item 6",
         "logic": "(world) => ShopRandomized(world, 2)",
-        "group": "0"
+        "group": "0",
+        "untrackable": true
     },
     {
         "name": "Market Bombchu Shop Item 7",
         "logic": "(world) => ShopRandomized(world, 3)",
-        "group": "0"
+        "group": "0",
+        "untrackable": true
     },
     {
         "name": "Market Bombchu Shop Item 8",
         "logic": "(world) => ShopRandomized(world, 4)",
-        "group": "0"
+        "group": "0",
+        "untrackable": true
     },
     {
         "name": "ToT Light Arrows Cutscene",
@@ -444,42 +461,50 @@
     {
         "name": "Kak Bazaar Item 5",
         "logic": "(world) => CanBecomeAdult(world) && ShopRandomized(world, 1)",
-        "scene": "82"
+        "scene": "82",
+        "untrackable": true
     },
     {
         "name": "Kak Bazaar Item 6",
         "logic": "(world) => CanBecomeAdult(world) && ShopRandomized(world, 2)",
-        "scene": "82"
+        "scene": "82",
+        "untrackable": true
     },
     {
         "name": "Kak Bazaar Item 7",
         "logic": "(world) => CanBecomeAdult(world) && ShopRandomized(world, 3)",
-        "scene": "82"
+        "scene": "82",
+        "untrackable": true
     },
     {
         "name": "Kak Bazaar Item 8",
         "logic": "(world) => CanBecomeAdult(world) && ShopRandomized(world, 4)",
-        "scene": "82"
+        "scene": "82",
+        "untrackable": true
     },
     {
         "name": "Kak Potion Shop Item 5",
         "logic": "(world) => CanBecomeAdult(world) && ShopRandomized(world, 1)",
-        "scene": "82"
+        "scene": "82",
+        "untrackable": true
     },
     {
         "name": "Kak Potion Shop Item 6",
         "logic": "(world) => CanBecomeAdult(world) && ShopRandomized(world, 2)",
-        "scene": "82"
+        "scene": "82",
+        "untrackable": true
     },
     {
         "name": "Kak Potion Shop Item 7",
         "logic": "(world) => CanBecomeAdult(world) && ShopRandomized(world, 3)",
-        "scene": "82"
+        "scene": "82",
+        "untrackable": true
     },
     {
         "name": "Kak Potion Shop Item 8",
         "logic": "(world) => CanBecomeAdult(world) && ShopRandomized(world, 4)",
-        "scene": "82"
+        "scene": "82",
+        "untrackable": true
     },
     {
         "name": "Graveyard Shield Grave Chest",
@@ -597,37 +622,44 @@
     {
         "name": "GC Shop Item 5",
         "logic": "(world) => (world.items.strength.value >= 1 || HasExplosives(world)) && ShopRandomized(world, 1)",
-        "scene": "98"
+        "scene": "98",
+        "untrackable": true
     },
     {
         "name": "GC Shop Item 6",
         "logic": "(world) => (world.items.strength.value >= 1 || HasExplosives(world)) && ShopRandomized(world, 2)",
-        "scene": "98"
+        "scene": "98",
+        "untrackable": true
     },
     {
         "name": "GC Shop Item 7",
         "logic": "(world) => (world.items.strength.value >= 1 || HasExplosives(world)) && ShopRandomized(world, 3)",
-        "scene": "98"
+        "scene": "98",
+        "untrackable": true
     },
     {
         "name": "GC Shop Item 8",
         "logic": "(world) => (world.items.strength.value >= 1 || HasExplosives(world)) && ShopRandomized(world, 4)",
-        "scene": "98"
+        "scene": "98",
+        "untrackable": true
     },
     {
         "name": "DMC Volcano Freestanding PoH",
         "logic": "(world) => HasExplosives(world) && CanEnterDeathMountain(world) && CanBecomeAdult(world)",
-        "scene": "97"
+        "scene": "97",
+        "untrackable": true
     },
     {
         "name": "DMC Wall Freestanding PoH",
         "logic": "(world) => HasExplosives(world) && CanEnterDeathMountain(world)",
-        "scene": "97"
+        "scene": "97",
+        "untrackable": true
     },
     {
         "name": "DMC Upper Grotto Chest",
         "logic": "(world) => CanEnterDeathMountain(world) && HasExplosives(world)",
-        "scene": "97"
+        "scene": "97",
+        "untrackable": true
     },
     {
         "name": "DMC Great Fairy Reward",
@@ -712,22 +744,26 @@
     {
         "name": "ZD Shop Item 5",
         "logic": "(world) => CanEnterZorasDomain(world)&& ShopRandomized(world, 1)",
-        "scene": "88"
+        "scene": "88",
+        "untrackable": true
     },
     {
         "name": "ZD Shop Item 6",
         "logic": "(world) => CanEnterZorasDomain(world)&& ShopRandomized(world, 2)",
-        "scene": "88"
+        "scene": "88",
+        "untrackable": true
     },
     {
         "name": "ZD Shop Item 7",
         "logic": "(world) => CanEnterZorasDomain(world)&& ShopRandomized(world, 3)",
-        "scene": "88"
+        "scene": "88",
+        "untrackable": true
     },
     {
         "name": "ZD Shop Item 8",
         "logic": "(world) => CanEnterZorasDomain(world)&& ShopRandomized(world, 4)",
-        "scene": "88"
+        "scene": "88",
+        "untrackable": true
     },
     {
         "name": "ZF Great Fairy Reward",

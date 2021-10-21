@@ -6,8 +6,6 @@ import Items from './Items'
 import Dungeons from './Dungeon'
 import Settings from './Settings'
 import Worlds from './Worlds'
-import Parser from '../classes/Parser'
-import { TrackerSettings } from '../AppManagers'
 
 export class SidebarButtons extends React.Component {
   constructor (props) {
@@ -24,11 +22,10 @@ export class SidebarButtons extends React.Component {
   render () {
     return (
       <select className='form-control' onChange={this.handleChange}>
-        <option value='0'>Home</option>
+        <option value='0'>Worlds</option>
         <option value='1'>Saves</option>
         <option value='3'>Items</option>
         <option value='4'>Settings</option>
-        {this.state.uploaded ? <option value='2'>Worlds</option> : <option value='2' disabled>Worlds</option>}
       </select>
     )
   }

@@ -341,6 +341,11 @@ export class Location {
      * Auto tracking event
      */
     this.event = data.event
+
+    /**
+     * Untrackable?
+     */
+    this.untrackable = data.untrackable
   }
 
   /**
@@ -348,7 +353,9 @@ export class Location {
    */
   Mark () {
     this.completed = !this.completed
-    Parser.addLocationID(this.id, this.manager.world.app.lastEvent) // Add the ID of the last event to the location.json
+    if (!this.untrackable) Parser.addLocationID(this.id, this.manager.world.app.lastEvent) // Add the ID of the last event to the location.json
+    //DEBUG
+    else console.log(`Untrackable Location: ${this.name}`);
     this.manager.world.Sync()
   }
 }

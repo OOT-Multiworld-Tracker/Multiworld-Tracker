@@ -26,6 +26,8 @@ export class NetworkManager {
             this.app.local.world.items[key].Set(items[key] * 1)
           })
 
+          console.log(parsed.data);
+
           this.app.local.world.save = parsed.data.save // Overwrite the local save with the parsed save.
           this.app.emit('items updated', this.app.local.world.items)
           break
@@ -35,7 +37,8 @@ export class NetworkManager {
         case ElectronPayloads.SKULLTULA_COLLECTED:
         case ElectronPayloads.CHEST_OPENED:
         case ElectronPayloads.SHOPNUT_BOUGHT:
-          this.app.lastEvent = { payload: parsed.payload, data: JSON.parse(parsed.data.data) } // Make data to be created.
+        case ElectronPayloads.SWITCH_CHANGED:
+          this.app.lastEvent = { payload: parsed.payload, scene: parsed.data.scene, data: JSON.parse(parsed.data.data) } // Make data to be created.
 
           this.app.local.world.locations.Accessible(false, false, -1).forEach((location) => {
             if (JSON.stringify(location.event) == JSON.stringify(this.app.lastEvent)) location.completed = true // If the events match then mark as complete.

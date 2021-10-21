@@ -49,7 +49,7 @@ export class GameWorld {
       this.app.networking.Send({
         world: this.app.worlds.indexOf(this.app.global.world),
         save: this.save,
-        locations: this.locations,
+        locations: this.locations.Array().map((location) => { return { completed: location.completed, item: location.item, display: location.display, name: location.name, preExit: location.preExit, scene: location.scene } }),
         dungeons: this.dungeons,
         items: this.items
       })

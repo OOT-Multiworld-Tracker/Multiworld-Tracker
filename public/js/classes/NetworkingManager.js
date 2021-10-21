@@ -12,6 +12,7 @@ export class NetworkManager {
 
       switch (parsed.payload) {
         case ElectronPayloads.SAVE_UPDATED:
+          console.log(parsed)
           items = Object.assign({}, // Assign all of the items to the savefile.
             parsed.data.save.questStatus,
             parsed.data.save.inventory,
@@ -26,6 +27,7 @@ export class NetworkManager {
             this.app.local.world.items[key].Set(items[key] * 1)
           })
 
+          this.app.global.world = parsed.data.save.world
           this.app.local.world.save = parsed.data.save // Overwrite the local save with the parsed save.
           this.app.emit('items updated', this.app.local.world.items)
           break

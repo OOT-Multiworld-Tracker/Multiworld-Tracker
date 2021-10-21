@@ -50,7 +50,7 @@ class PlayerList extends React.Component {
   }
 
   render () {
-    return app.worlds.map((world, index) => { return <Player key={index} world={index} save={world.save} /> })
+    return app.worlds.map((world, index) => { return <Player key={index} current={world.save == app.global.world} world={index} save={world.save} /> })
   }
 }
 
@@ -75,7 +75,6 @@ export default class Sidebar extends React.Component {
   homePage () {
     return (
       <>
-        <input type='number' className='form-control' value={String(this.state.worldId)} max={app.worlds.length+1} min='0' onChange={(e) => { app.global.world = e.target.value; this.setState({ worldId: e.target.value }); app.local.world = app.worlds[app.global.world] }} />
         <PlayerList />
       </>
     )

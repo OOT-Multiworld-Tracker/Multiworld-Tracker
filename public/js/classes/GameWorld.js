@@ -45,7 +45,7 @@ export class GameWorld {
   Sync () {
     // Announce the current save-status of your tracker to other trackers.
     this.app.networking.Send({
-      world: this.app.worlds[this.app.global.world],
+      world: this.app.global.world,
       save: this.save,
       locations: this.locations.Array().map((location) => { return { completed: location.completed, item: location.item, display: location.display, name: location.name, preExit: location.preExit, scene: location.scene } }),
       dungeons: this.dungeons,

@@ -89,10 +89,10 @@ export default class Locations extends React.Component {
     return (
       <>
         <LocationDropdown onDropdownClick={this.handleDropdownClick} display={this.props.dropDownOpen} position={{ left: this.state.dropdown.left, top: this.state.dropdown.top }} />
-        <div class='btn-group' style={{ width: '100%', marginBottom: '4px' }}>
-          <select class='btn btn-bottom btn-default' style={{ width: '33.34%', marginRight: '1px' }} value={this.state.scene} onChange={(e) => this.setState({ scene: e.target.value })}><option value='-1'>None</option>{this.getScenes()}</select>
-          <button class='btn btn-bottom btn-default' style={{ width: '33.34%', backgroundColor: this.state.page === 0 ? '#444' : null }} onClick={() => this.displaySection(0)}>Accessible <span class='badge'>{app.local.world.locations.Accessible(false, false, -1).length}</span></button>
-          <button class='btn btn-bottom btn-default' style={{ width: '33.34%', backgroundColor: this.state.page === 1 ? '#444' : null }} onClick={() => this.displaySection(1)}>Completed <span class='badge'>{app.local.world.locations.Get(true).length}</span></button>
+        <div className='btn-group' style={{ width: '100%', marginBottom: '4px' }}>
+          <select className='btn btn-bottom btn-default' style={{ width: '33.34%', marginRight: '1px' }} value={this.state.scene} onChange={(e) => this.setState({ scene: e.target.value })}><option value='-1'>None</option>{this.getScenes()}</select>
+          <button className='btn btn-bottom btn-default' style={{ width: '33.34%', backgroundColor: this.state.page === 0 ? '#444' : null }} onClick={() => this.displaySection(0)}>Accessible <span className='badge'>{app.local.world.locations.Accessible(false, false, -1).length}</span></button>
+          <button className='btn btn-bottom btn-default' style={{ width: '33.34%', backgroundColor: this.state.page === 1 ? '#444' : null }} onClick={() => this.displaySection(1)}>Completed <span className='badge'>{app.local.world.locations.Get(true).length}</span></button>
         </div>
         <div style={{ overflowY: 'auto', height: '90%' }}>
           <List>
@@ -116,7 +116,7 @@ export class Location extends React.PureComponent {
     return (
       <ErrorBoundary fallback={<p>Location Failed to Load</p>}>
         <ListItem style={{ backgroundColor: ((app.global.settings.itemHints.Index() === 1 && this.hasRareItem()) || this.props.important) ? '#cbef28' : '' }} onClick={() => app.local.world.locations.ToggleCompleted(this.props.id)} onContextMenu={(e) => { e.preventDefault(); this.props.onContextMenu(e, this.props.id) }}>
-          <div className='location-name' style={{ color: this.props.useless ? '#666' : null }}>{this.props.name} {app.global.settings.playerHints.value == true ? <span class='badge'>{app.local.world.locations.Array()[this.props.id].item.player}</span> : null}</div>
+          <div className='location-name' style={{ color: this.props.useless ? '#666' : null }}>{this.props.name} {app.global.settings.playerHints.value == true ? <span className='badge'>{app.local.world.locations.Array()[this.props.id].item.player}</span> : null}</div>
           <div className='location-items'>{app.global.settings.itemHints.value === 'show items' ? app.local.world.locations.Array()[this.props.id].item.item : this.props.item}</div>
         </ListItem>
       </ErrorBoundary>

@@ -164,12 +164,12 @@ export default class Application extends React.Component {
               {this.getModal()}
             </ModalLayer>
             <div className='pane-group'>
-              <div class='pane-md' style={{ minWidth: '240px' }}>
+              <div className='pane-md' style={{ minWidth: '240px' }}>
                 <ErrorBoundary fallback={<p>Sidebar failed to load</p>}>
                   <Sidebar onSave={this.handleCreateSave} onSpoilerUpload={this.handleSpoiler} onModal={this.handleSidebarModal} saves={this.state.saves} worlds={app.worlds} page={this.state.sidebar} />
                 </ErrorBoundary>
               </div>
-              <div class='pane'>
+              <div className='pane'>
                 <ErrorBoundary fallback={<p>Search failed to load</p>}>
                   <input type='text' className='form-control search-bar' onChange={this.handleSearch} placeholder='Search...' />
                 </ErrorBoundary>

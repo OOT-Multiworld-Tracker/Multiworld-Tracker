@@ -32,7 +32,6 @@ export default class Parser {
         }
       })
     } else {
-      console.log('Loading singleplayer world')
       spoiler.worlds.push(new GameWorld(app))
 
       for (let i = 0; i < Object.keys(spoiler.log.dungeons).length; i++) {
@@ -64,7 +63,6 @@ export default class Parser {
       locations.set(String(index), new Location(manager, location))
     })
 
-    console.log(locations)
     return locations
   }
 

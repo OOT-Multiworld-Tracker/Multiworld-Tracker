@@ -43,7 +43,6 @@ class PlayerList extends React.Component {
     }
 
     app.on('world added', (worlds) => {
-      console.log('world added')
       this.setState({ worlds })
       this.forceUpdate()
     })
@@ -90,9 +89,9 @@ export default class Sidebar extends React.Component {
       <>
         <button className='btn btn-dark' style={{ marginBottom: '4px', width: '100%', backgroundColor: 'rgb(113 47 47)' }} onClick={() => SaveUtils.Reset()}>Start Over</button>
         <br />
-        <div class='list'>
-          <div class='list-header'>Files <span onClick={this.props.onSave} className='btn btn-default icon icon-plus' /></div>
-          <div class='list-content'><Saves saves={this.props.saves} onSaveClick={this.props.onModal} /></div>
+        <div className='list'>
+          <div className='list-header'>Files <span onClick={this.props.onSave} className='btn btn-default icon icon-plus' /></div>
+          <div className='list-content'><Saves saves={this.props.saves} onSaveClick={this.props.onModal} /></div>
         </div>
       </>
     )
@@ -108,7 +107,7 @@ export default class Sidebar extends React.Component {
     return (
       <>
         <input type='file' id='spoiler' onChange={(e) => this.props.onSpoilerUpload(e)} accept='.json' style={{display: 'none'}} />
-        <select className='btn btn-default form-control' style={{width: '100%'}} onChange={(e) => this.context.languageChange(e)}>{Translator.GetLanguages().map((lang) => <option value={lang}>{lang}</option>)}</select>
+        <select className='btn btn-default form-control' style={{width: '100%'}} onChange={(e) => this.context.languageChange(e)}>{Translator.GetLanguages().map((lang) => <option key={lang} value={lang}>{lang}</option>)}</select>
         <button className='btn btn-default form-control' style={{width: '100%', borderBottom: '1px solid #555'}} onClick={(e) => $('#spoiler').click()}>Upload Spoiler Log</button>
         <Settings settings={app.global.settings} />
         <hr />

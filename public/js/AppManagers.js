@@ -207,8 +207,6 @@ export class LocationManager {
      * @type {Location[]}
      */
     this.locations = Parser.ParseLocations(this)
-
-    console.log(this.locations)
   }
 
   /**
@@ -353,9 +351,6 @@ export class Location {
   Mark () {
     this.completed = !this.completed
     if (!this.untrackable) Parser.addLocationID(this.id, this.manager.world.app.lastEvent) // Add the ID of the last event to the location.json
-    //DEBUG
-    else console.log(`Untrackable Location: ${this.name}`);
-    console.log('sync')
     this.manager.world.Sync()
   }
 }

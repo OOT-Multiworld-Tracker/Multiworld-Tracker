@@ -12,7 +12,6 @@ export class NetworkManager {
 
       switch (parsed.payload) {
         case ElectronPayloads.SAVE_UPDATED:
-          console.log(parsed)
           items = Object.assign({}, // Assign all of the items to the savefile.
             parsed.data.save.questStatus,
             parsed.data.save.inventory,
@@ -61,8 +60,6 @@ export class NetworkManager {
           break
 
         case ElectronPayloads.OTHER_TRACKER_UPDATE:
-          console.log('Received other map tracker')
-          console.log(parsed)
 
           if (this.app.worlds[parsed.data.world] === this.app.local.world) { return } // Prevent lost progress through mistakes or attempted trolls.
           if (this.app.worlds.length-1 < parsed.data.world) { this.app.worlds.push(new GameWorld(this.app)) }
@@ -70,7 +67,6 @@ export class NetworkManager {
           this.app.worlds[parsed.data.world].scene = parsed.data.scene
 
           this.Deserialize(this.app.worlds[parsed.data.world], parsed.data)
-          console.log(this.app)
           this.app.emit('world added', this.app.worlds)
           break
 
@@ -110,9 +106,7 @@ export class NetworkManager {
       data.save.tunics,
       data.save.swords
     )
-
-    console.log(items)
-
+    
     Object.keys(items).forEach((key) => {
       if (world.items[key] === undefined) return // Ignore any keys not within the item manager.
       world.items[key].Set(items[key] * 1)

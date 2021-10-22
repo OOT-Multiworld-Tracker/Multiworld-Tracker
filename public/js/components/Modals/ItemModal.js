@@ -10,7 +10,6 @@ export default class ItemModal extends React.Component {
   }
 
   render () {
-    console.log(this.props)
     return (
       <Modal
         onClick={(e) => e.stopPropagation()}

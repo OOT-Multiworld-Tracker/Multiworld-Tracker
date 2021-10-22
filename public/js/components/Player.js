@@ -29,7 +29,7 @@ export default class Player extends React.Component {
   generateContainers () {
     const elements = []
     for (let i = 0; i < this.state.save.heart_containers; i++) {
-      elements.push(<span className='heart-container'><img src='/images/container.png' width='16' /></span>)
+      elements.push(<span key={i} className='heart-container'><img src='/images/container.png' width='16' /></span>)
 
       if (elements.length === 10) elements.push(<br />)
     }

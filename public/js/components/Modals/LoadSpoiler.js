@@ -15,8 +15,8 @@ export default class SpoilerModal extends React.Component {
           <>
             <p><b>World Count</b>: {this.props.log.log.settings.world_count}</p>
             <hr />
-            <input type='checkbox' class='form-control' id='import-dungeons' /> <label>Import Dungeons</label> <br />
-            <input type='checkbox' class='form-control' id='automark' /> <label>Auto-mark Disabled Locations</label> <br />
+            <input type='checkbox' className='form-control' id='import-dungeons' /> <label>Import Dungeons</label> <br />
+            <input type='checkbox' className='form-control' id='automark' /> <label>Auto-mark Disabled Locations</label> <br />
             <hr />
           </>
         }

@@ -47,7 +47,7 @@ export default class Items extends React.Component {
 
             return (
               <tr key={item.name} onClick={() => { item.Toggle(); this.setState({ items: app.local.world.save }) }}>
-                <td>{Translator.GetTranslation(this.context, item.name)}</td>
+                <td>{Translator.GetTranslation(this.context.language, item.name)}</td>
                 <td>{item.value === '0' ? 'None' : (item.value === '1' ? 'Have' : item.value)}</td>
               </tr>
             )

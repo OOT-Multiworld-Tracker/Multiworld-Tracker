@@ -2,6 +2,7 @@ const { app, BrowserWindow, ipcMain } = require('electron')
 const EventEmitter = require('events')
 const { autoUpdater } = require('electron-updater')
 const fs = require('fs')
+const path = require('path')
 
 class ElectronRenderer extends EventEmitter {
   constructor () {
@@ -82,7 +83,8 @@ class ElectronRenderer extends EventEmitter {
    * Load a file into the browser window from the public directory.
    */
   LoadWindow (file) {
-    this.window.loadURL('http://localhost:8081')
+    if (process.env.NODE_ENV !== 'production') this.window.loadURL('http://localhost:8081/')
+    else this.window.loadFile(path.resolve(__dirname, 'public/dist/index.html'))
     autoUpdater.checkForUpdates()
   }
 

@@ -13,6 +13,8 @@ import SpoilerModal from './Modals/LoadSpoiler'
 import Parser from '../classes/Parser'
 import LanguageContext from '../components/LanguageContext'
 
+import '../../css/global.css'
+
 init({
   dsn: 'https://8957f94163d144e1b2efc135a8a2be1e@o174553.ingest.sentry.io/6000676',
   integrations: [new Integrations.BrowserTracing()],

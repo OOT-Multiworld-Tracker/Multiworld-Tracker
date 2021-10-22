@@ -46,6 +46,12 @@ export class SettingsManager {
     this.shuffleScrubs = new ValueSwitch('Shuffle Scrubs', [false, 'low', 'high'])
 
     /**
+     * Tracker specific options
+     */
+    this.itemHints = new ValueSwitch('Item Hints', [false, 'highlight important', 'show items'])
+    this.playerHints = new ValueSwitch('Player Hints', [false, true])
+
+    /**
       * Shuffle settings for items / changes avaliable item pool.
      */
     this.shopSanity = new ValueSwitch('Shop Sanity', ['none', 1, 2, 3, 4])
@@ -182,13 +188,6 @@ export class ItemManager {
     this.waterTemple = new KeyManager('Water Temple')
     this.spiritTemple = new KeyManager('Spirit Temple')
     this.shadowTemple = new KeyManager('Shadow Temple')
-  }
-}
-
-export class TrackerSettings {
-  constructor () {
-    this.itemHints = new ValueSwitch('Item Hints', [false, 'highlight important', 'show items'])
-    this.playerHints = new ValueSwitch('Player Hints', [false, true])
   }
 }
 

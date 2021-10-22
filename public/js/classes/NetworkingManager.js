@@ -67,6 +67,7 @@ export class NetworkManager {
           if (this.app.worlds[parsed.data.world] === this.app.local.world) { return } // Prevent lost progress through mistakes or attempted trolls.
           if (this.app.worlds.length-1 < parsed.data.world) { this.app.worlds.push(new GameWorld(this.app)) }
           this.app.worlds[parsed.data.world].save = parsed.data.save
+          this.app.worlds[parsed.data.world].scene = parsed.data.scene
 
           this.Deserialize(this.app.worlds[parsed.data.world], parsed.data)
           console.log(this.app)

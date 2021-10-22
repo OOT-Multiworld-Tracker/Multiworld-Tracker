@@ -1,10 +1,3 @@
-
-/*function SpoilerUploaded (data) {
-  $.getJSON(URL.createObjectURL(data.files[0]), (data) => {
-    ParseSpoilerLog(data)
-  })
-}*/
-
 // Mixins
 function CanStunDeku (world) {
   return world.items.fairySlingshot.Index() > 0 || world.items.boomerang.Index() > 0 || world.items.dekuSticks.Index() > 0 || (world.items.bombs.Index() > 0 || world.items.bombchus.Index() > 0) || world.items.dekuNuts.Index() > 0 || world.items.dinsFire.Index() > 0 || world.items.kokiriSword.Index() > 0 || world.items.dekuShield.Index() > 0
@@ -31,7 +24,7 @@ function CanUseMagic (world) {
 }
 
 function CanBecomeAdult (world) {
-  return world.app.global.settings.open_door_of_time || (world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfTime > 0)
+  return world.app.global.settings.openDoorOfTime.value == true || (world.items.ocarina.Index() >= 1 && world.save.questStatus.songOfTime > 0)
 }
 
 // Area Entry Mixins

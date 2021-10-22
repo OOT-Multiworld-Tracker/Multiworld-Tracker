@@ -101,8 +101,6 @@ export default class Sidebar extends React.Component {
       <>
         <input type='file' id='spoiler' onChange={(e) => this.props.onSpoilerUpload(e)} accept='.json' style={{display: 'none'}} />
         <button className='btn btn-default form-control' style={{width: '100%', borderBottom: '1px solid #555'}} onClick={(e) => $('#spoiler').click()}>Upload Spoiler Log</button>
-        <Settings settings={app.global.tracker} />
-        <hr />
         <Settings settings={app.global.settings} />
         <hr />
         <Dungeons />

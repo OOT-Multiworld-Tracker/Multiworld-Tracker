@@ -115,9 +115,9 @@ export class Location extends React.PureComponent {
   render () {
     return (
       <ErrorBoundary fallback={<p>Location Failed to Load</p>}>
-        <ListItem style={{ backgroundColor: ((app.global.tracker.itemHints.Index() === 1 && this.hasRareItem()) || this.props.important) ? '#cbef28' : '' }} onClick={() => app.local.world.locations.ToggleCompleted(this.props.id)} onContextMenu={(e) => { e.preventDefault(); this.props.onContextMenu(e, this.props.id) }}>
-          <div className='location-name' style={{ color: this.props.useless ? '#666' : null }}>{this.props.name} {app.global.tracker.playerHints.value == true ? <span class='badge'>{app.local.world.locations.Array()[this.props.id].item.player}</span> : null}</div>
-          <div className='location-items'>{app.global.tracker.itemHints.value === 'show items' ? app.local.world.locations.Array()[this.props.id].item.item : this.props.item}</div>
+        <ListItem style={{ backgroundColor: ((app.global.settings.itemHints.Index() === 1 && this.hasRareItem()) || this.props.important) ? '#cbef28' : '' }} onClick={() => app.local.world.locations.ToggleCompleted(this.props.id)} onContextMenu={(e) => { e.preventDefault(); this.props.onContextMenu(e, this.props.id) }}>
+          <div className='location-name' style={{ color: this.props.useless ? '#666' : null }}>{this.props.name} {app.global.settings.playerHints.value == true ? <span class='badge'>{app.local.world.locations.Array()[this.props.id].item.player}</span> : null}</div>
+          <div className='location-items'>{app.global.settings.itemHints.value === 'show items' ? app.local.world.locations.Array()[this.props.id].item.item : this.props.item}</div>
         </ListItem>
       </ErrorBoundary>
     )

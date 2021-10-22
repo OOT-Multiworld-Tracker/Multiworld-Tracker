@@ -17,7 +17,7 @@ Electron.on('data', (data) => {
 
 AutoTracker.on('tracker status', status => {
   console.log('Tracker connection: ' + status)
-  Electron.SendData(JSON.stringify({ payload: 8, data: status }))
+  Electron.SendData(JSON.stringify({ payload: 9, data: status }))
 })
 
 AutoTracker.on('data', (data) => {

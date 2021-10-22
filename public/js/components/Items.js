@@ -1,8 +1,11 @@
 import React from 'react'
 import app from '../app'
 import { KeyManager } from '../AppManagers'
+import Translator from '../classes/Translator'
+import LanguageContext from '../components/LanguageContext'
 
 export default class Items extends React.Component {
+  static contextType = LanguageContext
   constructor () {
     super()
     this.state = { items: app.local.world.save }
@@ -26,7 +29,7 @@ export default class Items extends React.Component {
             if (item instanceof KeyManager) {
               return [(
                 <tr key={item.name}>
-                  <th>{item.name}</th>
+                  <th>{Translator.GetTranslation(this.context.language, item.name)}</th>
                   <th>Have</th>
                 </tr>
               ), (
@@ -44,7 +47,7 @@ export default class Items extends React.Component {
 
             return (
               <tr key={item.name} onClick={() => { item.Toggle(); this.setState({ items: app.local.world.save }) }}>
-                <td>{item.name}</td>
+                <td>{Translator.GetTranslation(this.context, item.name)}</td>
                 <td>{item.value === '0' ? 'None' : (item.value === '1' ? 'Have' : item.value)}</td>
               </tr>
             )

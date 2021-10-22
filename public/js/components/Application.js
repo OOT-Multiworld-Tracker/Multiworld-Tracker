@@ -27,7 +27,17 @@ init({
 export default class Application extends React.Component {
   constructor () {
     super()
-    this.state = { world: app.local.world, search: '', dropdown: false, sidebar: 0, display: 0, saves: [], locations: app.local.world.locations }
+    this.state = { 
+      world: app.local.world,
+      search: '',
+      dropdown: false,
+      sidebar: 0,
+      display: 0,
+      saves: [],
+      locations: app.local.world.locations,
+      language: 'en_us',
+      languageChange: (e) => { this.setState({ language: e.target.value }) }
+    }
 
     this.handleSearch = this.handleSearch.bind(this)
     this.handleModal = this.handleModal.bind(this)
@@ -146,7 +156,7 @@ export default class Application extends React.Component {
 
   render () {
     return (
-      <LanguageContext.Provider value='en_us'>
+      <LanguageContext.Provider value={this.state}>
         <div className='window' onClick={this.handleWindowClick}>
           <Header />
           <div className='window-content'>

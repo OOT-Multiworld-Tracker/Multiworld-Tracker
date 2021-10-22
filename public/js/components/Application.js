@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from 'react'
 import app from '../app'
 import Header from './Header'
 import ModalLayer from './ModalLayer'
@@ -26,7 +26,7 @@ init({
   tracesSampleRate: 1.0
 })
 
-export default class Application extends React.Component {
+export default class Application extends Component {
   constructor () {
     super()
     this.state = { 

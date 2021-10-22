@@ -1,9 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Application from './components/Application'
+import { withProfiler } from '@sentry/react'
 
 ReactDOM.render(
-  <Application />,
+  withProfiler(<Application />),
 
   document.getElementById('root')
 )

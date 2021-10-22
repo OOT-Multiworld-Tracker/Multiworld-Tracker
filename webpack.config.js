@@ -4,6 +4,7 @@ const webpack = require('webpack')
 
 module.exports = {
   entry: './public/js/index.js',
+  mode: 'development',
   target: 'electron-renderer',
   output: {
     filename: 'bundle.js',

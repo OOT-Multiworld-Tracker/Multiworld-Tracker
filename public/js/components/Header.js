@@ -1,5 +1,6 @@
 import React from 'react'
 import app from '../app'
+import Electron from 'electron'
 
 export default class Header extends React.Component {
   constructor (props) {
@@ -21,13 +22,13 @@ export default class Header extends React.Component {
             <button className='btn btn-default btn-dark pull-right'>
               <span className='icon icon-download' />
             </button>
-            <button className='btn btn-default btn-dark pull-right' onClick={() => require('electron').ipcRenderer.send('packets', 'minimize')}>
+            <button className='btn btn-default btn-dark pull-right' onClick={() => Electron.ipcRenderer.send('packets', 'minimize')}>
               <span className='icon icon-minus' />
             </button>
-            <button className='btn btn-default btn-dark pull-right' onClick={() => require('electron').ipcRenderer.send('packets', 'window_size')}>
+            <button className='btn btn-default btn-dark pull-right' onClick={() => Electron.ipcRenderer.send('packets', 'window_size')}>
               <span className='icon icon-doc' />
             </button>
-            <button className='btn btn-default btn-dark pull-right' onClick={() => require('electron').ipcRenderer.send('packets', 'close')}>
+            <button className='btn btn-default btn-dark pull-right' onClick={() => Electron.ipcRenderer.send('packets', 'close')}>
               <span className='icon icon-cancel' />
             </button>
           </div>

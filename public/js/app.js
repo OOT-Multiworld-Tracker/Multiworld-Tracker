@@ -1,8 +1,7 @@
 import { SettingsManager, ItemManager, TrackerSettings, LocationManager } from './AppManagers'
 import { GameWorld } from './classes/GameWorld'
 import { NetworkManager } from './classes/NetworkingManager'
-
-const { EventEmitter } = require('events')
+import EventEmitter from 'events'
 
 export class App extends EventEmitter {
   constructor () {

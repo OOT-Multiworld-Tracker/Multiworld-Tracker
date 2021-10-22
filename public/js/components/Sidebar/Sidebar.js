@@ -1,13 +1,15 @@
 import React from 'react'
-import app, { SaveUtils } from '../app'
-import Player from './Player'
-import Saves from './Saves'
-import Items from './Items'
-import Dungeons from './Dungeon'
-import Settings from './Settings'
-import Worlds from './Worlds'
-import LanguageContext from './LanguageContext'
-import Translator from '../classes/Translator'
+import app, { SaveUtils } from '../../app'
+import Player from '../Player'
+import Saves from '../Saves'
+import Items from '../Items'
+import Dungeons from '../Dungeon'
+import Settings from '../Settings'
+import Worlds from '../Worlds'
+import LanguageContext from '../LanguageContext'
+import Translator from '../../classes/Translator'
+
+import './Sidebar.css'
 
 export class SidebarButtons extends React.Component {
   static contextType = LanguageContext
@@ -43,13 +45,20 @@ class PlayerList extends React.Component {
     }
 
     app.on('world added', (worlds) => {
-      this.setState({ worlds })
-      this.forceUpdate()
+      this.setState({ worlds: app.worlds })
+    })
+
+    app.on('loaded', (save) => {
+      this.setState({ worlds: app.worlds })
     })
   }
 
+  componentDidMount () {
+    this.setState({ worlds: app.worlds })
+  }
+
   render () {
-    return app.worlds.map((world, index) => { return <Player key={index} current={world.save == app.global.world} world={index} save={world.save} /> })
+    return this.state.worlds.map((world, index) => { return <Player key={index} current={world.save == app.global.world} world={index} save={world.save} /> })
   }
 }
 
@@ -65,7 +74,7 @@ export default class Sidebar extends React.Component {
   }
 
   componentDidMount () {
-    this.pages = [this.homePage(), this.savePage(), this.worldPage(), this.itemPage(), this.settingsPage()]
+    this.pages = [this.homePage(), this.savePage(), null, this.itemPage(), this.settingsPage()]
   }
 
   renderPage () {
@@ -113,12 +122,6 @@ export default class Sidebar extends React.Component {
         <hr />
         <Dungeons />
       </>
-    )
-  }
-
-  worldPage () {
-    return (
-      <Worlds />
     )
   }
 

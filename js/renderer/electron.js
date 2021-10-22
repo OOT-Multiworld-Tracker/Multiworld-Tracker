@@ -3,6 +3,7 @@ const EventEmitter = require('events')
 const { autoUpdater } = require('electron-updater')
 const fs = require('fs')
 const path = require('path')
+const { default: installExtension, REACT_DEVELOPER_TOOLS } = require('electron-devtools-installer')
 
 class ElectronRenderer extends EventEmitter {
   constructor () {
@@ -13,7 +14,8 @@ class ElectronRenderer extends EventEmitter {
      */
     this.window = null
 
-    app.whenReady().then(() => {
+    app.whenReady().then(async() => {
+      await installExtension(REACT_DEVELOPER_TOOLS)
       this.CreateWindow()
       app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) {
@@ -39,6 +41,8 @@ class ElectronRenderer extends EventEmitter {
       frame: false,
       webPreferences: { contextIsolation: false, nodeIntegration: true }
     })
+    
+    this.window.openDevTools({mode:'detach'})
 
     ipcMain.on('packets', (_, data) => {
       if (data.payload === 7) {
@@ -83,7 +87,7 @@ class ElectronRenderer extends EventEmitter {
    * Load a file into the browser window from the public directory.
    */
   LoadWindow (file) {
-    if (process.env.NODE_ENV !== 'production') this.window.loadURL('http://localhost:8081/')
+    if (process.env.NODE_ENV !== 'production') this.window.loadURL('http://localhost:8080/')
     else this.window.loadFile(path.resolve(__dirname, 'public/dist/index.html'))
     autoUpdater.checkForUpdates()
   }

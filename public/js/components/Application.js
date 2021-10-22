@@ -5,7 +5,7 @@ import ModalLayer from './ModalLayer'
 import SaveModal from './Modals/SaveModal'
 import CreateSaveModal from './Modals/CreateSaveModal'
 import ItemModal from './Modals/ItemModal'
-import Sidebar from './Sidebar'
+import Sidebar from './Sidebar/Sidebar'
 import Locations from './Locations'
 import { init, ErrorBoundary } from '@sentry/react'
 import { Integrations } from '@sentry/tracing'
@@ -33,7 +33,6 @@ export default class Application extends Component {
       world: app.local.world,
       search: '',
       dropdown: false,
-      sidebar: 0,
       display: 0,
       saves: [],
       locations: app.local.world.locations,
@@ -168,7 +167,7 @@ export default class Application extends Component {
             <div className='pane-group'>
               <div className='pane-md' style={{ minWidth: '240px' }}>
                 <ErrorBoundary fallback={<p>Sidebar failed to load</p>}>
-                  <Sidebar onSave={this.handleCreateSave} onSpoilerUpload={this.handleSpoiler} onModal={this.handleSidebarModal} saves={this.state.saves} worlds={app.worlds} page={this.state.sidebar} />
+                  <Sidebar onSave={this.handleCreateSave} onSpoilerUpload={this.handleSpoiler} onModal={this.handleSidebarModal} saves={this.state.saves} />
                 </ErrorBoundary>
               </div>
               <div className='pane'>

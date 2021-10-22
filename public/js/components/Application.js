@@ -11,6 +11,7 @@ import { init, ErrorBoundary } from '@sentry/react'
 import { Integrations } from '@sentry/tracing'
 import SpoilerModal from './Modals/LoadSpoiler'
 import Parser from '../classes/Parser'
+import LanguageContext from '../components/LanguageContext'
 
 init({
   dsn: 'https://8957f94163d144e1b2efc135a8a2be1e@o174553.ingest.sentry.io/6000676',
@@ -145,29 +146,31 @@ export default class Application extends React.Component {
 
   render () {
     return (
-      <div className='window' onClick={this.handleWindowClick}>
-        <Header />
-        <div className='window-content'>
-          <ModalLayer onOutsideClick={this.handleModal} display={this.state.display > 0}>
-            {this.getModal()}
-          </ModalLayer>
-          <div className='pane-group'>
-            <div class='pane-md' style={{ minWidth: '240px' }}>
-              <ErrorBoundary fallback={<p>Sidebar failed to load</p>}>
-                <Sidebar onSave={this.handleCreateSave} onSpoilerUpload={this.handleSpoiler} onModal={this.handleSidebarModal} saves={this.state.saves} worlds={app.worlds} page={this.state.sidebar} />
-              </ErrorBoundary>
-            </div>
-            <div class='pane'>
-              <ErrorBoundary fallback={<p>Search failed to load</p>}>
-                <input type='text' className='form-control search-bar' onChange={this.handleSearch} placeholder='Search...' />
-              </ErrorBoundary>
-              <ErrorBoundary fallback={<p>Locations Failed to Load</p>}>
-                <Locations dropDownOpen={this.state.dropdown} onContextMenu={this.handleContextMenu} onDropdownClick={this.handleDropdown} locations={this.state.locations} search={this.state.search} />
-              </ErrorBoundary>
+      <LanguageContext.Provider value='en_us'>
+        <div className='window' onClick={this.handleWindowClick}>
+          <Header />
+          <div className='window-content'>
+            <ModalLayer onOutsideClick={this.handleModal} display={this.state.display > 0}>
+              {this.getModal()}
+            </ModalLayer>
+            <div className='pane-group'>
+              <div class='pane-md' style={{ minWidth: '240px' }}>
+                <ErrorBoundary fallback={<p>Sidebar failed to load</p>}>
+                  <Sidebar onSave={this.handleCreateSave} onSpoilerUpload={this.handleSpoiler} onModal={this.handleSidebarModal} saves={this.state.saves} worlds={app.worlds} page={this.state.sidebar} />
+                </ErrorBoundary>
+              </div>
+              <div class='pane'>
+                <ErrorBoundary fallback={<p>Search failed to load</p>}>
+                  <input type='text' className='form-control search-bar' onChange={this.handleSearch} placeholder='Search...' />
+                </ErrorBoundary>
+                <ErrorBoundary fallback={<p>Locations Failed to Load</p>}>
+                  <Locations dropDownOpen={this.state.dropdown} onContextMenu={this.handleContextMenu} onDropdownClick={this.handleDropdown} locations={this.state.locations} search={this.state.search} />
+                </ErrorBoundary>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </LanguageContext.Provider>
     )
   }
 }

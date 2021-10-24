@@ -1,24 +1,38 @@
 import { SettingsManager, ItemManager, TrackerSettings, LocationManager } from './AppManagers'
 import { GameWorld } from './classes/GameWorld'
 import { NetworkManager } from './classes/NetworkingManager'
+import { Subscription } from './classes/Subscription'
 
-const { EventEmitter } = require('events')
+class AppSubscriptions extends Subscription {
+  constructor () {
+    super(['connection', 'world update'])
+  }
 
-export class App extends EventEmitter {
+  subscribeToClientConnection (callback) {
+    this.subscribe('connection', callback)
+  }
+
+  subscribeToWorldUpdate (callback) {
+    this.subscribe('world update', callback)
+  }
+}
+
+export class App extends AppSubscriptions {
   constructor () {
     super()
 
     this.local = {
-      world: null,
+      world: new GameWorld(this),
       scene: -1
     }
 
     this.global = {
       settings: new SettingsManager(),
-      connected: false,
       scene: -1,
       world: 0
     }
+
+    this.saveLoad = new Subscription(['save', 'load', 'reset'])
 
     /**
      * The present electron IPC manager.
@@ -68,11 +82,9 @@ export class SaveUtils {
     app.global.settings = new SettingsManager()
     app.worlds = [new GameWorld(app)]
     app.local.world = app.worlds[0]
-    app.local.world.locations = new LocationManager(app.local.world)
-    app.local.world.items = new ItemManager(app.local.world)
 
-    app.emit('loaded', null)
-    app.emit('items updated', app.local.world.items)
+    app.saveLoad.call('reset')
+    app.local.world.call('update')
   }
 
   /**
@@ -82,21 +94,21 @@ export class SaveUtils {
    */
   static async Save (name) {
     return new Promise((resolve, reject) => {
-      const saveFiles = []
-
-      app.worlds.forEach((world) => {
-        saveFiles.push(Object.assign({}, { // Assign all of the values to the file.
+      const saveFiles = app.worlds.map((world) => 
+        Object.assign({}, { // Assign all of the values to the file.
           dungeons: world.dungeons,
           settings: app.global.settings.Serialize(),
           save: world.save,
           locations: world.locations.Array().map((location) => { return { completed: location.completed, item: location.item, display: location.display, name: location.name, preExit: location.preExit, scene: location.scene } }),
           scene: world.scene
-        }))
-      })
+        })
+      )
 
-      localStorage.setItem(name, JSON.stringify(saveFiles))
+      try {
+        localStorage.setItem(name, JSON.stringify(saveFiles))
+      } catch (e) { reject(e) }
 
-      app.emit('saved', saveFiles)
+      app.saveLoad.call('save', saveFiles)
       return resolve(saveFiles)
     })
   }
@@ -109,9 +121,10 @@ export class SaveUtils {
   static async Load (name) {
     return new Promise((resolve, reject) => {
       const file = JSON.parse(localStorage.getItem(name))
-
       app.worlds = []
+
       for (let i = 0; i < file.length; i++) app.worlds.push(new GameWorld(app))
+      
       app.local.world = app.worlds[app.global.world]
 
       file.forEach((world, index) => {
@@ -141,7 +154,7 @@ export class SaveUtils {
         })
       })
 
-      app.emit('loaded', file)
+      app.saveLoad.call('load', file)
       return resolve(file)
     })
   }

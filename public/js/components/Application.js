@@ -5,7 +5,7 @@ import ModalLayer from './ModalLayer'
 import SaveModal from './Modals/SaveModal'
 import CreateSaveModal from './Modals/CreateSaveModal'
 import ItemModal from './Modals/ItemModal'
-import Sidebar from './Sidebar'
+import Sidebar from './Sidebar/Sidebar'
 import Locations from './Locations'
 import { init, ErrorBoundary } from '@sentry/react'
 import { Integrations } from '@sentry/tracing'
@@ -14,6 +14,7 @@ import Parser from '../classes/Parser'
 import LanguageContext from '../components/LanguageContext'
 
 import '../../css/global.css'
+import Window from './Window/Window'
 
 init({
   dsn: 'https://8957f94163d144e1b2efc135a8a2be1e@o174553.ingest.sentry.io/6000676',
@@ -29,19 +30,16 @@ init({
 export default class Application extends Component {
   constructor () {
     super()
+
     this.state = { 
       world: app.local.world,
-      search: '',
       dropdown: false,
-      sidebar: 0,
       display: 0,
       saves: [],
-      locations: app.local.world.locations,
       language: 'en_us',
       languageChange: (e) => { this.setState({ language: e.target.value }) }
     }
 
-    this.handleSearch = this.handleSearch.bind(this)
     this.handleModal = this.handleModal.bind(this)
     this.handleDropdown = this.handleDropdown.bind(this)
     this.handleSetItem = this.handleSetItem.bind(this)
@@ -55,25 +53,13 @@ export default class Application extends Component {
 
     this.selectedLocation = 0
     this.selectedSave = 0
-
-    app.on('loaded', (save) => {
-      this.setState({ locations: app.local.world.locations })
-    })
-
-    app.on('chest opened', () => {
-      this.setState({ locations: app.local.world.locations })
-    })
-  }
-
-  handleSearch (e) {
-    this.setState({ locations: app.local.world.locations, search: e.target.value })
   }
 
   handleModal (e) {
     this.setState({ display: 0 })
   }
 
-  handleDropdown (e, id) {
+  handleDropdown (id) {
     switch (id) {
       case 0:
         this.setState({ display: 1 })
@@ -159,30 +145,14 @@ export default class Application extends Component {
   render () {
     return (
       <LanguageContext.Provider value={this.state}>
-        <div className='window' onClick={this.handleWindowClick}>
-          <Header />
-          <div className='window-content'>
-            <ModalLayer onOutsideClick={this.handleModal} display={this.state.display > 0}>
-              {this.getModal()}
-            </ModalLayer>
-            <div className='pane-group'>
-              <div className='pane-md' style={{ minWidth: '240px' }}>
-                <ErrorBoundary fallback={<p>Sidebar failed to load</p>}>
-                  <Sidebar onSave={this.handleCreateSave} onSpoilerUpload={this.handleSpoiler} onModal={this.handleSidebarModal} saves={this.state.saves} worlds={app.worlds} page={this.state.sidebar} />
-                </ErrorBoundary>
-              </div>
-              <div className='pane'>
-                <ErrorBoundary fallback={<p>Search failed to load</p>}>
-                  <input type='text' className='form-control search-bar' onChange={this.handleSearch} placeholder='Search...' />
-                </ErrorBoundary>
-                <ErrorBoundary fallback={<p>Locations Failed to Load</p>}>
-                  <Locations dropDownOpen={this.state.dropdown} onContextMenu={this.handleContextMenu} onDropdownClick={this.handleDropdown} locations={this.state.locations} search={this.state.search} />
-                </ErrorBoundary>
-              </div>
-            </div>
-          </div>
-        </div>
-      </LanguageContext.Provider>
+        <Window onClick={this.handleWindowClick}>
+          <ModalLayer onOutsideClick={this.handleModal} display={this.state.display > 0}>
+            {this.getModal()}
+          </ModalLayer>
+          <Sidebar onSave={this.handleCreateSave} onSpoilerUpload={this.handleSpoiler} onModal={this.handleSidebarModal} saves={this.state.saves} />
+          <Locations dropDownOpen={this.state.dropdown} onContextMenu={this.handleContextMenu} onDropdownClick={this.handleDropdown} />
+        </Window>
+    </LanguageContext.Provider>
     )
   }
 }

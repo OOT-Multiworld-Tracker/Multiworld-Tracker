@@ -17,13 +17,13 @@ export class LocationDropdown extends React.Component {
         ? (
           <div className='dropdown' style={{ left: this.props.position.left, top: this.props.position.top }}>
             <ul>
-              <li onClick={() => app.local.world.locations.ToggleCompleted(this.state)}>Toggle Completed</li>
-              <li onClick={(e) => this.onDropdownClick(e, 0)}>Set Item</li>
+              <li onClick={() => app.local.world.locations.Array()[this.state.id].Mark()}>Toggle Completed</li>
+              <li onClick={(e) => this.onDropdownClick(0)}>Set Item</li>
               <li className='dropdown-button'>Set Tag &gt;
                 <div className='dropdown side' style={{ left: '180px', bottom: '0px' }}>
                   <ul>
-                    <li onClick={(e) => this.onDropdownClick(e, 1)}>Set Useless</li>
-                    <li onClick={(e) => this.onDropdownClick(e, 2)}>Set Reminder</li>
+                    <li onClick={(e) => this.onDropdownClick(1)}>Set Useless</li>
+                    <li onClick={(e) => this.onDropdownClick(2)}>Set Reminder</li>
                   </ul>
                 </div>
               </li>
@@ -41,16 +41,22 @@ export default class Locations extends React.Component {
     this.filter = props.completed || false
     this.showItems = props.showItems || false
 
-    this.state = { search: '', page: 0, scene: -1, dropdown: { } }
+    this.state = { search: '', page: 0, scene: -1, dropdown: { }, locations: app.local.world.locations.Accessible(false, false, -1) }
 
     this.handleDropdownClick = this.props.onDropdownClick
     this.handleContextMenu = this.handleContextMenu.bind(this)
+    this.handleSceneChange = this.handleSceneChange.bind(this)
+  }
 
-    app.on('scene updated', (scene) => {
-      app.global.scene = scene
+  handleSceneChange () {
+    app.local.world.scene = scene
+    this.setState({ scene: Parser.ParseScenes().filter(sceneOb => this.checkLocation(app.local.world.locations.Accessible(), scene) && sceneOb.id == scene).length > 0 ? scene : -1 })
+  }
 
-      this.setState({ scene: Parser.ParseScenes().filter(sceneOb => this.checkLocation(app.local.world.locations.Accessible(), scene) && sceneOb.id == scene).length > 0 ? scene : -1 })
-    })
+  componentDidMount () {
+    app.local.world.subscribeChangeScene(this.handleSceneChange)
+    app.local.world.subscribeUpdate(() => this.setState({ locations: app.local.world.locations.Accessible(false, false, -1) }))
+    app.saveLoad.subscribe('load', (() => this.setState({ locations: app.local.world.locations.Accessible(false, false, -1) })))
   }
 
   handleContextMenu (e, id) {
@@ -87,22 +93,27 @@ export default class Locations extends React.Component {
 
   render () {
     return (
-      <>
-        <LocationDropdown onDropdownClick={this.handleDropdownClick} display={this.props.dropDownOpen} position={{ left: this.state.dropdown.left, top: this.state.dropdown.top }} />
-        <div className='btn-group' style={{ width: '100%', marginBottom: '4px' }}>
-          <select className='btn btn-bottom btn-default' style={{ width: '33.34%', marginRight: '1px' }} value={this.state.scene} onChange={(e) => this.setState({ scene: e.target.value })}><option value='-1'>None</option>{this.getScenes()}</select>
-          <button className='btn btn-bottom btn-default' style={{ width: '33.34%', backgroundColor: this.state.page === 0 ? '#444' : null }} onClick={() => this.displaySection(0)}>Accessible <span className='badge'>{app.local.world.locations.Accessible(false, false, -1).length}</span></button>
-          <button className='btn btn-bottom btn-default' style={{ width: '33.34%', backgroundColor: this.state.page === 1 ? '#444' : null }} onClick={() => this.displaySection(1)}>Completed <span className='badge'>{app.local.world.locations.Get(true).length}</span></button>
-        </div>
+      <div className='pane'>
+        <ErrorBoundary fallback={<p>Locations Failed to Load</p>}>
+          <ErrorBoundary fallback={<p>Search failed to load</p>}>
+            <input type='text' className='form-control search-bar' onChange={(e) => this.setState({ search: e.target.value })} placeholder='Search...' />
+          </ErrorBoundary>
+          <LocationDropdown onDropdownClick={this.handleDropdownClick} display={this.props.dropDownOpen} position={{ left: this.state.dropdown.left, top: this.state.dropdown.top }} />
+          <div className='btn-group' style={{ width: '100%', marginBottom: '4px' }}>
+            <select className='btn btn-bottom btn-default' style={{ width: '33.34%', marginRight: '1px' }} value={this.state.scene} onChange={(e) => this.setState({ scene: e.target.value })}><option value='-1'>None</option>{this.getScenes()}</select>
+            <button className='btn btn-bottom btn-default' style={{ width: '33.34%', backgroundColor: this.state.page === 0 ? '#444' : null }} onClick={() => this.displaySection(0)}>Accessible <span className='badge'>{app.local.world.locations.Accessible(false, false, -1).length}</span></button>
+            <button className='btn btn-bottom btn-default' style={{ width: '33.34%', backgroundColor: this.state.page === 1 ? '#444' : null }} onClick={() => this.displaySection(1)}>Completed <span className='badge'>{app.local.world.locations.Get(true).length}</span></button>
+          </div>
         <div style={{ overflowY: 'auto', height: '90%' }}>
           <List>
-            {(!this.props.search
+            {(!this.state.search
               ? app.local.world.locations.Accessible(this.state.page === 1, false, this.state.scene)
-              : app.local.world.locations.Search(this.props.search, this.state.scene, this.state.page)).map((location, index) => (
+              : app.local.world.locations.Search(this.state.search, this.state.scene, this.state.page)).map((location, index) => (
                 <Location onContextMenu={this.handleContextMenu} useless={location.useless} important={location.important} key={index} id={location.id} item={location.display ? location.display.name : 'None'} name={location.name} />))}
-          </List>
+            </List>
         </div>
-      </>
+        </ErrorBoundary>
+      </div>
     )
   }
 }

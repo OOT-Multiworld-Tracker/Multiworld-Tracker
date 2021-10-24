@@ -33,7 +33,6 @@ export class NetworkManager {
           }
 
           this.app.local.world.save = parsed.data.save // Overwrite the local save with the parsed save.
-          this.app.emit('items updated', this.app.local.world.items)
           this.app.local.world.Sync()
           break
 
@@ -49,12 +48,11 @@ export class NetworkManager {
             if (JSON.stringify(location.event.data) == JSON.stringify(this.app.lastEvent.data)) location.completed = true // If the events match then mark as complete.
           })
 
-          this.app.emit('chest opened')
           this.app.local.world.Sync()
           break
 
         case ElectronPayloads.SCENE_UPDATED:
-          this.app.emit('scene updated', parsed.data.scene)
+          this.app.call('scene changed')
           this.app.local.world.scene = parsed.data.scene
           this.app.local.world.Sync()
           break
@@ -67,11 +65,11 @@ export class NetworkManager {
           this.app.worlds[parsed.data.world].scene = parsed.data.scene
 
           this.Deserialize(this.app.worlds[parsed.data.world], parsed.data)
-          this.app.emit('world added', this.app.worlds)
+          this.app.worlds[parsed.data.world].call('update')
           break
 
         case ElectronPayloads.CONNECTION_UPDATE: // Connection payload
-          this.app.emit('connection updated', parsed.data)
+          this.app.call('connection', parsed.data)
           break
       }
     })

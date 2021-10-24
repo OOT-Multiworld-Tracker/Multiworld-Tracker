@@ -1,0 +1,32 @@
+.btn {
+    background: none;
+    border: none;
+    color: #dadada;
+    border-radius: 0;
+    padding: 5px;
+}
+
+.btn-bottom {
+    border-bottom: 1px solid #4e4e4e!important;
+}
+
+.btn:hover {
+    background-color: #555;
+    cursor: pointer;
+}
+
+.btn-dark {
+    background: none;
+}
+
+.btn-warning {
+    background-color: #722424!important;
+}
+
+input[type="button" i] {
+    background-color: #4e4e4e;
+}
+
+.btn .icon {
+    color: #dadada
+}

@@ -1,12 +1,27 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import app from '../app'
+import Electron from 'electron'
+import ButtonGroup from './Buttons/ButtonGroup'
+import Button from './Buttons/Button'
 
-export default class Header extends React.Component {
+export default class Header extends PureComponent {
   constructor (props) {
     super(props)
-    this.state = { connected: false }
 
-    app.on('connection updated', (status) => this.setState({ connected: status }))
+    this.state = { connected: false }
+    this.handleStatusUpdate = this.handleStatusUpdate.bind(this)
+  }
+
+  handleStatusUpdate(status) {
+    this.setState({ connected: status })
+  }
+
+  componentDidMount () {
+    app.subscribeToClientConnection(this.handleStatusUpdate)
+  }
+
+  componentWillUnmount () {
+    app.unsubscribe('connection', this.handleStatusUpdate)
   }
 
   render () {
@@ -14,23 +29,12 @@ export default class Header extends React.Component {
       <header className='toolbar toolbar-header'>
         <div className='toolbar-actions'>
           <span className='title'>Ocarina of Time - Multiworld Autotracker</span>
-          <div className='btn-group pull-right'>
-            <button className='btn btn-default btn-dark pull-right'>
-              <span className={this.state.connected ? 'icon icon-check' : 'icon icon-cancel'} />
-            </button>
-            <button className='btn btn-default btn-dark pull-right'>
-              <span className='icon icon-download' />
-            </button>
-            <button className='btn btn-default btn-dark pull-right' onClick={() => require('electron').ipcRenderer.send('packets', 'minimize')}>
-              <span className='icon icon-minus' />
-            </button>
-            <button className='btn btn-default btn-dark pull-right' onClick={() => require('electron').ipcRenderer.send('packets', 'window_size')}>
-              <span className='icon icon-doc' />
-            </button>
-            <button className='btn btn-default btn-dark pull-right' onClick={() => require('electron').ipcRenderer.send('packets', 'close')}>
-              <span className='icon icon-cancel' />
-            </button>
-          </div>
+          <ButtonGroup align='right'>
+            <Button align='right' theme='dark'><span className={this.state.connected ? 'icon icon-check' : 'icon icon-cancel'} /></Button>
+            <Button align='right' theme='dark' onClick={() => Electron.ipcRenderer.send('packets', 'minimize')}><span className='icon icon-minus' /></Button>
+            <Button align='right' theme='dark' onClick={() => Electron.ipcRenderer.send('packets', 'window_size')}><span className='icon icon-doc' /></Button>
+            <Button align='right' theme='dark' onClick={() => Electron.ipcRenderer.send('packets', 'close')}><span className='icon icon-cancel' /></Button>
+          </ButtonGroup>
         </div>
       </header>
     )

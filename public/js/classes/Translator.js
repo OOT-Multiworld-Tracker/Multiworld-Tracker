@@ -15,16 +15,17 @@ const lang = {
     }
 }
 
+export const GetLanguages = () => {
+  return Object.keys(lang)
+}
+
+export const GetLanguage = (name) => {
+  return lang[name]
+}
+
+export const GetTranslation = (lang, key) => {
+  return GetLanguage(lang)[key] || key
+}
+
 export default class Translator {
-  static GetLanguages () {
-    return Object.keys(lang)
-  }
-
-  static GetLanguage (name) {
-    return lang[name]
-  }
-
-  static GetTranslation (lang, key) {
-    return this.GetLanguage(lang)[key] || key
-  }
 }

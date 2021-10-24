@@ -4,6 +4,7 @@ const webpack = require('webpack')
 
 module.exports = {
   entry: './public/js/index.js',
+  mode: 'development',
   target: 'electron-renderer',
   output: {
     filename: 'bundle.js',
@@ -21,7 +22,7 @@ module.exports = {
   module: {
     rules: [
       { test: /\.js$/, use: {loader: 'babel-loader', options: { presets: ['@babel/preset-react'] } }, exclude: '/node_modules/' },
-      { test: /\.jsx$/, loader: 'babel-loader', exclude: '/node_modules/' },
+      { test: /\.jsx$/,  use: {loader: 'babel-loader', options: { presets: ['@babel/preset-react'] } }, exclude: '/node_modules/' },
       { test: /\.css$/i, use: ['style-loader', 'css-loader'] },
       { test: /\.(png|svg|jpg|jpeg|gif)$/i, type: 'asset/resource' }
     ]

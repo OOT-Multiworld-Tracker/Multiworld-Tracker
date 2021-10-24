@@ -1,0 +1,4 @@
+
+.btn-group .btn+.btn {
+    border: none
+}

@@ -87,7 +87,7 @@ class ElectronRenderer extends EventEmitter {
    * Load a file into the browser window from the public directory.
    */
   LoadWindow (file) {
-    if (process.env.NODE_ENV !== 'production') this.window.loadURL('http://localhost:8080/')
+    if (process.env.NODE_ENV !== 'production') this.window.loadURL('http://localhost:8081/')
     else this.window.loadFile(path.resolve(__dirname, 'public/dist/index.html'))
     autoUpdater.checkForUpdates()
   }

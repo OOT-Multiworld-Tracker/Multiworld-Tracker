@@ -7,6 +7,8 @@ export default class Settings extends React.Component {
     super(props)
     this.state = { settings: app.global.settings }
 
+    this.changeSetting = this.changeSetting.bind(this)
+
     app.on('setting change', settings => {
       this.setState({ settings })
     })

@@ -1,11 +1,14 @@
 import { App } from '../app'
 import { ItemManager, LocationManager } from '../AppManagers'
+import { Subscription } from './Subscription'
 
 /**
  * A player world instance. Controls everything related to worlds.
  */
-export class GameWorld {
+export class GameWorld extends Subscription {
   constructor (app) {
+    super(['update', 'sync', 'change scene'])
+
     /**
      * The application instance.
      * @type {App}
@@ -38,6 +41,10 @@ export class GameWorld {
     this.locations = new LocationManager(this)
     this.dungeons = [{ name: 'Deku Tree', mq: false }, { name: "Dodongo's Cave", mq: false }, { name: 'Bottom of the Well', mq: false }, { name: "Jabu Jabu's Belly", mq: false }, { name: 'Forest Temple', mq: false }, { name: 'Fire Temple', mq: false }, { name: 'Water Temple', mq: false }, { name: 'Shadow Temple', mq: false }, { name: 'Spirit Temple', mq: false }, { name: 'Ice Cavern', mq: false }, { name: 'GTG', mq: false }, { name: "Ganon's Castle", mq: false }]
     this.scene = 0
+
+    this.subscribeUpdate(() => {
+      this.app.call('world update', this.app.worlds)
+    })
   }
 
   /**
@@ -53,5 +60,20 @@ export class GameWorld {
       items: this.items,
       scene: this.scene
     })
+
+    this.call('sync', this)
   }
+
+  subscribeUpdate (callback) {
+    this.subscribe('update', callback)
+  }
+
+  subscribeSync (callback) {
+    this.subscribe('sync', callback)
+  }
+  
+  subscribeChangeScene (callback) {
+    this.subscribe('change scene', callback)
+  }
+
 }

@@ -5,8 +5,9 @@
   "main": "app.js",
   "scripts": {
     "start": "electron-forge start",
-    "dev": "concurrently \"webpack serve --config webpack.config.js --mode=development\" \"npx electron .\" --kill-others",
+    "server": "webpack && concurrently \"webpack serve --config webpack.config.js --mode=development\" \"npx electron .\" --kill-others",
     "test": "webpack --config webpack.config.js --mode=production && npx electron .",
+    "dev": "webpack --config webpack.config.js --mode=development && npx electron .",
     "prod": "npm run test",
     "package": "electron-forge package",
     "make": "electron-forge make"
@@ -61,8 +62,8 @@
     "electron-squirrel-startup": "^1.0.0",
     "electron-webpack": "^2.8.2",
     "html-webpack-plugin": "^5.3.2",
-    "react-dom": "^17.0.2",
     "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "style-loader": "^3.3.1",
     "webpack": "^5.38.1",
     "webpack-cli": "^4.7.2",
@@ -104,5 +105,22 @@
         }
       ]
     }
+  },
+  "standard.options": {
+    "globals": [
+      "$",
+      "jQuery",
+      "fetch"
+    ],
+    "ignore": [
+      "node_modules/**"
+    ],
+    "plugins": [
+      "html"
+    ],
+    "parser": "babel-eslint",
+    "envs": [
+      "jest"
+    ]
   }
 }

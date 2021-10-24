@@ -1,8 +1,10 @@
-import React from 'react'
-import app from '../app'
-import { List, ListItem } from './Lists'
-import Parser from '../classes/Parser'
+import React, { Component, PureComponent } from 'react'
+import app from '../../app'
+import { List, ListItem } from '../Lists'
+import Parser from '../../classes/Parser'
 import { ErrorBoundary } from '@sentry/react'
+
+import './MainWindow.css'
 
 export class LocationDropdown extends React.Component {
   constructor (props) {
@@ -35,28 +37,105 @@ export class LocationDropdown extends React.Component {
   }
 }
 
-export default class Locations extends React.Component {
+class MainHeader extends Component {
+  constructor (props) {
+    super(props)
+  }
+
+  onSceneUpdate (e) {
+    this.setState({ scene: Parser.ParseScenes().filter(sceneOb => this.checkLocation(app.local.world.locations.Accessible(), scene) && sceneOb.id == scene).length > 0 ? scene : -1 })
+  }
+  
+  componentDidMount () {
+    app.local.world.subscribeChangeScene(this.onSceneUpdate)
+  }
+
+  shouldComponentUpdate (nextProps) {
+    if (JSON.stringify(this.props) !== JSON.stringify(nextProps)) {
+      return true
+    }
+
+    return false
+  }
+
+  checkLocation (accessible, scene) {
+    return accessible.some(location => location.scene === scene)
+  }
+
+  getScenes () {
+    const accessible = app.local.world.locations.Accessible(this.props.page === 1, false, -1)
+
+    const sceneList = Parser.ParseScenes().map((scene) => {
+      if (this.checkLocation(accessible, String(scene.id))) {
+        return (<option key={scene.id} value={scene.id}>{scene.name}</option>)
+      } else {
+        if (this.props.scene === scene.id) {
+          this.props.onSceneChange(-1)
+          return null
+        }
+
+        return null
+      }
+    })
+
+    return sceneList
+  }
+
+  render () {
+    return (
+    <>
+    <ErrorBoundary fallback={<p>Search failed to load</p>}>
+      <input type='text' className='form-control search-bar' onChange={(e) => this.props.onSearch({ search: e.target.value })} placeholder='Search...' />
+    </ErrorBoundary>
+    <div className='btn-group' style={{ width: '100%', marginBottom: '4px' }}>
+      <select className='btn btn-bottom btn-default' style={{ width: '33.34%', marginRight: '1px' }} value={this.props.scene} onChange={(e) => this.props.onSceneChange(e.target.value)}><option value='-1'>None</option>{this.getScenes()}</select>
+      <button className='btn btn-bottom btn-default' style={{ width: '33.34%', backgroundColor: this.props.page === 0 ? '#444' : null }} onClick={() => this.props.onPageClick(0)}>Accessible <span className='badge'>{app.local.world.locations.Accessible(false, false, -1).length}</span></button>
+      <button className='btn btn-bottom btn-default' style={{ width: '33.34%', backgroundColor: this.props.page === 1 ? '#444' : null }} onClick={() => this.props.onPageClick(1)}>Completed <span className='badge'>{app.local.world.locations.Get(true).length}</span></button>
+    </div>
+    </>
+    )
+  }
+}
+
+export default class MainWindow extends Component {
   constructor (props) {
     super(props)
     this.filter = props.completed || false
     this.showItems = props.showItems || false
 
-    this.state = { search: '', page: 0, scene: -1, dropdown: { }, locations: app.local.world.locations.Accessible(false, false, -1) }
+    this.state = { search: '', page: 0, scene: -1, dropdown: { } }
 
     this.handleDropdownClick = this.props.onDropdownClick
     this.handleContextMenu = this.handleContextMenu.bind(this)
     this.handleSceneChange = this.handleSceneChange.bind(this)
+    this.displaySection = this.displaySection.bind(this)
+    this.handleSceneUpdate = this.handleSceneUpdate.bind(this)
+    this.handleSearch = this.handleSearch.bind(this)
+
   }
 
-  handleSceneChange () {
+  handleSceneUpdate (scene) {
     app.local.world.scene = scene
-    this.setState({ scene: Parser.ParseScenes().filter(sceneOb => this.checkLocation(app.local.world.locations.Accessible(), scene) && sceneOb.id == scene).length > 0 ? scene : -1 })
+  }
+
+  handleSceneChange (scene) {
+    this.setState({ scene })
+  }
+
+  handleSearch (term) {
+    this.setState({ search: term.search })
+  }
+
+  shouldComponentUpdate (nextProps, nextState) {
+    if (JSON.stringify(this.state) != JSON.stringify(nextState)) return true
+
+    return false
   }
 
   componentDidMount () {
     app.local.world.subscribeChangeScene(this.handleSceneChange)
-    app.local.world.subscribeUpdate(() => this.setState({ locations: app.local.world.locations.Accessible(false, false, -1) }))
-    app.saveLoad.subscribe('load', (() => this.setState({ locations: app.local.world.locations.Accessible(false, false, -1) })))
+    app.local.world.subscribeUpdate(() => { this.setState({ scene: app.local.world.scene }) })
+    app.saveLoad.subscribe('load', () => { this.setState({ scene: app.local.world.scene }) })
   }
 
   handleContextMenu (e, id) {
@@ -68,42 +147,12 @@ export default class Locations extends React.Component {
     this.setState({ page })
   }
 
-  getScenes () {
-    const accessible = app.local.world.locations.Accessible(this.state.page === 1, false, -1)
-
-    const sceneList = Parser.ParseScenes().map((scene) => {
-      if (this.checkLocation(accessible, String(scene.id))) {
-        return (<option key={scene.id} value={scene.id}>{scene.name}</option>)
-      } else {
-        if (this.state.scene === scene.id) {
-          this.setState({ scene: '-1' })
-          return null
-        }
-
-        return null
-      }
-    })
-
-    return sceneList
-  }
-
-  checkLocation (accessible, scene) {
-    return accessible.some(location => location.scene === scene)
-  }
-
   render () {
     return (
       <div className='pane'>
         <ErrorBoundary fallback={<p>Locations Failed to Load</p>}>
-          <ErrorBoundary fallback={<p>Search failed to load</p>}>
-            <input type='text' className='form-control search-bar' onChange={(e) => this.setState({ search: e.target.value })} placeholder='Search...' />
-          </ErrorBoundary>
-          <LocationDropdown onDropdownClick={this.handleDropdownClick} display={this.props.dropDownOpen} position={{ left: this.state.dropdown.left, top: this.state.dropdown.top }} />
-          <div className='btn-group' style={{ width: '100%', marginBottom: '4px' }}>
-            <select className='btn btn-bottom btn-default' style={{ width: '33.34%', marginRight: '1px' }} value={this.state.scene} onChange={(e) => this.setState({ scene: e.target.value })}><option value='-1'>None</option>{this.getScenes()}</select>
-            <button className='btn btn-bottom btn-default' style={{ width: '33.34%', backgroundColor: this.state.page === 0 ? '#444' : null }} onClick={() => this.displaySection(0)}>Accessible <span className='badge'>{app.local.world.locations.Accessible(false, false, -1).length}</span></button>
-            <button className='btn btn-bottom btn-default' style={{ width: '33.34%', backgroundColor: this.state.page === 1 ? '#444' : null }} onClick={() => this.displaySection(1)}>Completed <span className='badge'>{app.local.world.locations.Get(true).length}</span></button>
-          </div>
+        <MainHeader onSearch={this.handleSearch} onSceneChange={this.handleSceneUpdate} onPageClick={this.displaySection} scene={this.state.scene} page={this.state.page} />
+        <LocationDropdown onDropdownClick={this.handleDropdownClick} display={this.props.dropDownOpen} position={{ left: this.state.dropdown.left, top: this.state.dropdown.top }} />
         <div style={{ overflowY: 'auto', height: '90%' }}>
           <List>
             {(!this.state.search

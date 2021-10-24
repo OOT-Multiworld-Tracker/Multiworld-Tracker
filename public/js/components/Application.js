@@ -6,7 +6,6 @@ import SaveModal from './Modals/SaveModal'
 import CreateSaveModal from './Modals/CreateSaveModal'
 import ItemModal from './Modals/ItemModal'
 import Sidebar from './Sidebar/Sidebar'
-import Locations from './Locations'
 import { init, ErrorBoundary } from '@sentry/react'
 import { Integrations } from '@sentry/tracing'
 import SpoilerModal from './Modals/LoadSpoiler'
@@ -15,6 +14,7 @@ import LanguageContext from '../components/LanguageContext'
 
 import '../../css/global.css'
 import Window from './Window/Window'
+import MainWindow from './Locations/MainWindow'
 
 init({
   dsn: 'https://8957f94163d144e1b2efc135a8a2be1e@o174553.ingest.sentry.io/6000676',
@@ -35,9 +35,12 @@ export default class Application extends Component {
       world: app.local.world,
       dropdown: false,
       display: 0,
-      saves: [],
+      saves: []
+    }
+
+    this.language = {
       language: 'en_us',
-      languageChange: (e) => { this.setState({ language: e.target.value }) }
+      languageChange: (e) => { this.language.language = e.target.value; this.forceUpdate();}
     }
 
     this.handleModal = this.handleModal.bind(this)
@@ -144,13 +147,13 @@ export default class Application extends Component {
 
   render () {
     return (
-      <LanguageContext.Provider value={this.state}>
+      <LanguageContext.Provider value={this.language}>
         <Window onClick={this.handleWindowClick}>
           <ModalLayer onOutsideClick={this.handleModal} display={this.state.display > 0}>
             {this.getModal()}
           </ModalLayer>
           <Sidebar onSave={this.handleCreateSave} onSpoilerUpload={this.handleSpoiler} onModal={this.handleSidebarModal} saves={this.state.saves} />
-          <Locations dropDownOpen={this.state.dropdown} onContextMenu={this.handleContextMenu} onDropdownClick={this.handleDropdown} />
+          <MainWindow dropDownOpen={this.state.dropdown} onContextMenu={this.handleContextMenu} onDropdownClick={this.handleDropdown} />
         </Window>
     </LanguageContext.Provider>
     )

@@ -8,7 +8,7 @@ export default class Window extends Component {
             <Header />
 
             <div className="window-content">
-                <div class="pane-group">
+                <div className="pane-group">
                     {this.props.children}
                 </div>
             </div>

@@ -65,6 +65,12 @@ export default class Sidebar extends React.Component {
     this.pages = [this.homePage()];
   }
 
+  shouldComponentUpdate (nextProps, nextState) {
+    if (JSON.stringify(this.state) != JSON.stringify(nextState)) return true
+
+    return false
+  }
+
   componentDidMount () {
     this.pages = [this.homePage(), this.savePage(), null, this.itemPage(), this.settingsPage()]
   }

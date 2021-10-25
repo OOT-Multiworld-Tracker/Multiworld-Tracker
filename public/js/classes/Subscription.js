@@ -8,7 +8,8 @@ export class Subscription {
     }
 
     subscribe (event, callback) {
-        this.events[event].push(callback) // Add the callback to the event array.
+        if (this.events[event]) this.events[event].push(callback) // Add the callback to the event array.
+        else console.error('Failure registering invalid event type')
     }
 
     unsubscribe (event, callback) {

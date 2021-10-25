@@ -74,6 +74,8 @@ export default class Application extends Component {
         app.local.world.locations.Array()[this.selectedLocation].important = !app.local.world.locations.Array()[this.selectedLocation].important
         break
     }
+
+    app.call('locations update')
   }
 
   handleSidebarModal (e, name) {
@@ -143,6 +145,7 @@ export default class Application extends Component {
 
   handleSetItem (e) {
     this.handleModal(e)
+    app.call('locations update')
   }
 
   render () {

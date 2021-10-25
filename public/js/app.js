@@ -1,11 +1,11 @@
-import { SettingsManager, ItemManager, TrackerSettings, LocationManager } from './AppManagers'
+import { SettingsManager, ItemManager } from './AppManagers'
 import { GameWorld } from './classes/GameWorld'
 import { NetworkManager } from './classes/NetworkingManager'
 import { Subscription } from './classes/Subscription'
 
 class AppSubscriptions extends Subscription {
   constructor () {
-    super(['connection', 'world update'])
+    super(['connection', 'world update', 'view', 'settings update', 'locations update'])
   }
 
   subscribeToClientConnection (callback) {
@@ -14,6 +14,10 @@ class AppSubscriptions extends Subscription {
 
   subscribeToWorldUpdate (callback) {
     this.subscribe('world update', callback)
+  }
+
+  subscribeToSettingUpdate (callback) {
+    this.subscribe('settings update', callback)
   }
 }
 

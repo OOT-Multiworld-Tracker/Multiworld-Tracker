@@ -9,10 +9,18 @@ export default class Items extends React.Component {
   constructor () {
     super()
     this.state = { items: app.local.world.save }
+  }
 
-    app.local.world.subscribe('update', () => {
-      this.setState({ items: app.local.world.save })
-    })
+  onWorldUpdate () {
+    this.setState({ items: app.local.world.save })
+  }
+
+  componentDidMount () {
+    app.subscribeToWorldUpdate(this.onWorldUpdate)
+  }
+
+  componentWillUnmount () {
+    app.local.world.unsubscribe('world update', this.onWorldUpdate)
   }
 
   render () {

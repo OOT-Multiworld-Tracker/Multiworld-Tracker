@@ -352,5 +352,6 @@ export class Location {
     this.completed = !this.completed
     if (!this.untrackable) Parser.addLocationID(this.id, this.manager.world.app.lastEvent) // Add the ID of the last event to the location.json
     this.manager.world.Sync()
+    this.manager.world.app.call('locations update', this.manager)
   }
 }

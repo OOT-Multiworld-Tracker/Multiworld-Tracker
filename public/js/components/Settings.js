@@ -7,11 +7,19 @@ export default class Settings extends React.Component {
     super(props)
     this.state = { settings: app.global.settings }
 
-    this.changeSetting = this.changeSetting.bind(this)
+    this.onSettingChange = this.onSettingChange.bind(this)
+  }
 
-    app.on('setting change', settings => {
-      this.setState({ settings })
-    })
+  componentDidMount () {
+    app.subscribeToSettingUpdate(this.onSettingChange)
+  }
+
+  componentWillUnmount () {
+    app.unsubscribe('settings update', this.onSettingChange)
+  }
+
+  onSettingChange () {
+    this.setState({ settings: Object.assign({}, app.global.settings) })
   }
 
   changeSetting (id) {

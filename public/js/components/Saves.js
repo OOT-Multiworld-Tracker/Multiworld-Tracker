@@ -7,10 +7,18 @@ export default class Saves extends React.PureComponent {
     super()
 
     this.state = { saves: SaveUtils.GetFiles() }
+  }
 
-    app.on('saved', () => {
-      this.setState({ saves: SaveUtils.GetFiles() })
-    })
+  onSave () {
+    this.setState({ saves: SaveUtils.GetFiles() })
+  }
+
+  componentDidMount () {
+    app.saveLoad.subscribe('save', this.onSave)
+  }
+
+  componentWillUnmount () {
+    app.saveLoad.unsubscribe('save', this.onSave)
   }
 
   list () {

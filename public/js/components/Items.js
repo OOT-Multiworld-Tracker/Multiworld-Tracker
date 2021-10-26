@@ -9,6 +9,8 @@ export default class Items extends React.Component {
   constructor () {
     super()
     this.state = { items: app.local.world.save }
+
+    this.onWorldUpdate = this.onWorldUpdate.bind(this)
   }
 
   onWorldUpdate () {

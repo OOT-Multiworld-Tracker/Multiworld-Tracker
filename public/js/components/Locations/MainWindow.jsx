@@ -44,7 +44,7 @@ class MainHeader extends Component {
     this.onSceneUpdate = this.onSceneUpdate.bind(this)
   }
 
-  onSceneUpdate (e) {
+  onSceneUpdate (scene) {
     this.setState({ scene: Parser.ParseScenes().filter(sceneOb => this.checkLocation(app.local.world.locations.Accessible(), scene) && sceneOb.id == scene).length > 0 ? scene : -1 })
   }
   

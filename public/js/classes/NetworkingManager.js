@@ -34,7 +34,7 @@ export class NetworkManager {
 
           this.app.global.world = parsed.data.world-1
 
-          for (let i=this.app.global.world; i>0; i--) {
+          for (let i=this.app.global.world; i>this.app.worlds.length-1; i--) {
             this.app.worlds.unshift(new GameWorld(this.app))
             this.app.call('world update')
           }

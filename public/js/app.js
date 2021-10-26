@@ -99,7 +99,7 @@ export class SaveUtils {
   static async Save (name) {
     return new Promise((resolve, reject) => {
       const saveFiles = app.worlds.map((world) => 
-        Object.assign({}, { // Assign all of the values to the file.
+        Object.assign({ }, { // Assign all of the values to the file.
           dungeons: world.dungeons,
           settings: app.global.settings.Serialize(),
           save: world.save,
@@ -109,7 +109,7 @@ export class SaveUtils {
       )
 
       try {
-        localStorage.setItem(name, JSON.stringify(saveFiles))
+        localStorage.setItem(name, JSON.stringify({world: app.global.world, files: saveFiles}))
       } catch (e) { reject(e) }
 
       app.saveLoad.call('save', saveFiles)
@@ -127,11 +127,12 @@ export class SaveUtils {
       const file = JSON.parse(localStorage.getItem(name))
       app.worlds = []
 
-      for (let i = 0; i < file.length; i++) app.worlds.push(new GameWorld(app))
+      for (let i = 0; i < file.files.length; i++) app.worlds.push(new GameWorld(app))
       
       app.local.world = app.worlds[app.global.world]
+      app.global.world = file.world
 
-      file.forEach((world, index) => {
+      file.files.forEach((world, index) => {
         app.global.settings = new SettingsManager(world.settings)
         app.worlds[index].save = world.save
         app.worlds[index].items = new ItemManager(app.worlds[index])

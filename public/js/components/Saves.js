@@ -7,6 +7,7 @@ export default class Saves extends React.PureComponent {
     super()
 
     this.state = { saves: SaveUtils.GetFiles() }
+    this.onSave = this.onSave.bind(this)
   }
 
   onSave () {

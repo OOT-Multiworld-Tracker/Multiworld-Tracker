@@ -20,7 +20,7 @@ export default class Items extends React.Component {
   }
 
   componentWillUnmount () {
-    app.local.world.unsubscribe('world update', this.onWorldUpdate)
+    app.unsubscribe('world update', this.onWorldUpdate)
   }
 
   render () {

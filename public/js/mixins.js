@@ -4,7 +4,7 @@ function CanStunDeku (world) {
 }
 
 function HasExplosives (world) {
-  return world.items.bombs.value > 0 || world.items.bombchus.value > 0
+  return world.items.bombs.value > 0 || (world.app.global.settings.bombchusInLogic.Index() > 0 && world.items.bombchus.value > 0)
 }
 
 function CanDamage (world) {
@@ -89,9 +89,9 @@ function ShopRandomized (world, count = 0) {
 }
 
 function IsScrubSanity (world) {
-  return world.app.global.settings.shuffleScrubs.value !== 'none'
+  return world.app.global.settings.shuffleScrubs.Index() > 0
 }
 
 function IsTokenSanity (world) {
-  return world.app.global.settings.tokenSanity.value !== 'vanilla'
+  return world.app.global.settings.tokenSanity.Index() > 0
 }

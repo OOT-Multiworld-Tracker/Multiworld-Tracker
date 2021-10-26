@@ -1,4 +1,4 @@
-import React, { Component, PureComponent } from 'react'
+import React, { Component } from 'react'
 import app from '../../app'
 import { List, ListItem } from '../Lists'
 import Parser from '../../classes/Parser'
@@ -40,6 +40,8 @@ export class LocationDropdown extends React.Component {
 class MainHeader extends Component {
   constructor (props) {
     super(props)
+
+    this.onSceneUpdate = this.onSceneUpdate.bind(this)
   }
 
   onSceneUpdate (e) {
@@ -50,8 +52,8 @@ class MainHeader extends Component {
     app.local.world.subscribeChangeScene(this.onSceneUpdate)
   }
 
-  shouldComponentUpdate (nextProps) {
-    if (JSON.stringify(this.props) !== JSON.stringify(nextProps)) {
+  shouldComponentUpdate (nextProps, nextState) {
+    if (JSON.stringify(this.props) !== JSON.stringify(nextProps) || JSON.stringify(this.state) !== JSON.stringify(nextState)) {
       return true
     }
 
@@ -103,25 +105,31 @@ export default class MainWindow extends Component {
     this.filter = props.completed || false
     this.showItems = props.showItems || false
 
-    this.state = { search: '', page: 0, scene: -1, dropdown: { }, world: 0, locations: app.local.world.locations.Accessible(false, false  -1) }
+    this.state = { 
+      search: '', 
+      page: 0, 
+      scene: -1, 
+      dropdown: { }, 
+      world: 0, 
+      locations: app.local.world.locations.Accessible(false, false  -1)
+    }
 
     this.handleDropdownClick = this.props.onDropdownClick
     this.handleContextMenu = this.handleContextMenu.bind(this)
     this.handleSceneChange = this.handleSceneChange.bind(this)
     this.displaySection = this.displaySection.bind(this)
-    this.handleSceneUpdate = this.handleSceneUpdate.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
+    this.handleLocationClick = this.handleLocationClick.bind(this)
     this.onLocationUpdate = this.onLocationUpdate.bind(this)
 
   }
-
-  handleSceneUpdate (scene) {
+  
+  handleSceneChange (scene) {
     this.setState({ scene, locations: app.local.world.locations.Search(this.state.search, scene, this.state.page) })
   }
 
-  handleSceneChange (scene) {
-    app.local.world.scene = scene
-    this.setState({ scene, locations: app.local.world.locations.Search(this.state.search, scene, this.state.page) })
+  handleLocationClick () {
+    this.setState({ accessible: app.local.world.locations.Accessible(false, false, -1).length, completed: app.local.world.locations.Get(true).length })
   }
 
   handleSearch (term) {
@@ -129,7 +137,7 @@ export default class MainWindow extends Component {
   }
 
   shouldComponentUpdate (nextProps, nextState) {
-    if (this.state != nextState) return true
+    if (this.state != nextState || this.state.scene != nextState.scene) return true
 
     return false
   }
@@ -139,9 +147,8 @@ export default class MainWindow extends Component {
   }
 
   componentDidMount () {
-    app.local.world.subscribeChangeScene(this.handleSceneChange)
     app.subscribeToWorldUpdate(this.onLocationUpdate)
-    app.saveLoad.subscribe('load', () => { this.setState({ scene: app.local.world.scene }) })
+    app.saveLoad.subscribe('load', () => { app.local.world.subscribeChangeScene(this.handleSceneChange); this.setState({ scene: String(app.local.world.scene), locations: app.local.world.locations.Search(this.state.search, String(app.local.world.scene), 0) }) })
     app.subscribe('view', (world) => { this.setState({ world: app.worlds.indexOf(world), locations: app.local.world.locations.Accessible(this.state.search, this.state.scene, this.state.page)  }) })
     app.subscribe('locations update', this.onLocationUpdate)
   }
@@ -160,7 +167,7 @@ export default class MainWindow extends Component {
     return (
       <div className='pane'>
         <ErrorBoundary fallback={<p>Locations Failed to Load</p>}>
-        <MainHeader world={this.state.world} onSearch={this.handleSearch} onSceneChange={this.handleSceneUpdate} onPageClick={this.displaySection} scene={this.state.scene} page={this.state.page} />
+        <MainHeader locations={this.state.locations.length} world={this.state.world} onSearch={this.handleSearch} onSceneChange={this.handleSceneChange} onPageClick={this.displaySection} scene={this.state.scene} page={this.state.page} />
         <LocationDropdown onDropdownClick={this.handleDropdownClick} display={this.props.dropDownOpen} position={{ left: this.state.dropdown.left, top: this.state.dropdown.top }} />
         <div style={{ overflowY: 'auto', height: '90%' }}>
           <List>
@@ -182,7 +189,7 @@ export class Location extends React.PureComponent {
   render () {
     return (
       <ErrorBoundary fallback={<p>Location Failed to Load</p>}>
-        <ListItem style={{ backgroundColor: ((app.global.settings.itemHints.Index() === 1 && this.hasRareItem()) || this.props.important) ? '#cbef28' : '' }} onClick={() => app.local.world.locations.Array()[this.props.id].Mark()} onContextMenu={(e) => { e.preventDefault(); this.props.onContextMenu(e, this.props.id) }}>
+        <ListItem style={{ backgroundColor: ((app.global.settings.itemHints.Index() === 1 && this.hasRareItem()) || this.props.important) ? '#cbef28' : '' }} onClick={() => { app.local.world.locations.Array()[this.props.id].Mark(); this.props.handleLocationClick() }} onContextMenu={(e) => { e.preventDefault(); this.props.onContextMenu(e, this.props.id) }}>
           <div className='location-name' style={{ color: this.props.useless ? '#666' : null }}>{this.props.name} {app.global.settings.playerHints.value == true ? <span className='badge'>{app.local.world.locations.Array()[this.props.id].item.player}</span> : null}</div>
           <div className='location-items'>{app.global.settings.itemHints.value === 'show items' ? app.local.world.locations.Array()[this.props.id].item.item : this.props.item}</div>
         </ListItem>

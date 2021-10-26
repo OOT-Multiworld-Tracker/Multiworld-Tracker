@@ -25,6 +25,7 @@ export default class Settings extends React.Component {
   changeSetting (id) {
     app.global.settings[id].Toggle()
     this.setState({ settings: app.global.settings })
+    app.call('locations update', app.local.world.locations)
   }
 
   render () {

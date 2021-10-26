@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import app from '../app'
-import Header from './Header'
 import ModalLayer from './ModalLayer'
 import SaveModal from './Modals/SaveModal'
 import CreateSaveModal from './Modals/CreateSaveModal'

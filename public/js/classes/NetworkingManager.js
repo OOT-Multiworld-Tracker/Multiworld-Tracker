@@ -4,11 +4,17 @@ import { GameWorld } from './GameWorld'
 
 export class NetworkManager {
   constructor (app) {
+    /**
+     * The application instance.
+     * @type {import ('../app').App}
+     */
     this.app = app
 
     require('electron').ipcRenderer.on('packet', (_, data) => {
       const parsed = JSON.parse(String(data))
       let items
+
+      console.log(parsed)
 
       switch (parsed.payload) {
         case ElectronPayloads.SAVE_UPDATED:
@@ -29,7 +35,8 @@ export class NetworkManager {
           this.app.global.world = parsed.data.world-1
 
           for (let i=this.app.global.world; i>0; i--) {
-            this.app.worlds.shift(new GameWorld(this.app))
+            this.app.worlds.unshift(new GameWorld(this.app))
+            this.app.call('world update')
           }
 
           this.app.local.world.save = parsed.data.save // Overwrite the local save with the parsed save.
@@ -52,13 +59,13 @@ export class NetworkManager {
           break
 
         case ElectronPayloads.SCENE_UPDATED:
-          this.app.call('scene changed')
           this.app.local.world.scene = parsed.data.scene
+
+          if (this.app.global.settings.followCurrentScene.value == true) this.app.local.world.call('change scene', parsed.data.scene)
           this.app.local.world.Sync()
           break
 
         case ElectronPayloads.OTHER_TRACKER_UPDATE:
-
           if (this.app.worlds[parsed.data.world] === this.app.local.world) { return } // Prevent lost progress through mistakes or attempted trolls.
           if (this.app.worlds.length-1 < parsed.data.world) { this.app.worlds.push(new GameWorld(this.app)) }
           this.app.worlds[parsed.data.world].save = parsed.data.save

@@ -9,10 +9,10 @@ export class SettingsManager {
     /**
      * Progression-related settings
      */
-    this.openForest = new ValueSwitch('Open Forest', ['open', 'closed'])
-    this.openKakariko = new ValueSwitch('Open Kakariko', ['open', 'closed'])
+    this.openForest = new ValueSwitch('Open Forest', ['closed', 'open deku', 'open forest'])
+    this.openKakariko = new ValueSwitch('Open Kakariko', ['closed', 'open'])
     this.openDoorOfTime = new ValueSwitch('Open Door Of Time', [false, true])
-    this.zoraFountain = new ValueSwitch('Zora Fountain', ['open', 'closed'])
+    this.zoraFountain = new ValueSwitch('Zora Fountain', ['closed', 'open adult', 'open child'])
     this.gerudoFortress = new ValueSwitch('Gerudo Fortress', ['vanilla', 'fast', 'open'])
 
     /**
@@ -20,7 +20,6 @@ export class SettingsManager {
      */
     this.bridge = new ValueSwitch('Bridge', ['vanilla', 'stones', 'medallions', 'skulltulas', 'open'])
     this.bridgeStones = new ValueSwitch('Bridge Stones', [0, 1, 2, 3, 4, 5, 6])
-    this.triforceHunt = new ValueSwitch('Triforce Hunt', [false, true])
 
     /**
      * Bombchus able to be used in-place of bombs.
@@ -35,11 +34,6 @@ export class SettingsManager {
     /**
      * Shuffle settings for items / changes avaliable item pool.
      */
-    this.shuffleKokiriSword = new ValueSwitch('Shuffle Kokiri Sword', [false, true])
-    this.shuffleOcarinas = new ValueSwitch('Shuffle Ocarinas', [false, true])
-    this.shuffleWeirdEgg = new ValueSwitch('Shuffle Weird Egg', [false, true])
-    this.shuffleGerudoCard = new ValueSwitch('Shuffle Gerudo Card', [false, true])
-    this.shuffleSongItems = new ValueSwitch('Shuffle Song Items', ['vanilla', 'shuffle', 'random'])
     this.shuffleCows = new ValueSwitch('Shuffle Cows', [false, true])
     this.shuffleBeans = new ValueSwitch('Shuffle Beans', [false, true])
     this.shuffleMedigoronCarpetSalesman = new ValueSwitch('Shuffle Medigoron Carpet Salesman', [false, true])
@@ -50,6 +44,8 @@ export class SettingsManager {
      */
     this.itemHints = new ValueSwitch('Item Hints', [false, 'highlight important', 'show items'])
     this.playerHints = new ValueSwitch('Player Hints', [false, true])
+    this.followCurrentScene = new ValueSwitch('Follow Current Scene', [true, false])
+    this.hideUnavaliable = new ValueSwitch('Hide Unavaliable', [true, false])
 
     /**
       * Shuffle settings for items / changes avaliable item pool.
@@ -230,8 +226,9 @@ export class LocationManager {
   / @returns {Location[]}
   */
   Accessible (complete = false, showItems = false, scene = -1) {
-    return this.Array().filter(location =>
+    return this.world.app.global.settings.hideUnavaliable.value ? this.Array().filter(location =>
       (location.scene == scene || scene == -1) && (this.IsAccessible(location, this.world) && (complete == false && location.completed == false) || (complete == true && location.completed)))
+    : this.Array()
   }
 
   /**

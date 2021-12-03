@@ -42,9 +42,20 @@ export default class Player extends React.Component {
   render () {
     return (
       <div className='player'>
-        <div className='character_name' onClick={() => {app.local.world = app.worlds[this.props.world]; app.call('view', app.local.world)}}><span>{this.props.current ? "You" : this.state.worldState.save.player_name}</span> <span style={this.state.worldState.save.rupee_count == this.state.worldState.items.wallet.value ? {color: '#e08231'} : null }><img width='16' src={[GreenRupee, BlueRupee, RedRupee][this.state.worldState.items.wallet.Index()]} />{this.state.worldState.save.rupee_count}</span></div>
+        <div 
+          className='character_name' 
+          onClick={() => {
+            app.local.world = app.worlds[this.props.world]; 
+            app.call('view', app.local.world)
+          }}>
+            <span>{this.props.current ? "You" : this.state.worldState.save.player_name}</span> 
+            <span style={this.state.worldState.save.rupee_count == this.state.worldState.items.wallet.value ? {color: '#e08231'} : null }>
+              <img width='16' src={[GreenRupee, BlueRupee, RedRupee][this.state.worldState.items.wallet.Index()]} />{this.state.worldState.save.rupee_count}<span style={{fontSize: 9, color: '#BBB', marginLeft: '2px'}}>/{this.state.worldState.items.wallet.value}</span>
+            </span>
+          </div>
+
         <div className='heart_containers'>{this.generateContainers()}</div>
-        <div className='progress' style={{width: this.state.worldState.save.magic_meter_size+'%'}}><div className='progress-bar' style={{width: this.state.worldState.save.magic_current+'%'}} /></div>
+        <div className='progress' style={{width: 50 * this.state.worldState.save.magic_meter_size+'%'}}><div className='progress-bar' style={{width: 2 * this.state.worldState.save.magic_current+'%'}} /></div>
         {app.worlds.length > 1 ? <div>{GetTranslation(this.context.language, "World")} {this.state.world+1}</div> : null } {Parser.ParseScenes()[this.state.worldState.scene].name}
       </div>
     )

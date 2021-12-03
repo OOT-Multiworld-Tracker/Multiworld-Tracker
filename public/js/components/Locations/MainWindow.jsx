@@ -1,103 +1,11 @@
 import React, { Component } from 'react'
 import app from '../../app'
 import { List, ListItem } from '../Lists'
-import Parser from '../../classes/Parser'
 import { ErrorBoundary } from '@sentry/react'
 
 import './MainWindow.css'
-
-export class LocationDropdown extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = { open: false, id: 0, left: this.props.position.left, top: this.props.position.top }
-    this.onDropdownClick = this.props.onDropdownClick.bind(this)
-  }
-
-  render () {
-    return (
-      this.props.display
-        ? (
-          <div className='dropdown' style={{ left: this.props.position.left, top: this.props.position.top }}>
-            <ul>
-              <li onClick={() => app.local.world.locations.Array()[this.state.id].Mark()}>Toggle Completed</li>
-              <li onClick={(e) => this.onDropdownClick(0)}>Set Item</li>
-              <li className='dropdown-button'>Set Tag &gt;
-                <div className='dropdown side' style={{ left: '180px', bottom: '0px' }}>
-                  <ul>
-                    <li onClick={(e) => this.onDropdownClick(1)}>Set Useless</li>
-                    <li onClick={(e) => this.onDropdownClick(2)}>Set Reminder</li>
-                  </ul>
-                </div>
-              </li>
-            </ul>
-          </div>
-          )
-        : null
-    )
-  }
-}
-
-class MainHeader extends Component {
-  constructor (props) {
-    super(props)
-
-    this.onSceneUpdate = this.onSceneUpdate.bind(this)
-  }
-
-  onSceneUpdate (scene) {
-    this.setState({ scene: Parser.ParseScenes().filter(sceneOb => this.checkLocation(app.local.world.locations.Accessible(), scene) && sceneOb.id == scene).length > 0 ? scene : -1 })
-  }
-  
-  componentDidMount () {
-    app.local.world.subscribeChangeScene(this.onSceneUpdate)
-  }
-
-  shouldComponentUpdate (nextProps, nextState) {
-    if (JSON.stringify(this.props) !== JSON.stringify(nextProps) || JSON.stringify(this.state) !== JSON.stringify(nextState)) {
-      return true
-    }
-
-    return false
-  }
-
-  checkLocation (accessible, scene) {
-    return accessible.some(location => location.scene === scene)
-  }
-
-  getScenes () {
-    const accessible = app.local.world.locations.Accessible(this.props.page === 1, false, -1)
-
-    const sceneList = Parser.ParseScenes().map((scene) => {
-      if (this.checkLocation(accessible, String(scene.id))) {
-        return (<option key={scene.id} value={scene.id}>{scene.name}</option>)
-      } else {
-        if (this.props.scene === scene.id) {
-          this.props.onSceneChange(-1)
-          return null
-        }
-
-        return null
-      }
-    })
-
-    return sceneList
-  }
-
-  render () {
-    return (
-    <>
-    <ErrorBoundary fallback={<p>Search failed to load</p>}>
-      <input type='text' className='form-control search-bar' onChange={(e) => this.props.onSearch({ search: e.target.value })} placeholder='Search...' />
-    </ErrorBoundary>
-    <div className='btn-group' style={{ width: '100%', marginBottom: '4px' }}>
-      <select className='btn btn-bottom btn-default' style={{ width: '33.34%', marginRight: '1px' }} value={this.props.scene} onChange={(e) => this.props.onSceneChange(e.target.value)}><option value='-1'>None</option>{this.getScenes()}</select>
-      <button className='btn btn-bottom btn-default' style={{ width: '33.34%', backgroundColor: this.props.page === 0 ? '#444' : null }} onClick={() => this.props.onPageClick(0)}>Accessible <span className='badge'>{app.local.world.locations.Accessible(false, false, -1).length}</span></button>
-      <button className='btn btn-bottom btn-default' style={{ width: '33.34%', backgroundColor: this.props.page === 1 ? '#444' : null }} onClick={() => this.props.onPageClick(1)}>Completed <span className='badge'>{app.local.world.locations.Get(true).length}</span></button>
-    </div>
-    </>
-    )
-  }
-}
+import MainHeader from './MainHeader'
+import LocationDropdown from './LocationDropdown'
 
 export default class MainWindow extends Component {
   constructor (props) {
@@ -136,10 +44,8 @@ export default class MainWindow extends Component {
     this.setState({ search: term.search, locations: app.local.world.locations.Search(term.search, this.state.scene, this.state.page)})
   }
 
-  shouldComponentUpdate (nextProps, nextState) {
-    if (this.state != nextState || this.state.scene != nextState.scene) return true
-
-    return false
+  shouldComponentUpdate (_, nextState) {
+    return (this.state != nextState || this.state.scene != nextState.scene);
   }
 
   onLocationUpdate() {
@@ -163,7 +69,6 @@ export default class MainWindow extends Component {
   }
 
   render () {
-    console.log(this.state)
     return (
       <div className='pane'>
         <ErrorBoundary fallback={<p>Locations Failed to Load</p>}>

@@ -4,3 +4,14 @@
     margin: 0;
     padding: 3px;
 }
+
+.pane-md div .list
+{
+    margin-top: 10px;
+    padding: 0;
+}
+
+.pane-md div .list .list-item
+{
+    padding: 3px;
+}

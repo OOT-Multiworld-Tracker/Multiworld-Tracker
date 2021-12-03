@@ -3,7 +3,6 @@ const EventEmitter = require('events')
 const { autoUpdater } = require('electron-updater')
 const fs = require('fs')
 const path = require('path')
-const { default: installExtension, REACT_DEVELOPER_TOOLS } = require('electron-devtools-installer')
 
 class ElectronRenderer extends EventEmitter {
   constructor () {
@@ -15,7 +14,6 @@ class ElectronRenderer extends EventEmitter {
     this.window = null
 
     app.whenReady().then(async() => {
-      await installExtension(REACT_DEVELOPER_TOOLS)
       this.CreateWindow()
       app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) {

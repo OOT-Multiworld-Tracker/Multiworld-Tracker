@@ -5,7 +5,7 @@ import { Subscription } from './classes/Subscription'
 
 class AppSubscriptions extends Subscription {
   constructor () {
-    super(['connection', 'world update', 'view', 'settings update', 'locations update'])
+    super(['connection', 'world update', 'view', 'settings update', 'locations update', 'entrance update'])
   }
 
   subscribeToClientConnection (callback) {
@@ -33,7 +33,8 @@ export class App extends AppSubscriptions {
     this.global = {
       settings: new SettingsManager(),
       scene: -1,
-      world: 0
+      world: 0,
+      entrances: []
     }
 
     this.saveLoad = new Subscription(['save', 'load', 'reset'])
@@ -104,7 +105,8 @@ export class SaveUtils {
           settings: app.global.settings.Serialize(),
           save: world.save,
           locations: world.locations.Array().map((location) => { return { completed: location.completed, item: location.item, display: location.display, name: location.name, preExit: location.preExit, scene: location.scene } }),
-          scene: world.scene
+          scene: world.scene,
+          entrances: app.global.entrances
         })
       )
 
@@ -131,12 +133,14 @@ export class SaveUtils {
       
       app.local.world = app.worlds[app.global.world]
       app.global.world = file.world
+      app.global.entrances = file.files[0].entrances || []
 
       file.files.forEach((world, index) => {
         app.global.settings = new SettingsManager(world.settings)
         app.worlds[index].save = world.save
         app.worlds[index].items = new ItemManager(app.worlds[index])
         app.worlds[index].dungeons = world.dungeons
+        app.worlds[index].scene = world.scene
 
         const items = Object.assign({}, // Assign all of the items to the savefile.
           world.save.questStatus,

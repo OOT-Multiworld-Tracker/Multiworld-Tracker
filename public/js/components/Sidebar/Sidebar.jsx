@@ -1,6 +1,5 @@
 import React from 'react'
 import app, { SaveUtils } from '../../app'
-import Player from '../Player'
 import Saves from '../Saves'
 import Items from '../Items'
 import Dungeons from '../Dungeon'
@@ -10,54 +9,9 @@ import {GetLanguages, GetTranslation} from '../../classes/Translator'
 import { ErrorBoundary } from '@sentry/react'
 
 import './Sidebar.css'
-
-export class SidebarButtons extends React.Component {
-  static contextType = LanguageContext
-
-  render () {
-    return (
-      <select className='form-control' onChange={this.props.onChange}>
-        <option value='0'>{GetTranslation(this.context.language, 'World')}</option>
-        <option value='1'>{GetTranslation(this.context.language, 'Saves')}</option>
-        <option value='3'>{GetTranslation(this.context.language, 'Items')}</option>
-        <option value='4'>{GetTranslation(this.context.language, 'Settings')}</option>
-      </select>
-    )
-  }
-  
-}
-
-class PlayerList extends React.Component {
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      worlds: app.worlds
-    }
-
-    this.handleWorldUpdate = this.handleWorldUpdate.bind(this)
-  }
-
-  handleWorldUpdate () {
-    this.setState({ worlds: app.worlds })
-  }
-
-  componentDidMount () {
-    app.subscribeToWorldUpdate(this.handleWorldUpdate)
-    app.saveLoad.subscribe('load', this.handleWorldUpdate)
-  }
-
-  componentWillUnmount () {
-    app.unsubscribe('world update', this.handleWorldUpdate)
-    app.saveLoad.unsubscribe('load', this.handleWorldUpdate)
-  }
-
-  render () {
-    return this.state.worlds.map((world, index) => { 
-      return <Player key={index} current={world == app.local.world} world={index} save={world.save} /> 
-    })
-  }
-}
+import PlayerList from './PlayerList'
+import SidebarButtons from './SidebarButtons'
+import EntranceRandomizer from './EntranceRandomizer'
 
 export default class Sidebar extends React.Component {
   static contextType = LanguageContext
@@ -92,6 +46,7 @@ export default class Sidebar extends React.Component {
     return (
       <>
         <PlayerList />
+        <EntranceRandomizer />
       </>
     )
   }

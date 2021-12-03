@@ -23,6 +23,7 @@ export default class Button extends PureComponent {
       <button
         className={this.className.join(' ')}
         onClick={this.props.onClick}
+        style={this.props.style}
       >
         {this.props.children}
       </button>

@@ -53,6 +53,8 @@ export class SettingsManager {
     this.shopSanity = new ValueSwitch('Shop Sanity', ['none', 1, 2, 3, 4])
     this.tokenSanity = new ValueSwitch('Token Sanity', ['vanilla', 'dungeon', 'overworld', 'all'])
 
+    this.entranceSanity = new ValueSwitch('Entrance Sanity', [false, true])
+
     if (spoiler) {
       Object.keys(this).forEach(key => {
         if (spoiler[this[key].name.toLowerCase().replace(/ /g, '_')]) {
@@ -226,9 +228,8 @@ export class LocationManager {
   / @returns {Location[]}
   */
   Accessible (complete = false, showItems = false, scene = -1) {
-    return this.world.app.global.settings.hideUnavaliable.value ? this.Array().filter(location =>
-      (location.scene == scene || scene == -1) && (this.IsAccessible(location, this.world) && (complete == false && location.completed == false) || (complete == true && location.completed)))
-    : this.Array()
+    return this.Array().filter(location =>
+      (location.scene == scene || scene == -1) && ((this.world.app.global.settings.hideUnavaliable.value || this.IsAccessible(location, this.world)) && (complete == false && location.completed == false) || (complete == true && location.completed)))
   }
 
   /**

@@ -59,9 +59,14 @@ export class NetworkManager {
           break
 
         case ElectronPayloads.SCENE_UPDATED:
+          this.AddEntrance(parsed.data.scene) // Add the entrance to the global entrances.
           this.app.local.world.scene = parsed.data.scene
 
           if (this.app.global.settings.followCurrentScene.value == true) this.app.local.world.call('change scene', parsed.data.scene)
+          
+          if (this.app.global.settings.entranceSanity.value == true) 
+            this.app.call('entrance update')
+            
           this.app.local.world.Sync()
           break
 
@@ -80,6 +85,18 @@ export class NetworkManager {
           break
       }
     })
+  }
+
+  AddEntrance (to) {
+    if (this.HasEntrance(this.app.local.world.scene, to)) return // Prevent duplicates.
+
+    this.app.global.entrances.push([this.app.local.world.scene, to]) // Add the entrance to the global entrances.
+    this.app.global.entrances.push([to, this.app.local.world.scene]) // Add the entrance to the global entrances.
+  }
+
+  HasEntrance (from, to) {
+    console.log(this.app.global.entrances.find((entrance) => entrance[0] == from && entrance[1] == to));
+    return this.app.global.entrances.find((entrance) => entrance[0] == from && entrance[1] == to) !== undefined
   }
 
   /**

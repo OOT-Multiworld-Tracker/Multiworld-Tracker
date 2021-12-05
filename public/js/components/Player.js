@@ -56,7 +56,8 @@ export default class Player extends React.Component {
 
         <div className='heart_containers'>{this.generateContainers()}</div>
         <div className='progress' style={{width: 50 * this.state.worldState.save.magic_meter_size+'%'}}><div className='progress-bar' style={{width: 2 * this.state.worldState.save.magic_current+'%'}} /></div>
-        {app.worlds.length > 1 ? <div>{GetTranslation(this.context.language, "World")} {this.state.world+1}</div> : null } {Parser.ParseScenes()[this.state.worldState.scene].name}
+        {app.worlds.length > 1 ? <div>{GetTranslation(this.context.language, "World")} {this.state.world+1}</div> : null } 
+        <span className='scene_name'>{Parser.ParseScenes()[this.state.worldState.scene].name}</span>
       </div>
     )
   }

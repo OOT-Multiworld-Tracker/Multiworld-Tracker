@@ -31,6 +31,7 @@ export default class Header extends PureComponent {
           <span className='title'>Ocarina of Time - Multiworld Autotracker</span>
           <ButtonGroup align='right'>
             <Button align='right' theme='dark'><span className={this.state.connected ? 'icon icon-check' : 'icon icon-cancel'} /></Button>
+            <Button align='right' theme='dark' onClick={() => { app.global.settings.popout = !app.global.settings.popout; Electron.ipcRenderer.send('packets', 'popout') }}>P</Button>
             <Button align='right' theme='dark' onClick={() => Electron.ipcRenderer.send('packets', 'minimize')}><span className='icon icon-minus' /></Button>
             <Button align='right' theme='dark' onClick={() => Electron.ipcRenderer.send('packets', 'window_size')}><span className='icon icon-doc' /></Button>
             <Button align='right' theme='dark' onClick={() => Electron.ipcRenderer.send('packets', 'close')}><span className='icon icon-cancel' /></Button>

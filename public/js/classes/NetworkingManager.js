@@ -91,7 +91,6 @@ export class NetworkManager {
     if (this.HasEntrance(this.app.local.world.scene, to)) return // Prevent duplicates.
 
     this.app.global.entrances.push([this.app.local.world.scene, to]) // Add the entrance to the global entrances.
-    this.app.global.entrances.push([to, this.app.local.world.scene]) // Add the entrance to the global entrances.
   }
 
   HasEntrance (from, to) {

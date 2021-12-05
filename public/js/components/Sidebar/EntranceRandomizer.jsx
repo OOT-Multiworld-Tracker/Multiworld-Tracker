@@ -37,6 +37,14 @@ export default class EntranceRandomizer extends React.Component {
                         <span>To {Parser.ParseScenes()[entrance[1]].name}</span>
                     </ListItem>
                 ))}
+                
+                {app.global.entrances.filter((entrance) => {
+                    return entrance[1] == app.local.world.scene
+                }).map((entrance, i) => (
+                    <ListItem key={i}>
+                        <span>From {Parser.ParseScenes()[entrance[0]].name}</span>
+                    </ListItem>
+                ))}
                 </div>
             </div>
         )

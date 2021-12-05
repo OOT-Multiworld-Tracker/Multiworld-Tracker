@@ -148,6 +148,7 @@ export default class Application extends Component {
   }
 
   render () {
+    if (app.global.settings.popout) return <Window onClick={this.handleWindowClick}><MainWindow dropDownOpen={this.state.dropdown} onContextMenu={this.handleContextMenu} onDropdownClick={this.handleDropdown} /></Window>
     return (
       <LanguageContext.Provider value={this.language}>
         <Window onClick={this.handleWindowClick}>

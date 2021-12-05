@@ -49,6 +49,15 @@ class ElectronRenderer extends EventEmitter {
       } else if (data === 'close') return this.window.close()
       else if (data === 'window_size') return this.window.isMaximized ? this.window.maximize() : this.window.unmaximize()
       else if (data === 'minimize') return this.window.minimize()
+      else if (data === 'popout') {
+        if (this.window.isAlwaysOnTop()) {
+          this.window.setAlwaysOnTop(false)
+          this.window.setSize(1024, 748);
+        } else {
+          this.window.setAlwaysOnTop(true);
+          return this.window.setSize(300, 400);
+        }
+      }
 
       console.log(data)
       this.emit('data', data)

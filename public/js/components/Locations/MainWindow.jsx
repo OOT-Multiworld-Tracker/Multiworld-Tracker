@@ -88,7 +88,7 @@ export default class MainWindow extends Component {
 
 export class Location extends React.PureComponent {
   hasRareItem () {
-    return Object.values(app.local.world.items).some((item) => (item.name === app.local.world.locations.Array()[this.props.id].item) || (item.name === app.local.world.locations.Array()[this.props.id].item.item))
+    return Object.values(app.local.world.items).some((item) => (item.name === app.local.world.locations.Array()[this.props.id].item) || (item.name === app.local.world.locations.Array()[this.props.id].name))
   }
 
   render () {

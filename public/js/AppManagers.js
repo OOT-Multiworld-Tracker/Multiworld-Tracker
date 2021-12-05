@@ -229,7 +229,7 @@ export class LocationManager {
   */
   Accessible (complete = false, showItems = false, scene = -1) {
     return this.Array().filter(location =>
-      (location.scene == scene || scene == -1) && ((this.world.app.global.settings.hideUnavaliable.value || this.IsAccessible(location, this.world)) && (complete == false && location.completed == false) || (complete == true && location.completed)))
+      (location.scene == scene || scene == -1) && ((this.world.app.global.settings.hideUnavaliable.value == false || this.IsAccessible(location, this.world)) && (complete == false && location.completed == false) || (complete == true && location.completed)))
   }
 
   /**

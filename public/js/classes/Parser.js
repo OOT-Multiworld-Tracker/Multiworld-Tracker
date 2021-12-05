@@ -13,6 +13,8 @@ export default class Parser {
     spoiler.log = log
     spoiler.seed = log[':seed']
     spoiler.worlds = []
+    
+    if (!log.locations) return spoiler;
 
     if (spoiler.log.settings.world_count > 1) {
       Object.values(log.locations).forEach((_, index) => {

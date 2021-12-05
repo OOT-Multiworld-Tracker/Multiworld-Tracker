@@ -88,7 +88,7 @@ export class SaveUtils {
     app.worlds = [new GameWorld(app)]
     app.local.world = app.worlds[0]
 
-    app.saveLoad.call('reset')
+    app.saveLoad.call('load')
     app.local.world.call('update')
   }
 

@@ -38,8 +38,7 @@ export default class MainHeader extends Component {
             } 
             else 
             {
-              if (this.props.scene === scene.id) {
-                this.props.onSceneChange(-1)
+              if (this.props.scene != -1 && this.props.scene === scene.id) {
                 return null
             }
   
@@ -54,9 +53,7 @@ export default class MainHeader extends Component {
     render () {
       return (
       <>
-      <ErrorBoundary fallback={<p>Search failed to load</p>}>
-        <input type='text' className='form-control search-bar' onChange={(e) => this.props.onSearch({ search: e.target.value })} placeholder='Search...' />
-      </ErrorBoundary>
+      <input type='text' className='form-control search-bar' onChange={(e) => this.props.onSearch({ search: e.target.value })} placeholder='Search...' />
       <div className='btn-group' style={{ width: '100%', marginBottom: '4px' }}>
         <select 
           className='btn btn-bottom btn-default' 

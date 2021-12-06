@@ -145,6 +145,9 @@ export class ItemManager {
     this.hylianShield = new Item('Hylian Shield', [0, 1])
     this.mirrorShield = new Item('Mirror Shield', [0, 1])
 
+    this.ironBoots = new Item('Iron Boots', [0, 1])
+    this.hoverBoots = new Item('Hover Boots', [0, 1])
+
     /**
      * Quest Status Items
      */

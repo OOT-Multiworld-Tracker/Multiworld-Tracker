@@ -65,7 +65,7 @@ function CanEnterDMC (world) {
 }
 
 function CanEnterWater (world) {
-  return CanBecomeAdult(world) && world.save.boots.ironBoots && world.items.hookshot >= 1
+  return CanBecomeAdult(world) && world.items.ironBoots.Index() > 0 && world.items.hookshot.Index() >= 1
 }
 
 function CanEnterShadow (world) {
@@ -73,11 +73,11 @@ function CanEnterShadow (world) {
 }
 
 function CanEnterSpirit (world) {
-  return (world.items.ocarina.Index() >= 1 && world.save.questStatus.requiemOfSpirit > 0) || (CanBecomeAdult(world) && world.save.questStatus.gerudoMembershipCard > 0 && (world.items.hookshot.Index() == 2 || world.items.ocarina.Index() >= 1 && world.save.questStatus.eponasSong > 0))
+  return (world.items.ocarina.Index() >= 1 && world.items.requiemOfSpirit.Index() > 0) || (CanBecomeAdult(world) && world.items.gerudoMembershipCard.Index() > 0 && (world.items.hookshot.Index() == 2 || world.items.ocarina.Index() >= 1 && world.items.eponasSong.Index() > 0))
 }
 
 function CanEnterGtG (world) {
-  return (CanBecomeAdult(world) && world.items.gerudoMembershipCard > 0 && (world.items.hookshot.Index() === 2 || (world.items.ocarina.Index() >= 1 && world.items.eponasSong.Index()) > 0))
+  return (CanBecomeAdult(world) && world.items.gerudoMembershipCard.Index() > 0 && (world.items.hookshot.Index() === 2 || (world.items.ocarina.Index() >= 1 && world.items.eponasSong.Index()) > 0))
 }
 
 function CanEnterGC (world) {

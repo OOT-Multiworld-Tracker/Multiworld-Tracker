@@ -4,6 +4,20 @@ import { MapToArray } from './Utils'
 import Parser from './classes/Parser'
 import { GameWorld } from './classes/GameWorld'
 
+const CATEGORIES = {
+  SHIELDS: 'Shields',
+  TUNICS: 'Tunics',
+  SWORDS: 'Swords',
+  BOW: 'Bow & Arrows',
+  MAGIC: 'Magic',
+  BOMBS: 'Bombs',
+  BOOTS: 'Boots',
+  SONGS: 'Songs',
+  WARP_SONGS: 'Warp Songs',
+  COLLECTABLES: 'Collectables',
+  DUNGEON: 'Dungeon',
+}
+
 export class SettingsManager {
   constructor (spoiler) {
     /**
@@ -88,20 +102,20 @@ export class ItemManager {
      */
     this.dekuSticks = new Item('Deku Sticks', [0, 10, 20, 30])
     this.dekuNuts = new Item('Deku Nuts', [0, 20, 30, 40])
-    this.bombs = new Item('Bomb Bag', [0, 30, 40, 50])
-    this.bombchus = new Item('Bombchus', [0, 20])
+    this.bombs = new Item('Bomb Bag', [0, 30, 40, 50], CATEGORIES.BOMBS)
+    this.bombchus = new Item('Bombchus', [0, 20], CATEGORIES.BOMBS)
     this.magicBeans = new Item('Magic Beans', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
     this.fairySlingshot = new Item('Slingshot', [0, 20, 30, 40])
-    this.fairyBow = new Item('Bow', [0, 30, 40, 50])
-    this.fireArrows = new Item('Fire Arrows', [0, 1])
-    this.iceArrows = new Item('Ice Arrows', [0, 1])
-    this.lightArrows = new Item('Light Arrows', [0, 1])
-    this.dinsFire = new Item('Din\'s Fire', [0, 1])
-    this.faroresWind = new Item('Farores\'s Wind', [0, 1])
-    this.nayrusLove = new Item('Nayru\'s Love', [0, 1])
+    this.fairyBow = new Item('Bow', [0, 30, 40, 50], CATEGORIES.BOW)
+    this.fireArrows = new Item('Fire Arrows', [0, 1], CATEGORIES.BOW)
+    this.iceArrows = new Item('Ice Arrows', [0, 1], CATEGORIES.BOW)
+    this.lightArrows = new Item('Light Arrows', [0, 1], CATEGORIES.BOW)
+    this.dinsFire = new Item('Din\'s Fire', [0, 1], CATEGORIES.MAGIC)
+    this.faroresWind = new Item('Farores\'s Wind', [0, 1], CATEGORIES.MAGIC)
+    this.nayrusLove = new Item('Nayru\'s Love', [0, 1], CATEGORIES.MAGIC)
     this.ocarina = new Item('Ocarina', [0, 'Saria\'s Ocarina', 'Ocarina of Time'])
     this.hookshot = new Item('Hookshot', [0, 'Hookshot', 'Longshot'])
-    this.lensOfTruth = new Item('Lens of Truth', [0, 1])
+    this.lensOfTruth = new Item('Lens of Truth', [0, 1], CATEGORIES.MAGIC)
     this.boomerang = new Item('Boomerang', [0, 1])
     this.megatonHammer = new Item('Megaton Hammer', [0, 1])
 
@@ -128,58 +142,58 @@ export class ItemManager {
     /**
      * Swords
      */
-    this.kokiriSword = new Item('Kokiri Sword', [0, 1])
-    this.masterSword = new Item('Master Sword', [0, 1])
-    this.biggoronSword = new Item('Biggoron Sword', [0, 1])
+    this.kokiriSword = new Item('Kokiri Sword', [0, 1], CATEGORIES.SWORDS)
+    this.masterSword = new Item('Master Sword', [0, 1], CATEGORIES.SWORDS)
+    this.biggoronSword = new Item('Biggoron Sword', [0, 1], CATEGORIES.SWORDS)
 
     /**
      * Tunics
      */
-    this.goronTunic = new Item('Goron Tunic', [0, 1])
-    this.zoraTunic = new Item('Zora Tunic', [0, 1])
-    this.dekuShield = new Item('Deku Shield', [0, 1])
+    this.goronTunic = new Item('Goron Tunic', [0, 1], CATEGORIES.TUNICS)
+    this.zoraTunic = new Item('Zora Tunic', [0, 1], CATEGORIES.TUNICS)
 
     /**
      * Shields
      */
-    this.hylianShield = new Item('Hylian Shield', [0, 1])
-    this.mirrorShield = new Item('Mirror Shield', [0, 1])
+    this.dekuShield = new Item('Deku Shield', [0, 1], CATEGORIES.SHIELDS)
+    this.hylianShield = new Item('Hylian Shield', [0, 1], CATEGORIES.SHIELDS)
+    this.mirrorShield = new Item('Mirror Shield', [0, 1], CATEGORIES.SHIELDS)
 
-    this.ironBoots = new Item('Iron Boots', [0, 1])
-    this.hoverBoots = new Item('Hover Boots', [0, 1])
+    this.ironBoots = new Item('Iron Boots', [0, 1], CATEGORIES.BOOTS)
+    this.hoverBoots = new Item('Hover Boots', [0, 1], CATEGORIES.BOOTS)
 
     /**
      * Quest Status Items
      */
     this.gerudoMembershipCard = new Item('Gerudo Membership Card', [0, 1])
     this.stoneOfAgony = new Item('Stone of Agony', [0, 1])
-    this.goldSkulltulas = new Item('Gold Skulltulas', [0, 10, 20, 30, 40, 50])
-    this.heartPieces = new Item('Heart Pieces', [0, 4, 8, 12, 16, 20, 24, 28, 32])
+    this.goldSkulltulas = new Item('Gold Skulltulas', [0, 10, 20, 30, 40, 50], CATEGORIES.COLLECTABLES)
+    this.heartPieces = new Item('Heart Pieces', [0, 4, 8, 12, 16, 20, 24, 28, 32], CATEGORIES.COLLECTABLES)
 
     /**
      * Songs
      */
-    this.zeldasLullaby = new Item('Zelda\'s Lullaby', [0, 1])
-    this.eponasSong = new Item('Epona\'s Song', [0, 1])
-    this.sunsSong = new Item('Sun\'s Song', [0, 1])
-    this.sariasSong = new Item('Saria\'s Song', [0, 1])
-    this.songOfTime = new Item('Song Of Time', [0, 1])
-    this.songOfStorms = new Item('Song Of Storms', [0, 1])
-    this.preludeOfLight = new Item('Prelude Of Light', [0, 1])
-    this.minuetOfForest = new Item('Minuet Of Forest', [0, 1])
-    this.boleroOfFire = new Item('Bolero Of Fire', [0, 1])
-    this.serenadeOfWater = new Item('Serenade Of Water', [0, 1])
-    this.nocturneOfShadow = new Item('Nocturne Of Shadow', [0, 1])
-    this.requiemOfSpirit = new Item('Requiem Of Spirit', [0, 1])
-    this.kokiriEmerald = new Item('Kokiri Emerald', [0, 1])
-    this.goronRuby = new Item('Goron Ruby', [0, 1])
-    this.zoraSapphire = new Item('Zora Sapphire', [0, 1])
-    this.lightMedallion = new Item('Light Medallion', [0, 1])
-    this.forestMedallion = new Item('Forest Medallion', [0, 1])
-    this.waterMedallion = new Item('Water Medallion', [0, 1])
-    this.fireMedallion = new Item('Fire Medallion', [0, 1])
-    this.spiritMedallion = new Item('Spirit Medallion', [0, 1])
-    this.shadowMedallion = new Item('Shadow Medallion', [0, 1])
+    this.zeldasLullaby = new Item('Zelda\'s Lullaby', [0, 1], CATEGORIES.SONGS)
+    this.eponasSong = new Item('Epona\'s Song', [0, 1], CATEGORIES.SONGS)
+    this.sunsSong = new Item('Sun\'s Song', [0, 1], CATEGORIES.SONGS)
+    this.sariasSong = new Item('Saria\'s Song', [0, 1], CATEGORIES.SONGS)
+    this.songOfTime = new Item('Song Of Time', [0, 1], CATEGORIES.SONGS)
+    this.songOfStorms = new Item('Song Of Storms', [0, 1], CATEGORIES.SONGS)
+    this.preludeOfLight = new Item('Prelude Of Light', [0, 1], CATEGORIES.WARP_SONGS)
+    this.minuetOfForest = new Item('Minuet Of Forest', [0, 1], CATEGORIES.WARP_SONGS)
+    this.boleroOfFire = new Item('Bolero Of Fire', [0, 1], CATEGORIES.WARP_SONGS)
+    this.serenadeOfWater = new Item('Serenade Of Water', [0, 1], CATEGORIES.WARP_SONGS)
+    this.nocturneOfShadow = new Item('Nocturne Of Shadow', [0, 1], CATEGORIES.WARP_SONGS)
+    this.requiemOfSpirit = new Item('Requiem Of Spirit', [0, 1], CATEGORIES.WARP_SONGS)
+    this.kokiriEmerald = new Item('Kokiri Emerald', [0, 1], CATEGORIES.DUNGEON)
+    this.goronRuby = new Item('Goron Ruby', [0, 1], CATEGORIES.DUNGEON)
+    this.zoraSapphire = new Item('Zora Sapphire', [0, 1], CATEGORIES.DUNGEON)
+    this.lightMedallion = new Item('Light Medallion', [0, 1], CATEGORIES.DUNGEON)
+    this.forestMedallion = new Item('Forest Medallion', [0, 1], CATEGORIES.DUNGEON)
+    this.waterMedallion = new Item('Water Medallion', [0, 1], CATEGORIES.DUNGEON)
+    this.fireMedallion = new Item('Fire Medallion', [0, 1], CATEGORIES.DUNGEON)
+    this.spiritMedallion = new Item('Spirit Medallion', [0, 1], CATEGORIES.DUNGEON)
+    this.shadowMedallion = new Item('Shadow Medallion', [0, 1], CATEGORIES.DUNGEON)
 
     /**
      * Key lists

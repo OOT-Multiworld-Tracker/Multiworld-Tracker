@@ -11,6 +11,7 @@ export default class Dungeons extends React.Component {
 
   render () {
     return (
+      <>
       <List>
         {app.local.world.dungeons.map((dungeon) => {
           return (
@@ -21,6 +22,20 @@ export default class Dungeons extends React.Component {
           )
         })}
       </List>
+
+      <br/>
+
+      <List>
+        {app.local.world.dungeons.map((dungeon) => {
+          return (
+            <ListItem key={dungeon.name} onClick={() => { dungeon.random = dungeon.random+1; if (!app.local.world.dungeons[dungeon.random]) dungeon.random = 0; this.setState({ dungeons: app.local.world.dungeons }) }}>
+              <div className='location-name'>{dungeon.name}</div>
+              <div className='location-items'>{app.local.world.dungeons[dungeon.random]?.name||"Unset"}</div>
+            </ListItem>
+          )
+        })}
+      </List>
+      </>
     )
   }
 }

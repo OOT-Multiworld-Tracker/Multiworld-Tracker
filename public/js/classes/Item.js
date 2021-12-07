@@ -1,6 +1,11 @@
 import ValueSwitch from './ValueSwitch'
 
 export class Item extends ValueSwitch {
+  constructor (name, value, category=null) {
+    super(name, value)
+    this.category = category
+  }
+
   Icon () {
     return `/images/${this.name.replace(' ', '_').toLowerCase()}.png`
   }

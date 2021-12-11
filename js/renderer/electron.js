@@ -59,7 +59,6 @@ class ElectronRenderer extends EventEmitter {
         }
       }
 
-      console.log(data)
       this.emit('data', data)
     })
 

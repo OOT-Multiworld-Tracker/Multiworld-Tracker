@@ -29,8 +29,9 @@ export default class SaveModal extends React.Component {
         }
         footer={
           <>
-            <button className='btn btn-default' style={{ width: '50%' }} onClick={() => { this.closeModal(); SaveUtils.Load(this.props.save) }}>Load</button>
-            <button className='btn btn-warning' style={{ width: '50%' }} onClick={() => { this.closeModal(); localStorage.removeItem(this.props.save) }}>Delete</button>
+            <button className='btn btn-default' style={{ width: '33.3%' }} onClick={() => { this.closeModal(); SaveUtils.Load(this.props.save) }}>Load</button>
+            <button className='btn btn-default' style={{ width: '33.3%' }} onClick={() => { this.closeModal(); SaveUtils.Save(this.props.save, JSON.parse(localStorage.saves).find(save => save.name === this.props.save).data) }}>Overwrite</button>
+            <button className='btn btn-warning' style={{ width: '33.3%' }} onClick={() => { this.closeModal(); SaveUtils.Delete(this.props.save) }}>Delete</button>
           </>
         }
       />

@@ -17,6 +17,7 @@ class AutoTracker extends EventEmitter {
     this.socket.onclose = () => { console.log('Disconnected from client'); setTimeout(() => this.Connect(), 10000); if(this.lastState == true) this.emit('tracker status', false); this.lastState = false; }
     this.socket.on('open', _ => {
       console.log('Connected to auto-tracker')
+      
       this.socket.send(JSON.stringify({ PAYLOAD: 0 }))
       this.lastState = true;
       this.emit('tracker status', true)

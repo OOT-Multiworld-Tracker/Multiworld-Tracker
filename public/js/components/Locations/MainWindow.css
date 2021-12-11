@@ -1,0 +1,12 @@
+.location-name, .location-items {
+    display: inline;
+    width: 70%;
+}
+
+.location-items {
+    text-align: right;
+}
+
+.location-name {
+    font-weight: 250;
+}

@@ -7,6 +7,7 @@ import Button from '../Buttons/Button'
 export default class MainHeader extends Component {
     constructor (props) {
       super(props)
+      this.state = { scene: -1 }
   
       this.onSceneUpdate = this.onSceneUpdate.bind(this)
     }

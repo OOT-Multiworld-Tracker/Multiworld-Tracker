@@ -5,7 +5,7 @@ import { Subscription } from './classes/Subscription'
 
 class AppSubscriptions extends Subscription {
   constructor () {
-    super(['connection', 'world update', 'view', 'settings update', 'locations update', 'entrance update'])
+    super(['connection', 'world update', 'view', 'settings update', 'locations update', 'entrance update', 'account'])
   }
 
   subscribeToClientConnection (callback) {
@@ -71,12 +71,20 @@ function Autosave () {
 setInterval(Autosave, 10000)
 
 export class SaveUtils {
+  static migrate () {
+    const saves = []
+    Object.entries(localStorage).forEach(([key, value]) => {
+      saves.push({name: key, data: JSON.parse(value)})
+    })
+    localStorage.clear();
+    localStorage.saves = JSON.stringify(saves)
+  }
   /**
    * Returns a key-array of all save files.
    * @returns {String[]}}
    */
   static GetFiles () {
-    return Object.keys(localStorage)
+    return localStorage.saves
   }
 
   static Delete (name) {
@@ -111,7 +119,15 @@ export class SaveUtils {
       )
 
       try {
-        localStorage.setItem(name, JSON.stringify({world: app.global.world, files: saveFiles}))
+        if (!localStorage.saves) localStorage.saves = JSON.stringify([])
+        const saves = JSON.parse(localStorage.saves);
+        if (saves.find((save) => save.name === name)) {
+          const index = saves.indexOf(saves.find((save) => save.name === name))
+          saves[index] = { name, data: {world: app.global.world, files: saveFiles} }
+        } else {
+          saves.push({ name, data: {world: app.global.world, files: saveFiles} })
+        }
+        localStorage.saves = JSON.stringify(saves)
       } catch (e) { reject(e) }
 
       app.saveLoad.call('save', saveFiles)
@@ -126,7 +142,8 @@ export class SaveUtils {
    */
   static async Load (name) {
     return new Promise((resolve, reject) => {
-      const file = JSON.parse(localStorage.getItem(name))
+      const file = JSON.parse(localStorage.saves).find((save) => save.name === name).data
+      if (!file) return reject(new Error('No save file found.'))
       app.worlds = []
 
       for (let i = 0; i < file.files.length; i++) app.worlds.push(new GameWorld(app))

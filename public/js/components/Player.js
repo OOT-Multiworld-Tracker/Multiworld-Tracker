@@ -8,6 +8,7 @@ import GreenRupee from '../../images/green_rupee.png'
 import BlueRupee from '../../images/blue_rupee.png'
 import RedRupee from '../../images/red_rupee.png'
 import HeartContainer from '../../images/container.png'
+import Bar from './ProgressBar/Bar'
 
 export default class Player extends React.Component {
   static contextType = LanguageContext
@@ -23,41 +24,89 @@ export default class Player extends React.Component {
     this.setState({ worldState: app.worlds[this.state.world] })
   }
 
+  // Subscribe to world sync and save load events.
   componentDidMount () {
-    app.worlds[this.props.world].subscribe('sync', this.handleWorldSync)
-    app.worlds[this.props.world].subscribe('update', this.handleWorldSync)
+    if (!this.props.world) return;
+
+    app.worlds[this.props.world].subscribeMany(['sync', 'update'], this.handleWorldSync)
     app.saveLoad.subscribe('load', this.handleWorldSync)
   }
 
-  generateContainers () {
-    const elements = []
-    for (let i = 0; i < this.state.worldState.save.heart_containers; i++) {
-      elements.push(<span key={i} className='heart-container'><img src={HeartContainer} width='16' /></span>)
+  // Unsubscribe from world sync and save load events.
+  componentWillUnmount () {
+    if (!this.props.world) return;
 
-      if (elements.length === 10) elements.push(<br />)
+    app.worlds[this.props.world].unsubscribeMany(['sync', 'update'], this.handleWorldSync)
+    app.saveLoad.unsubscribe('load', this.handleWorldSync)
+  }
+
+  generateContainers (number) {
+    const elements = []
+
+    for (let i = 0; i < number; i++) {
+
+      elements.push(<img key={i} className='heart-container' src={HeartContainer} width='16' />)
+
+      if (elements.length === 10) 
+        elements.push(<br />)
+
     }
+
     return elements
   }
 
   render () {
+    let state = this.state.worldState || this.props.save
+
     return (
       <div className='player'>
         <div 
-          className='character_name' 
-          onClick={() => {
-            app.local.world = app.worlds[this.props.world]; 
-            app.call('view', app.local.world)
-          }}>
-            <span>{this.props.current ? "You" : this.state.worldState.save.player_name}</span> 
-            <span style={this.state.worldState.save.rupee_count == this.state.worldState.items.wallet.value ? {color: '#e08231'} : null }>
-              <img width='16' src={[GreenRupee, BlueRupee, RedRupee][this.state.worldState.items.wallet.Index()]} />{this.state.worldState.save.rupee_count}<span style={{fontSize: 9, color: '#BBB', marginLeft: '2px'}}>/{this.state.worldState.items.wallet.value}</span>
-            </span>
-          </div>
+          className='character_name'
 
-        <div className='heart_containers'>{this.generateContainers()}</div>
-        <div className='progress' style={{width: 50 * this.state.worldState.save.magic_meter_size+'%'}}><div className='progress-bar' style={{width: 2 * this.state.worldState.save.magic_current+'%'}} /></div>
-        {app.worlds.length > 1 ? <div>{GetTranslation(this.context.language, "World")} {this.state.world+1}</div> : null } 
-        <span className='scene_name'>{Parser.ParseScenes()[this.state.worldState.scene].name}</span>
+          onClick={
+            _ => {
+              if (app.worlds.length === 1) return; // Don't do anything with a single world.
+
+              app.local.world = app.worlds[this.props.world]; 
+              app.call('view', app.local.world)
+            }
+          }>
+
+            <span>{(this.props.current) ? // Change name between save name and "You" depending on current.
+              GetTranslation(this.context.language, "You") : state.save.player_name}</span>
+
+            {state.items && <span style={(state.save.rupee_count === state.items.wallet.value) ? {color: '#e08231'} : null }>
+              <img width='16' src={[GreenRupee, BlueRupee, RedRupee][state.items.wallet.Index()]} />
+
+              {state.save.rupee_count}
+
+              <span>
+                /{state.items.wallet.value}
+              </span>
+            </span>}
+
+        </div>
+
+        <div className='heart-containers'>
+          {this.generateContainers(state.save.heart_containers)}
+        </div>
+
+        { state.save.magic_meter_size > 0 && 
+          <Bar 
+            length = {50 * state.save.magic_meter_size} 
+            fill = {2 * state.save.magic_current} />
+        }
+
+        { app.worlds.length > 1 && 
+          <span>
+            {GetTranslation(this.context.language, "World")} 
+            {this.state.world+1}
+          </span> 
+        }
+        
+        <span className='scene_name'>
+          {GetTranslation(this.context.language, Parser.ParseScenes()[state.scene].name)}
+        </span>
       </div>
     )
   }

@@ -23,15 +23,10 @@ export default class Saves extends React.PureComponent {
   }
 
   list () {
-    const files = []
-    for (let i = 0; i < localStorage.length; i++) {
-      files.push(
-        <ListItem onClick={(e) => { this.props.onSaveClick(e, localStorage.key(i)) }}>
-          {localStorage.key(i)}
-        </ListItem>
-      )
-    }
-    return files
+    return JSON.parse(localStorage.saves).map((save, i) => (
+    <ListItem onClick={(e) => { this.props.onSaveClick(e, save.name) }}>
+    {save.name}
+    </ListItem>))
   }
 
   render () {

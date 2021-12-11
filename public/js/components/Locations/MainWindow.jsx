@@ -19,7 +19,7 @@ export default class MainWindow extends Component {
       scene: -1, 
       dropdown: { }, 
       world: 0, 
-      locations: app.local.world.locations.Accessible(false, false  -1)
+      locations: app.local.world.locations.Accessible(false, false, -1)
     }
 
     this.handleDropdownClick = this.props.onDropdownClick
@@ -72,14 +72,34 @@ export default class MainWindow extends Component {
     return (
       <div className='pane'>
         <ErrorBoundary fallback={<p>Locations Failed to Load</p>}>
-        <MainHeader locations={this.state.locations.length} world={this.state.world} onSearch={this.handleSearch} onSceneChange={this.handleSceneChange} onPageClick={this.displaySection} scene={this.state.scene} page={this.state.page} />
-        <LocationDropdown onDropdownClick={this.handleDropdownClick} display={this.props.dropDownOpen} position={{ left: this.state.dropdown.left, top: this.state.dropdown.top }} />
-        <div style={{ overflowY: 'auto', height: '90%' }}>
-          <List>
-            {this.state.locations.map((location, index) => (
-                <Location onContextMenu={this.handleContextMenu} useless={location.useless} important={location.important} key={index} id={location.id} item={location.display ? location.display.name : 'None'} name={location.name} />))}
+          <MainHeader locations={this.state.locations.length} world={this.state.world} onSearch={this.handleSearch} onSceneChange={this.handleSceneChange} onPageClick={this.displaySection} scene={this.state.scene} page={this.state.page} />
+          
+          <LocationDropdown 
+            onDropdownClick={this.handleDropdownClick} 
+            display={this.props.dropDownOpen} 
+            position={{ 
+              left: this.state.dropdown.left, 
+              top: this.state.dropdown.top 
+            }} />
+          
+          <div style={{ overflowY: 'auto', height: '90%' }}>
+            <List>
+              {
+              this.state.locations.map(
+                (location, index) => (
+                  <Location
+                    onContextMenu={this.handleContextMenu} 
+                    useless={location.useless} 
+                    important={location.important} 
+                    key={index} 
+                    id={location.id} 
+                    item={(location.display) ? location.display.name : 'None'} 
+                    name={location.name} />
+                  )
+                )
+              }
             </List>
-        </div>
+          </div>
         </ErrorBoundary>
       </div>
     )
@@ -88,16 +108,30 @@ export default class MainWindow extends Component {
 
 export class Location extends React.PureComponent {
   hasRareItem () {
-    console.log(app.local.world.locations.Array()[this.props.id])
-    return Object.values(app.local.world.items).some((item) => (item.name === app.local.world.locations.Array()[this.props.id].item.item) || (item.name === app.local.world.locations.Array()[this.props.id].name))
+    return Object.values(app.local.world.items).some(
+      (item) => (
+        item.name === app.local.world.locations.Array()[this.props.id].item.item) 
+          || (item.name === app.local.world.locations.Array()[this.props.id].name))
   }
 
   render () {
     return (
       <ErrorBoundary fallback={<p>Location Failed to Load</p>}>
-        <ListItem style={{ backgroundColor: ((app.global.settings.itemHints.Index() === 1 && this.hasRareItem()) || this.props.important) ? '#cbef28' : '' }} onClick={() => { app.local.world.locations.Array()[this.props.id].Mark(); }} onContextMenu={(e) => { e.preventDefault(); this.props.onContextMenu(e, this.props.id) }}>
-          <div className='location-name' style={{ color: this.props.useless ? '#666' : null }}>{this.props.name} {app.global.settings.playerHints.value == true ? <span className='badge'>{app.local.world.locations.Array()[this.props.id].item.player}</span> : null}</div>
-          <div className='location-items'>{app.global.settings.itemHints.value === 'show items' ? app.local.world.locations.Array()[this.props.id].item.item : this.props.item}</div>
+        <ListItem 
+          style={{ 
+            backgroundColor: ((app.global.settings.itemHints.Index() === 1 && this.hasRareItem()) || this.props.important) ? '#cbef28' : '' }} 
+            onClick={_ => app.local.world.locations.Array()[this.props.id].Mark()} 
+            onContextMenu={(e) => { e.preventDefault(); this.props.onContextMenu(e, this.props.id) }}>
+
+          <div className='location-name' style={{ color: this.props.useless ? '#666' : null }}>
+            {this.props.name} 
+            {(app.global.settings.playerHints.value == true) &&
+              <span className='badge'>{app.local.world.locations.Array()[this.props.id].item.player}</span>}
+          </div>
+
+          <div className='location-items'>
+            {app.global.settings.itemHints.value === 'show items' ? app.local.world.locations.Array()[this.props.id].item.item : this.props.item}
+          </div>
         </ListItem>
       </ErrorBoundary>
     )

@@ -3,70 +3,110 @@ import Modal from './BaseModal'
 import { List, ListItem } from '../Lists'
 import app from '../../app'
 import GreenRupee from '../../../images/green_rupee.png'
+import Button from '../Buttons/Button'
 
 export default class ItemModal extends React.Component {
   constructor (props) {
     super(props)
-    this.state = { search: '', category: -1 }
+
+    this.state = { 
+      search: '', 
+      category: -1 
+    }
+
     this.closeModal = this.props.onItemSet.bind(this)
 
-    this.categories = [{name:"Uncategorized", items:[]},{name:"Junk", items: [
-      {name:"Rupee", Icon: () => GreenRupee},
-      {name:"Buy Deku Nuts"},
-      {name:"Buy Deku Stick"},
-      {name:"Buy Bombs"},
-      {name:"Buy Arrows"},
-      {name:"Buy Bombchus"}
-    ]}];
+    // The default categories before being auto-filled.
+    this.categories = [
+      {name:"Uncategorized", items:[]},
 
-    Object.values(app.local.world.items).forEach((item) => {
-      if (!item.category) this.categories[0].items.push(item)
-      else {
+      {name:"Junk", items: [
+        { name: "Rupee", Icon: () => GreenRupee },
+        { name: "Buy Deku Nuts" },
+        { name: "Buy Deku Stick" },
+        { name: "Buy Bombs" },
+        { name: "Buy Arrows" },
+        { name: "Buy Bombchus" }
+        ]
+      }
+    ]
+
+    // Sort all of the items into categorized lists.
+    Object.values(app.local.world.items).forEach(
+      (item) => {
+        if (!item.category) // Put in uncategorized if no category is present.
+          this.categories[0].items.push(item)
+
+        else {
         
-        if (!this.categories.find((cat) => cat.name == item.category)) { 
-        this.categories.push({name:item.category, items:[]})
-        this.categories.find((cat) => cat.name == item.category).items.push(item)
-      } else {
-        this.categories.find((cat) => cat.name == item.category).items.push(item)
-      } }
-    })
+          if (!this.categories.find((cat) => cat.name == item.category)) // Create a new category if it doesn't exist.
+            this.categories.push({name:item.category, items:[]})
+
+          this.categories.find((cat) => cat.name == item.category).items.push(item) // Add the item to the category.
+
+        }
+      }
+    )
+  }
+
+  setItem (e, item) {
+    app.local.world.locations.locations.get( String(this.props.location) ).display = { name: item.name }
+    e.stopPropagation()
+    this.closeModal(e)
   }
 
   render () {
     return (
       <Modal
         onClick={(e) => e.stopPropagation()}
-        title='Item'
+        title='Select Item'
         footer={
           <>
-          {this.state.category != -1 && 
-            <button className='btn' onClick={() => this.setState({ category: -1 })}>Back</button>}
+            {this.state.category != -1 &&  // Display a back button when on a category.
+              <button className='btn' onClick={_ => this.setState({ category: -1 })}>Back</button>}
 
-          <button className='btn' onClick={e => { app.local.world.locations.locations.get(String(this.props.location)).display = { name: 'None' }; e.stopPropagation(); this.closeModal(e) }}>Deselect</button>
+            <Button 
+              onClick={
+                e => 
+                  { 
+                    app.local.world.locations.locations.get( String(this.props.location) ).display = { name: 'None' }
+                    e.stopPropagation()
+                    this.closeModal(e) 
+                  }
+                }>Unset</Button>
           </>
         }
-        content={
-          <>
-          <input type='text' className='form-control search-bar' placeholder='Item name' onChange={(e) => this.setState({search: e.target.value})} ref='itemName' />
-          <div style={{overflowY:'scroll',height:'329px'}}>
-          <List>
-            {this.state.category == -1 && this.categories.filter((item) => item.name.toLowerCase().includes(this.state.search) || this.state.search == '').map((item, index) => {
-              return (
-                <ListItem key={item.name} onClick={e => this.setState({ category: index })}>
-                  <div className='location-name'><img style={{width: '24px', height: '32px', verticalAlign: 'middle', marginRight: '4px'}} src={item.items[0].Icon()}/>{item.name}</div>
-                </ListItem>
-              )
-            })}
 
-            {this.state.category != -1 && this.categories[this.state.category].items.filter((item) => item.name.toLowerCase().includes(this.state.search) || this.state.search == '').map((item) => {
-              return (
-                <ListItem key={item.name} onClick={e => { app.local.world.locations.locations.get(String(this.props.location)).display = { name: item.name }; e.stopPropagation(); this.closeModal(e) }}>
-                  <div className='location-name'>{item.name}</div>
-                </ListItem>
-              )
-            })}
-          </List>
-          </div>
+        content=
+        {
+          <>
+            <input type='text' className='form-control search-bar' placeholder='Item name' onChange={(e) => this.setState({search: e.target.value})} ref='itemName' />
+
+            <div style={{ overflowY: 'scroll', height: '329px' }}>
+              <List>
+                {
+                  (this.categories[this.state.category]?.items || this.categories).filter( // If an item list is avalible then list it, otherwise categorizes.
+                    (item) => 
+                      (item.name.toLowerCase().includes( this.state.search.toLowerCase() ) || this.state.search === '') // non-case-sensitive search.
+                  ).map(
+
+                      (item, index) => {
+                        return (
+
+                          <ListItem key={item.name} onClick={e => (this.state.category === -1) ? this.setState({ category: index }) : this.setItem(e, item)}>
+                            <div className='location-name'>
+                              {this.state.category === -1 && <img src={ item.items[0].Icon() }/>} 
+                                {item.name}
+                            </div>
+                          </ListItem>
+
+                        )
+                      }
+
+                    )
+                }
+              </List>
+            </div>
           </>
         }
       />

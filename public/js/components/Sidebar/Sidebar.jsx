@@ -12,6 +12,7 @@ import './Sidebar.css'
 import PlayerList from './PlayerList'
 import SidebarButtons from './SidebarButtons'
 import EntranceRandomizer from './EntranceRandomizer'
+import Account from './Account'
 
 export default class Sidebar extends React.Component {
   static contextType = LanguageContext
@@ -31,7 +32,7 @@ export default class Sidebar extends React.Component {
   }
 
   componentDidMount () {
-    this.pages = [this.homePage(), this.savePage(), null, this.itemPage(), this.settingsPage()]
+    this.pages = [this.homePage(), this.savePage(), null, this.itemPage(), this.settingsPage(), this.accountPage()]
   }
 
   renderPage () {
@@ -79,6 +80,14 @@ export default class Sidebar extends React.Component {
         <Settings settings={app.global.settings} />
         <hr />
         <Dungeons />
+      </>
+    )
+  }
+
+  accountPage () {
+    return (
+      <>
+        <Account onLogin={this.props.onLogin} />
       </>
     )
   }

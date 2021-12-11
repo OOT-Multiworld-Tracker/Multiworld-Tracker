@@ -20,29 +20,6 @@ body {
     overflow-y: unset;
 }
 
-.character_name {
-    font-size: 1.2em;
-    font-weight: bold;
-    display: flex;
-}
-
-.character_name span {
-    width: 50%
-}
-
-.character_name span:last-child {
-    text-align: right;
-}
-
-.location-name, .location-items {
-    display: inline;
-    width: 70%;
-}
-
-.location-items {
-    text-align: right;
-}
-
 .list {
     padding: 4px;
 }
@@ -62,10 +39,6 @@ body {
 
 .list-item:active {
     background-color: #666;
-}
-
-.location-name {
-    font-weight: 250;
 }
 
 .modal-layer {
@@ -224,10 +197,6 @@ hr {
 input#file-upload-button {
     background-color: #4e4e4e;
     color: #dadada;
-}
-
-.character_name {
-    cursor: pointer;
 }
 
 .table-striped tr:nth-child(even) {

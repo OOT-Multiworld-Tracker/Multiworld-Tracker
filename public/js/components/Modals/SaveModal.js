@@ -2,6 +2,7 @@ import React from 'react'
 import Modal from './BaseModal'
 import { SaveUtils } from '../../app'
 import Player from '../Player'
+import Bar from '../ProgressBar/Bar'
 
 export default class SaveModal extends React.Component {
   constructor (props) {
@@ -10,7 +11,7 @@ export default class SaveModal extends React.Component {
   }
 
   render () {
-    const save = JSON.parse(localStorage.getItem(this.props.save))[0];
+    const save = JSON.parse(localStorage.saves).find(save => save.name === this.props.save).data.files[0]
 
     return (
       <Modal
@@ -18,10 +19,12 @@ export default class SaveModal extends React.Component {
         title={this.props.save}
         content={
           <>
-            <Player save={save.save} />
-            <div className='progress'>
-              <div className='progress-bar' style={{ width: (save.locations.filter((loc) => (loc.completed && loc.completed === true)).length / save.locations.length) * 100 + '%' }}>{save.locations.filter((loc) => (loc.completed　&& loc.completed == true)).length}</div>
-            </div>
+            <Player save={save} />
+            
+            <Bar 
+              width={100}
+              fill={(save.locations.filter((loc) => (loc.completed && loc.completed === true)).length / save.locations.length) * 100}
+            />
           </>
         }
         footer={

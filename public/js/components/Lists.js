@@ -13,7 +13,7 @@ export class List extends React.Component {
 export class ListItem extends React.Component {
   render () {
     return (
-      <div onClick={this.props.onClick} onContextMenu={this.props.onContextMenu} className='list-item'>
+      <div onClick={this.props.onClick} onContextMenu={this.props.onContextMenu} className={this.props.type == 'header' ? 'list-header' : 'list-item'}>
         {this.props.children}
       </div>
     )

@@ -10,3 +10,12 @@
 .location-name {
     font-weight: 250;
 }
+
+.list-header {
+    font-weight: bold;
+    background-color: #00000066;
+    width: 100%;
+    padding: 4px;
+    font-size: 11px;
+    
+}

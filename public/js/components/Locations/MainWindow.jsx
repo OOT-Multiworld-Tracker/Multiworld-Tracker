@@ -6,6 +6,7 @@ import { ErrorBoundary } from '@sentry/react'
 import './MainWindow.css'
 import MainHeader from './MainHeader'
 import LocationDropdown from './LocationDropdown'
+import Parser from '../../classes/Parser'
 
 export default class MainWindow extends Component {
   constructor (props) {
@@ -29,6 +30,7 @@ export default class MainWindow extends Component {
     this.handleSearch = this.handleSearch.bind(this)
     this.handleLocationClick = this.handleLocationClick.bind(this)
     this.onLocationUpdate = this.onLocationUpdate.bind(this)
+    this.scenes = Parser.ParseScenes()
 
   }
   
@@ -54,7 +56,7 @@ export default class MainWindow extends Component {
 
   componentDidMount () {
     app.subscribeToWorldUpdate(this.onLocationUpdate)
-    app.saveLoad.subscribe('load', () => { app.local.world.subscribeChangeScene(this.handleSceneChange); this.setState({ scene: String(app.local.world.scene), locations: app.local.world.locations.Search(this.state.search, String(app.local.world.scene), 0) }) })
+    app.saveLoad.subscribe('load', () => { app.local.world.subscribeChangeScene(this.handleSceneChange); this.setState({ locations: app.local.world.locations.Search(this.state.search, -1, 0) }) })
     app.subscribe('view', (world) => { this.setState({ world: app.worlds.indexOf(world), locations: app.local.world.locations.Accessible(this.state.search, this.state.scene, this.state.page)  }) })
     app.subscribe('locations update', this.onLocationUpdate)
   }
@@ -69,6 +71,8 @@ export default class MainWindow extends Component {
   }
 
   render () {
+    let lastScene = -1;
+
     return (
       <div className='pane'>
         <ErrorBoundary fallback={<p>Locations Failed to Load</p>}>
@@ -86,7 +90,9 @@ export default class MainWindow extends Component {
             <List>
               {
               this.state.locations.map(
-                (location, index) => (
+                (location, index) => ( 
+                  <>
+                  {lastScene != location.scene && this.state.scene == -1 && <Location type="header" name={this.scenes[lastScene = location.scene]?.name||"Unknown"} />}
                   <Location
                     onContextMenu={this.handleContextMenu} 
                     useless={location.useless} 
@@ -95,6 +101,7 @@ export default class MainWindow extends Component {
                     id={location.id} 
                     item={(location.display) ? location.display.name : 'None'} 
                     name={location.name} />
+                  </>
                   )
                 )
               }
@@ -118,6 +125,7 @@ export class Location extends React.PureComponent {
     return (
       <ErrorBoundary fallback={<p>Location Failed to Load</p>}>
         <ListItem 
+          type={this.props.type}
           style={{ 
             backgroundColor: ((app.global.settings.itemHints.Index() === 1 && this.hasRareItem()) || this.props.important) ? '#cbef28' : '' }} 
             onClick={_ => app.local.world.locations.Array()[this.props.id].Mark()} 

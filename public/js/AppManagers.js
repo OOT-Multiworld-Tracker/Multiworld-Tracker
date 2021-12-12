@@ -287,7 +287,7 @@ export class LocationManager {
     return (page === 0 ? this.Accessible(false, false, scene) : this.Get(true, scene)).filter((location) => {
       let valid = true
       keywords.forEach(keyword => {
-        if (!location.name.toLowerCase().includes(keyword.toLowerCase())) {
+        if (!location.name.toLowerCase().includes(keyword.toLowerCase()) && !(location.display && location.display.name.toLowerCase().includes(keyword.toLowerCase()))) {
           valid = false
         }
       })

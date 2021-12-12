@@ -16,6 +16,7 @@ import Window from './Window/Window'
 import MainWindow from './Locations/MainWindow'
 import LoginModal from './Modals/LoginModal'
 import Toast from './Toasts/Toast'
+import ToastManager from './Toasts/ToastManager'
 
 init({
   dsn: 'https://8957f94163d144e1b2efc135a8a2be1e@o174553.ingest.sentry.io/6000676',
@@ -166,7 +167,7 @@ export default class Application extends Component {
           <ModalLayer onOutsideClick={this.handleModal} display={this.state.display > 0}>
             {this.getModal()}
           </ModalLayer>
-          <Toast />
+          <ToastManager />
           <Sidebar onSave={this.handleCreateSave} onLogin={this.handleLogin} onSpoilerUpload={this.handleSpoiler} onModal={this.handleSidebarModal} saves={this.state.saves} />
           <MainWindow dropDownOpen={this.state.dropdown} onContextMenu={this.handleContextMenu} onDropdownClick={this.handleDropdown} />
         </Window>

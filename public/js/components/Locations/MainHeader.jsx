@@ -69,7 +69,7 @@ export default class MainHeader extends Component {
           onChange={(e) => this.props.onSceneChange(e.target.value)}
         >
         
-          <option value='-1'>None</option>
+          <option value='-1'>Unsorted</option>
           {this.getScenes()}
           
         </select>

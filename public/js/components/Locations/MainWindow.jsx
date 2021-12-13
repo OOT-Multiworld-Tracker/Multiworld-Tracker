@@ -32,6 +32,8 @@ export default class MainWindow extends Component {
     this.onLocationUpdate = this.onLocationUpdate.bind(this)
     this.scenes = Parser.ParseScenes()
 
+    this.collapse = {}
+
   }
   
   handleSceneChange (scene) {
@@ -92,15 +94,15 @@ export default class MainWindow extends Component {
               this.state.locations.map(
                 (location, index) => ( 
                   <>
-                  {lastScene != location.scene && this.state.scene == -1 && <Location type="header" name={this.scenes[lastScene = location.scene]?.name||"Unknown"} />}
-                  <Location
+                  {lastScene != location.scene && this.state.scene == -1 && <Location onClick={() => { this.collapse[location.scene] = !this.collapse[location.scene]; this.setState({ collapse: this.collapse }) } } type="header" name={this.scenes[lastScene = location.scene]?.name||"Unknown"} />}
+                  {(!this.collapse[location.scene] || this.collapse[location.scene] == false) && <Location
                     onContextMenu={this.handleContextMenu} 
                     useless={location.useless} 
                     important={location.important} 
                     key={index} 
                     id={location.id} 
                     item={(location.display) ? location.display.name : 'None'} 
-                    name={location.name} />
+                    name={location.name} />}
                   </>
                   )
                 )
@@ -128,7 +130,7 @@ export class Location extends React.PureComponent {
           type={this.props.type}
           style={{ 
             backgroundColor: ((app.global.settings.itemHints.Index() === 1 && this.hasRareItem()) || this.props.important) ? '#cbef28' : '' }} 
-            onClick={_ => app.local.world.locations.Array()[this.props.id].Mark()} 
+            onClick={this.props.onClick || (_ => app.local.world.locations.Array()[this.props.id].Mark())} 
             onContextMenu={(e) => { e.preventDefault(); this.props.onContextMenu(e, this.props.id) }}>
 
           <div className='location-name' style={{ color: this.props.useless ? '#666' : null }}>

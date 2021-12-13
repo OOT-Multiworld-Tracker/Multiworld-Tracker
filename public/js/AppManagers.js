@@ -60,6 +60,7 @@ export class SettingsManager {
     this.playerHints = new ValueSwitch('Player Hints', [false, true])
     this.followCurrentScene = new ValueSwitch('Follow Current Scene', [true, false])
     this.hideUnavaliable = new ValueSwitch('Hide Unavaliable', [true, false])
+    this.hideEra = new ValueSwitch('Only Current Age', [false, true])
 
     /**
       * Shuffle settings for items / changes avaliable item pool.

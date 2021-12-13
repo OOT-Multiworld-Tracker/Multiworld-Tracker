@@ -24,7 +24,7 @@ function CanUseMagic (world) {
 }
 
 function CanBecomeAdult (world) {
-  return world.app.global.settings.openDoorOfTime.value == true || (world.items.ocarina.Index() >= 1 && world.items.songOfTime > 0)
+  return (world.app.global.settings.openDoorOfTime.value == true || (world.items.ocarina.Index() >= 1 && world.items.songOfTime > 0)) && (world.app.global.settings.hideEra.value == true && world.save.age == 1)
 }
 
 const entranceLogics = [
@@ -96,11 +96,11 @@ function Dodongo (world) {
 }
 
 function Deku (world) {
-  return true;
+  return world.items.kokiriSword.Index() > 0 && world.items.dekuShield.Index() > 0;
 }
 
 function BOTW (world) {
-  return true;
+  return world.items.songOfStorms.Index() > 0;
 }
 
 function CanEnterDeathMountain (world) {

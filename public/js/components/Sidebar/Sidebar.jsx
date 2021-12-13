@@ -13,6 +13,7 @@ import PlayerList from './PlayerList'
 import SidebarButtons from './SidebarButtons'
 import EntranceRandomizer from './EntranceRandomizer'
 import Account from './Account'
+import Button from '../Buttons/Button'
 
 export default class Sidebar extends React.Component {
   static contextType = LanguageContext

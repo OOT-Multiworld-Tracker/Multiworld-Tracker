@@ -24,13 +24,13 @@ export default class ToastManager extends React.Component {
     }
 
     openSaveToast () {
-        const toast = <Toast text={"Saved"} />;
+        const toast = <Toast key={"Saved"} text={"Saved"} />;
         this.makeToast("save", toast);
     }
 
     openLoadToast () {
         console.log("Load")
-        const toast = <Toast text={"Loaded"} />;
+        const toast = <Toast key={"Loaded"} text={"Loaded"} />;
         this.makeToast("load", toast);
     }
 

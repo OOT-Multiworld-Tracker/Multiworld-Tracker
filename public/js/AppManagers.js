@@ -111,9 +111,9 @@ export class ItemManager {
     this.fireArrows = new Item('Fire Arrows', [0, 1], CATEGORIES.BOW)
     this.iceArrows = new Item('Ice Arrows', [0, 1], CATEGORIES.BOW)
     this.lightArrows = new Item('Light Arrows', [0, 1], CATEGORIES.BOW)
-    this.dinsFire = new Item('Din\'s Fire', [0, 1], CATEGORIES.MAGIC)
-    this.faroresWind = new Item('Farores\'s Wind', [0, 1], CATEGORIES.MAGIC)
-    this.nayrusLove = new Item('Nayru\'s Love', [0, 1], CATEGORIES.MAGIC)
+    this.dinsFire = new Item('Dins Fire', [0, 1], CATEGORIES.MAGIC)
+    this.faroresWind = new Item('Faroress Wind', [0, 1], CATEGORIES.MAGIC)
+    this.nayrusLove = new Item('Nayrus Love', [0, 1], CATEGORIES.MAGIC)
     this.ocarina = new Item('Ocarina', [0, 'Saria\'s Ocarina', 'Ocarina of Time'])
     this.hookshot = new Item('Hookshot', [0, 'Hookshot', 'Longshot'])
     this.lensOfTruth = new Item('Lens of Truth', [0, 1], CATEGORIES.MAGIC)
@@ -128,7 +128,7 @@ export class ItemManager {
     this.bottle_3 = new Bottle('Bottle 3')
     this.bottle_4 = new Bottle('Bottle 4')
 
-    this.rutosLetter = new Item('Ruto\'s Letter', [0, 1])
+    this.rutosLetter = new Item('Rutos Letter', [0, 1])
 
     /**
      * All of the trade items.
@@ -174,10 +174,10 @@ export class ItemManager {
     /**
      * Songs
      */
-    this.zeldasLullaby = new Item('Zelda\'s Lullaby', [0, 1], CATEGORIES.SONGS)
-    this.eponasSong = new Item('Epona\'s Song', [0, 1], CATEGORIES.SONGS)
-    this.sunsSong = new Item('Sun\'s Song', [0, 1], CATEGORIES.SONGS)
-    this.sariasSong = new Item('Saria\'s Song', [0, 1], CATEGORIES.SONGS)
+    this.zeldasLullaby = new Item('Zeldas Lullaby', [0, 1], CATEGORIES.SONGS)
+    this.eponasSong = new Item('Eponas Song', [0, 1], CATEGORIES.SONGS)
+    this.sunsSong = new Item('Suns Song', [0, 1], CATEGORIES.SONGS)
+    this.sariasSong = new Item('Sarias Song', [0, 1], CATEGORIES.SONGS)
     this.songOfTime = new Item('Song Of Time', [0, 1], CATEGORIES.SONGS)
     this.songOfStorms = new Item('Song Of Storms', [0, 1], CATEGORIES.SONGS)
     this.preludeOfLight = new Item('Prelude Of Light', [0, 1], CATEGORIES.WARP_SONGS)

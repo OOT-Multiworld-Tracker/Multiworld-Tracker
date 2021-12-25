@@ -31,6 +31,7 @@ export class App extends AppSubscriptions {
     }
 
     this.global = {
+      connected: false,
       settings: new SettingsManager(),
       scene: -1,
       world: 0,

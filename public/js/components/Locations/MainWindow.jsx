@@ -135,8 +135,8 @@ export class Location extends React.PureComponent {
 
           <div className='location-name' style={{ color: this.props.useless ? '#666' : null }}>
             {this.props.name} 
-            {(app.global.settings.playerHints.value == true) &&
-              <span className='badge'>{app.local.world.locations.Array()[this.props.id].item.player}</span>}
+            {(app.global.settings.playerHints.value == true && this.props.type != "header") &&
+              <span className='badge'>{app.local.world.locations.Array()[this.props.id]?.item.player||"?"}</span>}
           </div>
 
           <div className='location-items'>

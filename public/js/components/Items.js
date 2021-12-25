@@ -3,12 +3,13 @@ import app from '../app'
 import { KeyManager } from '../AppManagers'
 import { GetTranslation } from '../classes/Translator'
 import LanguageContext from '../components/LanguageContext'
+import { List, ListItem } from './Lists'
 
 export default class Items extends React.Component {
   static contextType = LanguageContext
   constructor () {
     super()
-    this.state = { items: app.local.world.save }
+    this.state = { items: app.local.world.save, search: "" }
 
     this.onWorldUpdate = this.onWorldUpdate.bind(this)
   }
@@ -27,15 +28,8 @@ export default class Items extends React.Component {
 
   render () {
     return (
-      <table className='table-striped'>
-        <thead>
-          <tr>
-            <th>Item</th>
-            <th>Have</th>
-          </tr>
-        </thead>
-        <tbody>
-          {Object.values(app.local.world.items).map((item) => {
+      <div style={{maxWidth: '260px',flexWrap: 'wrap', display:'flex'}}>
+        {Object.values(app.local.world.items).filter((item) => item.name == this.state.search || this.state.search == '').map((item) => {
             if (item instanceof KeyManager) {
               return [(
                 <tr key={item.name}>
@@ -56,14 +50,14 @@ export default class Items extends React.Component {
             }
 
             return (
-              <tr key={item.name} onClick={() => { item.Toggle(); this.setState({ items: app.local.world.save }) }}>
-                <td>{GetTranslation(this.context.language, item.name)}</td>
-                <td>{item.value === '0' ? 'None' : (item.value === '1' ? 'Have' : item.value)}</td>
-              </tr>
+              <div className={`grid-item${item.Index() > 0 ? " active" : ""}`} onClick={() => {item.Toggle(); this.setState({ items: app.local.world.save })}}>
+                <div style={{backgroundImage: `url(${item.Icon()})`}}>
+                  {item.values.length > 2 && item.Index() > 0 && <span>{typeof item.value != "number" ? item.value.slice(0,1) : item.value}</span>}
+                </div>
+              </div>
             )
           })}
-        </tbody>
-      </table>
+      </div>
     )
   }
 }

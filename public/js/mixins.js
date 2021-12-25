@@ -24,7 +24,7 @@ function CanUseMagic (world) {
 }
 
 function CanBecomeAdult (world) {
-  return (world.app.global.settings.openDoorOfTime.value == true || (world.items.ocarina.Index() >= 1 && world.items.songOfTime > 0)) && (world.app.global.settings.hideEra.value == true && world.save.age == 1)
+  return (world.app.global.settings.openDoorOfTime.value == true || (world.items.ocarina.Index() >= 1 && world.items.songOfTime > 0))
 }
 
 const entranceLogics = [

@@ -7,7 +7,7 @@ export class Item extends ValueSwitch {
   }
 
   Icon () {
-    return `/images/${this.name.replace(' ', '_').toLowerCase()}.png`
+    return `/images/${this.name.replace(/ /g, '_').toLowerCase()}${this.Index() > 1 && typeof this.value === 'string' ? `_${this.Index()}` : ""}.png`
   }
 }
 
@@ -32,6 +32,10 @@ export class TradeItem extends Item {
 }
 
 export class Bottle extends Item {
+  Icon () {
+    return `/images/bottle.png`
+  }
+
   constructor (name) {
     super(name, [0])
     this.values[0] = 0

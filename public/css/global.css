@@ -216,6 +216,29 @@ th {
     width: 12px;
 }
 
+.grid-item {
+    display: flex;
+    padding: 2px;
+    opacity: 0.4;
+}
+
+.grid-item div {
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    background-size: 24px 24px;
+}
+
+.grid-item span {
+    position: absolute;
+    font-weight: bold;
+    text-shadow: black -1px 0px 1px, black 0px 1px 1px, black 1px 0px 1px, black 0px -1px 1px;
+}
+
+.active {
+    opacity: 1;
+}
+
 *::-webkit-scrollbar-thumb {
     background-color: #222;
     border-radius: 20px;

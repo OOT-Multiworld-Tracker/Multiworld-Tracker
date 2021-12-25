@@ -5,7 +5,7 @@ import Items from '../Items'
 import Dungeons from '../Dungeon'
 import Settings from '../Settings'
 import LanguageContext from '../LanguageContext'
-import {GetLanguages, GetTranslation} from '../../classes/Translator'
+import {GetLanguages} from '../../classes/Translator'
 import { ErrorBoundary } from '@sentry/react'
 
 import './Sidebar.css'
@@ -13,20 +13,19 @@ import PlayerList from './PlayerList'
 import SidebarButtons from './SidebarButtons'
 import EntranceRandomizer from './EntranceRandomizer'
 import Account from './Account'
-import Button from '../Buttons/Button'
 
 export default class Sidebar extends React.Component {
   static contextType = LanguageContext
   constructor (props) {
     super(props)
-    this.state = { page: 0 }
+    this.state = { page: 1 }
 
     this.handleChange = this.handleChange.bind(this)
 
-    this.pages = [this.homePage()];
+    this.pages = [this.homePage(), this.itemPage()];
   }
 
-  shouldComponentUpdate (nextProps, nextState) {
+  shouldComponentUpdate (_, nextState) {
     if (JSON.stringify(this.state) != JSON.stringify(nextState)) return true
 
     return false

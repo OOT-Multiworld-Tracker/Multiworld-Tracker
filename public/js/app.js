@@ -144,7 +144,7 @@ export class SaveUtils {
   static async Load (name) {
     return new Promise((resolve, reject) => {
       const file = JSON.parse(localStorage.saves).find((save) => save.name === name).data
-      if (!file) return reject(new Error('No save file found.'))
+      if (!file || !file.files[0]) return reject(new Error('No save file found.'))
       app.worlds = []
 
       for (let i = 0; i < file.files.length; i++) app.worlds.push(new GameWorld(app))

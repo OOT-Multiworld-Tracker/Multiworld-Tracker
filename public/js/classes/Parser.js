@@ -18,9 +18,9 @@ export default class Parser {
     if (!log.locations) return spoiler;
 
     if (spoiler.log.settings.world_count > 1) {
-      Object.values(log.locations).forEach((_, index) => {
+      for (let i = 0; i < spoiler.log.settings.world_count; i++) {
         spoiler.worlds.push(new GameWorld(app))
-      })
+      }
 
       Object.keys(log.locations).forEach((world, windex) => {
         Object.values(log.locations[world]).forEach((locale, index) => {
@@ -41,8 +41,6 @@ export default class Parser {
         spoiler.worlds[0].dungeons[i].mq = log.dungeons[Object.keys(log.dungeons)[i]] === 'mq'
       }
     }
-
-    console.log(spoiler.worlds)
 
     return spoiler
   }

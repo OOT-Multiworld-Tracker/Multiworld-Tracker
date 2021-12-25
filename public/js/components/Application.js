@@ -17,6 +17,7 @@ import MainWindow from './Locations/MainWindow'
 import LoginModal from './Modals/LoginModal'
 import Toast from './Toasts/Toast'
 import ToastManager from './Toasts/ToastManager'
+import { GameWorld } from '../classes/GameWorld'
 
 init({
   dsn: 'https://8957f94163d144e1b2efc135a8a2be1e@o174553.ingest.sentry.io/6000676',
@@ -121,6 +122,7 @@ export default class Application extends Component {
 
   handleLoadSpoiler (e, options) {
     app.worlds = this.log.worlds
+    if (!app.worlds[0]) app.worlds = [new GameWorld(app)];
     app.global.settings = this.log.settings
 
     if (!options.dungeons) app.worlds[0].dungeons = [{ name: 'Deku Tree', mq: false }, { name: "Dodongo's Cave", mq: false }, { name: 'Bottom of the Well', mq: false }, { name: "Jabu Jabu's Belly", mq: false }, { name: 'Forest Temple', mq: false }, { name: 'Fire Temple', mq: false }, { name: 'Water Temple', mq: false }, { name: 'Shadow Temple', mq: false }, { name: 'Spirit Temple', mq: false }, { name: 'Ice Cavern', mq: false }, { name: 'GTG', mq: false }, { name: "Ganon's Castle", mq: false }]

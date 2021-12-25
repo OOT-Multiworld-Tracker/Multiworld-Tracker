@@ -91,7 +91,7 @@ export class SettingsManager {
 export class KeyManager {
   constructor (dungeon) {
     this.name = dungeon
-    this.smallKeys = new Item('Small Key', [0, 1, 2, 3])
+    this.smallKeys = new Item('Small Key', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
     this.bigKey = new Item('Big Key', [0, 1])
   }
 }

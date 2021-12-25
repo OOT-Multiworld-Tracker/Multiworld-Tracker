@@ -32,9 +32,12 @@ body {
     float: right;
 }
 
-.list-item:hover, .location-name:hover {
+.list-item:hover, .list-header:hover, .location-name:hover, .location-items:hover {
+    cursor: pointer;
+}
+
+.list-item:hover {
     background-color: #555;
-    cursor:pointer;
 }
 
 .list-item:active {

@@ -19,7 +19,7 @@ export default class SaveModal extends React.Component {
         title={this.props.save}
         content={
           <>
-            <Player save={save} />
+            <Player save={save} hideWorld={true} />
             
             <Bar 
               width={100}

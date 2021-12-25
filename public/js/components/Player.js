@@ -65,7 +65,7 @@ export default class Player extends React.Component {
 
           onClick={
             _ => {
-              if (app.worlds.length === 1) return; // Don't do anything with a single world.
+              if (app.worlds.length === 1 || this.props.hideWorld) return; // Don't do anything with a single world.
 
               app.local.world = app.worlds[this.props.world]; 
               app.call('view', app.local.world)

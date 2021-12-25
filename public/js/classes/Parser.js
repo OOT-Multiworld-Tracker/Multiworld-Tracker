@@ -11,6 +11,7 @@ export default class Parser {
 
     spoiler.settings = new SettingsManager(log.settings)
     spoiler.log = log
+    console.log(log);
     spoiler.seed = log[':seed']
     spoiler.worlds = []
     
@@ -40,6 +41,8 @@ export default class Parser {
         spoiler.worlds[0].dungeons[i].mq = log.dungeons[Object.keys(log.dungeons)[i]] === 'mq'
       }
     }
+
+    console.log(spoiler.worlds)
 
     return spoiler
   }

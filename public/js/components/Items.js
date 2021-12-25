@@ -3,7 +3,6 @@ import app from '../app'
 import { KeyManager } from '../AppManagers'
 import { GetTranslation } from '../classes/Translator'
 import LanguageContext from '../components/LanguageContext'
-import { List, ListItem } from './Lists'
 
 export default class Items extends React.Component {
   static contextType = LanguageContext
@@ -32,25 +31,25 @@ export default class Items extends React.Component {
         {Object.values(app.local.world.items).filter((item) => item.name == this.state.search || this.state.search == '').map((item) => {
             if (item instanceof KeyManager) {
               return [(
-                <tr key={item.name}>
-                  <th>{GetTranslation(this.context.language, item.name)}</th>
-                  <th>Have</th>
-                </tr>
+                <div className='list-header' key={item.name}>
+                  <span className='location-name'>{GetTranslation(this.context.language, item.name)}</span>
+                  <span className='location-items'>Have</span>
+                </div>
               ), (
-                <tr key={item.smallKeys.name} onClick={() => { item.smallKeys.Toggle(); this.setState({ items: app.local.world.save }) }}>
-                  <td>{item.smallKeys.name}</td>
-                  <td>{item.smallKeys.value}</td>
-                </tr>
+                <div className='list-item' key={item.smallKeys.name} onClick={() => { item.smallKeys.Toggle(); this.setState({ items: app.local.world.save }) }}>
+                  <span className='location-name'><img src="/images/small_key.png"/></span>
+                  <span className='location-items'>{item.smallKeys.value}/{item.smallKeys.values.length-1}</span>
+                </div>
               ), (
-                <tr key={item.bigKey.name} onClick={() => { item.bigKey.Toggle(); this.setState({ items: app.local.world.save }) }}>
-                  <td>{item.bigKey.name}</td>
-                  <td>{item.bigKey.value}</td>
-                </tr>
+                <div className='list-item' key={item.bigKey.name} onClick={() => { item.bigKey.Toggle(); this.setState({ items: app.local.world.save }) }}>
+                  <span className='location-name'><img src="/images/boss_key.png"/></span>
+                  <span className='location-items'>{item.bigKey.value}</span>
+                </div>
               )]
             }
 
             return (
-              <div className={`grid-item${item.Index() > 0 ? " active" : ""}`} onClick={() => {item.Toggle(); this.setState({ items: app.local.world.save })}}>
+              <div key={item.name} className={`grid-item${item.Index() > 0 ? " active" : ""}`} onClick={() => {item.Toggle(); this.setState({ items: app.local.world.save })}}>
                 <div style={{backgroundImage: `url(${item.Icon()})`}}>
                   {item.values.length > 2 && item.Index() > 0 && <span>{typeof item.value != "number" ? item.value.slice(0,1) : item.value}</span>}
                 </div>

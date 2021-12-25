@@ -89,9 +89,9 @@ export class SettingsManager {
 }
 
 export class KeyManager {
-  constructor (dungeon) {
+  constructor (dungeon, maxKeys) {
     this.name = dungeon
-    this.smallKeys = new Item('Small Key', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+    this.smallKeys = new Item('Small Key', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].filter((num) => num <= maxKeys))
     this.bigKey = new Item('Big Key', [0, 1])
   }
 }
@@ -123,10 +123,10 @@ export class ItemManager {
     /**
      * A list of bottles on a special class denoting all bottle values.
      */
-    this.bottle_1 = new Bottle('Bottle 1')
-    this.bottle_2 = new Bottle('Bottle 2')
-    this.bottle_3 = new Bottle('Bottle 3')
-    this.bottle_4 = new Bottle('Bottle 4')
+    this.bottle_1 = new Bottle('Bottle')
+    this.bottle_2 = new Bottle('Bottle')
+    this.bottle_3 = new Bottle('Bottle')
+    this.bottle_4 = new Bottle('Bottle')
 
     this.rutosLetter = new Item('Rutos Letter', [0, 1])
 
@@ -137,8 +137,8 @@ export class ItemManager {
     this.adultTradeItem = new TradeItem('Adult Trading')
 
     this.wallet = new Item('Wallet', [99, 200, 500, 999])
-    this.swimming = new Item('Swimming', [0, 'Silver Scale', 'Gold Scale'])
-    this.strength = new Item('Strength Upgrade', [0, 'Goron\'s Bracelet', 'Silver Gauntlet', 'Golden Gauntlet'])
+    this.swimming = new Item('Progressive Scale', [0, 'Silver Scale', 'Gold Scale'])
+    this.strength = new Item('Progressive Strength', [0, 'Goron\'s Bracelet', 'Silver Gauntlet', 'Golden Gauntlet'])
 
     /**
      * Swords
@@ -199,11 +199,14 @@ export class ItemManager {
     /**
      * Key lists
      */
-    this.forestTemple = new KeyManager('Forest Temple')
-    this.fireTemple = new KeyManager('Fire Temple')
-    this.waterTemple = new KeyManager('Water Temple')
-    this.spiritTemple = new KeyManager('Spirit Temple')
-    this.shadowTemple = new KeyManager('Shadow Temple')
+    this.forestTemple = new KeyManager('Forest Temple', 6)
+    this.fireTemple = new KeyManager('Fire Temple', 8)
+    this.waterTemple = new KeyManager('Water Temple', 6)
+    this.spiritTemple = new KeyManager('Spirit Temple', 7)
+    this.shadowTemple = new KeyManager('Shadow Temple', 6)
+    this.boTW = new KeyManager('BOTW', 3)
+    this.gtg = new KeyManager('GTG', 9)
+    this.ganonCastle = new KeyManager('Ganon Castle', 3)
   }
 }
 

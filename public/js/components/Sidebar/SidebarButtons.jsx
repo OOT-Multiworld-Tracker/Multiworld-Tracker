@@ -9,6 +9,8 @@ export default class SidebarButtons extends React.Component {
   constructor () {
     super();
     this.state = {status: false}
+    
+    this.connection = this.connection.bind(this)
     app.subscribeToClientConnection(this.connection)
   }
 
@@ -19,7 +21,7 @@ export default class SidebarButtons extends React.Component {
   render () {
     return (
       <select className='form-control' onChange={this.props.onChange}>
-       {app.global.connected && <option value='0'>{GetTranslation(this.context.language, 'World')}</option>}
+        <option value='0'>{GetTranslation(this.context.language, 'World')}</option>
         <option value='3'>{GetTranslation(this.context.language, 'Items')}</option>
         <option value='1'>{GetTranslation(this.context.language, 'Saves')}</option>
         <option value='4'>{GetTranslation(this.context.language, 'Settings')}</option>

@@ -13,12 +13,13 @@ import PlayerList from './PlayerList'
 import SidebarButtons from './SidebarButtons'
 import EntranceRandomizer from './EntranceRandomizer'
 import Account from './Account'
+import LocationHint from './LocationHint'
 
 export default class Sidebar extends React.Component {
   static contextType = LanguageContext
   constructor (props) {
     super(props)
-    this.state = { page: 0 }
+    this.state = { page: 0, connected: false }
 
     this.handleChange = this.handleChange.bind(this)
 
@@ -32,6 +33,9 @@ export default class Sidebar extends React.Component {
   }
 
   componentDidMount () {
+    app.subscribeToClientConnection((connected) => {
+      this.setState({ connected })
+    });
     this.pages = [this.homePage(), this.savePage(), null, this.itemPage(), this.settingsPage(), this.accountPage()]
   }
 
@@ -47,6 +51,7 @@ export default class Sidebar extends React.Component {
     return (
       <>
         {app.global.connected ? <PlayerList /> : <p>Connect to a tracker to see the player list.</p>}
+        <LocationHint />
         <EntranceRandomizer />
       </>
     )

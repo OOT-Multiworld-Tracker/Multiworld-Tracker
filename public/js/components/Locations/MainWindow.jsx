@@ -140,7 +140,7 @@ export class Location extends React.PureComponent {
           </div>
 
           <div className='location-items'>
-            {app.global.settings.itemHints.value === 'show items' ? app.local.world.locations.Array()[this.props.id].item.item : this.props.item}
+            {app.global.settings.itemHints.value === 'show items' ? app.local.world.locations.Array()[this.props.id]?.item.item : this.props.item}
           </div>
         </ListItem>
       </ErrorBoundary>

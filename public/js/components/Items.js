@@ -31,20 +31,20 @@ export default class Items extends React.Component {
         {Object.values(app.local.world.items).filter((item) => item.name == this.state.search || this.state.search == '').map((item) => {
             if (item instanceof KeyManager) {
               return [(
-                <div key={item.name}>
-                  <span>{GetTranslation(this.context.language, item.name)}</span>
-                  <span>Have</span>
+                <div className='list-header' key={item.name}>
+                  <span className='location-name'>{GetTranslation(this.context.language, item.name)}</span>
+                  <span className='location-items'>Have</span>
                 </div>
               ), (
-                <tr key={item.smallKeys.name} onClick={() => { item.smallKeys.Toggle(); this.setState({ items: app.local.world.save }) }}>
-                  <td>{item.smallKeys.name}</td>
-                  <td>{item.smallKeys.value}</td>
-                </tr>
+                <div className='list-item' key={item.smallKeys.name} onClick={() => { item.smallKeys.Toggle(); this.setState({ items: app.local.world.save }) }}>
+                  <span className='location-name'>{item.smallKeys.name}</span>
+                  <span className='location-items'>{item.smallKeys.value}</span>
+                </div>
               ), (
-                <tr key={item.bigKey.name} onClick={() => { item.bigKey.Toggle(); this.setState({ items: app.local.world.save }) }}>
-                  <td>{item.bigKey.name}</td>
-                  <td>{item.bigKey.value}</td>
-                </tr>
+                <div className='list-item' key={item.bigKey.name} onClick={() => { item.bigKey.Toggle(); this.setState({ items: app.local.world.save }) }}>
+                  <span className='location-name'>{item.bigKey.name}</span>
+                  <span className='location-items'>{item.bigKey.value}</span>
+                </div>
               )]
             }
 

@@ -38,7 +38,7 @@ export default class LocationHint extends Component {
           </div>
           {app.local.world.locations.Accessible(false, false, -1).filter((location) => this.getKeyItem((location.item?.item||location.item)||"None")).map(
             (location) => (
-                <ListItem>
+                <ListItem key={location.name}>
                     <div className='location-name'>
                         <span>{location.name}</span>
                     </div>

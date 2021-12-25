@@ -28,7 +28,7 @@ export default class Items extends React.Component {
   render () {
     return (
       <div style={{maxWidth: '260px',flexWrap: 'wrap', display:'flex'}}>
-        {Object.values(app.local.world.items).filter((item) => item.name == this.state.search || this.state.search == '').map((item) => {
+        {Object.values(app.local.world.items).filter((item) => item.name == this.state.search || this.state.search == '').map((item, index) => {
             if (item instanceof KeyManager) {
               return [(
                 <div className='list-header' key={item.name}>
@@ -49,7 +49,7 @@ export default class Items extends React.Component {
             }
 
             return (
-              <div key={item.name} className={`grid-item${item.Index() > 0 ? " active" : ""}`} onClick={() => {item.Toggle(); this.setState({ items: app.local.world.save })}}>
+              <div key={item.name+index} className={`grid-item${item.Index() > 0 ? " active" : ""}`} onClick={() => {item.Toggle(); this.setState({ items: app.local.world.save })}}>
                 <div style={{backgroundImage: `url(${item.Icon()})`}}>
                   {item.values.length > 2 && item.Index() > 0 && <span>{typeof item.value != "number" ? item.value.slice(0,1) : item.value}</span>}
                 </div>

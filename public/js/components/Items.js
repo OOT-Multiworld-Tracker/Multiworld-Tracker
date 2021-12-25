@@ -37,12 +37,12 @@ export default class Items extends React.Component {
                 </div>
               ), (
                 <div className='list-item' key={item.smallKeys.name} onClick={() => { item.smallKeys.Toggle(); this.setState({ items: app.local.world.save }) }}>
-                  <span className='location-name'>{item.smallKeys.name}</span>
-                  <span className='location-items'>{item.smallKeys.value}</span>
+                  <span className='location-name'><img src="/images/small_key.png"/></span>
+                  <span className='location-items'>{item.smallKeys.value}/{item.smallKeys.values.length-1}</span>
                 </div>
               ), (
                 <div className='list-item' key={item.bigKey.name} onClick={() => { item.bigKey.Toggle(); this.setState({ items: app.local.world.save }) }}>
-                  <span className='location-name'>{item.bigKey.name}</span>
+                  <span className='location-name'><img src="/images/boss_key.png"/></span>
                   <span className='location-items'>{item.bigKey.value}</span>
                 </div>
               )]

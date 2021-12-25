@@ -18,11 +18,11 @@ export default class Sidebar extends React.Component {
   static contextType = LanguageContext
   constructor (props) {
     super(props)
-    this.state = { page: 1 }
+    this.state = { page: 0 }
 
     this.handleChange = this.handleChange.bind(this)
 
-    this.pages = [this.homePage(), this.itemPage()];
+    this.pages = [this.homePage()];
   }
 
   shouldComponentUpdate (_, nextState) {
@@ -46,7 +46,7 @@ export default class Sidebar extends React.Component {
   homePage () {
     return (
       <>
-        <PlayerList />
+        {app.global.connected ? <PlayerList /> : <p>Connect to a tracker to see the player list.</p>}
         <EntranceRandomizer />
       </>
     )

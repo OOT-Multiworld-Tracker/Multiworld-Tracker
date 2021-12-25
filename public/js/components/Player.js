@@ -102,7 +102,7 @@ export default class Player extends React.Component {
             {GetTranslation(this.context.language, "World")} 
             {this.state.world+1}
           </span> 
-        }
+        } <br/>
         
         <span className='scene_name'>
           {GetTranslation(this.context.language, Parser.ParseScenes()[state.scene].name)}

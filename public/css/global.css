@@ -222,6 +222,10 @@ th {
     opacity: 0.4;
 }
 
+.grid-item:hover {
+    opacity: 0.7;
+}
+
 .grid-item div {
     cursor: pointer;
     width: 24px;
@@ -236,7 +240,7 @@ th {
 }
 
 .active {
-    opacity: 1;
+    opacity: 1!important;
 }
 
 *::-webkit-scrollbar-thumb {

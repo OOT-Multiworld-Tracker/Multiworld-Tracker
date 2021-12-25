@@ -35,4 +35,14 @@ export default class ValueSwitch {
       this.value = this.values[index + 1]
     }
   }
+
+  /**
+   * Go back through the values
+   */
+  Back () {
+    const index = this.values.indexOf(this.value)
+
+    if (index - 1 > 0)
+      this.value = this.values[index]
+  }
 }

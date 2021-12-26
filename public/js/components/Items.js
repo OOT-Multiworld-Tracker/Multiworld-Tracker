@@ -26,7 +26,7 @@ export default class Items extends React.Component {
     app.unsubscribe('world update', this.onWorldUpdate)
   }
 
-  makeGridElement (item, showMax = false) {
+  makeGridElement (item, index, showMax = false) {
     return (
       <div key={item.name+index} className={`grid-item${item.Index() > 0 ? " active" : ""}`}
         onClick={() => {item.Toggle(); this.setState({ items: app.local.world.save })}}>
@@ -35,7 +35,7 @@ export default class Items extends React.Component {
             { item.values.length > 2 && item.Index ( ) > 0 && 
               <span>
                 { (typeof item.value != "number") ? item.value.slice ( 0, 1 ) : item.value } 
-                {showMax ? " / " + item.values.length : ""}
+                { showMax ? " / " + item.values.length - 1 : "" }
               </span>
             }
           </div>
@@ -49,7 +49,7 @@ export default class Items extends React.Component {
       <div style={{maxWidth: '260px',flexWrap: 'wrap', display:'flex'}}>
       {
         // Turn to item list into an array of values for indexing.
-        Object.values(app.local.world.items).map( item => {
+        Object.values(app.local.world.items).map( (item, index) => {
           if (item instanceof KeyManager) {  // Divide the key-managers of the item lists into groups.
             const keyList = [
               <div className='list-header' key={item.name}>
@@ -59,15 +59,15 @@ export default class Items extends React.Component {
             ];
 
             // After ensuring the key-field is an item, turn it into a grid element.
-            Object.values(item).forEach(key => {
+            Object.values(item).forEach( (key, index) => {
               if (!(key instanceof Item)) return; // The KeyManager includes more than just item values, so truncate those.
-              keyList.push(this.makeGridElement(key, true)); 
+              keyList.push(this.makeGridElement(key, index, true)); 
             });
             
             return keyList;
           }
 
-          return this.makeGridElement(item);
+          return this.makeGridElement(item, index);
         })
       }
       </div>

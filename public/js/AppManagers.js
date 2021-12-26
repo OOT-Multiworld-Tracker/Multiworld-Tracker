@@ -93,7 +93,7 @@ export class KeyManager {
   constructor (dungeon, maxKeys) {
     this.name = dungeon
     this.smallKeys = new Item('Small Key', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].filter((num) => num <= maxKeys))
-    this.bigKey = new Item('Big Key', [0, 1])
+    this.bigKey = new Item('Boss Key', [0, 1])
   }
 }
 

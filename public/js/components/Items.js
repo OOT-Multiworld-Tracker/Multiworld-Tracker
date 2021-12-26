@@ -36,14 +36,15 @@ export default class Items extends React.Component {
                   <span className='location-items'>Have</span>
                 </div>
               ), (
-                <div className='list-item' key={item.smallKeys.name} onClick={() => { item.smallKeys.Toggle(); this.setState({ items: app.local.world.save }) }}>
-                  <span className='location-name'><img src="/images/small_key.png"/></span>
-                  <span className='location-items'>{item.smallKeys.value}/{item.smallKeys.values.length-1}</span>
+                <div className={`grid-item${item.smallKeys.Index() > 0 ? " active" : ""}`} key={item.smallKeys.name} onClick={() => { item.smallKeys.Toggle(); this.setState({ items: app.local.world.save }) }}>
+                  <div style={{backgroundImage: `url(/images/small_key.png)`}}>
+                    {item.smallKeys.values.length > 2 && item.smallKeys.Index() > 0 && <span>{item.smallKeys.value}/{item.smallKeys.values.length-1}</span>}
+                  </div>
                 </div>
               ), (
-                <div className='list-item' key={item.bigKey.name} onClick={() => { item.bigKey.Toggle(); this.setState({ items: app.local.world.save }) }}>
-                  <span className='location-name'><img src="/images/boss_key.png"/></span>
-                  <span className='location-items'>{item.bigKey.value}</span>
+                <div className={`grid-item${item.bigKey.Index() > 0 ? " active" : ""}`} key={item.bigKey.name} onClick={() => { item.bigKey.Toggle(); this.setState({ items: app.local.world.save }) }}>
+                  <div style={{backgroundImage: `url(/images/boss_key.png)`}}>
+                  </div>
                 </div>
               )]
             }

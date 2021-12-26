@@ -26,17 +26,16 @@ export default class Items extends React.Component {
     app.unsubscribe('world update', this.onWorldUpdate)
   }
 
-  makeGridElement (item) {
+  makeGridElement (item, showMax = false) {
     return (
-      <div 
-        key={item.name+index} 
-        className={`grid-item${item.Index() > 0 ? " active" : ""}`} 
+      <div key={item.name+index} className={`grid-item${item.Index() > 0 ? " active" : ""}`}
         onClick={() => {item.Toggle(); this.setState({ items: app.local.world.save })}}>
 
           <div style={{backgroundImage: `url(${item.Icon()})`}}>
             { item.values.length > 2 && item.Index ( ) > 0 && 
               <span>
-                { (typeof item.value != "number") ? item.value.slice ( 0, 1 ) : item.value }
+                { (typeof item.value != "number") ? item.value.slice ( 0, 1 ) : item.value } 
+                {showMax ? " / " + item.values.length : ""}
               </span>
             }
           </div>
@@ -51,17 +50,18 @@ export default class Items extends React.Component {
       {
         // Turn to item list into an array of values for indexing.
         Object.values(app.local.world.items).map( item => {
-          if (item instanceof KeyManager) {
+          if (item instanceof KeyManager) {  // Divide the key-managers of the item lists into groups.
             const keyList = [
               <div className='list-header' key={item.name}>
-                <span className='location-name'>{GetTranslation(this.context.language, item.name)}</span>
-                <span className='location-items'>Have</span>
+                <span className='location-name'>{ this.context.i ( item.name ) }</span>
+                <span className='location-items'>{ this.context.i ( "Have" ) }</span>
               </div>
             ];
 
-            Object.values(item).forEach(keyManager => {
-              if (!(keyManager instanceof Item)) return;
-              keyList.push(this.makeGridElement(keyManager)); 
+            // After ensuring the key-field is an item, turn it into a grid element.
+            Object.values(item).forEach(key => {
+              if (!(key instanceof Item)) return; // The KeyManager includes more than just item values, so truncate those.
+              keyList.push(this.makeGridElement(key, true)); 
             });
             
             return keyList;

@@ -36,8 +36,8 @@ export default class Settings extends React.Component {
   render () {
     return (
       <List>
-        {Object.keys(app.global.settings).map((setting) => (
-          <ListItem key={setting.name} onClick={() => this.changeSetting(setting)}>
+        {Object.keys(app.global.settings).map((setting, index) => (
+          <ListItem key={index} onClick={() => this.changeSetting(setting)}>
             <div className='location-name'>{GetTranslation(this.context.language, app.global.settings[setting].name)}</div>
             <div className='location-items'>{(app.global.settings[setting].value === true ? 'Yes' : (app.global.settings[setting].value === false ? 'No' : app.global.settings[setting].value))}</div>
           </ListItem>)

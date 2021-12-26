@@ -48,6 +48,7 @@ export class SettingsManager {
     /**
      * Shuffle settings for items / changes avaliable item pool.
      */
+    this.shuffleWeirdEgg = new ValueSwitch('Shuffle Weird Egg', [false, true])
     this.shuffleCows = new ValueSwitch('Shuffle Cows', [false, true])
     this.shuffleBeans = new ValueSwitch('Shuffle Beans', [false, true])
     this.shuffleMedigoronCarpetSalesman = new ValueSwitch('Shuffle Medigoron Carpet Salesman', [false, true])

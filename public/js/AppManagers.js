@@ -1,6 +1,7 @@
 import ValueSwitch from './classes/ValueSwitch'
 import { Item, Bottle, TradeItem } from './classes/Item'
 import { MapToArray } from './Utils'
+import GameManager from './classes/GameManager'
 import Parser from './classes/Parser'
 import { GameWorld } from './classes/GameWorld'
 

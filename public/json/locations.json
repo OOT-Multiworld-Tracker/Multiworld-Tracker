@@ -52,7 +52,7 @@
     },
     {
         "name": "Twinrova",
-        "logic": "(world) => CanEnterSpirit(world)"
+        "logic": "(world) => CanEnterSpirit(world) && world.items.spiritTemple.bossKey.value == 1"
     },
     {
         "name": "Song from Impa",

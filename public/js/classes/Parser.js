@@ -1,11 +1,21 @@
-import { existsSync, readFileSync } from 'original-fs'
+import { existsSync, readdirSync, readFileSync } from 'original-fs'
 import { SettingsManager, Location, LocationManager } from '../AppManagers'
 import { GameWorld } from './GameWorld'
 
 const LocationList = (existsSync(process.env.APPDATA + '/multiworld-tracker/locations.json')) ? JSON.parse(readFileSync(process.env.APPDATA + '/multiworld-tracker/locations.json')) : require('../locations.json')
 const SceneList = require('../scenes.json')
+const gameList = [];
 
 export default class Parser {
+  static ParseGame (game, app) {
+    const gameData = { };
+  }
+
+  static ParseGameList () {
+      const games = readdirSync(process.env.USERPROFILE+'\\Documents\\Multi-World\\Games')
+      
+  }
+
   static ParseSpoiler (log, app) {
     const spoiler = { }
 
@@ -13,11 +23,13 @@ export default class Parser {
     spoiler.log = log
     console.log(log);
     spoiler.seed = log[':seed']
-    spoiler.worlds = []
+    spoiler.worlds = [];
     
     if (!log.locations) return spoiler;
 
     if (spoiler.log.settings.world_count > 1) {
+      spoiler.worlds = []
+
       for (let i = 0; i < spoiler.log.settings.world_count; i++) {
         spoiler.worlds.push(new GameWorld(app))
       }
@@ -35,11 +47,18 @@ export default class Parser {
         }
       })
     } else {
-      spoiler.worlds.push(new GameWorld(app))
+      spoiler.worlds = app.worlds;
+
+      console.log(spoiler);
 
       for (let i = 0; i < Object.keys(spoiler.log.dungeons).length; i++) {
         spoiler.worlds[0].dungeons[i].mq = log.dungeons[Object.keys(log.dungeons)[i]] === 'mq'
       }
+
+      Object.values(log.locations).forEach((locale, index) => {
+        if (!spoiler.worlds[0].locations.Array()[index]) return
+        spoiler.worlds[0].locations.Array()[index].item = locale
+      })
     }
 
     return spoiler

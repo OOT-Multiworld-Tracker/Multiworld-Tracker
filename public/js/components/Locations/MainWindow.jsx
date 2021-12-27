@@ -49,7 +49,7 @@ export default class MainWindow extends Component {
   }
 
   shouldComponentUpdate (_, nextState) {
-    return (this.state != nextState || this.state.scene != nextState.scene);
+    return (this.state != nextState || this.state.scene != nextState.scene || this.state.locations.length != nextState.locations.length);
   }
 
   onLocationUpdate() {

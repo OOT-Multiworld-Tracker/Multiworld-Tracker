@@ -24,7 +24,7 @@ export default class Saves extends React.PureComponent {
 
   list () {
     return JSON.parse(localStorage.saves).map((save, i) => (
-    <ListItem onClick={(e) => { this.props.onSaveClick(e, save.name) }}>
+    <ListItem key={i} onClick={(e) => { this.props.onSaveClick(e, save.name) }}>
     {save.name}
     </ListItem>))
   }

@@ -48,6 +48,7 @@ export class SettingsManager {
     /**
      * Shuffle settings for items / changes avaliable item pool.
      */
+    this.shuffleWeirdEgg = new ValueSwitch('Shuffle Weird Egg', [false, true])
     this.shuffleCows = new ValueSwitch('Shuffle Cows', [false, true])
     this.shuffleBeans = new ValueSwitch('Shuffle Beans', [false, true])
     this.shuffleMedigoronCarpetSalesman = new ValueSwitch('Shuffle Medigoron Carpet Salesman', [false, true])
@@ -92,7 +93,7 @@ export class KeyManager {
   constructor (dungeon, maxKeys) {
     this.name = dungeon
     this.smallKeys = new Item('Small Key', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].filter((num) => num <= maxKeys))
-    this.bigKey = new Item('Big Key', [0, 1])
+    this.bigKey = new Item('Boss Key', [0, 1])
   }
 }
 
@@ -369,7 +370,7 @@ export class Location {
    */
   Mark () {
     this.completed = !this.completed
-    if (!this.untrackable) Parser.addLocationID(this.id, this.manager.world.app.lastEvent) // Add the ID of the last event to the location.json
+    //if (!this.untrackable) Parser.addLocationID(this.id, this.manager.world.app.lastEvent) // Add the ID of the last event to the location.json
     this.manager.world.Sync()
     this.manager.world.app.call('locations update', this.manager)
   }

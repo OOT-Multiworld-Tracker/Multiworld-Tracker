@@ -1,6 +1,7 @@
 import React from 'react'
 import app from '../app'
 import { KeyManager } from '../AppManagers'
+import { Item } from '../classes/Item'
 import { GetTranslation } from '../classes/Translator'
 import LanguageContext from '../components/LanguageContext'
 
@@ -8,7 +9,7 @@ export default class Items extends React.Component {
   static contextType = LanguageContext
   constructor () {
     super()
-    this.state = { items: app.local.world.save, search: "" }
+    this.state = { items: app.local.world.save }
 
     this.onWorldUpdate = this.onWorldUpdate.bind(this)
   }
@@ -25,37 +26,50 @@ export default class Items extends React.Component {
     app.unsubscribe('world update', this.onWorldUpdate)
   }
 
+  makeGridElement (item, index, showMax = false) {
+    return (
+      <div key={item.name+index} className={`grid-item${item.Index() > 0 ? " active" : ""}`}
+        onClick={() => {item.Toggle(); this.setState({ items: app.local.world.save })}}>
+
+          <div style={{backgroundImage: `url(${item.Icon()})`}}>
+            { item.values.length > 2 && item.Index ( ) > 0 && 
+              <span>
+                { (typeof item.value != "number") ? item.value.slice ( 0, 1 ) : item.value } 
+                { showMax ? " / " + item.values.length - 1 : "" }
+              </span>
+            }
+          </div>
+
+      </div>
+    )
+  }
+
   render () {
     return (
       <div style={{maxWidth: '260px',flexWrap: 'wrap', display:'flex'}}>
-        {Object.values(app.local.world.items).filter((item) => item.name == this.state.search || this.state.search == '').map((item) => {
-            if (item instanceof KeyManager) {
-              return [(
-                <div className='list-header' key={item.name}>
-                  <span className='location-name'>{GetTranslation(this.context.language, item.name)}</span>
-                  <span className='location-items'>Have</span>
-                </div>
-              ), (
-                <div className='list-item' key={item.smallKeys.name} onClick={() => { item.smallKeys.Toggle(); this.setState({ items: app.local.world.save }) }}>
-                  <span className='location-name'><img src="/images/small_key.png"/></span>
-                  <span className='location-items'>{item.smallKeys.value}/{item.smallKeys.values.length-1}</span>
-                </div>
-              ), (
-                <div className='list-item' key={item.bigKey.name} onClick={() => { item.bigKey.Toggle(); this.setState({ items: app.local.world.save }) }}>
-                  <span className='location-name'><img src="/images/boss_key.png"/></span>
-                  <span className='location-items'>{item.bigKey.value}</span>
-                </div>
-              )]
-            }
-
-            return (
-              <div key={item.name} className={`grid-item${item.Index() > 0 ? " active" : ""}`} onClick={() => {item.Toggle(); this.setState({ items: app.local.world.save })}}>
-                <div style={{backgroundImage: `url(${item.Icon()})`}}>
-                  {item.values.length > 2 && item.Index() > 0 && <span>{typeof item.value != "number" ? item.value.slice(0,1) : item.value}</span>}
-                </div>
+      {
+        // Turn to item list into an array of values for indexing.
+        Object.values(app.local.world.items).map( (item, index) => {
+          if (item instanceof KeyManager) {  // Divide the key-managers of the item lists into groups.
+            const keyList = [
+              <div className='list-header' key={item.name}>
+                <span className='location-name'>{ this.context.i ( item.name ) }</span>
+                <span className='location-items'>{ this.context.i ( "Have" ) }</span>
               </div>
-            )
-          })}
+            ];
+
+            // After ensuring the key-field is an item, turn it into a grid element.
+            Object.values(item).forEach( (key, index) => {
+              if (!(key instanceof Item)) return; // The KeyManager includes more than just item values, so truncate those.
+              keyList.push(this.makeGridElement(key, index, true)); 
+            });
+            
+            return keyList;
+          }
+
+          return this.makeGridElement(item, index);
+        })
+      }
       </div>
     )
   }

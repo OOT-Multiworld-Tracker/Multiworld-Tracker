@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import app from '../../app'
 import { List, ListItem } from '../Lists'
 import { ErrorBoundary } from '@sentry/react'
@@ -49,7 +49,7 @@ export default class MainWindow extends Component {
   }
 
   shouldComponentUpdate (_, nextState) {
-    return (this.state != nextState || this.state.scene != nextState.scene);
+    return (this.state != nextState || this.state.scene != nextState.scene || this.state.locations.length != nextState.locations.length);
   }
 
   onLocationUpdate() {
@@ -92,9 +92,9 @@ export default class MainWindow extends Component {
             <List>
               {
               this.state.locations.map(
-                (location, index) => ( 
-                  <>
-                  {lastScene != location.scene && this.state.scene == -1 && <Location onClick={() => { this.collapse[location.scene] = !this.collapse[location.scene]; this.setState({ collapse: this.collapse }) } } type="header" name={this.scenes[lastScene = location.scene]?.name||"Unknown"} />}
+                (location, index) => (
+                 <Fragment key={index}>
+                  {lastScene != location.scene && this.state.scene == -1 && <Location key={location.scene} onClick={() => { this.collapse[location.scene] = !this.collapse[location.scene]; this.setState({ collapse: this.collapse }) } } type="header" name={this.scenes[lastScene = location.scene]?.name||"Unknown"} />}
                   {(!this.collapse[location.scene] || this.collapse[location.scene] == false) && <Location
                     onContextMenu={this.handleContextMenu} 
                     useless={location.useless} 
@@ -103,9 +103,9 @@ export default class MainWindow extends Component {
                     id={location.id} 
                     item={(location.display) ? location.display.name : 'None'} 
                     name={location.name} />}
-                  </>
-                  )
+                 </Fragment> 
                 )
+              )
               }
             </List>
           </div>

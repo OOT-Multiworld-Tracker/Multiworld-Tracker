@@ -7,21 +7,23 @@ export default class LocationHint extends Component {
     super(props)
 
     this.state = { hints: app.local.world.locations.Accessible(false, false, -1).filter((location) => this.getKeyItem((location.item?.item||location.item)||"None")) }
-  
-    this.onLocationUpdate = this.onLocationUpdate.bind(this)  
+    this.dismounted = false;
+    this.onLocationUp = this.onLocationUp.bind(this)  
   }
 
   componentDidMount () {
-    app.subscribe('locations update', this.onLocationUpdate)
-    app.saveLoad.subscribe('load', this.onLocationUpdate)
+    app.subscribe('locations update', this.onLocationUp)
+    app.saveLoad.subscribe('load', this.onLocationUp)
+    this.dismounted = false;
   }
 
   componentWillUnmount () {
-    app.unsubscribe('locations update', this.onLocationUpdate)
-    app.saveLoad.unsubscribe('load', this.onLocationUpdate)
+    this.dismounted = true;
   }
 
-  onLocationUpdate () {
+  onLocationUp () {
+      if (this.dismounted) return;
+
       this.setState({ hints: app.local.world.locations.Accessible(false, false, -1).filter((location) => this.getKeyItem((location.item?.item||location.item)||"None")) })
   }
 
@@ -38,7 +40,7 @@ export default class LocationHint extends Component {
           </div>
           {app.local.world.locations.Accessible(false, false, -1).filter((location) => this.getKeyItem((location.item?.item||location.item)||"None")).map(
             (location) => (
-                <ListItem>
+                <ListItem key={location.name}>
                     <div className='location-name'>
                         <span>{location.name}</span>
                     </div>

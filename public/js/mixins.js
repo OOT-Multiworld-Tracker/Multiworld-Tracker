@@ -46,7 +46,7 @@ function GetDungeonLogic (world, dungeon) {
   const dung = world.dungeons[dungeon];
   const entrance = world.dungeons.find((dunge) => dunge.random === world.dungeons.indexOf(dung));
   
-  if (dung.random && dung.random !== -1 && entrance == undefined) return false; // Don't display if it's swapped.
+  if (dung.random && dung.random !== -1 && entrance === undefined) return false; // Don't display if it's swapped.
 
   return entrance === undefined ? entranceLogics[world.dungeons.indexOf(dung)](world) : entranceLogics[world.dungeons.indexOf(entrance)](world)
 }

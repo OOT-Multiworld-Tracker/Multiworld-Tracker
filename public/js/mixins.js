@@ -44,11 +44,11 @@ const entranceLogics = [
 
 function GetDungeonLogic (world, dungeon) {
   const dung = world.dungeons[dungeon];
-  const entrance = world.dungeons.find((dunge) => dunge.random == world.dungeons.indexOf(dung));
+  const entrance = world.dungeons.find((dunge) => dunge.random === world.dungeons.indexOf(dung));
   
-  if (dung.random && dung.random != -1 && entrance == undefined) return false; // Don't display if it's swapped.
+  if (dung.random && dung.random !== -1 && entrance == undefined) return false; // Don't display if it's swapped.
 
-  return entrance == undefined ? entranceLogics[world.dungeons.indexOf(dung)](world) : entranceLogics[world.dungeons.indexOf(entrance)](world)
+  return entrance === undefined ? entranceLogics[world.dungeons.indexOf(dung)](world) : entranceLogics[world.dungeons.indexOf(entrance)](world)
 }
 
 function CanEnterDeku (world) {
@@ -111,7 +111,7 @@ function BOTW (world) {
 }
 
 function CanEnterDeathMountain (world) {
-  return world.app.global.settings.open_kakariko || ((world.items.childTradeItem.Index() >= 35 || world.app.global.settings.skipChildZelda.value == true) || HasExplosives(world))
+  return world.app.global.settings.open_kakariko || ((world.items.childTradeItem.Index() >= 35 || world.app.global.settings.skipChildZelda.value === true) || HasExplosives(world))
 }
 
 function CanEnterZorasRiver (world) {

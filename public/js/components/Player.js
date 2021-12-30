@@ -75,7 +75,7 @@ export default class Player extends React.Component {
             <span>{(this.props.current) ? // Change name between save name and "You" depending on current.
               GetTranslation(this.context.language, "You") : state.save.player_name}</span>
 
-            {state.items && <span style={(state.save.rupee_count === state.items.wallet.value) ? {color: '#e08231'} : null }>
+            {state.items && state.items.wallet && <span style={(state.save.rupee_count === state.items.wallet.value) ? {color: '#e08231'} : null }>
               <img width='16' src={[GreenRupee, BlueRupee, RedRupee][state.items.wallet.Index()]} />
 
               {state.save.rupee_count}

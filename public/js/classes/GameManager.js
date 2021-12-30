@@ -36,7 +36,7 @@ class Game {
 export default class GameManager {
     static SetSelectedGame (name) {
         selectedGame = gameList.find(game => game.name === name);
-        console.log(selectedGame.name + ' selected');
+        console.log(selectedGame);
         return this.GetSelectedGame();
     }
 

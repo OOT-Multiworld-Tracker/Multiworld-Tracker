@@ -1,5 +1,7 @@
 import { SettingsManager, ItemManager } from './AppManagers'
+import GameManager from './classes/GameManager'
 import { GameWorld } from './classes/GameWorld'
+import { Item } from './classes/Item'
 import { NetworkManager } from './classes/NetworkingManager'
 import { Subscription } from './classes/Subscription'
 
@@ -116,6 +118,7 @@ export class SaveUtils {
           items: world.items,
           locations: world.locations.Array().map((location) => { return { completed: location.completed, item: location.item, display: location.display, name: location.name, preExit: location.preExit, scene: location.scene } }),
           scene: world.scene,
+          game: GameManager.GetSelectedGame().name,
           entrances: app.global.entrances
         })
       )
@@ -145,11 +148,14 @@ export class SaveUtils {
   static async Load (name) {
     return new Promise((resolve, reject) => {
       const file = JSON.parse(localStorage.saves).find((save) => save.name === name).data
+      
       if (!file || !file.files[0]) return reject(new Error('No save file found.'))
-      app.worlds = []
+      app.worlds = [];
+      
+      GameManager.SetSelectedGame(file.files[0].game);
 
       for (let i = 0; i < file.files.length; i++) app.worlds.push(new GameWorld(app))
-      
+
       app.local.world = app.worlds[app.global.world]
       app.global.world = file.world
       app.global.entrances = file.files[0].entrances || []
@@ -161,18 +167,12 @@ export class SaveUtils {
         app.worlds[index].dungeons = world.dungeons
         app.worlds[index].scene = world.scene
 
-        const items = Object.assign({}, // Assign all of the items to the savefile.
-          world.save.questStatus,
-          world.save.inventory,
-          world.save.boots,
-          world.save.shields,
-          world.save.tunics,
-          world.save.swords
-        )
+        const items = world.items
 
         Object.keys(items).forEach((key) => {
           if (app.worlds[index].items[key] === undefined) return // Ignore any keys not within the item manager.
-          app.worlds[index].items[key].Set(items[key] * 1)
+          if (app.worlds[index].items[key] instanceof Item) 
+          app.worlds[index].items[key].Set(items[key].value * 1)
         })
 
         world.locations.forEach((location, index2) => {

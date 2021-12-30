@@ -54,7 +54,7 @@ export default class Sidebar extends React.Component {
       <>
         {app.global.connected ? <PlayerList /> : <p>Connect to a tracker to see the player list.</p>}
         <LocationHint />
-        <EntranceRandomizer />
+        { (app.global.settings.entranceSanity && app.global.settings.entranceSanity.value == true) && <EntranceRandomizer />}
       </>
     )
   }

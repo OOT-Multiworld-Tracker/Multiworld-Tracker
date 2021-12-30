@@ -26,7 +26,7 @@ export default class EntranceRandomizer extends React.Component {
     }
 
     render () {
-        return app.global.settings.entranceSanity.value == true && (
+        return (
             <div className='list'>
                 <div className='list-header'>Entrance Tracking</div>
                 <div className='list-content'>

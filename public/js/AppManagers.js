@@ -45,8 +45,7 @@ export class SettingsManager {
       if (!Array.isArray(values)) // Values must be an array.
         throw new Error('Item has failed to generate: Item values must be an array');
 
-      // Make special value type.
-      values.forEach( (value, index) => {
+      values.forEach( (value, index) => { // Make special value type.
       
         if (Array.isArray ( value )) // Turn a 2-piece array into a list of values.
           for (let i = value[0]; i <= value[1]; i++) values.push(i);
@@ -160,7 +159,7 @@ export class LocationManager {
   */
   Accessible (complete = false, showItems = false, scene = -1) {
     return this.Array().filter(location =>
-      (location.scene == scene || scene == -1) && ((this.world.app.global.settings.hideUnavaliable.value == false || this.IsAccessible(location, this.world)) && (complete == false && location.completed == false) || (complete == true && location.completed)))
+      (location.scene == scene || scene == -1) && ((this.world.app.global.settings.hideUnavaliable && this.world.app.global.settings.hideUnavaliable.value == false || this.IsAccessible(location, this.world)) && (complete == false && location.completed == false) || (complete == true && location.completed)))
   }
 
   /**
@@ -249,6 +248,7 @@ export class LocationManager {
   }
 
   Set (locations) {
+    console.log(locations);
     locations.forEach((location, index) => 
           Object.assign(this.locations.get(String(index)), location))
   }

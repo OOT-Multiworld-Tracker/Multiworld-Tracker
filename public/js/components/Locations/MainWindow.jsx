@@ -122,18 +122,18 @@ export class Location extends React.PureComponent {
         <ListItem 
           type={this.props.type}
           style={{ 
-            backgroundColor: ((app.global.settings.itemHints.Index() === 1 && this.hasRareItem()) || this.props.important) ? '#cbef28' : '' }} 
+            backgroundColor: ((app.global.settings.itemHints && app.global.settings.itemHints.Index() === 1 && this.hasRareItem()) || this.props.important) ? '#cbef28' : '' }} 
             onClick={this.props.onClick || (_ => app.local.world.locations.Array()[this.props.id].Mark())} 
             onContextMenu={(e) => { e.preventDefault(); this.props.onContextMenu(e, this.props.id) }}>
 
           <div className='location-name' style={{ color: this.props.useless ? '#666' : null }}>
             {this.props.name} 
-            {(app.global.settings.playerHints.value == true && this.props.type != "header") &&
+            {(app.global.settings.playerHints && app.global.settings.playerHints.value == true && this.props.type != "header") &&
               <span className='badge'>{app.local.world.locations.Array()[this.props.id]?.item.player||"?"}</span>}
           </div>
 
           <div className='location-items'>
-            {app.global.settings.itemHints.value === 'show items' ? app.local.world.locations.Array()[this.props.id]?.item.item : this.props.item}
+            {app.global.settings.itemHints && app.global.settings.itemHints.value === 'show items' ? app.local.world.locations.Array()[this.props.id]?.item.item : this.props.item}
           </div>
         </ListItem>
       </ErrorBoundary>

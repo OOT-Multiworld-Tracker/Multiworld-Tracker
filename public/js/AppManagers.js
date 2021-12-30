@@ -21,57 +21,6 @@ const CATEGORIES = {
 
 export class SettingsManager {
   constructor (spoiler) {
-    /**
-     * Progression-related settings
-     */
-    this.openForest = new ValueSwitch('Open Forest', ['closed', 'open deku', 'open forest'])
-    this.openKakariko = new ValueSwitch('Open Kakariko', ['closed', 'open'])
-    this.openDoorOfTime = new ValueSwitch('Open Door Of Time', [false, true])
-    this.zoraFountain = new ValueSwitch('Zora Fountain', ['closed', 'open adult', 'open child'])
-    this.gerudoFortress = new ValueSwitch('Gerudo Fortress', ['vanilla', 'fast', 'open'])
-
-    /**
-     * Win conditions
-     */
-    this.bridge = new ValueSwitch('Bridge', ['vanilla', 'stones', 'medallions', 'skulltulas', 'open'])
-    this.bridgeStones = new ValueSwitch('Bridge Stones', [0, 1, 2, 3, 4, 5, 6])
-
-    /**
-     * Bombchus able to be used in-place of bombs.
-     */
-    this.bombchusInLogic = new ValueSwitch('Bombchus in Logic', [false, true])
-
-    /**
-     * Whether or not to skip zelda -- removes items from pool.
-     */
-    this.skipChildZelda = new ValueSwitch('Skip Child Zelda', [false, true])
-
-    /**
-     * Shuffle settings for items / changes avaliable item pool.
-     */
-    this.shuffleWeirdEgg = new ValueSwitch('Shuffle Weird Egg', [false, true])
-    this.shuffleCows = new ValueSwitch('Shuffle Cows', [false, true])
-    this.shuffleBeans = new ValueSwitch('Shuffle Beans', [false, true])
-    this.shuffleMedigoronCarpetSalesman = new ValueSwitch('Shuffle Medigoron Carpet Salesman', [false, true])
-    this.shuffleScrubs = new ValueSwitch('Shuffle Scrubs', [false, 'low', 'high'])
-
-    /**
-     * Tracker specific options
-     */
-    this.itemHints = new ValueSwitch('Item Hints', [false, 'highlight important', 'show items'])
-    this.playerHints = new ValueSwitch('Player Hints', [false, true])
-    this.followCurrentScene = new ValueSwitch('Follow Current Scene', [true, false])
-    this.hideUnavaliable = new ValueSwitch('Hide Unavaliable', [true, false])
-    this.hideEra = new ValueSwitch('Only Current Age', [false, true])
-
-    /**
-      * Shuffle settings for items / changes avaliable item pool.
-     */
-    this.shopSanity = new ValueSwitch('Shop Sanity', ['none', 1, 2, 3, 4])
-    this.tokenSanity = new ValueSwitch('Token Sanity', ['vanilla', 'dungeon', 'overworld', 'all'])
-
-    this.entranceSanity = new ValueSwitch('Entrance Sanity', [false, true])
-
     if (spoiler) {
       Object.keys(this).forEach(key => {
         if (spoiler[this[key].name.toLowerCase().replace(/ /g, '_')]) {

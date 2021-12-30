@@ -157,29 +157,22 @@ export class SaveUtils {
       for (let i = 0; i < file.files.length; i++) app.worlds.push(new GameWorld(app))
 
       app.local.world = app.worlds[app.global.world]
+
       app.global.world = file.world
       app.global.entrances = file.files[0].entrances || []
 
       file.files.forEach((world, index) => {
+        Object.assign(app.worlds[index], world) // Reassign the world to the current world.
         app.global.settings = new SettingsManager(world.settings)
-        app.worlds[index].save = world.save
         app.worlds[index].items = new ItemManager(app.worlds[index])
-        app.worlds[index].dungeons = world.dungeons
-        app.worlds[index].scene = world.scene
 
-        const items = world.items
-
-        Object.keys(items).forEach((key) => {
-          if (app.worlds[index].items[key] === undefined) return // Ignore any keys not within the item manager.
-          if (app.worlds[index].items[key] instanceof Item) 
+        Object.keys(app.worlds[index]).forEach((key) => {
+          if (app.worlds[index].items[key] === undefined || !(app.worlds[index].items[key] instanceof Item)) return // Ignore any keys not within the item manager.
           app.worlds[index].items[key].Set(items[key].value * 1)
         })
 
-        world.locations.forEach((location, index2) => {
-          if (location.completed) app.worlds[index].locations.locations.get(String(index2)).completed = location.completed
-          if (location.item) app.worlds[index].locations.locations.get(String(index2)).item = location.item
-          if (location.display) app.worlds[index].locations.locations.get(String(index2)).display = location.display
-        })
+        world.locations.forEach((location, index2) => 
+          Object.assign(app.worlds[index].locations.locations.get(String(index2)), location))
       })
 
       app.saveLoad.call('load', file)

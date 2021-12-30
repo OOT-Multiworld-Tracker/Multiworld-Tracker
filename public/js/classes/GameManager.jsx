@@ -1,4 +1,4 @@
-import { existsSync, mkdirSync, readdirSync, readFile, readFileSync } from "original-fs";
+import { existsSync, mkdirSync, readdirSync, readFileSync } from "original-fs";
 
 /**
  * @type {Game[]}

@@ -26,7 +26,7 @@ export default class MainWindow extends Component {
     this.handleLocationClick = this.handleLocationClick.bind(this)
     this.onLocationUpdate = this.onLocationUpdate.bind(this)
 
-    this.collapse = {}
+    this.collapse = {};
   }
   
   handleSceneChange (scene) {

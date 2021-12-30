@@ -57,6 +57,15 @@ export class App extends AppSubscriptions {
 
     this.lastChestID = -1
   }
+
+  /**
+   * Generate a new list of worlds based from the supplied count.
+   * @param {Number} count 
+   */
+  makeWorlds (count) {
+    this.worlds = [];
+    for (let i = 0; i < count; i++) this.worlds.push(new GameWorld(this));
+  }
 }
 
 const app = new App()
@@ -112,23 +121,18 @@ export class SaveUtils {
     return new Promise((resolve, reject) => {
       const saveFiles = app.worlds.map((world) => 
         Object.assign({ }, { // Assign all of the values to the file.
-          dungeons: world.dungeons, save: world.save, items: world.items,
-          settings: app.global.settings.Serialize(),
+          dungeons: world.dungeons, save: world.save, items: world.items, settings: app.global.settings.Serialize(),
           locations: world.locations.Array().map((location) => { return { completed: location.completed, item: location.item, display: location.display, name: location.name, preExit: location.preExit, scene: location.scene } }),
-          scene: world.scene, game: GameManager.GetSelectedGame().name,
-          entrances: app.global.entrances
+          scene: world.scene, game: GameManager.GetSelectedGame().name, entrances: app.global.entrances
         })
       )
 
-      try {
-        const saves = JSON.parse(localStorage.saves || []); // Set a default save state.
+      const saveLoc = (JSON.parse(localStorage.saves || [])).find( save => ( save.name === name ) ), // Set a default save state.
+        save = { name, data: {world: app.global.world, files: saveFiles} };
+      if (!saveLoc) return JSON.parse(localStorage.saves || []).push( save ) // Push into the saves or into an empty array.
 
-        if ( saves.find( save => ( save.name === name ) ) )
-          saves[ saves.indexOf(saves.find((save) => save.name === name)) ] = { name, data: {world: app.global.world, files: saveFiles} }
-        else saves.push( { name, data: { world: app.global.world, files: saveFiles } } )
-
-        localStorage.saves = JSON.stringify(saves)
-      } catch (e) { reject(e) }
+      saveLoc = save;
+      localStorage.saves = JSON.stringify(saves);
 
       app.saveLoad.call('save', saveFiles)
       return resolve(saveFiles)
@@ -145,29 +149,20 @@ export class SaveUtils {
       const file = JSON.parse(localStorage.saves).find((save) => save.name === name).data
       
       if (!file || !file.files[0]) return reject(new Error('No save file found.'))
-      app.worlds = [];
       
       GameManager.SetSelectedGame(file.files[0].game); // Set the game to the one in the save file.
 
-      for (let i = 0; i < file.files.length; i++) app.worlds.push(new GameWorld(app))
-
+      // Make the world cache and set necessary settings.
+      app.makeWorlds(file.files.length);
       app.local.world = app.worlds[app.global.world]
-
-      app.global.world = file.world
-      app.global.entrances = file.files[0].entrances || []
+      app.global = Object.assign(app.global, { world: file.world, entrances: file.files[0].entrances || [] });
 
       file.files.forEach((world, index) => {
         Object.assign(app.worlds[index], world) // Reassign the world to the current world.
+
         app.global.settings = new SettingsManager(world.settings)
-        app.worlds[index].items = new ItemManager(app.worlds[index])
-
-        Object.keys(app.worlds[index]).forEach((key) => {
-          if (app.worlds[index].items[key] === undefined || !(app.worlds[index].items[key] instanceof Item)) return // Ignore any keys not within the item manager.
-          app.worlds[index].items[key].Set(items[key].value * 1)
-        })
-
-        world.locations.forEach((location, index2) => 
-          Object.assign(app.worlds[index].locations.locations.get(String(index2)), location))
+        app.worlds[index].items = new ItemManager(app.worlds[index]).Set(world.items)
+        app.worlds[index].locations.Set(world.locations)
       })
 
       app.saveLoad.call('load', file)

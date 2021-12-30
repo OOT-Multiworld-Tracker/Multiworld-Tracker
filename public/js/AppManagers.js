@@ -109,6 +109,15 @@ export class ItemManager {
       this[item.name.toLowerCase()] = new Item(item.name, values, category);
     })
   }
+
+  Set (items) {
+    Object.keys(this).forEach( key => {
+      if (this[ key ] === undefined || !(this[ key ] instanceof Item)) 
+        return // Ignore any keys not within the item manager.
+
+      this[ key ].Set( items[ key ].value * 1 )
+    })
+  }
 }
 
 /**
@@ -237,6 +246,11 @@ export class LocationManager {
    */
   Get (completed = false, scene = -1) {
     return this.Array().filter(location => (location.scene == scene || scene == -1) && location.completed === completed)
+  }
+
+  Set (locations) {
+    locations.forEach((location, index) => 
+          Object.assign(this.locations.get(String(index)), location))
   }
 }
 

@@ -112,26 +112,21 @@ export class SaveUtils {
     return new Promise((resolve, reject) => {
       const saveFiles = app.worlds.map((world) => 
         Object.assign({ }, { // Assign all of the values to the file.
-          dungeons: world.dungeons,
+          dungeons: world.dungeons, save: world.save, items: world.items,
           settings: app.global.settings.Serialize(),
-          save: world.save,
-          items: world.items,
           locations: world.locations.Array().map((location) => { return { completed: location.completed, item: location.item, display: location.display, name: location.name, preExit: location.preExit, scene: location.scene } }),
-          scene: world.scene,
-          game: GameManager.GetSelectedGame().name,
+          scene: world.scene, game: GameManager.GetSelectedGame().name,
           entrances: app.global.entrances
         })
       )
 
       try {
-        if (!localStorage.saves) localStorage.saves = JSON.stringify([])
-        const saves = JSON.parse(localStorage.saves);
-        if (saves.find((save) => save.name === name)) {
-          const index = saves.indexOf(saves.find((save) => save.name === name))
-          saves[index] = { name, data: {world: app.global.world, files: saveFiles} }
-        } else {
-          saves.push({ name, data: {world: app.global.world, files: saveFiles} })
-        }
+        const saves = JSON.parse(localStorage.saves || []); // Set a default save state.
+
+        if ( saves.find( save => ( save.name === name ) ) )
+          saves[ saves.indexOf(saves.find((save) => save.name === name)) ] = { name, data: {world: app.global.world, files: saveFiles} }
+        else saves.push( { name, data: { world: app.global.world, files: saveFiles } } )
+
         localStorage.saves = JSON.stringify(saves)
       } catch (e) { reject(e) }
 
@@ -152,7 +147,7 @@ export class SaveUtils {
       if (!file || !file.files[0]) return reject(new Error('No save file found.'))
       app.worlds = [];
       
-      GameManager.SetSelectedGame(file.files[0].game);
+      GameManager.SetSelectedGame(file.files[0].game); // Set the game to the one in the save file.
 
       for (let i = 0; i < file.files.length; i++) app.worlds.push(new GameWorld(app))
 

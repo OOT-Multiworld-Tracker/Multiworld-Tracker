@@ -68,7 +68,6 @@ export default class Parser {
       const location = Object.assign({}, locale)
       location.id = index
 
-      if (location.logic) { location.logic = eval(locale.logic) }
       locations.set(String(index), new Location(manager, location))
     })
 

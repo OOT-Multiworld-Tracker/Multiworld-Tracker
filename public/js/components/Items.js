@@ -31,7 +31,7 @@ export default class Items extends React.Component {
       <div key={item.name+index} className={`grid-item${item.Index() > 0 ? " active" : ""}`}
         onClick={() => {item.Toggle(); this.setState({ items: app.local.world.save })}}>
 
-          <div style={{backgroundImage: `url(${item.Icon()})`}}>
+          <div style={{backgroundImage: `url("data:image/png;base64,${item.Icon()}")`}}>
             { item.values.length > 2 && item.Index ( ) > 0 && 
               <span>
                 { (typeof item.value != "number") ? item.value.slice ( 0, 1 ) : item.value } 

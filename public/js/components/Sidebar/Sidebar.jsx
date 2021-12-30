@@ -14,6 +14,8 @@ import SidebarButtons from './SidebarButtons'
 import EntranceRandomizer from './EntranceRandomizer'
 import Account from './Account'
 import LocationHint from './LocationHint'
+import GameManager from '../../classes/GameManager'
+import { GameWorld } from '../../classes/GameWorld'
 
 export default class Sidebar extends React.Component {
   static contextType = LanguageContext
@@ -81,6 +83,7 @@ export default class Sidebar extends React.Component {
       <>
         <input type='file' id='spoiler' onChange={(e) => this.props.onSpoilerUpload(e)} accept='.json' style={{display: 'none'}} />
         <select className='btn btn-default form-control' style={{width: '100%'}} onChange={(e) => this.context.languageChange(e)}>{GetLanguages().map((lang) => <option key={lang} value={lang}>{lang}</option>)}</select>
+        <select className='btn btn-default form-control' value={GameManager.GetSelectedGame().name} style={{width: '100%'}} onChange={(e) => { GameManager.SetSelectedGame(e.target.value); app.worlds = [new GameWorld(app)]; app.local.world = app.worlds[0]; app.global.settings.makeSettings(); app.call('locations update') }}>{GameManager.GetGames().map((game, index) => { console.log(game); return (<option key={index} value={game.name}>{game.name}</option>)})}</select>
         <button className='btn btn-default form-control' style={{width: '100%', borderBottom: '1px solid #555'}} onClick={(e) => $('#spoiler').click()}>Upload Spoiler Log</button>
         <Settings settings={app.global.settings} />
         <hr />

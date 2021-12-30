@@ -19,7 +19,15 @@ class Game {
          */
         this.locations = data.locations;
 
+        this.directory = data.directory;
+
         this.scenes = data.scenes;
+
+        this.items = data.items;
+
+        this.settings = data.settings;
+
+        this.mixins = data.mixins;
 
         this.icon = data.icon;
     }
@@ -27,10 +35,17 @@ class Game {
 
 export default class GameManager {
     static SetSelectedGame (name) {
-        console.log(name);
         selectedGame = gameList.find(game => game.name === name);
-        console.log(selectedGame);
+        console.log(selectedGame.name + ' selected');
         return this.GetSelectedGame();
+    }
+
+    static GetGameDirectory () {
+        return multiworldDir;
+    }
+
+    static GetGames () {
+        return gameList;
     }
 
     /**
@@ -59,13 +74,17 @@ export default class GameManager {
             gameList.push(new Game({
                 name: gameName,
                 locations: gameLocations,
+                items: gameConfig.items,
+                directory: game,
+                settings: gameConfig.settings,
+                mixins: gameConfig.mixins,
                 scenes: gameScenes,
                 icon: gameIcon
             }));
         });
 
         this.SetSelectedGame(gameList[0].name);
-        return gameListDir;
+        return gameList;
     }
 }
 

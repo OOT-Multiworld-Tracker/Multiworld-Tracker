@@ -1,4 +1,6 @@
+import GameManager from './GameManager'
 import ValueSwitch from './ValueSwitch'
+import { existsSync, readFileSync } from 'fs'
 
 export class Item extends ValueSwitch {
   constructor (name, value, category=null) {
@@ -7,7 +9,9 @@ export class Item extends ValueSwitch {
   }
 
   Icon () {
-    return `/images/${this.name.replace(/ /g, '_').toLowerCase()}${this.Index() > 1 && typeof this.value === 'string' ? `_${this.Index()}` : ""}.png`
+    if (!existsSync(`${GameManager.GetGameDirectory()}\\${GameManager.GetSelectedGame().directory}\\icons\\${this.name.replace(/ /g, '_').toLowerCase()}${(this.Index() > 1 && typeof this.value === 'string') ? `_${this.Index()}` : ""}.png`)) return 'unknown';
+
+    return readFileSync(`${GameManager.GetGameDirectory()}\\${GameManager.GetSelectedGame().directory}\\icons\\${this.name.replace(/ /g, '_').toLowerCase()}${(this.Index() > 1 && typeof this.value === 'string') ? `_${this.Index()}` : ""}.png`, 'base64')
   }
 }
 

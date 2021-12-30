@@ -30,7 +30,6 @@ export default class MainWindow extends Component {
     this.handleSearch = this.handleSearch.bind(this)
     this.handleLocationClick = this.handleLocationClick.bind(this)
     this.onLocationUpdate = this.onLocationUpdate.bind(this)
-    this.scenes = Parser.ParseScenes()
 
     this.collapse = {}
 
@@ -94,7 +93,7 @@ export default class MainWindow extends Component {
               this.state.locations.map(
                 (location, index) => (
                  <Fragment key={index}>
-                  {lastScene != location.scene && this.state.scene == -1 && <Location key={location.scene} onClick={() => { this.collapse[location.scene] = !this.collapse[location.scene]; this.setState({ collapse: this.collapse }) } } type="header" name={this.scenes[lastScene = location.scene]?.name||"Unknown"} />}
+                  {lastScene != location.scene && this.state.scene == -1 && <Location key={location.scene} onClick={() => { this.collapse[location.scene] = !this.collapse[location.scene]; this.setState({ collapse: this.collapse }) } } type="header" name={Parser.ParseScenes()[lastScene = location.scene]?.name||"Unknown"} />}
                   {(!this.collapse[location.scene] || this.collapse[location.scene] == false) && <Location
                     onContextMenu={this.handleContextMenu} 
                     useless={location.useless} 

@@ -15,15 +15,10 @@ export default class MainWindow extends Component {
     this.showItems = props.showItems || false
 
     this.state = { 
-      search: '', 
-      page: 0, 
-      scene: -1, 
-      dropdown: { }, 
-      world: 0, 
+      search: '', page: 0, scene: -1, dropdown: { }, world: 0, 
       locations: app.local.world.locations.Accessible(false, false, -1)
     }
 
-    this.handleDropdownClick = this.props.onDropdownClick
     this.handleContextMenu = this.handleContextMenu.bind(this)
     this.handleSceneChange = this.handleSceneChange.bind(this)
     this.displaySection = this.displaySection.bind(this)
@@ -32,7 +27,6 @@ export default class MainWindow extends Component {
     this.onLocationUpdate = this.onLocationUpdate.bind(this)
 
     this.collapse = {}
-
   }
   
   handleSceneChange (scene) {
@@ -80,7 +74,7 @@ export default class MainWindow extends Component {
           <MainHeader locations={this.state.locations.length} world={this.state.world} onSearch={this.handleSearch} onSceneChange={this.handleSceneChange} onPageClick={this.displaySection} scene={this.state.scene} page={this.state.page} />
           
           <LocationDropdown 
-            onDropdownClick={this.handleDropdownClick} 
+            onDropdownClick={this.props.onDropdownClick} 
             display={this.props.dropDownOpen} 
             position={{ 
               left: this.state.dropdown.left, 

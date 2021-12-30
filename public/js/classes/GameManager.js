@@ -69,7 +69,7 @@ export default class GameManager {
             const gameName = gameConfig.name;
             const gameLocations = JSON.parse(readFileSync(`${gameDir}/locations.json`)) || [];
             const gameScenes = JSON.parse(readFileSync(`${gameDir}/scenes.json`)) || [];
-            const gameIcon = readFileSync(`${gameDir}/icon.png`);
+            const gameIcon = readFileSync(`${gameDir}/icon.png`, 'base64');
 
             gameList.push(new Game({
                 name: gameName,

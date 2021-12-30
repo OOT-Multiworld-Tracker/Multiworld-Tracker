@@ -57,29 +57,17 @@ export default class GameManager {
     }
 
     static ParseGameList () {
-        if (!existsSync(multiworldDir))
-            mkdirSync(multiworldDir, { recursive: true });
+        if (!existsSync(multiworldDir)) mkdirSync(multiworldDir, { recursive: true });
 
-        const gameListDir = readdirSync(multiworldDir);
-
-        gameListDir.forEach(game => {
+        readdirSync(multiworldDir).forEach(game => {
             const gameDir = `${multiworldDir}\\${game}`;
             const gameConfig = JSON.parse(readFileSync(gameDir + '\\config.json'));
 
-            const gameName = gameConfig.name;
-            const gameLocations = JSON.parse(readFileSync(`${gameDir}/locations.json`)) || [];
-            const gameScenes = JSON.parse(readFileSync(`${gameDir}/scenes.json`)) || [];
-            const gameIcon = readFileSync(`${gameDir}/icon.png`, 'base64');
-
             gameList.push(new Game({
-                name: gameName,
-                locations: gameLocations,
-                items: gameConfig.items,
-                directory: game,
-                settings: gameConfig.settings,
-                mixins: gameConfig.mixins,
-                scenes: gameScenes,
-                icon: gameIcon
+                name: gameConfig.name, items: gameConfig.items, directory: game, settings: gameConfig.settings, mixins: gameConfig.mixins,
+                locations: JSON.parse(readFileSync(`${gameDir}/locations.json`)) || [],
+                scenes: JSON.parse(readFileSync(`${gameDir}/scenes.json`)) || [],
+                icon: readFileSync(`${gameDir}/icon.png`, 'base64')
             }));
         });
 

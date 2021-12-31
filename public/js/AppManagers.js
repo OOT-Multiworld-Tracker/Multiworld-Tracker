@@ -37,23 +37,20 @@ export class SettingsManager {
       if (typeof setting !== 'object') // No special manipulations.
         return this[setting.toLowerCase()] = new ValueSwitch(setting, [0, 1]);
 
-      if (!setting.name) // Force the item to have a name.
-        throw new Error('Item has failed to generate: Item must have a name');
-
       const values = setting.values || [];
 
-      if (!Array.isArray(values)) // Values must be an array.
-        throw new Error('Item has failed to generate: Item values must be an array');
+      if (!setting.name || !Array.isArray(values)) // Force the item to have a name.
+        throw new Error('Item has failed to generate: Item must have a name and values must be an array');
 
-      values.forEach( value => { // Make special value type.
-      
-        if (Array.isArray ( value )) // Turn a 2-piece array into a list of values.
-          for (let i = value[0]; i <= value[1]; i++) values.push(i);
-      
-      });
+      values.forEach( value => this.MakeSpecialValues(value, values) );
 
       this[setting.name.toLowerCase()] = new ValueSwitch(setting.name, values);
     })
+  }
+
+  MakeSpecialValues (value, values) {
+    if (Array.isArray ( value )) // Turn a 2-piece array into a list of values.
+      for (let i = value[0]; i <= value[1]; i++) values.push(i);
   }
 
   Serialize () {

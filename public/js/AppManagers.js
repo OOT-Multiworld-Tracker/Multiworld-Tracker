@@ -83,30 +83,26 @@ export class ItemManager {
       if (typeof item !== 'object') // No special manipulations.
         return this[item.toLowerCase()] = new Item(item, [0, 1]);
 
-      if (!item.name) // Force the item to have a name.
-        throw new Error('Item has failed to generate: Item must have a name');
-
-      if (item.type && item.type == 'dungeon') {
-        return this[item.name.toLowerCase()] = new KeyManager(item.name, item.max);
-      }
-
       const values = item.values || [];
 
-      if (!Array.isArray(values)) // Values must be an array.
-        throw new Error('Item has failed to generate: Item values must be an array');
+      if (!item.name || !Array.isArray(values)) // Force the item to have a name.
+        throw new Error('Item has failed to generate: Item must have a name and values must be an array');
+
+      if (item.type && item.type == 'dungeon')
+        return this[item.name.toLowerCase()] = new KeyManager(item.name, item.max);
 
       // Make special value type.
-      values.forEach( (value, index) => {
-      
-        if (Array.isArray ( value )) // Turn a 2-piece array into a list of values.
-          for (let i = value[0]; i <= value[1]; i++) values.push(i);
-      
-      });
+      values.forEach( value => this.MakeSpecialValues ( value, values ) )
 
       const category = item.category || null;
 
       this[item.name.toLowerCase()] = new Item(item.name, values, category);
     })
+  }
+
+  MakeSpecialValues (value, values) {
+    if (Array.isArray ( value )) // Turn a 2-piece array into a list of values.
+      for (let i = value[0]; i <= value[1]; i++) values.push(i);
   }
 
   Set (items) {

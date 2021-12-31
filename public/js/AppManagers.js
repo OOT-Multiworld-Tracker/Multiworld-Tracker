@@ -78,11 +78,14 @@ export class ItemManager {
   }
 
   makeItems () {
-    GameManager.GetSelectedGame().items.forEach (item => {
+    GameManager.GetSelectedGame().items.forEach ( this.addItem );
+  }
+
+  addItem (item) {
       if (typeof item !== 'object') // No special manipulations.
         return this[item.toLowerCase()] = new Item(item, [0, 1]);
 
-      const values = item.values || [];
+      const values = item.values;
 
       if (!item.name || !Array.isArray(values)) // Force the item to have a name.
         throw new Error('Item has failed to generate: Item must have a name and values must be an array');
@@ -96,7 +99,6 @@ export class ItemManager {
       const category = item.category || null;
 
       this[item.name.toLowerCase()] = new Item(item.name, values, category);
-    })
   }
 
   MakeSpecialValues (value, values) {

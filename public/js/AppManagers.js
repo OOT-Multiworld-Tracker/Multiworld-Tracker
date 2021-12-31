@@ -33,11 +33,14 @@ export class SettingsManager {
   }
 
   makeSettings () {
-    GameManager.GetSelectedGame().settings.forEach ( setting => {
+    GameManager.GetSelectedGame().settings.forEach ( this.addSetting );
+  }
+
+  addSetting (setting) {
       if (typeof setting !== 'object') // No special manipulations.
         return this[setting.toLowerCase()] = new ValueSwitch(setting, [0, 1]);
 
-      const values = setting.values || [];
+      const values = setting.values;
 
       if (!setting.name || !Array.isArray(values)) // Force the item to have a name.
         throw new Error('Item has failed to generate: Item must have a name and values must be an array');
@@ -45,7 +48,6 @@ export class SettingsManager {
       values.forEach( value => this.MakeSpecialValues(value, values) );
 
       this[setting.name.toLowerCase()] = new ValueSwitch(setting.name, values);
-    })
   }
 
   MakeSpecialValues (value, values) {

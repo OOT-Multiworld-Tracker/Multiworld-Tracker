@@ -78,13 +78,15 @@ export class ItemManager {
   }
 
   makeItems () {
-    GameManager.GetSelectedGame().items.forEach ( this.addItem );
-  }
-
-  addItem (item) {
+    GameManager.GetSelectedGame().items.forEach ( (item) => { 
       if (typeof item !== 'object') // No special manipulations.
         return this[item.toLowerCase()] = new Item(item, [0, 1]);
 
+      return this.addItem (item)
+    });
+  }
+
+  addItem (item) {
       const values = item.values;
 
       if (!item.name || !Array.isArray(values)) // Force the item to have a name.

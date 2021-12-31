@@ -189,25 +189,44 @@ export class LocationManager {
   CheckLogic (logic) {
     if (!logic) return true; // No logic = OK
 
+    const logicTypes = {
+      'mixin': this.CheckMixin,
+      'item': this.CheckItem,
+      'setting': this.CheckSetting, 
+    }
+
     for (let log of logic) {
-      switch (log.type) {
-        case 'mixin':
-          if (!GameManager.GetSelectedGame().mixins[log.name]) return console.warn("Mixin not found: " + log.name);
-          this.CheckLogic(GameManager.GetSelectedGame().mixins[log.name].logic)
-          continue;
-        case 'item':
-          if (!this.world.items[log.name.toLowerCase()]) return console.warn("Item not found: " + log.name);
-          if (this.world.items[log.name.toLowerCase()].Index() >= log.index)
-          continue;
-        case 'setting':
-          if (!this.world.app.global.settings[log.name.toLowerCase()]) return console.warn("Setting not found: " + log.name);
-          if (this.world.app.global.settings[log.name.toLowerCase()].Index() >= log.index)
-          continue;
-      }
+      if (logicTypes[logic.type](logic)) continue;
       return false;
     }
 
     return true;
+  }
+
+  /**
+   * @private
+   */
+  CheckMixin (log) {
+    if (!GameManager.GetSelectedGame().mixins[log.name]) return console.warn("Mixin not found: " + log.name);
+    return this.CheckLogic(GameManager.GetSelectedGame().mixins[log.name].logic)
+  }
+
+  /**
+   * @private
+   */
+  CheckItem () {
+    if (!this.world.items[log.name.toLowerCase()]) return console.warn("Item not found: " + log.name);
+    if (this.world.items[log.name.toLowerCase()].Index() >= log.index) return true;
+    return false;
+  }
+
+  /**
+   * @private
+   */
+  CheckSetting () {
+    if (!this.world.app.global.settings[log.name.toLowerCase()]) return console.warn("Setting not found: " + log.name);
+    if (this.world.app.global.settings[log.name.toLowerCase()].Index() >= log.index) return true;
+    return false;
   }
 
   /**

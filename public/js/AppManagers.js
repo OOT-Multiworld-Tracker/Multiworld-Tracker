@@ -45,7 +45,7 @@ export class SettingsManager {
       if (!Array.isArray(values)) // Values must be an array.
         throw new Error('Item has failed to generate: Item values must be an array');
 
-      values.forEach( (value, index) => { // Make special value type.
+      values.forEach( value => { // Make special value type.
       
         if (Array.isArray ( value )) // Turn a 2-piece array into a list of values.
           for (let i = value[0]; i <= value[1]; i++) values.push(i);

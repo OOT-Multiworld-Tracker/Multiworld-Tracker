@@ -89,9 +89,6 @@ export class ItemManager {
   addItem (item) {
       const values = item.values;
 
-      if (!item.name || !Array.isArray(values)) // Force the item to have a name.
-        throw new Error('Item has failed to generate: Item must have a name and values must be an array');
-
       if (item.type && item.type == 'dungeon')
         return this[item.name.toLowerCase()] = new KeyManager(item.name, item.max);
 

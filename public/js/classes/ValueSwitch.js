@@ -6,12 +6,12 @@ export default class ValueSwitch {
     /**
      * @type {String}
      */
-    this.name = name
+    this.name = name || throw new Error('ValueSwitch requires a name.')
 
     /**
     * @type {Object[]}
     */
-    this.values = values
+    this.values = values || throw new Error('ValueSwitch requires values.')
     this.value = this.values[0]
   }
 

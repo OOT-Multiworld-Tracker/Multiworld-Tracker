@@ -1,8 +1,21 @@
+import { existsSync, readdirSync, readFileSync } from 'original-fs'
 import { SettingsManager, Location, LocationManager } from '../AppManagers'
-import GameManager from './GameManager'
 import { GameWorld } from './GameWorld'
 
+const LocationList = (existsSync(process.env.APPDATA + '/multiworld-tracker/locations.json')) ? JSON.parse(readFileSync(process.env.APPDATA + '/multiworld-tracker/locations.json')) : require('../locations.json')
+const SceneList = require('../scenes.json')
+const gameList = [];
+
 export default class Parser {
+  static ParseGame (game, app) {
+    const gameData = { };
+  }
+
+  static ParseGameList () {
+      const games = readdirSync(process.env.USERPROFILE+'\\Documents\\Multi-World\\Games')
+      
+  }
+
   static ParseSpoiler (log, app) {
     const spoiler = { }
 
@@ -64,10 +77,11 @@ export default class Parser {
   static ParseLocations (manager) {
     const locations = new Map()
 
-    GameManager.GetSelectedGame().locations.forEach((locale, index) => {
+    LocationList.forEach((locale, index) => {
       const location = Object.assign({}, locale)
       location.id = index
 
+      if (location.logic) { location.logic = eval(locale.logic) }
       locations.set(String(index), new Location(manager, location))
     })
 
@@ -75,6 +89,6 @@ export default class Parser {
   }
 
   static ParseScenes () {
-    return GameManager.GetSelectedGame().scenes
+    return SceneList
   }
 }

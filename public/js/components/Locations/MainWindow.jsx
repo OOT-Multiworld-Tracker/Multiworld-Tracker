@@ -15,25 +15,18 @@ export default class MainWindow extends Component {
     this.showItems = props.showItems || false
 
     this.state = { 
-      search: '', 
-      page: 0, 
-      scene: -1, 
-      dropdown: { }, 
-      world: 0, 
+      search: '', page: 0, scene: -1, dropdown: { }, world: 0, 
       locations: app.local.world.locations.Accessible(false, false, -1)
     }
 
-    this.handleDropdownClick = this.props.onDropdownClick
     this.handleContextMenu = this.handleContextMenu.bind(this)
     this.handleSceneChange = this.handleSceneChange.bind(this)
     this.displaySection = this.displaySection.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
     this.handleLocationClick = this.handleLocationClick.bind(this)
     this.onLocationUpdate = this.onLocationUpdate.bind(this)
-    this.scenes = Parser.ParseScenes()
 
-    this.collapse = {}
-
+    this.collapse = {};
   }
   
   handleSceneChange (scene) {
@@ -81,7 +74,7 @@ export default class MainWindow extends Component {
           <MainHeader locations={this.state.locations.length} world={this.state.world} onSearch={this.handleSearch} onSceneChange={this.handleSceneChange} onPageClick={this.displaySection} scene={this.state.scene} page={this.state.page} />
           
           <LocationDropdown 
-            onDropdownClick={this.handleDropdownClick} 
+            onDropdownClick={this.props.onDropdownClick} 
             display={this.props.dropDownOpen} 
             position={{ 
               left: this.state.dropdown.left, 
@@ -94,7 +87,7 @@ export default class MainWindow extends Component {
               this.state.locations.map(
                 (location, index) => (
                  <Fragment key={index}>
-                  {lastScene != location.scene && this.state.scene == -1 && <Location key={location.scene} onClick={() => { this.collapse[location.scene] = !this.collapse[location.scene]; this.setState({ collapse: this.collapse }) } } type="header" name={this.scenes[lastScene = location.scene]?.name||"Unknown"} />}
+                  {lastScene != location.scene && this.state.scene == -1 && <Location key={location.scene} onClick={() => { this.collapse[location.scene] = !this.collapse[location.scene]; this.setState({ collapse: this.collapse }) } } type="header" name={Parser.ParseScenes()[lastScene = location.scene]?.name||"Unknown"} />}
                   {(!this.collapse[location.scene] || this.collapse[location.scene] == false) && <Location
                     onContextMenu={this.handleContextMenu} 
                     useless={location.useless} 
@@ -129,18 +122,18 @@ export class Location extends React.PureComponent {
         <ListItem 
           type={this.props.type}
           style={{ 
-            backgroundColor: ((app.global.settings.itemHints.Index() === 1 && this.hasRareItem()) || this.props.important) ? '#cbef28' : '' }} 
+            backgroundColor: ((app.global.settings.itemHints && app.global.settings.itemHints.Index() === 1 && this.hasRareItem()) || this.props.important) ? '#cbef28' : '' }} 
             onClick={this.props.onClick || (_ => app.local.world.locations.Array()[this.props.id].Mark())} 
             onContextMenu={(e) => { e.preventDefault(); this.props.onContextMenu(e, this.props.id) }}>
 
           <div className='location-name' style={{ color: this.props.useless ? '#666' : null }}>
             {this.props.name} 
-            {(app.global.settings.playerHints.value == true && this.props.type != "header") &&
+            {(app.global.settings.playerHints && app.global.settings.playerHints.value == true && this.props.type != "header") &&
               <span className='badge'>{app.local.world.locations.Array()[this.props.id]?.item.player||"?"}</span>}
           </div>
 
           <div className='location-items'>
-            {app.global.settings.itemHints.value === 'show items' ? app.local.world.locations.Array()[this.props.id]?.item.item : this.props.item}
+            {app.global.settings.itemHints && app.global.settings.itemHints.value === 'show items' ? app.local.world.locations.Array()[this.props.id]?.item.item : this.props.item}
           </div>
         </ListItem>
       </ErrorBoundary>

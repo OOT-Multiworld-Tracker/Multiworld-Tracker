@@ -1,6 +1,7 @@
 import ValueSwitch from './classes/ValueSwitch'
 import { Item, Bottle, TradeItem } from './classes/Item'
 import { MapToArray } from './Utils'
+import GameManager from './classes/GameManager'
 import Parser from './classes/Parser'
 import { GameWorld } from './classes/GameWorld'
 
@@ -20,57 +21,6 @@ const CATEGORIES = {
 
 export class SettingsManager {
   constructor (spoiler) {
-    /**
-     * Progression-related settings
-     */
-    this.openForest = new ValueSwitch('Open Forest', ['closed', 'open deku', 'open forest'])
-    this.openKakariko = new ValueSwitch('Open Kakariko', ['closed', 'open'])
-    this.openDoorOfTime = new ValueSwitch('Open Door Of Time', [false, true])
-    this.zoraFountain = new ValueSwitch('Zora Fountain', ['closed', 'open adult', 'open child'])
-    this.gerudoFortress = new ValueSwitch('Gerudo Fortress', ['vanilla', 'fast', 'open'])
-
-    /**
-     * Win conditions
-     */
-    this.bridge = new ValueSwitch('Bridge', ['vanilla', 'stones', 'medallions', 'skulltulas', 'open'])
-    this.bridgeStones = new ValueSwitch('Bridge Stones', [0, 1, 2, 3, 4, 5, 6])
-
-    /**
-     * Bombchus able to be used in-place of bombs.
-     */
-    this.bombchusInLogic = new ValueSwitch('Bombchus in Logic', [false, true])
-
-    /**
-     * Whether or not to skip zelda -- removes items from pool.
-     */
-    this.skipChildZelda = new ValueSwitch('Skip Child Zelda', [false, true])
-
-    /**
-     * Shuffle settings for items / changes avaliable item pool.
-     */
-    this.shuffleWeirdEgg = new ValueSwitch('Shuffle Weird Egg', [false, true])
-    this.shuffleCows = new ValueSwitch('Shuffle Cows', [false, true])
-    this.shuffleBeans = new ValueSwitch('Shuffle Beans', [false, true])
-    this.shuffleMedigoronCarpetSalesman = new ValueSwitch('Shuffle Medigoron Carpet Salesman', [false, true])
-    this.shuffleScrubs = new ValueSwitch('Shuffle Scrubs', [false, 'low', 'high'])
-
-    /**
-     * Tracker specific options
-     */
-    this.itemHints = new ValueSwitch('Item Hints', [false, 'highlight important', 'show items'])
-    this.playerHints = new ValueSwitch('Player Hints', [false, true])
-    this.followCurrentScene = new ValueSwitch('Follow Current Scene', [true, false])
-    this.hideUnavaliable = new ValueSwitch('Hide Unavaliable', [true, false])
-    this.hideEra = new ValueSwitch('Only Current Age', [false, true])
-
-    /**
-      * Shuffle settings for items / changes avaliable item pool.
-     */
-    this.shopSanity = new ValueSwitch('Shop Sanity', ['none', 1, 2, 3, 4])
-    this.tokenSanity = new ValueSwitch('Token Sanity', ['vanilla', 'dungeon', 'overworld', 'all'])
-
-    this.entranceSanity = new ValueSwitch('Entrance Sanity', [false, true])
-
     if (spoiler) {
       Object.keys(this).forEach(key => {
         if (spoiler[this[key].name.toLowerCase().replace(/ /g, '_')]) {
@@ -78,6 +28,31 @@ export class SettingsManager {
         }
       })
     }
+
+    this.makeSettings();
+  }
+
+  makeSettings () {
+    GameManager.GetSelectedGame().settings.forEach ( this.addSetting );
+  }
+
+  addSetting (setting) {
+      if (typeof setting !== 'object') // No special manipulations.
+        return this[setting.toLowerCase()] = new ValueSwitch(setting, [0, 1]);
+
+      const values = setting.values;
+
+      if (!setting.name || !Array.isArray(values)) // Force the item to have a name.
+        throw new Error('Item has failed to generate: Item must have a name and values must be an array');
+
+      values.forEach( value => this.MakeSpecialValues(value, values) );
+
+      this[setting.name.toLowerCase()] = new ValueSwitch(setting.name, values);
+  }
+
+  MakeSpecialValues (value, values) {
+    if (Array.isArray ( value )) // Turn a 2-piece array into a list of values.
+      for (let i = value[0]; i <= value[1]; i++) values.push(i);
   }
 
   Serialize () {
@@ -99,115 +74,44 @@ export class KeyManager {
 
 export class ItemManager {
   constructor (world) {
-    /**
-     * Basic major items.
-     */
-    this.dekuSticks = new Item('Deku Sticks', [0, 10, 20, 30])
-    this.dekuNuts = new Item('Deku Nuts', [0, 20, 30, 40])
-    this.bombs = new Item('Bomb Bag', [0, 30, 40, 50], CATEGORIES.BOMBS)
-    this.bombchus = new Item('Bombchus', [0, 20], CATEGORIES.BOMBS)
-    this.magicBeans = new Item('Magic Beans', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
-    this.fairySlingshot = new Item('Slingshot', [0, 20, 30, 40])
-    this.fairyBow = new Item('Bow', [0, 30, 40, 50], CATEGORIES.BOW)
-    this.fireArrows = new Item('Fire Arrows', [0, 1], CATEGORIES.BOW)
-    this.iceArrows = new Item('Ice Arrows', [0, 1], CATEGORIES.BOW)
-    this.lightArrows = new Item('Light Arrows', [0, 1], CATEGORIES.BOW)
-    this.dinsFire = new Item('Dins Fire', [0, 1], CATEGORIES.MAGIC)
-    this.faroresWind = new Item('Faroress Wind', [0, 1], CATEGORIES.MAGIC)
-    this.nayrusLove = new Item('Nayrus Love', [0, 1], CATEGORIES.MAGIC)
-    this.ocarina = new Item('Ocarina', [0, 'Saria\'s Ocarina', 'Ocarina of Time'])
-    this.hookshot = new Item('Hookshot', [0, 'Hookshot', 'Longshot'])
-    this.lensOfTruth = new Item('Lens of Truth', [0, 1], CATEGORIES.MAGIC)
-    this.boomerang = new Item('Boomerang', [0, 1])
-    this.megatonHammer = new Item('Megaton Hammer', [0, 1])
+    this.makeItems();
+  }
 
-    /**
-     * A list of bottles on a special class denoting all bottle values.
-     */
-    this.bottle_1 = new Bottle('Bottle')
-    this.bottle_2 = new Bottle('Bottle')
-    this.bottle_3 = new Bottle('Bottle')
-    this.bottle_4 = new Bottle('Bottle')
+  makeItems () {
+    GameManager.GetSelectedGame().items.forEach ( (item) => { 
+      if (typeof item !== 'object') // No special manipulations.
+        return this[item.toLowerCase()] = new Item(item, [0, 1]);
 
-    this.rutosLetter = new Item('Rutos Letter', [0, 1])
+      return this.addItem (item)
+    });
+  }
 
-    /**
-     * All of the trade items.
-     */
-    this.childTradeItem = new TradeItem('Child Trading')
-    this.adultTradeItem = new TradeItem('Adult Trading')
+  addItem (item) {
+      const values = item.values;
 
-    this.wallet = new Item('Wallet', [99, 200, 500, 999])
-    this.swimming = new Item('Progressive Scale', [0, 'Silver Scale', 'Gold Scale'])
-    this.strength = new Item('Progressive Strength', [0, 'Goron\'s Bracelet', 'Silver Gauntlet', 'Golden Gauntlet'])
+      if (item.type && item.type == 'dungeon')
+        return this[item.name.toLowerCase()] = new KeyManager(item.name, item.max);
 
-    /**
-     * Swords
-     */
-    this.kokiriSword = new Item('Kokiri Sword', [0, 1], CATEGORIES.SWORDS)
-    this.masterSword = new Item('Master Sword', [0, 1], CATEGORIES.SWORDS)
-    this.biggoronSword = new Item('Biggoron Sword', [0, 1], CATEGORIES.SWORDS)
+      // Make special value type.
+      values.forEach( value => this.MakeSpecialValues ( value, values ) )
 
-    /**
-     * Tunics
-     */
-    this.goronTunic = new Item('Goron Tunic', [0, 1], CATEGORIES.TUNICS)
-    this.zoraTunic = new Item('Zora Tunic', [0, 1], CATEGORIES.TUNICS)
+      const category = item.category || null;
 
-    /**
-     * Shields
-     */
-    this.dekuShield = new Item('Deku Shield', [0, 1], CATEGORIES.SHIELDS)
-    this.hylianShield = new Item('Hylian Shield', [0, 1], CATEGORIES.SHIELDS)
-    this.mirrorShield = new Item('Mirror Shield', [0, 1], CATEGORIES.SHIELDS)
+      this[item.name.toLowerCase()] = new Item(item.name, values, category);
+  }
 
-    this.ironBoots = new Item('Iron Boots', [0, 1], CATEGORIES.BOOTS)
-    this.hoverBoots = new Item('Hover Boots', [0, 1], CATEGORIES.BOOTS)
+  MakeSpecialValues (value, values) {
+    if (Array.isArray ( value )) // Turn a 2-piece array into a list of values.
+      for (let i = value[0]; i <= value[1]; i++) values.push(i);
+  }
 
-    /**
-     * Quest Status Items
-     */
-    this.gerudoMembershipCard = new Item('Gerudo Membership Card', [0, 1])
-    this.stoneOfAgony = new Item('Stone of Agony', [0, 1])
-    this.goldSkulltulas = new Item('Gold Skulltulas', [0, 10, 20, 30, 40, 50], CATEGORIES.COLLECTABLES)
-    this.heartPieces = new Item('Heart Pieces', [0, 4, 8, 12, 16, 20, 24, 28, 32], CATEGORIES.COLLECTABLES)
+  Set (items) {
+    Object.keys(this).forEach( key => {
+      if (this[ key ] === undefined || !(this[ key ] instanceof Item)) 
+        return // Ignore any keys not within the item manager.
 
-    /**
-     * Songs
-     */
-    this.zeldasLullaby = new Item('Zeldas Lullaby', [0, 1], CATEGORIES.SONGS)
-    this.eponasSong = new Item('Eponas Song', [0, 1], CATEGORIES.SONGS)
-    this.sunsSong = new Item('Suns Song', [0, 1], CATEGORIES.SONGS)
-    this.sariasSong = new Item('Sarias Song', [0, 1], CATEGORIES.SONGS)
-    this.songOfTime = new Item('Song Of Time', [0, 1], CATEGORIES.SONGS)
-    this.songOfStorms = new Item('Song Of Storms', [0, 1], CATEGORIES.SONGS)
-    this.preludeOfLight = new Item('Prelude Of Light', [0, 1], CATEGORIES.WARP_SONGS)
-    this.minuetOfForest = new Item('Minuet Of Forest', [0, 1], CATEGORIES.WARP_SONGS)
-    this.boleroOfFire = new Item('Bolero Of Fire', [0, 1], CATEGORIES.WARP_SONGS)
-    this.serenadeOfWater = new Item('Serenade Of Water', [0, 1], CATEGORIES.WARP_SONGS)
-    this.nocturneOfShadow = new Item('Nocturne Of Shadow', [0, 1], CATEGORIES.WARP_SONGS)
-    this.requiemOfSpirit = new Item('Requiem Of Spirit', [0, 1], CATEGORIES.WARP_SONGS)
-    this.kokiriEmerald = new Item('Kokiri Emerald', [0, 1], CATEGORIES.DUNGEON)
-    this.goronRuby = new Item('Goron Ruby', [0, 1], CATEGORIES.DUNGEON)
-    this.zoraSapphire = new Item('Zora Sapphire', [0, 1], CATEGORIES.DUNGEON)
-    this.lightMedallion = new Item('Light Medallion', [0, 1], CATEGORIES.DUNGEON)
-    this.forestMedallion = new Item('Forest Medallion', [0, 1], CATEGORIES.DUNGEON)
-    this.waterMedallion = new Item('Water Medallion', [0, 1], CATEGORIES.DUNGEON)
-    this.fireMedallion = new Item('Fire Medallion', [0, 1], CATEGORIES.DUNGEON)
-    this.spiritMedallion = new Item('Spirit Medallion', [0, 1], CATEGORIES.DUNGEON)
-    this.shadowMedallion = new Item('Shadow Medallion', [0, 1], CATEGORIES.DUNGEON)
-
-    /**
-     * Key lists
-     */
-    this.forestTemple = new KeyManager('Forest Temple', 6)
-    this.fireTemple = new KeyManager('Fire Temple', 8)
-    this.waterTemple = new KeyManager('Water Temple', 6)
-    this.spiritTemple = new KeyManager('Spirit Temple', 7)
-    this.shadowTemple = new KeyManager('Shadow Temple', 6)
-    this.boTW = new KeyManager('BOTW', 3)
-    this.gtg = new KeyManager('GTG', 9)
-    this.ganonCastle = new KeyManager('Ganon Castle', 3)
+      this[ key ].Set( items[ key ].value * 1 )
+    })
   }
 }
 
@@ -251,7 +155,7 @@ export class LocationManager {
   */
   Accessible (complete = false, showItems = false, scene = -1) {
     return this.Array().filter(location =>
-      (location.scene == scene || scene == -1) && ((this.world.app.global.settings.hideUnavaliable.value == false || this.IsAccessible(location, this.world)) && (complete == false && location.completed == false) || (complete == true && location.completed)))
+      (location.scene == scene || scene == -1) && ((this.world.app.global.settings.hideUnavaliable && this.world.app.global.settings.hideUnavaliable.value == false || this.IsAccessible(location, this.world)) && (complete == false && location.completed == false) || (complete == true && location.completed)))
   }
 
   /**
@@ -269,7 +173,56 @@ export class LocationManager {
    * @returns {Boolean}
    */
   IsAccessible (location, world) {
-    return (location && (location.preExit === true || CanExitForest(world)) && ((!location.logic || location.logic(world)) && !location.completed))
+    const logic = location.logic;
+
+    return this.CheckLogic(logic)
+  }
+
+  /**
+   * Evaluate a logic line.
+   * @param {string[]||object[]} logic 
+   */
+  CheckLogic (logic) {
+    if (!logic) return true; // No logic = OK
+
+    const logicTypes = {
+      'mixin': this.CheckMixin,
+      'item': this.CheckItem,
+      'setting': this.CheckSetting, 
+    }
+
+    for (let log of logic) {
+      if (logicTypes[logic.type](logic)) continue;
+      return false;
+    }
+
+    return true;
+  }
+
+  /**
+   * @private
+   */
+  CheckMixin (log) {
+    if (!GameManager.GetSelectedGame().mixins[log.name]) return console.warn("Mixin not found: " + log.name);
+    return this.CheckLogic(GameManager.GetSelectedGame().mixins[log.name].logic)
+  }
+
+  /**
+   * @private
+   */
+  CheckItem () {
+    if (!this.world.items[log.name.toLowerCase()]) return console.warn("Item not found: " + log.name);
+    if (this.world.items[log.name.toLowerCase()].Index() >= log.index) return true;
+    return false;
+  }
+
+  /**
+   * @private
+   */
+  CheckSetting () {
+    if (!this.world.app.global.settings[log.name.toLowerCase()]) return console.warn("Setting not found: " + log.name);
+    if (this.world.app.global.settings[log.name.toLowerCase()].Index() >= log.index) return true;
+    return false;
   }
 
   /**
@@ -307,6 +260,12 @@ export class LocationManager {
    */
   Get (completed = false, scene = -1) {
     return this.Array().filter(location => (location.scene == scene || scene == -1) && location.completed === completed)
+  }
+
+  Set (locations) {
+    console.log(locations);
+    locations.forEach((location, index) => 
+          Object.assign(this.locations.get(String(index)), location))
   }
 }
 

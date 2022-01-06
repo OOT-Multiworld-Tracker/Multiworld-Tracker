@@ -1,0 +1,7815 @@
+[
+  {
+    "name": "Queen Gohma",
+    "preExit": true,
+    "logic": [
+      {
+        "type": "item",
+        "name": "kokiri Sword",
+        "index": 1
+      },
+      {
+        "type": "item",
+        "name": "deku Shield",
+        "index": 1
+      },
+      {
+        "type": "item",
+        "name": "Slingshot",
+        "index": 0
+      }
+    ],
+    "scene": "0",
+    "chest": 32,
+    "event": {
+      "payload": 3,
+      "data": {
+        "index": 0,
+        "object": 128
+      }
+    }
+  },
+  {
+    "name": "King Dodongo",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanEnterDodongo"
+      },
+      "||",
+      {
+        "type": "item",
+        "name": "strength",
+        "index": null
+      }
+    ],
+    "scene": "1",
+    "chest": 1
+  },
+  {
+    "name": "Barinade",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanEnterJabu"
+      },
+      {
+        "type": "item",
+        "name": "boomerang",
+        "index": 1
+      }
+    ],
+    "scene": "2",
+    "chest": 16,
+    "event": {
+      "payload": 3,
+      "data": {
+        "index": 0,
+        "object": 128
+      }
+    }
+  },
+  {
+    "name": "Phantom Ganon",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanEnterForest"
+      },
+      {
+        "type": "item",
+        "name": "fairy Bow",
+        "index": 1
+      }
+    ],
+    "scene": "3"
+  },
+  {
+    "name": "Volvagia",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanEnterFire"
+      },
+      {
+        "type": "item",
+        "name": "goron Tunic",
+        "index": 1
+      },
+      {
+        "type": "item",
+        "name": "megaton Hamme",
+        "index": 1
+      }
+    ],
+    "scene": "4"
+  },
+  {
+    "name": "Morpha",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanEnterWater"
+      }
+    ]
+  },
+  {
+    "name": "Bongo Bongo",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanEnterShadow"
+      }
+    ]
+  },
+  {
+    "name": "Twinrova",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanEnterSpirit"
+      },
+      {
+        "type": "item",
+        "name": "spirit Temple",
+        "index": 1
+      }
+    ]
+  },
+  {
+    "name": "Song from Impa",
+    "logic": [
+      {
+        "type": "item",
+        "name": "child Trade Item",
+        "index": 34
+      }
+    ],
+    "scene": "95",
+    "chest": 1,
+    "event": {
+      "payload": 5,
+      "data": {
+        "index": 10,
+        "object": 2
+      }
+    }
+  },
+  {
+    "name": "Song from Malon",
+    "logic": [
+      {
+        "type": "item",
+        "name": "ocarina",
+        "index": 1
+      },
+      {
+        "type": "item",
+        "name": "child Trade Item",
+        "index": 34
+      }
+    ],
+    "scene": "99",
+    "chest": 1,
+    "event": {
+      "payload": 5,
+      "data": {
+        "index": 10,
+        "object": 1
+      }
+    }
+  },
+  {
+    "name": "Malon Egg",
+    "scene": "95",
+    "logic": [
+      {
+        "type": "setting",
+        "name": "skip Child Zelda",
+        "index": true
+      }
+    ],
+    "chest": 1,
+    "event": {
+      "payload": 5,
+      "data": {
+        "index": 3,
+        "object": 4
+      }
+    }
+  },
+  {
+    "name": "Song from Saria",
+    "logic": [
+      {
+        "type": "item",
+        "name": "ocarina",
+        "index": 1
+      }
+    ],
+    "scene": "86"
+  },
+  {
+    "name": "Song from Composers Grave",
+    "logic": [
+      {
+        "type": "item",
+        "name": "zeldas Lullaby",
+        "index": true
+      },
+      {
+        "type": "mixin",
+        "name": "HasExplosives"
+      },
+      {
+        "type": "mixin",
+        "name": "CanDamage"
+      },
+      "||",
+      {
+        "type": "item",
+        "name": "boomerang",
+        "index": 1
+      }
+    ],
+    "scene": "83",
+    "event": {
+      "payload": 5,
+      "data": {
+        "index": 2,
+        "object": 32
+      }
+    }
+  },
+  {
+    "name": "Song from Ocarina of Time",
+    "logic": [
+      {
+        "type": "item",
+        "name": "kokiri Emerald",
+        "index": 1
+      },
+      {
+        "type": "item",
+        "name": "goron Ruby",
+        "index": 1
+      },
+      {
+        "type": "item",
+        "name": "zora Sapphire",
+        "index": 1
+      }
+    ],
+    "scene": "81",
+    "event": {
+      "payload": 5,
+      "scene": 86,
+      "data": {
+        "index": 0,
+        "object": 128
+      }
+    }
+  },
+  {
+    "name": "Song from Windmill",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "item",
+        "name": "ocarina",
+        "index": 1
+      }
+    ],
+    "scene": "82",
+    "event": {
+      "payload": 5,
+      "data": {
+        "index": 10,
+        "object": 8
+      }
+    }
+  },
+  {
+    "name": "Sheik in Forest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterForest"
+      }
+    ],
+    "scene": "86"
+  },
+  {
+    "name": "Sheik in Crater",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterDMC"
+      }
+    ],
+    "scene": "97"
+  },
+  {
+    "name": "Sheik in Ice Cavern",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterWater"
+      }
+    ],
+    "scene": "9"
+  },
+  {
+    "name": "Sheik at Colossus",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanEnterSpirit"
+      }
+    ],
+    "scene": "92"
+  },
+  {
+    "name": "Sheik in Kakariko",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      }
+    ],
+    "scene": "86"
+  },
+  {
+    "name": "Sheik at Temple",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "item",
+        "name": "spirit Medallio",
+        "index": null
+      }
+    ],
+    "scene": "6",
+    "event": {
+      "payload": 5,
+      "data": {
+        "index": 8,
+        "object": 8
+      }
+    }
+  },
+  {
+    "name": "KF Midos Top Left Chest",
+    "preExit": true,
+    "scene": "40",
+    "chest": 1,
+    "event": {
+      "payload": 5,
+      "data": {
+        "index": 1,
+        "object": 16
+      }
+    },
+    "logic": []
+  },
+  {
+    "name": "KF Midos Top Right Chest",
+    "preExit": true,
+    "scene": "40",
+    "chest": 2,
+    "event": {
+      "payload": 5,
+      "data": {
+        "index": 1,
+        "object": 16
+      }
+    },
+    "logic": []
+  },
+  {
+    "name": "KF Midos Bottom Left Chest",
+    "preExit": true,
+    "scene": "40",
+    "chest": 4,
+    "event": {
+      "payload": 5,
+      "data": {
+        "index": 1,
+        "object": 16
+      }
+    },
+    "logic": []
+  },
+  {
+    "name": "KF Midos Bottom Right Chest",
+    "preExit": true,
+    "scene": "40",
+    "chest": 8,
+    "event": {
+      "payload": 5,
+      "data": {
+        "index": 1,
+        "object": 16
+      }
+    },
+    "logic": []
+  },
+  {
+    "name": "KF Kokiri Sword Chest",
+    "preExit": true,
+    "scene": "85",
+    "chest": 1,
+    "event": {
+      "payload": 2,
+      "scene": 0,
+      "data": {
+        "index": 3,
+        "object": 2
+      }
+    },
+    "logic": []
+  },
+  {
+    "name": "KF Storms Grotto Chest",
+    "preExit": true,
+    "logic": [
+      {
+        "type": "item",
+        "name": "ocarina",
+        "index": 1
+      },
+      {
+        "type": "item",
+        "name": "song Of Storms",
+        "index": 1
+      }
+    ],
+    "scene": "85",
+    "event": {
+      "payload": 2,
+      "data": {
+        "index": 2,
+        "object": 16
+      }
+    }
+  },
+  {
+    "name": "KF Shop Item 5",
+    "preExit": true,
+    "logic": [],
+    "scene": "45",
+    "event": {
+      "payload": 5,
+      "scene": 84,
+      "data": {
+        "index": 2,
+        "object": 1
+      }
+    }
+  },
+  {
+    "name": "KF Shop Item 6",
+    "preExit": true,
+    "logic": [],
+    "scene": "45",
+    "event": {
+      "payload": 5,
+      "scene": 84,
+      "data": {
+        "index": 2,
+        "object": 1
+      }
+    }
+  },
+  {
+    "name": "KF Shop Item 7",
+    "preExit": true,
+    "logic": [],
+    "scene": "45",
+    "event": {
+      "payload": 2,
+      "scene": 62,
+      "data": {
+        "index": 0,
+        "object": 4
+      }
+    }
+  },
+  {
+    "name": "KF Shop Item 8",
+    "preExit": true,
+    "logic": [],
+    "scene": "45",
+    "event": {
+      "payload": 2,
+      "scene": 62,
+      "data": {
+        "index": 0,
+        "object": 4
+      }
+    }
+  },
+  {
+    "name": "LW Gift from Saria",
+    "logic": [
+      {
+        "type": "setting",
+        "name": "open forest",
+        "index": "open"
+      }
+    ],
+    "scene": "91",
+    "chest": 32,
+    "event": {
+      "payload": 5,
+      "data": {
+        "index": 0,
+        "object": 2
+      }
+    }
+  },
+  {
+    "name": "LW Ocarina Memory Game",
+    "preExit": true,
+    "logic": [
+      {
+        "type": "item",
+        "name": "ocarina",
+        "index": 1
+      }
+    ],
+    "scene": "91",
+    "chest": 16,
+    "event": {
+      "payload": 3,
+      "scene": 0,
+      "data": {
+        "index": 6,
+        "object": 16
+      }
+    }
+  },
+  {
+    "name": "LW Target in Woods",
+    "preExit": true,
+    "logic": [
+      {
+        "type": "item",
+        "name": "slingshot",
+        "index": 0
+      }
+    ],
+    "scene": "91",
+    "chest": 16,
+    "event": {
+      "payload": 3,
+      "data": {
+        "index": 7,
+        "object": 32
+      }
+    }
+  },
+  {
+    "name": "LW Near Shortcuts Grotto Chest",
+    "preExit": true,
+    "logic": [
+      {
+        "type": "item",
+        "name": "bombchus",
+        "index": 0
+      },
+      "||",
+      {
+        "type": "item",
+        "name": "bombs",
+        "index": 0
+      }
+    ],
+    "scene": "91",
+    "chest": 16,
+    "event": {
+      "payload": 2,
+      "data": {
+        "index": 1,
+        "object": 16
+      }
+    }
+  },
+  {
+    "name": "LW Deku Scrub Near Bridge",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "IsScrubSanity"
+      }
+    ],
+    "preExit": true,
+    "scene": "91",
+    "chest": 1,
+    "event": {
+      "payload": 3,
+      "data": {
+        "index": 7,
+        "object": 32
+      }
+    }
+  },
+  {
+    "name": "LW Deku Scrub Near Deku Theater Left",
+    "preExit": true,
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "IsScrubSanity"
+      }
+    ],
+    "scene": "91",
+    "chest": 1,
+    "event": {
+      "payload": 3,
+      "data": {
+        "index": 7,
+        "object": 32
+      }
+    }
+  },
+  {
+    "name": "LW Deku Scrub Near Deku Theater Right",
+    "preExit": true,
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "IsScrubSanity"
+      }
+    ],
+    "scene": "91",
+    "chest": 1,
+    "event": {
+      "payload": 3,
+      "data": {
+        "index": 7,
+        "object": 32
+      }
+    }
+  },
+  {
+    "name": "LW Deku Scrub Grotto Front",
+    "preExit": true,
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "HasExplosives"
+      },
+      {
+        "type": "mixin",
+        "name": "IsScrubSanity"
+      }
+    ],
+    "scene": "91",
+    "chest": 16,
+    "event": {
+      "payload": 2,
+      "data": {
+        "index": 1,
+        "object": 16
+      }
+    }
+  },
+  {
+    "name": "LW Deku Scrub Grotto Rear",
+    "preExit": true,
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "HasExplosives"
+      },
+      {
+        "type": "mixin",
+        "name": "IsScrubSanity"
+      }
+    ],
+    "scene": "91",
+    "chest": 16,
+    "event": {
+      "payload": 2,
+      "data": {
+        "index": 1,
+        "object": 16
+      }
+    }
+  },
+  {
+    "name": "SFM Wolfos Grotto Chest",
+    "preExit": true,
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "HasExplosives"
+      }
+    ],
+    "scene": "86",
+    "event": {
+      "payload": 2,
+      "data": {
+        "index": 1,
+        "object": 2
+      }
+    }
+  },
+  {
+    "name": "SFM Deku Scrub Grotto Front",
+    "preExit": true,
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "HasExplosives"
+      },
+      {
+        "type": "mixin",
+        "name": "IsScrubSanity"
+      }
+    ],
+    "scene": "86",
+    "event": {
+      "payload": 2,
+      "scene": 62,
+      "data": {
+        "index": 1,
+        "object": 16
+      }
+    }
+  },
+  {
+    "name": "SFM Deku Scrub Grotto Rear",
+    "preExit": true,
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "HasExplosives"
+      },
+      {
+        "type": "mixin",
+        "name": "IsScrubSanity"
+      }
+    ],
+    "scene": "86",
+    "event": {
+      "payload": 2,
+      "scene": 62,
+      "data": {
+        "index": 1,
+        "object": 16
+      }
+    }
+  },
+  {
+    "name": "HF Ocarina of Time Item",
+    "logic": [
+      {
+        "type": "item",
+        "name": "kokiri Emerald",
+        "index": 1
+      },
+      {
+        "type": "item",
+        "name": "goron Ruby",
+        "index": 1
+      },
+      {
+        "type": "item",
+        "name": "zora Sapphire",
+        "index": 1
+      }
+    ],
+    "scene": "81"
+  },
+  {
+    "name": "HF Near Market Grotto Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "HasExplosives"
+      }
+    ],
+    "scene": "81",
+    "chest": 1,
+    "event": {
+      "payload": 2,
+      "data": {
+        "index": 3,
+        "object": 1
+      }
+    }
+  },
+  {
+    "name": "HF Tektite Grotto Freestanding PoH",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "HasExplosives"
+      },
+      "||",
+      {
+        "type": "mixin",
+        "name": ""
+      },
+      {
+        "type": "item",
+        "name": "iron Boots",
+        "index": 0
+      }
+    ],
+    "scene": "81"
+  },
+  {
+    "name": "HF Southeast Grotto Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "HasExplosives"
+      }
+    ],
+    "scene": "81",
+    "event": {
+      "payload": 2,
+      "data": {
+        "index": 3,
+        "object": 1
+      }
+    }
+  },
+  {
+    "name": "HF Open Grotto Chest",
+    "scene": "81",
+    "chest": 8,
+    "event": {
+      "payload": 2,
+      "data": {
+        "index": 3,
+        "object": 8
+      }
+    },
+    "logic": []
+  },
+  {
+    "name": "HF Deku Scrub Grotto",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "HasExplosives"
+      }
+    ],
+    "scene": "81",
+    "event": {
+      "payload": 3,
+      "data": {
+        "index": 3,
+        "object": 2
+      }
+    }
+  },
+  {
+    "name": "Market Shooting Gallery Reward",
+    "logic": [
+      {
+        "type": "item",
+        "name": "slingshot",
+        "index": 0
+      }
+    ],
+    "group": "0",
+    "event": {
+      "payload": 5,
+      "data": {
+        "index": 10,
+        "object": 8
+      }
+    }
+  },
+  {
+    "name": "Market Bombchu Bowling First Prize",
+    "logic": [
+      {
+        "type": "item",
+        "name": "bombchus",
+        "index": 0
+      }
+    ],
+    "group": "0",
+    "event": {
+      "payload": 5,
+      "data": {
+        "index": 7,
+        "object": 128
+      }
+    }
+  },
+  {
+    "name": "Market Bombchu Bowling Second Prize",
+    "logic": [
+      {
+        "type": "item",
+        "name": "bombchus",
+        "index": 0
+      }
+    ],
+    "group": "0",
+    "event": {
+      "payload": 5,
+      "data": {
+        "index": 7,
+        "object": 128
+      }
+    }
+  },
+  {
+    "name": "Market Lost Dog",
+    "group": "0",
+    "event": {
+      "payload": 5,
+      "data": {
+        "index": 10,
+        "object": 8
+      }
+    },
+    "logic": []
+  },
+  {
+    "name": "Market Treasure Chest Game Reward",
+    "logic": [
+      {
+        "type": "item",
+        "name": "lens Of Truth",
+        "index": 1
+      }
+    ],
+    "group": "0"
+  },
+  {
+    "name": "Market 10 Big Poes",
+    "logic": [
+      {
+        "type": "item",
+        "name": "bottle_1",
+        "index": 0
+      },
+      "||",
+      {
+        "type": "item",
+        "name": "bottle_2",
+        "index": 0
+      },
+      "||",
+      {
+        "type": "item",
+        "name": "bottle_3",
+        "index": 0
+      },
+      "||",
+      {
+        "type": "item",
+        "name": "bottle_4",
+        "index": 0
+      }
+    ],
+    "group": "0"
+  },
+  {
+    "name": "Market Bazaar Item 5",
+    "logic": [],
+    "group": "0",
+    "event": {
+      "payload": 4,
+      "data": {
+        "index": 8,
+        "object": 2
+      }
+    }
+  },
+  {
+    "name": "Market Bazaar Item 6",
+    "logic": [],
+    "group": "0",
+    "event": {
+      "payload": 4,
+      "data": {
+        "index": 8,
+        "object": 2
+      }
+    }
+  },
+  {
+    "name": "Market Bazaar Item 7",
+    "logic": [],
+    "group": "0",
+    "event": {
+      "payload": 4,
+      "data": {
+        "index": 8,
+        "object": 2
+      }
+    }
+  },
+  {
+    "name": "Market Bazaar Item 8",
+    "logic": [],
+    "group": "0",
+    "event": {
+      "payload": 4,
+      "data": {
+        "index": 8,
+        "object": 2
+      }
+    }
+  },
+  {
+    "name": "Market Potion Shop Item 5",
+    "logic": [],
+    "group": "0",
+    "event": {
+      "payload": 4,
+      "data": {
+        "index": 8,
+        "object": 2
+      }
+    }
+  },
+  {
+    "name": "Market Potion Shop Item 6",
+    "logic": [],
+    "group": "0",
+    "event": {
+      "payload": 4,
+      "data": {
+        "index": 8,
+        "object": 2
+      }
+    }
+  },
+  {
+    "name": "Market Potion Shop Item 7",
+    "logic": [],
+    "group": "0",
+    "event": {
+      "payload": 4,
+      "data": {
+        "index": 8,
+        "object": 2
+      }
+    }
+  },
+  {
+    "name": "Market Potion Shop Item 8",
+    "logic": [],
+    "group": "0",
+    "event": {
+      "payload": 4,
+      "data": {
+        "index": 8,
+        "object": 2
+      }
+    }
+  },
+  {
+    "name": "Market Bombchu Shop Item 5",
+    "logic": [],
+    "group": "0",
+    "event": {
+      "payload": 5,
+      "data": {
+        "index": 7,
+        "object": 128
+      }
+    }
+  },
+  {
+    "name": "Market Bombchu Shop Item 6",
+    "logic": [],
+    "group": "0",
+    "event": {
+      "payload": 5,
+      "data": {
+        "index": 7,
+        "object": 128
+      }
+    }
+  },
+  {
+    "name": "Market Bombchu Shop Item 7",
+    "logic": [],
+    "group": "0",
+    "event": {
+      "payload": 5,
+      "data": {
+        "index": 7,
+        "object": 128
+      }
+    }
+  },
+  {
+    "name": "Market Bombchu Shop Item 8",
+    "logic": [],
+    "group": "0",
+    "event": {
+      "payload": 5,
+      "data": {
+        "index": 7,
+        "object": 128
+      }
+    }
+  },
+  {
+    "name": "ToT Light Arrows Cutscene",
+    "logic": [
+      {
+        "type": "item",
+        "name": "shadow Medallio",
+        "index": null
+      },
+      {
+        "type": "item",
+        "name": "spirit Medallio",
+        "index": null
+      }
+    ],
+    "scene": "67"
+  },
+  {
+    "name": "HC Great Fairy Reward",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "HasExplosives"
+      },
+      {
+        "type": "item",
+        "name": "zeldas Lullaby",
+        "index": 0
+      }
+    ],
+    "scene": "95"
+  },
+  {
+    "name": "LLR Talons Chickens",
+    "scene": "99",
+    "logic": [
+      {
+        "type": "item",
+        "name": "child Trade Item",
+        "index": 34
+      }
+    ],
+    "chest": 1,
+    "event": {
+      "payload": 5,
+      "data": {
+        "index": 10,
+        "object": 1
+      }
+    }
+  },
+  {
+    "name": "LLR Freestanding PoH",
+    "scene": "99",
+    "chest": 1,
+    "event": {
+      "payload": 3,
+      "data": {
+        "index": 3,
+        "object": 2
+      }
+    },
+    "logic": []
+  },
+  {
+    "name": "LLR Deku Scrub Grotto Left",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "IsScrubSanity"
+      }
+    ],
+    "scene": "99",
+    "chest": 1,
+    "event": {
+      "payload": 2,
+      "data": {
+        "index": 3,
+        "object": 8
+      }
+    }
+  },
+  {
+    "name": "LLR Deku Scrub Grotto Center",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "IsScrubSanity"
+      }
+    ],
+    "scene": "99",
+    "chest": 1,
+    "event": {
+      "payload": 2,
+      "data": {
+        "index": 3,
+        "object": 8
+      }
+    }
+  },
+  {
+    "name": "LLR Deku Scrub Grotto Right",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "IsScrubSanity"
+      }
+    ],
+    "scene": "99",
+    "chest": 1,
+    "event": {
+      "payload": 2,
+      "data": {
+        "index": 3,
+        "object": 8
+      }
+    }
+  },
+  {
+    "name": "Kak Anju as Child",
+    "scene": "82",
+    "event": {
+      "payload": 3,
+      "data": {
+        "index": 3,
+        "object": 2
+      }
+    },
+    "logic": []
+  },
+  {
+    "name": "Kak Anju as Adult",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      }
+    ],
+    "scene": "82",
+    "event": {
+      "payload": 5,
+      "data": {
+        "index": 8,
+        "object": 8
+      }
+    }
+  },
+  {
+    "name": "Kak Impas House Freestanding PoH",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanEnterDeathMountain"
+      }
+    ],
+    "scene": "82",
+    "event": {
+      "payload": 3,
+      "data": {
+        "index": 3,
+        "object": 2
+      }
+    }
+  },
+  {
+    "name": "Kak Windmill Freestanding PoH",
+    "logic": [
+      {
+        "type": "item",
+        "name": "boomerang",
+        "index": 1
+      }
+    ],
+    "scene": "82",
+    "event": {
+      "payload": 3,
+      "data": {
+        "index": 3,
+        "object": 2
+      }
+    }
+  },
+  {
+    "name": "Kak Man on Roof",
+    "scene": "82",
+    "logic": [
+      {
+        "type": "item",
+        "name": "hookshot",
+        "index": 0
+      }
+    ],
+    "event": {
+      "payload": 5,
+      "data": {
+        "index": 10,
+        "object": 8
+      }
+    }
+  },
+  {
+    "name": "Kak Open Grotto Chest",
+    "scene": "82",
+    "chest": 1,
+    "event": {
+      "payload": 3,
+      "data": {
+        "index": 3,
+        "object": 2
+      }
+    },
+    "logic": []
+  },
+  {
+    "name": "Kak Redead Grotto Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "HasExplosives"
+      }
+    ],
+    "scene": "82",
+    "chest": 4,
+    "event": {
+      "payload": 2,
+      "scene": 62,
+      "data": {
+        "index": 2,
+        "object": 4
+      }
+    }
+  },
+  {
+    "name": "Kak Shooting Gallery Reward",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "item",
+        "name": "fairy Bow",
+        "index": 1
+      }
+    ],
+    "scene": "82"
+  },
+  {
+    "name": "Kak 10 Gold Skulltula Reward",
+    "logic": [
+      {
+        "type": "item",
+        "name": "gold Skulltula",
+        "index": 10
+      }
+    ],
+    "scene": "82",
+    "event": {
+      "payload": 5,
+      "data": {
+        "index": 26,
+        "object": 4
+      }
+    }
+  },
+  {
+    "name": "Kak 20 Gold Skulltula Reward",
+    "logic": [
+      {
+        "type": "item",
+        "name": "gold Skulltula",
+        "index": 20
+      }
+    ],
+    "scene": "82"
+  },
+  {
+    "name": "Kak 30 Gold Skulltula Reward",
+    "logic": [
+      {
+        "type": "item",
+        "name": "gold Skulltula",
+        "index": 30
+      }
+    ],
+    "scene": "82"
+  },
+  {
+    "name": "Kak 40 Gold Skulltula Reward",
+    "logic": [
+      {
+        "type": "item",
+        "name": "gold Skulltula",
+        "index": 40
+      }
+    ],
+    "scene": "82"
+  },
+  {
+    "name": "Kak 50 Gold Skulltula Reward",
+    "logic": [
+      {
+        "type": "item",
+        "name": "gold Skulltula",
+        "index": 50
+      }
+    ],
+    "scene": "82"
+  },
+  {
+    "name": "Kak Bazaar Item 5",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      }
+    ],
+    "scene": "82",
+    "event": {
+      "payload": 5,
+      "data": {
+        "index": 8,
+        "object": 8
+      }
+    }
+  },
+  {
+    "name": "Kak Bazaar Item 6",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      }
+    ],
+    "scene": "82",
+    "event": {
+      "payload": 5,
+      "data": {
+        "index": 8,
+        "object": 8
+      }
+    }
+  },
+  {
+    "name": "Kak Bazaar Item 7",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      }
+    ],
+    "scene": "82",
+    "event": {
+      "payload": 5,
+      "data": {
+        "index": 8,
+        "object": 8
+      }
+    }
+  },
+  {
+    "name": "Kak Bazaar Item 8",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      }
+    ],
+    "scene": "82",
+    "event": {
+      "payload": 5,
+      "data": {
+        "index": 8,
+        "object": 8
+      }
+    }
+  },
+  {
+    "name": "Kak Potion Shop Item 5",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      }
+    ],
+    "scene": "82",
+    "event": {
+      "payload": 5,
+      "data": {
+        "index": 8,
+        "object": 8
+      }
+    }
+  },
+  {
+    "name": "Kak Potion Shop Item 6",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      }
+    ],
+    "scene": "82",
+    "event": {
+      "payload": 5,
+      "data": {
+        "index": 8,
+        "object": 8
+      }
+    }
+  },
+  {
+    "name": "Kak Potion Shop Item 7",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      }
+    ],
+    "scene": "82",
+    "event": {
+      "payload": 5,
+      "data": {
+        "index": 8,
+        "object": 8
+      }
+    }
+  },
+  {
+    "name": "Kak Potion Shop Item 8",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      }
+    ],
+    "scene": "82",
+    "event": {
+      "payload": 5,
+      "data": {
+        "index": 8,
+        "object": 8
+      }
+    }
+  },
+  {
+    "name": "Graveyard Shield Grave Chest",
+    "scene": "83",
+    "event": {
+      "payload": 2,
+      "data": {
+        "index": 3,
+        "object": 1
+      }
+    },
+    "logic": []
+  },
+  {
+    "name": "Graveyard Heart Piece Grave Chest",
+    "logic": [
+      {
+        "type": "item",
+        "name": "ocarina",
+        "index": 0
+      },
+      {
+        "type": "item",
+        "name": "suns Son",
+        "index": null
+      }
+    ],
+    "scene": "83",
+    "event": {
+      "payload": 2,
+      "data": {
+        "index": 3,
+        "object": 1
+      }
+    }
+  },
+  {
+    "name": "Graveyard Composers Grave Chest",
+    "logic": [
+      {
+        "type": "item",
+        "name": "zeldas Lullaby",
+        "index": null
+      },
+      {
+        "type": "mixin",
+        "name": "HasExplosives"
+      },
+      {
+        "type": "mixin",
+        "name": "CanLightFires"
+      }
+    ],
+    "scene": "83",
+    "event": {
+      "payload": 5,
+      "data": {
+        "index": 2,
+        "object": 32
+      }
+    }
+  },
+  {
+    "name": "Graveyard Freestanding PoH",
+    "logic": [
+      {
+        "type": "item",
+        "name": "magic Beans",
+        "index": 1
+      },
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      }
+    ],
+    "scene": "83"
+  },
+  {
+    "name": "Graveyard Dampe Gravedigging Tour",
+    "scene": "83",
+    "event": {
+      "payload": 2,
+      "data": {
+        "index": 3,
+        "object": 1
+      }
+    },
+    "logic": []
+  },
+  {
+    "name": "Graveyard Hookshot Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "HasExplosives"
+      },
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      }
+    ],
+    "scene": "83",
+    "event": {
+      "payload": 2,
+      "data": {
+        "index": 3,
+        "object": 1
+      }
+    }
+  },
+  {
+    "name": "Graveyard Dampe Race Freestanding PoH",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "HasExplosives"
+      },
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      }
+    ],
+    "scene": "83"
+  },
+  {
+    "name": "DMT Freestanding PoH",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanEnterDeathMountain"
+      }
+    ],
+    "scene": "96",
+    "chest": 2,
+    "event": {
+      "payload": 3,
+      "scene": 96,
+      "data": {
+        "index": 0,
+        "object": 64
+      }
+    }
+  },
+  {
+    "name": "DMT Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanEnterDeathMountain"
+      },
+      {
+        "type": "mixin",
+        "name": "HasExplosives"
+      }
+    ],
+    "scene": "96",
+    "chest": 2,
+    "event": {
+      "payload": 2,
+      "data": {
+        "index": 0,
+        "object": 4
+      }
+    }
+  },
+  {
+    "name": "DMT Storms Grotto Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanEnterDeathMountain"
+      },
+      {
+        "type": "item",
+        "name": "ocarina",
+        "index": 1
+      },
+      {
+        "type": "item",
+        "name": "song Of Storm",
+        "index": null
+      }
+    ],
+    "scene": "96",
+    "event": {
+      "payload": 5,
+      "data": {
+        "index": 13,
+        "object": 160
+      }
+    }
+  },
+  {
+    "name": "DMT Great Fairy Reward",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanEnterDeathMountain"
+      },
+      {
+        "type": "item",
+        "name": "ocarina",
+        "index": 1
+      },
+      {
+        "type": "item",
+        "name": "ocarina",
+        "index": 0
+      },
+      {
+        "type": "item",
+        "name": "zeldas Lullab",
+        "index": null
+      },
+      {
+        "type": "mixin",
+        "name": "HasExplosives"
+      }
+    ],
+    "scene": "96",
+    "chest": 2
+  },
+  {
+    "name": "DMT Biggoron",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanEnterDeathMountain"
+      },
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "item",
+        "name": "adult Trade Item",
+        "index": 1
+      }
+    ],
+    "scene": "96"
+  },
+  {
+    "name": "GC Darunias Joy",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanEnterDeathMountain"
+      },
+      {
+        "type": "item",
+        "name": "ocarina",
+        "index": 1
+      },
+      {
+        "type": "item",
+        "name": "sarias Son",
+        "index": null
+      }
+    ],
+    "scene": "98"
+  },
+  {
+    "name": "GC Pot Freestanding PoH",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanEnterDeathMountain"
+      },
+      {
+        "type": "mixin",
+        "name": "HasExplosives"
+      },
+      {
+        "type": "mixin",
+        "name": "CanLightFires"
+      },
+      {
+        "type": "item",
+        "name": "sarias Son",
+        "index": null
+      },
+      "||",
+      {
+        "type": "mixin",
+        "name": ""
+      },
+      {
+        "type": "item",
+        "name": "dins Fire",
+        "index": 1
+      }
+    ],
+    "scene": "98",
+    "chest": 2
+  },
+  {
+    "name": "GC Rolling Goron as Child",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanEnterDeathMountain"
+      },
+      {
+        "type": "mixin",
+        "name": "HasExplosives"
+      }
+    ],
+    "scene": "98",
+    "chest": 32,
+    "event": {
+      "payload": 2,
+      "data": {
+        "index": 3,
+        "object": 2
+      }
+    }
+  },
+  {
+    "name": "GC Rolling Goron as Adult",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanEnterDeathMountain"
+      },
+      {
+        "type": "mixin",
+        "name": "HasExplosives"
+      },
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      }
+    ],
+    "scene": "98",
+    "event": {
+      "payload": 5,
+      "data": {
+        "index": 10,
+        "object": 8
+      }
+    }
+  },
+  {
+    "name": "GC Medigoron",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanEnterDeathMountain"
+      },
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "HasExplosives"
+      }
+    ],
+    "scene": "98"
+  },
+  {
+    "name": "GC Maze Left Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanEnterDeathMountain"
+      },
+      {
+        "type": "mixin",
+        "name": "&&CanBecomeAdult"
+      },
+      {
+        "type": "item",
+        "name": "megaton Hammer",
+        "index": 1
+      }
+    ],
+    "scene": "98",
+    "event": {
+      "payload": 2,
+      "scene": 98,
+      "data": {
+        "index": 3,
+        "object": 2
+      }
+    }
+  },
+  {
+    "name": "GC Maze Right Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanEnterDeathMountain"
+      },
+      {
+        "type": "mixin",
+        "name": "&&HasExplosives"
+      }
+    ],
+    "scene": "98",
+    "chest": 2,
+    "event": {
+      "payload": 2,
+      "data": {
+        "index": 3,
+        "object": 2
+      }
+    }
+  },
+  {
+    "name": "GC Maze Center Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanEnterDeathMountain"
+      },
+      {
+        "type": "mixin",
+        "name": "&&HasExplosives"
+      }
+    ],
+    "scene": "98",
+    "chest": 2,
+    "event": {
+      "payload": 5,
+      "data": {
+        "index": 5,
+        "object": 8
+      }
+    }
+  },
+  {
+    "name": "GC Deku Scrub Grotto Left",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanEnterDeathMountain"
+      },
+      {
+        "type": "mixin",
+        "name": "IsScrubSanity"
+      },
+      {
+        "type": "item",
+        "name": "ocarina",
+        "index": 0
+      },
+      {
+        "type": "item",
+        "name": "song Of Time",
+        "index": 0
+      },
+      {
+        "type": "mixin",
+        "name": ""
+      },
+      {
+        "type": "item",
+        "name": "hookshot",
+        "index": 2
+      }
+    ],
+    "scene": "98"
+  },
+  {
+    "name": "GC Deku Scrub Grotto Center",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanEnterDeathMountain"
+      },
+      {
+        "type": "mixin",
+        "name": "IsScrubSanity"
+      },
+      {
+        "type": "item",
+        "name": "ocarina",
+        "index": 0
+      },
+      {
+        "type": "item",
+        "name": "song Of Time",
+        "index": 0
+      },
+      {
+        "type": "mixin",
+        "name": ""
+      },
+      {
+        "type": "item",
+        "name": "hookshot",
+        "index": 2
+      }
+    ],
+    "scene": "98"
+  },
+  {
+    "name": "GC Deku Scrub Grotto Right",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanEnterDeathMountain"
+      },
+      {
+        "type": "mixin",
+        "name": "IsScrubSanity"
+      },
+      {
+        "type": "item",
+        "name": "ocarina",
+        "index": 0
+      },
+      {
+        "type": "item",
+        "name": "song Of Time",
+        "index": 0
+      },
+      {
+        "type": "mixin",
+        "name": ""
+      },
+      {
+        "type": "item",
+        "name": "hookshot",
+        "index": 2
+      }
+    ],
+    "scene": "98"
+  },
+  {
+    "name": "GC Shop Item 5",
+    "logic": [
+      "||",
+      {
+        "type": "mixin",
+        "name": "HasExplosives"
+      }
+    ],
+    "scene": "98",
+    "event": {
+      "payload": 2,
+      "scene": 98,
+      "data": {
+        "index": 3,
+        "object": 2
+      }
+    }
+  },
+  {
+    "name": "GC Shop Item 6",
+    "logic": [
+      "||",
+      {
+        "type": "mixin",
+        "name": "HasExplosives"
+      }
+    ],
+    "scene": "98",
+    "event": {
+      "payload": 2,
+      "scene": 98,
+      "data": {
+        "index": 3,
+        "object": 2
+      }
+    }
+  },
+  {
+    "name": "GC Shop Item 7",
+    "logic": [
+      "||",
+      {
+        "type": "mixin",
+        "name": "HasExplosives"
+      }
+    ],
+    "scene": "98",
+    "event": {
+      "payload": 5,
+      "scene": 98,
+      "data": {
+        "index": 3,
+        "object": 2
+      }
+    }
+  },
+  {
+    "name": "GC Shop Item 8",
+    "logic": [
+      "||",
+      {
+        "type": "mixin",
+        "name": "HasExplosives"
+      }
+    ],
+    "scene": "98",
+    "event": {
+      "payload": 2,
+      "scene": 98,
+      "data": {
+        "index": 3,
+        "object": 2
+      }
+    }
+  },
+  {
+    "name": "DMC Volcano Freestanding PoH",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "HasExplosives"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterDeathMountain"
+      },
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      }
+    ],
+    "scene": "97"
+  },
+  {
+    "name": "DMC Wall Freestanding PoH",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "HasExplosives"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterDeathMountain"
+      }
+    ],
+    "scene": "97",
+    "chest": 4,
+    "event": {
+      "payload": 3,
+      "data": {
+        "index": 3,
+        "object": 4
+      }
+    }
+  },
+  {
+    "name": "DMC Upper Grotto Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanEnterDeathMountain"
+      },
+      {
+        "type": "mixin",
+        "name": "HasExplosives"
+      }
+    ],
+    "scene": "97",
+    "chest": 4,
+    "event": {
+      "payload": 2,
+      "data": {
+        "index": 0,
+        "object": 4
+      }
+    }
+  },
+  {
+    "name": "DMC Great Fairy Reward",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanEnterDeathMountain"
+      },
+      {
+        "type": "item",
+        "name": "ocarina",
+        "index": 1
+      },
+      {
+        "type": "item",
+        "name": "zeldas Lullaby",
+        "index": 0
+      },
+      {
+        "type": "item",
+        "name": "zeldas Lullab",
+        "index": null
+      },
+      {
+        "type": "mixin",
+        "name": "HasExplosives"
+      }
+    ],
+    "scene": "97"
+  },
+  {
+    "name": "DMC Deku Scrub",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanEnterDeathMountain"
+      },
+      {
+        "type": "mixin",
+        "name": "HasExplosives"
+      },
+      {
+        "type": "mixin",
+        "name": "IsScrubSanity"
+      }
+    ],
+    "scene": "97"
+  },
+  {
+    "name": "DMC Deku Scrub Grotto Left",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterDeathMountain"
+      },
+      {
+        "type": "mixin",
+        "name": "HasExplosives"
+      },
+      {
+        "type": "mixin",
+        "name": "IsScrubSanity"
+      }
+    ],
+    "scene": "97"
+  },
+  {
+    "name": "DMC Deku Scrub Grotto Center",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterDeathMountain"
+      },
+      {
+        "type": "mixin",
+        "name": "HasExplosives"
+      },
+      {
+        "type": "mixin",
+        "name": "IsScrubSanity"
+      }
+    ],
+    "scene": "97"
+  },
+  {
+    "name": "DMC Deku Scrub Grotto Right",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterDeathMountain"
+      },
+      {
+        "type": "mixin",
+        "name": "HasExplosives"
+      },
+      {
+        "type": "mixin",
+        "name": "IsScrubSanity"
+      }
+    ],
+    "scene": "97"
+  },
+  {
+    "name": "ZR Magic Bean Salesman",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanEnterZorasRiver"
+      }
+    ],
+    "scene": "84",
+    "chest": 4,
+    "event": {
+      "payload": 3,
+      "scene": 84,
+      "data": {
+        "index": 2,
+        "object": 8
+      }
+    }
+  },
+  {
+    "name": "ZR Open Grotto Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanEnterZorasRiver"
+      }
+    ],
+    "scene": "84",
+    "chest": 2,
+    "event": {
+      "payload": 2,
+      "data": {
+        "index": 2,
+        "object": 2
+      }
+    }
+  },
+  {
+    "name": "ZR Frogs in the Rain",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanEnterZorasRiver"
+      },
+      {
+        "type": "item",
+        "name": "ocarina",
+        "index": 1
+      },
+      {
+        "type": "item",
+        "name": "song Of Storm",
+        "index": null
+      }
+    ],
+    "scene": "84",
+    "event": {
+      "payload": 5,
+      "data": {
+        "index": 27,
+        "object": 64
+      }
+    }
+  },
+  {
+    "name": "ZR Frogs Ocarina Game",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanEnterZorasRiver"
+      },
+      {
+        "type": "item",
+        "name": "ocarina",
+        "index": 1
+      },
+      {
+        "type": "item",
+        "name": "song Of Storm",
+        "index": null
+      },
+      {
+        "type": "item",
+        "name": "song Of Time",
+        "index": 0
+      },
+      {
+        "type": "item",
+        "name": "zeldas Lullaby",
+        "index": 0
+      },
+      {
+        "type": "item",
+        "name": "suns Song",
+        "index": 0
+      },
+      {
+        "type": "item",
+        "name": "eponas Song",
+        "index": 0
+      }
+    ],
+    "scene": "84"
+  },
+  {
+    "name": "ZR Near Open Grotto Freestanding PoH",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanEnterZorasRiver"
+      }
+    ],
+    "scene": "84",
+    "chest": 2,
+    "event": {
+      "payload": 2,
+      "data": {
+        "index": 2,
+        "object": 2
+      }
+    }
+  },
+  {
+    "name": "ZR Near Domain Freestanding PoH",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanEnterZorasRiver"
+      },
+      {
+        "type": "item",
+        "name": "boomerang",
+        "index": 1
+      }
+    ],
+    "scene": "84",
+    "event": {
+      "payload": 3,
+      "data": {
+        "index": 2,
+        "object": 8
+      }
+    }
+  },
+  {
+    "name": "ZR Deku Scrub Grotto Front",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanEnterZorasRiver"
+      },
+      {
+        "type": "mixin",
+        "name": "IsScrubSanity"
+      },
+      {
+        "type": "item",
+        "name": "ocarina",
+        "index": 0
+      },
+      {
+        "type": "item",
+        "name": "song Of Storms",
+        "index": 0
+      }
+    ],
+    "scene": "84",
+    "event": {
+      "payload": 3,
+      "data": {
+        "index": 2,
+        "object": 8
+      }
+    }
+  },
+  {
+    "name": "ZR Deku Scrub Grotto Rear",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanEnterZorasRiver"
+      },
+      {
+        "type": "mixin",
+        "name": "IsScrubSanity"
+      },
+      {
+        "type": "item",
+        "name": "ocarina",
+        "index": 0
+      },
+      {
+        "type": "item",
+        "name": "song Of Storms",
+        "index": 0
+      }
+    ],
+    "scene": "84",
+    "event": {
+      "payload": 3,
+      "data": {
+        "index": 2,
+        "object": 8
+      }
+    }
+  },
+  {
+    "name": "ZD Diving Minigame",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanEnterZorasDomain"
+      }
+    ],
+    "scene": "88",
+    "chest": 2,
+    "event": {
+      "payload": 5,
+      "data": {
+        "index": 6,
+        "object": 1
+      }
+    }
+  },
+  {
+    "name": "ZD Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanEnterZorasDomain"
+      },
+      {
+        "type": "mixin",
+        "name": "CanLightFires"
+      }
+    ],
+    "scene": "88",
+    "chest": 1,
+    "event": {
+      "payload": 2,
+      "data": {
+        "index": 3,
+        "object": 1
+      }
+    }
+  },
+  {
+    "name": "ZD King Zora Thawed",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanEnterZorasDomain"
+      },
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      }
+    ],
+    "scene": "88"
+  },
+  {
+    "name": "ZD Shop Item 5",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanEnterZorasDomain"
+      }
+    ],
+    "scene": "88"
+  },
+  {
+    "name": "ZD Shop Item 6",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanEnterZorasDomain"
+      }
+    ],
+    "scene": "88",
+    "event": {
+      "payload": 2,
+      "scene": 88,
+      "data": {
+        "index": 3,
+        "object": 1
+      }
+    }
+  },
+  {
+    "name": "ZD Shop Item 7",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanEnterZorasDomain"
+      }
+    ],
+    "scene": "88",
+    "event": {
+      "payload": 2,
+      "scene": 88,
+      "data": {
+        "index": 3,
+        "object": 1
+      }
+    }
+  },
+  {
+    "name": "ZD Shop Item 8",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanEnterZorasDomain"
+      }
+    ],
+    "scene": "88",
+    "event": {
+      "payload": 2,
+      "scene": 88,
+      "data": {
+        "index": 3,
+        "object": 1
+      }
+    }
+  },
+  {
+    "name": "ZF Great Fairy Reward",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanEnterZorasDomain"
+      },
+      {
+        "type": "mixin",
+        "name": "HasExplosives"
+      },
+      {
+        "type": "item",
+        "name": "zeldas Lullaby",
+        "index": 0
+      }
+    ],
+    "scene": "89",
+    "event": {
+      "payload": 5,
+      "data": {
+        "index": 7,
+        "object": 128
+      }
+    }
+  },
+  {
+    "name": "ZF Iceberg Freestanding PoH",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanEnterZorasDomain"
+      }
+    ],
+    "scene": "89"
+  },
+  {
+    "name": "ZF Bottom Freestanding PoH",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanEnterZorasDomain"
+      },
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "item",
+        "name": "iron Boots",
+        "index": 0
+      }
+    ],
+    "scene": "89"
+  },
+  {
+    "name": "LH Underwater Item",
+    "logic": [
+      {
+        "type": "item",
+        "name": "swimming",
+        "index": 1
+      }
+    ],
+    "scene": "87",
+    "event": {
+      "payload": 3,
+      "data": {
+        "index": 3,
+        "object": 2
+      }
+    }
+  },
+  {
+    "name": "LH Child Fishing",
+    "scene": "87",
+    "chest": 8,
+    "event": {
+      "payload": 3,
+      "data": {
+        "index": 3,
+        "object": 2
+      }
+    },
+    "logic": []
+  },
+  {
+    "name": "LH Adult Fishing",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      }
+    ],
+    "scene": "87",
+    "chest": 8,
+    "event": {
+      "payload": 5,
+      "data": {
+        "index": 7,
+        "object": 128
+      }
+    }
+  },
+  {
+    "name": "LH Lab Dive",
+    "logic": [
+      {
+        "type": "item",
+        "name": "swimming",
+        "index": 2
+      }
+    ],
+    "scene": "87"
+  },
+  {
+    "name": "LH Freestanding PoH",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "item",
+        "name": "ocarina",
+        "index": 1
+      },
+      {
+        "type": "item",
+        "name": "hookshot",
+        "index": 1
+      }
+    ],
+    "scene": "87"
+  },
+  {
+    "name": "LH Sun",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "world.locations.Get"
+      },
+      {
+        "type": "item",
+        "name": "fairy Bow",
+        "index": 1
+      }
+    ],
+    "scene": "87"
+  },
+  {
+    "name": "LH Deku Scrub Grotto Left",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanStunDeku"
+      },
+      {
+        "type": "mixin",
+        "name": "IsScrubSanity"
+      }
+    ],
+    "scene": "87",
+    "chest": 8,
+    "event": {
+      "payload": 3,
+      "data": {
+        "index": 3,
+        "object": 2
+      }
+    }
+  },
+  {
+    "name": "LH Deku Scrub Grotto Center",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanStunDeku"
+      },
+      {
+        "type": "mixin",
+        "name": "IsScrubSanity"
+      }
+    ],
+    "scene": "87",
+    "chest": 8,
+    "event": {
+      "payload": 3,
+      "data": {
+        "index": 3,
+        "object": 2
+      }
+    }
+  },
+  {
+    "name": "LH Deku Scrub Grotto Right",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanStunDeku"
+      },
+      {
+        "type": "mixin",
+        "name": "IsScrubSanity"
+      }
+    ],
+    "scene": "87",
+    "chest": 8,
+    "event": {
+      "payload": 3,
+      "data": {
+        "index": 3,
+        "object": 2
+      }
+    }
+  },
+  {
+    "name": "GV Crate Freestanding PoH",
+    "scene": "90",
+    "event": {
+      "payload": 5,
+      "data": {
+        "index": 27,
+        "object": 64
+      }
+    },
+    "logic": []
+  },
+  {
+    "name": "GV Waterfall Freestanding PoH",
+    "scene": "90",
+    "event": {
+      "payload": 3,
+      "data": {
+        "index": 3,
+        "object": 2
+      }
+    },
+    "logic": []
+  },
+  {
+    "name": "GV Chest",
+    "logic": [
+      {
+        "type": "item",
+        "name": "gerudo Membership Car",
+        "index": null
+      }
+    ],
+    "scene": "90"
+  },
+  {
+    "name": "GV Deku Scrub Grotto Front",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "item",
+        "name": "song Of Storms",
+        "index": 0
+      },
+      {
+        "type": "mixin",
+        "name": "IsScrubSanity"
+      },
+      {
+        "type": "mixin",
+        "name": "CanStunDeku"
+      }
+    ],
+    "scene": "90"
+  },
+  {
+    "name": "GV Deku Scrub Grotto Rear",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "item",
+        "name": "song Of Storms",
+        "index": 0
+      },
+      {
+        "type": "mixin",
+        "name": "IsScrubSanity"
+      },
+      {
+        "type": "mixin",
+        "name": "CanStunDeku"
+      }
+    ],
+    "scene": "90"
+  },
+  {
+    "name": "GF Gerudo Membership Card",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      "||",
+      {
+        "type": "item",
+        "name": "eponas Song)",
+        "index": null
+      }
+    ],
+    "scene": "93",
+    "event": {
+      "payload": 3,
+      "scene": 90,
+      "data": {
+        "index": 3,
+        "object": 2
+      }
+    }
+  },
+  {
+    "name": "GF Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      "||",
+      {
+        "type": "item",
+        "name": "eponas Song)",
+        "index": null
+      }
+    ],
+    "scene": "93",
+    "event": {
+      "payload": 3,
+      "scene": 90,
+      "data": {
+        "index": 3,
+        "object": 2
+      }
+    }
+  },
+  {
+    "name": "GF HBA 1000 Points",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "item",
+        "name": "gerudo Membership Car",
+        "index": null
+      },
+      "||",
+      {
+        "type": "item",
+        "name": "eponas Song)",
+        "index": null
+      }
+    ],
+    "scene": "93"
+  },
+  {
+    "name": "GF HBA 1500 Points",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "item",
+        "name": "gerudo Membership Car",
+        "index": null
+      },
+      "||",
+      {
+        "type": "item",
+        "name": "eponas Song)",
+        "index": null
+      }
+    ],
+    "scene": "93",
+    "event": {
+      "payload": 3,
+      "scene": 90,
+      "data": {
+        "index": 3,
+        "object": 2
+      }
+    }
+  },
+  {
+    "name": "Wasteland Bombchu Salesman",
+    "logic": [
+      {
+        "type": "item",
+        "name": "hookshot",
+        "index": 2
+      },
+      {
+        "type": "item",
+        "name": "gerudo Membership Car",
+        "index": null
+      }
+    ],
+    "scene": "94"
+  },
+  {
+    "name": "Wasteland Chest",
+    "logic": [
+      {
+        "type": "item",
+        "name": "hookshot",
+        "index": 2
+      },
+      {
+        "type": "item",
+        "name": "gerudo Membership Car",
+        "index": null
+      }
+    ],
+    "scene": "94"
+  },
+  {
+    "name": "Colossus Great Fairy Reward",
+    "logic": [
+      {
+        "type": "item",
+        "name": "requiem Of Spiri",
+        "index": null
+      },
+      {
+        "type": "item",
+        "name": "zeldas Lullaby",
+        "index": 0
+      },
+      "||",
+      {
+        "type": "item",
+        "name": "hookshot",
+        "index": 2
+      }
+    ],
+    "scene": "92"
+  },
+  {
+    "name": "Colossus Freestanding PoH",
+    "logic": [
+      {
+        "type": "item",
+        "name": "requiem Of Spirit",
+        "index": null
+      },
+      "||",
+      {
+        "type": "item",
+        "name": "hookshot",
+        "index": 2
+      }
+    ],
+    "scene": "92"
+  },
+  {
+    "name": "Colossus Deku Scrub Grotto Front",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "IsScrubSanity"
+      },
+      {
+        "type": "item",
+        "name": "requiem Of Spirit",
+        "index": null
+      },
+      "||",
+      {
+        "type": "item",
+        "name": "hookshot",
+        "index": 2
+      },
+      {
+        "type": "mixin",
+        "name": "CanStunDeku"
+      }
+    ],
+    "scene": "92"
+  },
+  {
+    "name": "Colossus Deku Scrub Grotto Rear",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "IsScrubSanity"
+      },
+      {
+        "type": "item",
+        "name": "requiem Of Spirit",
+        "index": null
+      },
+      "||",
+      {
+        "type": "item",
+        "name": "hookshot",
+        "index": 2
+      },
+      {
+        "type": "mixin",
+        "name": "CanStunDeku"
+      }
+    ],
+    "scene": "92"
+  },
+  {
+    "name": "OGC Great Fairy Reward",
+    "logic": [
+      {
+        "type": "item",
+        "name": "requiem Of Spiri",
+        "index": null
+      },
+      {
+        "type": "item",
+        "name": "zeldas Lullaby",
+        "index": null
+      },
+      "||",
+      {
+        "type": "item",
+        "name": "hookshot",
+        "index": 2
+      },
+      {
+        "type": "mixin",
+        "name": "CanStunDeku"
+      }
+    ]
+  },
+  {
+    "name": "Deku Tree Lobby Chest",
+    "preExit": true,
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 0
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterDeku"
+      }
+    ],
+    "scene": "0",
+    "event": {
+      "payload": 2,
+      "scene": 0,
+      "data": {
+        "index": 3,
+        "object": 2
+      }
+    }
+  },
+  {
+    "name": "Deku Tree Slingshot Room Side Chest",
+    "preExit": true,
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 0
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterDeku"
+      }
+    ],
+    "scene": "0",
+    "chest": 4,
+    "event": {
+      "test": "Test"
+    }
+  },
+  {
+    "name": "Deku Tree Slingshot Chest",
+    "preExit": true,
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 0
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterDeku"
+      }
+    ],
+    "scene": "0",
+    "chest": 8,
+    "event": {
+      "payload": 2,
+      "scene": 0,
+      "data": {
+        "index": 3,
+        "object": 2
+      }
+    }
+  },
+  {
+    "name": "Deku Tree Compass Room Side Chest",
+    "preExit": true,
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 0
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterDeku"
+      }
+    ],
+    "scene": "0",
+    "chest": 16,
+    "event": {
+      "payload": 2,
+      "scene": 0,
+      "data": {
+        "index": 3,
+        "object": 4
+      }
+    }
+  },
+  {
+    "name": "Deku Tree Basement Chest",
+    "preExit": true,
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 0
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterDeku"
+      },
+      {
+        "type": "item",
+        "name": "deku Nuts",
+        "index": 0
+      }
+    ],
+    "scene": "0",
+    "chest": 32,
+    "event": {
+      "payload": 2,
+      "scene": 0,
+      "data": {
+        "index": 3,
+        "object": 16
+      }
+    }
+  },
+  {
+    "name": "Deku Tree GS Compass Room",
+    "preExit": true,
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 0
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterDeku"
+      }
+    ],
+    "scene": "0",
+    "chest": 64,
+    "event": {
+      "payload": 4,
+      "data": {
+        "index": 3,
+        "object": 8
+      }
+    }
+  },
+  {
+    "name": "Deku Tree GS Basement Vines",
+    "preExit": true,
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 0
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterDeku"
+      },
+      {
+        "type": "item",
+        "name": "slingshot",
+        "index": 0
+      }
+    ],
+    "scene": "0",
+    "event": {
+      "payload": 4,
+      "data": {
+        "index": 3,
+        "object": 8
+      }
+    }
+  },
+  {
+    "name": "Deku Tree GS Basement Gate",
+    "preExit": true,
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 0
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterDeku"
+      }
+    ],
+    "scene": "0",
+    "event": {
+      "payload": 4,
+      "data": {
+        "index": 3,
+        "object": 8
+      }
+    }
+  },
+  {
+    "name": "Deku Tree GS Basement Back Room",
+    "preExit": true,
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 0
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterDeku"
+      }
+    ],
+    "scene": "0",
+    "event": {
+      "payload": 4,
+      "data": {
+        "index": 3,
+        "object": 8
+      }
+    }
+  },
+  {
+    "name": "Deku Tree Queen Gohma Heart",
+    "preExit": true,
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 0
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterDeku"
+      },
+      {
+        "type": "item",
+        "name": "slingshot",
+        "index": 0
+      }
+    ],
+    "scene": "0",
+    "event": {
+      "payload": 3,
+      "scene": 17,
+      "data": {
+        "index": 0,
+        "object": 128
+      }
+    }
+  },
+  {
+    "name": "Deku Tree MQ Before Spinning Log Chest",
+    "preExit": true,
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 0
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterDeku"
+      }
+    ],
+    "scene": "0",
+    "chest": 32,
+    "event": {
+      "payload": 2,
+      "data": {
+        "index": 3,
+        "object": 32
+      }
+    }
+  },
+  {
+    "name": "Deku Tree MQ Slingshot Room Back Chest",
+    "preExit": true,
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 0
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterDeku"
+      }
+    ],
+    "scene": "0",
+    "chest": 4,
+    "event": {
+      "payload": 2,
+      "data": {
+        "index": 3,
+        "object": 64
+      }
+    }
+  },
+  {
+    "name": "Deku Tree MQ Compass",
+    "preExit": true,
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 0
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterDeku"
+      },
+      {
+        "type": "mixin",
+        "name": "CanStunDeku"
+      }
+    ],
+    "scene": "0"
+  },
+  {
+    "name": "Deku Tree MQ Map Chest",
+    "preExit": true,
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 0
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterDeku"
+      }
+    ],
+    "scene": "0",
+    "chest": 8,
+    "event": {
+      "payload": 5,
+      "data": {
+        "index": 1,
+        "object": 16
+      }
+    }
+  },
+  {
+    "name": "Deku Tree MQ Basement Chest",
+    "preExit": true,
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 0
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterDeku"
+      }
+    ],
+    "scene": "0",
+    "chest": -1,
+    "event": {
+      "payload": 2,
+      "data": {
+        "index": 3,
+        "object": 16
+      }
+    }
+  },
+  {
+    "name": "Deku Tree MQ After Spinning Log Chest",
+    "preExit": true,
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 0
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterDeku"
+      },
+      {
+        "type": "item",
+        "name": "ocarina",
+        "index": 1
+      },
+      {
+        "type": "item",
+        "name": "song Of Tim",
+        "index": null
+      }
+    ],
+    "scene": "0"
+  },
+  {
+    "name": "Deku Tree MQ Slingshot Chest",
+    "preExit": true,
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 0
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterDeku"
+      },
+      {
+        "type": "mixin",
+        "name": "CanLightFires"
+      }
+    ],
+    "scene": "0",
+    "chest": 32,
+    "event": {
+      "payload": 2,
+      "data": {
+        "index": 3,
+        "object": 64
+      }
+    }
+  },
+  {
+    "name": "Deku Tree MQ GS Lobby",
+    "preExit": true,
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 0
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterDeku"
+      }
+    ],
+    "scene": "0",
+    "chest": 8,
+    "event": {
+      "payload": 4,
+      "data": {
+        "index": 3,
+        "object": 2
+      }
+    }
+  },
+  {
+    "name": "Deku Tree MQ GS Compass Room",
+    "preExit": true,
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 0
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterDeku"
+      },
+      {
+        "type": "item",
+        "name": "boomerang",
+        "index": 1
+      },
+      "||",
+      {
+        "type": "item",
+        "name": "bombchus",
+        "index": 0
+      }
+    ],
+    "scene": "0"
+  },
+  {
+    "name": "Deku Tree MQ GS Basement Graves Room",
+    "preExit": true,
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 0
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterDeku"
+      },
+      {
+        "type": "item",
+        "name": "boomerang",
+        "index": 1
+      }
+    ],
+    "scene": "0"
+  },
+  {
+    "name": "Deku Tree MQ GS Basement Back Room",
+    "preExit": true,
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 0
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterDeku"
+      },
+      {
+        "type": "item",
+        "name": "boomerang",
+        "index": 1
+      }
+    ],
+    "scene": "0",
+    "event": {
+      "payload": 4,
+      "data": {
+        "index": 3,
+        "object": 1
+      }
+    }
+  },
+  {
+    "name": "Dodongos Cavern Bomb Flower Platform Chest",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 1
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterDodongo"
+      }
+    ],
+    "scene": "1",
+    "chest": 32,
+    "event": {
+      "payload": 2,
+      "scene": 1,
+      "data": {
+        "index": 3,
+        "object": 32
+      }
+    }
+  },
+  {
+    "name": "Dodongos Cavern Bomb Bag Chest",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 1
+      },
+      {
+        "type": "mixin",
+        "name": "&&CanEnterDodongo"
+      }
+    ],
+    "scene": "1",
+    "chest": 16,
+    "event": {
+      "payload": 2,
+      "scene": 1,
+      "data": {
+        "index": 3,
+        "object": 16
+      }
+    }
+  },
+  {
+    "name": "Dodongos Cavern End of Bridge Chest",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 1
+      },
+      {
+        "type": "mixin",
+        "name": "&&CanEnterDodongo"
+      }
+    ],
+    "scene": "1",
+    "chest": 64,
+    "event": {
+      "payload": 2,
+      "scene": 1,
+      "data": {
+        "index": 3,
+        "object": 64
+      }
+    }
+  },
+  {
+    "name": "Dodongos Cavern Deku Scrub Side Room Near Dodongos",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "IsScrubSanity"
+      },
+      {
+        "type": "dungeon",
+        "index": 1
+      },
+      {
+        "type": "mixin",
+        "name": "&&CanEnterDodongo"
+      }
+    ],
+    "scene": "1",
+    "chest": 1,
+    "event": {
+      "payload": 6,
+      "scene": 1,
+      "data": [
+        69,
+        24,
+        16,
+        0,
+        195,
+        152,
+        128,
+        0,
+        197,
+        70,
+        48,
+        0
+      ]
+    }
+  },
+  {
+    "name": "Dodongos Cavern Deku Scrub Lobby",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "IsScrubSanity"
+      },
+      {
+        "type": "dungeon",
+        "index": 1
+      },
+      {
+        "type": "mixin",
+        "name": "&&CanEnterDodongo"
+      }
+    ],
+    "scene": "1",
+    "chest": 1,
+    "event": {
+      "payload": 6,
+      "scene": 1,
+      "data": [
+        196,
+        113,
+        128,
+        0,
+        195,
+        202,
+        128,
+        0,
+        195,
+        159,
+        0,
+        0
+      ]
+    }
+  },
+  {
+    "name": "Dodongos Cavern Deku Scrub Near Bomb Bag Left",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "IsScrubSanity"
+      },
+      {
+        "type": "dungeon",
+        "index": 1
+      },
+      {
+        "type": "mixin",
+        "name": "&&CanEnterDodongo"
+      }
+    ],
+    "scene": "1",
+    "chest": 64,
+    "event": {
+      "payload": 2,
+      "scene": 1,
+      "data": {
+        "index": 2,
+        "object": 4
+      }
+    }
+  },
+  {
+    "name": "Dodongos Cavern Deku Scrub Near Bomb Bag Right",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "IsScrubSanity"
+      },
+      {
+        "type": "dungeon",
+        "index": 1
+      },
+      {
+        "type": "mixin",
+        "name": "&&CanEnterDodongo"
+      }
+    ],
+    "scene": "1",
+    "chest": 4,
+    "event": {
+      "payload": 2,
+      "scene": 1,
+      "data": {
+        "index": 2,
+        "object": 4
+      }
+    }
+  },
+  {
+    "name": "Dodongos Cavern GS Side Room Near Lower Lizalfos",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 1
+      },
+      {
+        "type": "mixin",
+        "name": "&&CanEnterDodongo"
+      }
+    ],
+    "scene": "1",
+    "chest": 1
+  },
+  {
+    "name": "Dodongos Cavern GS Scarecrow",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 1
+      },
+      {
+        "type": "mixin",
+        "name": "&&CanEnterDodongo"
+      }
+    ],
+    "scene": "1"
+  },
+  {
+    "name": "Dodongos Cavern GS Alcove Above Stairs",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 1
+      },
+      {
+        "type": "mixin",
+        "name": "&&CanEnterDodongo"
+      }
+    ],
+    "scene": "1"
+  },
+  {
+    "name": "Dodongos Cavern GS Vines Above Stairs",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 1
+      },
+      {
+        "type": "mixin",
+        "name": "&&CanEnterDodongo"
+      }
+    ],
+    "scene": "1",
+    "chest": 32,
+    "event": {
+      "payload": 4,
+      "data": {
+        "index": 2,
+        "object": 1
+      }
+    }
+  },
+  {
+    "name": "Dodongos Cavern GS Back Room",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 1
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterDodongo"
+      }
+    ],
+    "scene": "1",
+    "chest": 4
+  },
+  {
+    "name": "Dodongos Cavern Boss Room Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanEnterDodongo"
+      }
+    ],
+    "scene": "1",
+    "chest": 1,
+    "event": {
+      "payload": 2,
+      "data": {
+        "index": 3,
+        "object": 8
+      }
+    }
+  },
+  {
+    "name": "Dodongos Cavern King Dodongo Heart",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanEnterDodongo"
+      },
+      "||",
+      {
+        "type": "item",
+        "name": "strength",
+        "index": null
+      },
+      "||",
+      {
+        "type": "item",
+        "name": "kokiri Sword",
+        "index": 1
+      }
+    ],
+    "scene": "1",
+    "chest": 1
+  },
+  {
+    "name": "Dodongos Cavern MQ Bomb Bag Chest",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 1
+      },
+      {
+        "type": "item",
+        "name": "slingshot",
+        "index": 0
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterDodongo"
+      }
+    ],
+    "scene": "1",
+    "event": {
+      "payload": 2,
+      "data": {
+        "index": 3,
+        "object": 32
+      }
+    }
+  },
+  {
+    "name": "Dodongos Cavern MQ Torch Puzzle Room Chest",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 1
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterDodongo"
+      }
+    ],
+    "scene": "1",
+    "event": {
+      "payload": 2,
+      "data": {
+        "index": 3,
+        "object": 32
+      }
+    }
+  },
+  {
+    "name": "Dodongos Cavern MQ Larvae Room Chest",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 1
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterDodongo"
+      }
+    ],
+    "scene": "1",
+    "event": {
+      "payload": 2,
+      "data": {
+        "index": 3,
+        "object": 16
+      }
+    }
+  },
+  {
+    "name": "Dodongos Cavern MQ Under Grave Chest",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 1
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterDodongo"
+      }
+    ],
+    "scene": "1",
+    "event": {
+      "payload": 2,
+      "data": {
+        "index": 3,
+        "object": 16
+      }
+    }
+  },
+  {
+    "name": "Dodongos Cavern MQ Deku Scrub Lobby Front",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "IsScrubSanity"
+      },
+      {
+        "type": "dungeon",
+        "index": 1
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterDodongo"
+      }
+    ],
+    "scene": "1",
+    "event": {
+      "payload": 2,
+      "data": {
+        "index": 3,
+        "object": 16
+      }
+    }
+  },
+  {
+    "name": "Dodongos Cavern MQ Deku Scrub Lobby Rear",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "IsScrubSanity"
+      },
+      {
+        "type": "dungeon",
+        "index": 1
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterDodongo"
+      }
+    ],
+    "scene": "1",
+    "event": {
+      "payload": 2,
+      "data": {
+        "index": 3,
+        "object": 16
+      }
+    }
+  },
+  {
+    "name": "Dodongos Cavern MQ Deku Scrub Side Room Near Lower Lizalfos",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "IsScrubSanity"
+      },
+      {
+        "type": "dungeon",
+        "index": 1
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterDodongo"
+      }
+    ],
+    "scene": "1",
+    "event": {
+      "payload": 3,
+      "data": {
+        "index": 7,
+        "object": 8
+      }
+    }
+  },
+  {
+    "name": "Dodongos Cavern MQ Deku Scrub Staircase",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "IsScrubSanity"
+      },
+      {
+        "type": "dungeon",
+        "index": 1
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterDodongo"
+      }
+    ],
+    "scene": "1",
+    "event": {
+      "payload": 2,
+      "data": {
+        "index": 3,
+        "object": 32
+      }
+    }
+  },
+  {
+    "name": "Dodongos Cavern MQ GS Scrub Room",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "IsTokenSanity"
+      },
+      {
+        "type": "item",
+        "name": "slingshot",
+        "index": 0
+      },
+      {
+        "type": "item",
+        "name": "boomerang",
+        "index": 0
+      },
+      {
+        "type": "dungeon",
+        "index": 1
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterDodongo"
+      }
+    ],
+    "scene": "1"
+  },
+  {
+    "name": "Dodongos Cavern MQ GS Larvae Room",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "IsTokenSanity"
+      },
+      {
+        "type": "dungeon",
+        "index": 1
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterDodongo"
+      }
+    ],
+    "scene": "1"
+  },
+  {
+    "name": "Dodongos Cavern MQ GS Lizalfos Room",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "IsTokenSanity"
+      },
+      {
+        "type": "dungeon",
+        "index": 1
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterDodongo"
+      }
+    ],
+    "scene": "1"
+  },
+  {
+    "name": "Dodongos Cavern MQ GS Song of Time Block Room",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "IsTokenSanity"
+      },
+      {
+        "type": "dungeon",
+        "index": 1
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterDodongo"
+      },
+      {
+        "type": "item",
+        "name": "ocarina",
+        "index": 0
+      },
+      {
+        "type": "item",
+        "name": "song Of Time",
+        "index": 0
+      }
+    ],
+    "scene": "1"
+  },
+  {
+    "name": "Dodongos Cavern MQ GS Back Area",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "IsTokenSanity"
+      },
+      {
+        "type": "dungeon",
+        "index": 1
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterDodongo"
+      }
+    ],
+    "scene": "1"
+  },
+  {
+    "name": "Jabu Jabus Belly Boomerang Chest",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 3
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterJabu"
+      },
+      {
+        "type": "item",
+        "name": "slingshot",
+        "index": 0
+      }
+    ],
+    "scene": "2",
+    "chest": 2,
+    "event": {
+      "payload": 2,
+      "data": {
+        "index": 3,
+        "object": 4
+      }
+    }
+  },
+  {
+    "name": "Jabu Jabus Belly Deku Scrub",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 3
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterJabu"
+      },
+      {
+        "type": "item",
+        "name": "slingshot",
+        "index": 0
+      }
+    ],
+    "scene": "2",
+    "chest": 4,
+    "event": {
+      "payload": 4,
+      "data": {
+        "index": 1,
+        "object": 1
+      }
+    }
+  },
+  {
+    "name": "Jabu Jabus Belly GS Water Switch Room",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 3
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterJabu"
+      },
+      {
+        "type": "item",
+        "name": "slingshot",
+        "index": 0
+      }
+    ],
+    "scene": "2",
+    "chest": 16,
+    "event": {
+      "payload": 4,
+      "data": {
+        "index": 1,
+        "object": 8
+      }
+    }
+  },
+  {
+    "name": "Jabu Jabus Belly GS Lobby Basement Lower",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 3
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterJabu"
+      },
+      {
+        "type": "item",
+        "name": "slingshot",
+        "index": 0
+      },
+      {
+        "type": "item",
+        "name": "boomerang",
+        "index": 0
+      }
+    ],
+    "scene": "2",
+    "chest": 16,
+    "event": {
+      "payload": 4,
+      "data": {
+        "index": 1,
+        "object": 1
+      }
+    }
+  },
+  {
+    "name": "Jabu Jabus Belly GS Lobby Basement Upper",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 3
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterJabu"
+      },
+      {
+        "type": "item",
+        "name": "slingshot",
+        "index": 0
+      },
+      {
+        "type": "item",
+        "name": "boomerang",
+        "index": 0
+      }
+    ],
+    "scene": "2",
+    "chest": 16,
+    "event": {
+      "payload": 4,
+      "data": {
+        "index": 1,
+        "object": 1
+      }
+    }
+  },
+  {
+    "name": "Jabu Jabus Belly GS Near Boss",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 3
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterJabu"
+      },
+      {
+        "type": "item",
+        "name": "slingshot",
+        "index": 0
+      }
+    ],
+    "scene": "2",
+    "chest": 16,
+    "event": {
+      "payload": 4,
+      "data": {
+        "index": 1,
+        "object": 4
+      }
+    }
+  },
+  {
+    "name": "Jabu Jabus Belly MQ First Room Side Chest",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 3
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterJabu"
+      },
+      {
+        "type": "item",
+        "name": "slingshot",
+        "index": 0
+      }
+    ],
+    "scene": "2",
+    "event": {
+      "payload": 5,
+      "data": {
+        "index": 6,
+        "object": 4
+      }
+    }
+  },
+  {
+    "name": "Jabu Jabus Belly MQ Second Room Lower Chest",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 3
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterJabu"
+      },
+      {
+        "type": "item",
+        "name": "slingshot",
+        "index": 0
+      }
+    ],
+    "scene": "2",
+    "event": {
+      "payload": 2,
+      "scene": 2,
+      "data": {
+        "index": 3,
+        "object": 4
+      }
+    }
+  },
+  {
+    "name": "Jabu Jabus Belly MQ Basement Near Switches Chest",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 3
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterJabu"
+      },
+      {
+        "type": "item",
+        "name": "slingshot",
+        "index": 0
+      }
+    ],
+    "scene": "2",
+    "event": {
+      "payload": 2,
+      "scene": 2,
+      "data": {
+        "index": 3,
+        "object": 1
+      }
+    }
+  },
+  {
+    "name": "Jabu Jabus Belly MQ Basement Near Vines Chest",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 3
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterJabu"
+      },
+      {
+        "type": "item",
+        "name": "slingshot",
+        "index": 0
+      }
+    ],
+    "scene": "2",
+    "event": {
+      "payload": 2,
+      "scene": 2,
+      "data": {
+        "index": 3,
+        "object": 16
+      }
+    }
+  },
+  {
+    "name": "Jabu Jabus Belly MQ Boomerang Room Small Chest",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 3
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterJabu"
+      },
+      {
+        "type": "item",
+        "name": "slingshot",
+        "index": 0
+      }
+    ],
+    "scene": "2",
+    "event": {
+      "payload": 5,
+      "scene": 2,
+      "data": {
+        "index": 2,
+        "object": 32
+      }
+    }
+  },
+  {
+    "name": "Jabu Jabus Belly MQ Boomerang Chest",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 3
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterJabu"
+      },
+      {
+        "type": "item",
+        "name": "slingshot",
+        "index": 0
+      }
+    ],
+    "scene": "2",
+    "event": {
+      "payload": 5,
+      "scene": 2,
+      "data": {
+        "index": 2,
+        "object": 32
+      }
+    }
+  },
+  {
+    "name": "Jabu Jabus Belly MQ Falling Like Like Room Chest",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 3
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterJabu"
+      },
+      {
+        "type": "item",
+        "name": "slingshot",
+        "index": 0
+      }
+    ],
+    "scene": "2",
+    "event": {
+      "payload": 2,
+      "scene": 2,
+      "data": {
+        "index": 3,
+        "object": 2
+      }
+    }
+  },
+  {
+    "name": "Jabu Jabus Belly MQ Second Room Upper Chest",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 3
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterJabu"
+      },
+      {
+        "type": "item",
+        "name": "slingshot",
+        "index": 0
+      }
+    ],
+    "scene": "2"
+  },
+  {
+    "name": "Jabu Jabus Belly MQ Near Boss Chest",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 3
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterJabu"
+      },
+      {
+        "type": "item",
+        "name": "slingshot",
+        "index": 0
+      }
+    ],
+    "scene": "2",
+    "event": {
+      "payload": 2,
+      "scene": 2,
+      "data": {
+        "index": 2,
+        "object": 1
+      }
+    }
+  },
+  {
+    "name": "Jabu Jabus Belly MQ GS Boomerang Chest Room",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 3
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterJabu"
+      },
+      {
+        "type": "item",
+        "name": "slingshot",
+        "index": 0
+      }
+    ],
+    "scene": "2"
+  },
+  {
+    "name": "Jabu Jabus Belly MQ GS Tailpasaran Room",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 3
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterJabu"
+      },
+      {
+        "type": "item",
+        "name": "slingshot",
+        "index": 0
+      }
+    ],
+    "scene": "2",
+    "event": {
+      "payload": 2,
+      "scene": 2,
+      "data": {
+        "index": 3,
+        "object": 64
+      }
+    }
+  },
+  {
+    "name": "Jabu Jabus Belly MQ GS Invisible Enemies Room",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 3
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterJabu"
+      },
+      {
+        "type": "item",
+        "name": "slingshot",
+        "index": 0
+      }
+    ],
+    "scene": "2"
+  },
+  {
+    "name": "Jabu Jabus Belly MQ GS Near Boss",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 3
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterJabu"
+      },
+      {
+        "type": "item",
+        "name": "slingshot",
+        "index": 0
+      }
+    ],
+    "scene": "2"
+  },
+  {
+    "name": "Jabu Jabus Belly Barinade Heart",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanEnterJabu"
+      },
+      {
+        "type": "item",
+        "name": "boomerang",
+        "index": 1
+      },
+      "||",
+      {
+        "type": "item",
+        "name": "kokiri Sword",
+        "index": 1
+      }
+    ],
+    "scene": "2",
+    "chest": 16,
+    "event": {
+      "payload": 3,
+      "data": {
+        "index": 0,
+        "object": 128
+      }
+    }
+  },
+  {
+    "name": "Bottom of the Well Front Left Fake Wall Chest",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 3
+      },
+      {
+        "type": "item",
+        "name": "ocarina",
+        "index": 1
+      },
+      {
+        "type": "item",
+        "name": "song Of Storm",
+        "index": null
+      }
+    ],
+    "scene": "8"
+  },
+  {
+    "name": "Bottom of the Well Front Center Bombable Chest",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 3
+      },
+      {
+        "type": "item",
+        "name": "ocarina",
+        "index": 1
+      },
+      {
+        "type": "item",
+        "name": "song Of Storm",
+        "index": null
+      },
+      {
+        "type": "mixin",
+        "name": "HasExplosives"
+      }
+    ],
+    "scene": "8"
+  },
+  {
+    "name": "Bottom of the Well Back Left Bombable Chest",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 3
+      },
+      {
+        "type": "item",
+        "name": "ocarina",
+        "index": 1
+      },
+      {
+        "type": "item",
+        "name": "song Of Storm",
+        "index": null
+      },
+      {
+        "type": "mixin",
+        "name": "HasExplosives"
+      }
+    ],
+    "scene": "8"
+  },
+  {
+    "name": "Bottom of the Well Underwater Left Chest",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 3
+      },
+      {
+        "type": "item",
+        "name": "ocarina",
+        "index": 1
+      },
+      {
+        "type": "item",
+        "name": "song Of Storm",
+        "index": null
+      },
+      {
+        "type": "item",
+        "name": "zeldas Lullab",
+        "index": null
+      }
+    ],
+    "scene": "8"
+  },
+  {
+    "name": "Bottom of the Well Freestanding Key",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 3
+      },
+      {
+        "type": "item",
+        "name": "ocarina",
+        "index": 1
+      },
+      {
+        "type": "item",
+        "name": "song Of Storm",
+        "index": null
+      }
+    ],
+    "scene": "8"
+  },
+  {
+    "name": "Bottom of the Well Center Skulltula Chest",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 3
+      },
+      {
+        "type": "item",
+        "name": "ocarina",
+        "index": 1
+      },
+      {
+        "type": "item",
+        "name": "song Of Storm",
+        "index": null
+      }
+    ],
+    "scene": "8"
+  },
+  {
+    "name": "Bottom of the Well Right Bottom Fake Wall Chest",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 3
+      },
+      {
+        "type": "item",
+        "name": "ocarina",
+        "index": 1
+      },
+      {
+        "type": "item",
+        "name": "song Of Storm",
+        "index": null
+      }
+    ],
+    "scene": "8"
+  },
+  {
+    "name": "Bottom of the Well Fire Keese Chest",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 3
+      },
+      {
+        "type": "item",
+        "name": "ocarina",
+        "index": 1
+      },
+      {
+        "type": "item",
+        "name": "song Of Storm",
+        "index": null
+      }
+    ],
+    "scene": "8"
+  },
+  {
+    "name": "Bottom of the Well Like Like Chest",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 3
+      },
+      {
+        "type": "item",
+        "name": "ocarina",
+        "index": 1
+      },
+      {
+        "type": "item",
+        "name": "song Of Storm",
+        "index": null
+      }
+    ],
+    "scene": "8"
+  },
+  {
+    "name": "Bottom of the Well Underwater Front Chest",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 3
+      },
+      {
+        "type": "item",
+        "name": "ocarina",
+        "index": 1
+      },
+      {
+        "type": "item",
+        "name": "song Of Storm",
+        "index": null
+      },
+      {
+        "type": "item",
+        "name": "zeldas Lullab",
+        "index": null
+      }
+    ],
+    "scene": "8"
+  },
+  {
+    "name": "Bottom of the Well Invisible Chest",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 3
+      },
+      {
+        "type": "item",
+        "name": "ocarina",
+        "index": 1
+      },
+      {
+        "type": "item",
+        "name": "song Of Storm",
+        "index": null
+      },
+      {
+        "type": "mixin",
+        "name": "CanUseMagic"
+      },
+      {
+        "type": "item",
+        "name": "lens Of Truth",
+        "index": 1
+      }
+    ],
+    "scene": "8"
+  },
+  {
+    "name": "Bottom of the Well Lens of Truth Chest",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 3
+      },
+      {
+        "type": "item",
+        "name": "ocarina",
+        "index": 1
+      },
+      {
+        "type": "item",
+        "name": "song Of Storm",
+        "index": null
+      }
+    ],
+    "scene": "8"
+  },
+  {
+    "name": "Bottom of the Well GS West Inner Room",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 3
+      },
+      {
+        "type": "item",
+        "name": "ocarina",
+        "index": 1
+      },
+      {
+        "type": "item",
+        "name": "song Of Storm",
+        "index": null
+      },
+      {
+        "type": "item",
+        "name": "boomerang",
+        "index": 1
+      }
+    ],
+    "scene": "8"
+  },
+  {
+    "name": "Bottom of the Well GS East Inner Room",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 3
+      },
+      {
+        "type": "item",
+        "name": "ocarina",
+        "index": 1
+      },
+      {
+        "type": "item",
+        "name": "song Of Storm",
+        "index": null
+      },
+      {
+        "type": "item",
+        "name": "boomerang",
+        "index": 1
+      }
+    ],
+    "scene": "8"
+  },
+  {
+    "name": "Bottom of the Well GS Like Like Cage",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 3
+      },
+      {
+        "type": "item",
+        "name": "ocarina",
+        "index": 1
+      },
+      {
+        "type": "item",
+        "name": "song Of Storm",
+        "index": null
+      },
+      {
+        "type": "item",
+        "name": "boomerang",
+        "index": 1
+      }
+    ],
+    "scene": "8"
+  },
+  {
+    "name": "Forest Temple First Room Chest",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 4
+      },
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterForest"
+      }
+    ],
+    "scene": "3"
+  },
+  {
+    "name": "Forest Temple First Stalfos Chest",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 4
+      },
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterForest"
+      }
+    ],
+    "scene": "3"
+  },
+  {
+    "name": "Forest Temple Raised Island Courtyard Chest",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 4
+      },
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterForest"
+      }
+    ],
+    "scene": "3"
+  },
+  {
+    "name": "Forest Temple Well Chest",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 4
+      },
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterForest"
+      },
+      {
+        "type": "item",
+        "name": "fairy Bow",
+        "index": 1
+      }
+    ],
+    "scene": "3"
+  },
+  {
+    "name": "Forest Temple Eye Switch Chest",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 4
+      },
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterForest"
+      },
+      {
+        "type": "item",
+        "name": "fairy Bow",
+        "index": 1
+      }
+    ],
+    "scene": "3"
+  },
+  {
+    "name": "Forest Temple Boss Key Chest",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 4
+      },
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterForest"
+      },
+      {
+        "type": "item",
+        "name": "fairy Bow",
+        "index": 1
+      }
+    ],
+    "scene": "3"
+  },
+  {
+    "name": "Forest Temple Floormaster Chest",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 4
+      },
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterForest"
+      }
+    ],
+    "scene": "3"
+  },
+  {
+    "name": "Forest Temple Red Poe Chest",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 4
+      },
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterForest"
+      }
+    ],
+    "scene": "3"
+  },
+  {
+    "name": "Forest Temple Bow Chest",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 4
+      },
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterForest"
+      }
+    ],
+    "scene": "3"
+  },
+  {
+    "name": "Forest Temple Falling Ceiling Room Chest",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 4
+      },
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterForest"
+      }
+    ],
+    "scene": "3"
+  },
+  {
+    "name": "Forest Temple Basement Chest",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 4
+      },
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterForest"
+      }
+    ],
+    "scene": "3"
+  },
+  {
+    "name": "Forest Temple GS First Room",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 4
+      },
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterForest"
+      }
+    ],
+    "scene": "3"
+  },
+  {
+    "name": "Forest Temple GS Lobby",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 4
+      },
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterForest"
+      }
+    ],
+    "scene": "3"
+  },
+  {
+    "name": "Forest Temple GS Raised Island Courtyard",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterForest"
+      }
+    ],
+    "scene": "3"
+  },
+  {
+    "name": "Forest Temple GS Level Island Courtyard",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 4
+      },
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterForest"
+      }
+    ],
+    "scene": "3"
+  },
+  {
+    "name": "Forest Temple GS Basement",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 4
+      },
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterForest"
+      }
+    ],
+    "scene": "3"
+  },
+  {
+    "name": "Forest Temple MQ First Room Chest",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 4
+      },
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterForest"
+      }
+    ],
+    "scene": "3"
+  },
+  {
+    "name": "Forest Temple MQ Wolfos Chest",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 4
+      },
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterForest"
+      },
+      {
+        "type": "item",
+        "name": "song Of Time",
+        "index": 0
+      }
+    ],
+    "scene": "3"
+  },
+  {
+    "name": "Forest Temple MQ Well Chest",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 4
+      },
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterForest"
+      }
+    ],
+    "scene": "3"
+  },
+  {
+    "name": "Forest Temple MQ Raised Island Courtyard Lower Chest",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 4
+      },
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterForest"
+      }
+    ],
+    "scene": "3"
+  },
+  {
+    "name": "Forest Temple MQ Raised Island Courtyard Upper Chest",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 4
+      },
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterForest"
+      }
+    ],
+    "scene": "3"
+  },
+  {
+    "name": "Forest Temple MQ Boss Key Chest",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 4
+      },
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterForest"
+      }
+    ],
+    "scene": "3"
+  },
+  {
+    "name": "Forest Temple MQ Redead Chest",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 4
+      },
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterForest"
+      }
+    ],
+    "scene": "3"
+  },
+  {
+    "name": "Forest Temple MQ Bow Chest",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 4
+      },
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterForest"
+      }
+    ],
+    "scene": "3"
+  },
+  {
+    "name": "Forest Temple MQ Falling Ceiling Room Chest",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 4
+      },
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterForest"
+      }
+    ],
+    "scene": "3"
+  },
+  {
+    "name": "Forest Temple MQ Basement Chest",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 4
+      },
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterForest"
+      }
+    ],
+    "scene": "3"
+  },
+  {
+    "name": "Forest Temple MQ GS First Hallway",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 4
+      },
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterForest"
+      }
+    ],
+    "scene": "3"
+  },
+  {
+    "name": "Forest Temple MQ GS Raised Island Courtyard",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 4
+      },
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterForest"
+      }
+    ],
+    "scene": "3"
+  },
+  {
+    "name": "Forest Temple MQ GS Level Island Courtyard",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 4
+      },
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterForest"
+      }
+    ],
+    "scene": "3"
+  },
+  {
+    "name": "Forest Temple MQ GS Well",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 4
+      },
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterForest"
+      }
+    ],
+    "scene": "3"
+  },
+  {
+    "name": "Forest Temple MQ GS Block Push Room",
+    "logic": [
+      {
+        "type": "dungeon",
+        "index": 4
+      },
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterForest"
+      },
+      {
+        "type": "item",
+        "name": "forest Temple",
+        "index": 0
+      }
+    ],
+    "scene": "3"
+  },
+  {
+    "name": "Forest Temple Phantom Ganon Heart",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterForest"
+      },
+      {
+        "type": "item",
+        "name": "fairy Bow",
+        "index": 1
+      }
+    ],
+    "scene": "3"
+  },
+  {
+    "name": "Fire Temple MQ Map Room Side Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterFire"
+      }
+    ],
+    "scene": "4"
+  },
+  {
+    "name": "Fire Temple MQ Megaton Hammer Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterFire"
+      },
+      "||",
+      {
+        "type": "item",
+        "name": "megaton Hammer",
+        "index": 0
+      },
+      {
+        "type": "item",
+        "name": "fire Temple",
+        "index": 0
+      }
+    ],
+    "scene": "4"
+  },
+  {
+    "name": "Fire Temple MQ Near Boss Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterFire"
+      },
+      {
+        "type": "item",
+        "name": "fire Temple",
+        "index": 1
+      }
+    ],
+    "scene": "4"
+  },
+  {
+    "name": "Fire Temple MQ Big Lava Room Blocked Door Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterFire"
+      },
+      {
+        "type": "item",
+        "name": "fire Temple",
+        "index": 1
+      }
+    ],
+    "scene": "4"
+  },
+  {
+    "name": "Fire Temple MQ Boss Key Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterFire"
+      },
+      {
+        "type": "item",
+        "name": "fire Temple",
+        "index": 1
+      }
+    ],
+    "scene": "4"
+  },
+  {
+    "name": "Fire Temple MQ Lizalfos Maze Side Room Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterFire"
+      },
+      {
+        "type": "item",
+        "name": "fire Temple",
+        "index": 1
+      }
+    ],
+    "scene": "4"
+  },
+  {
+    "name": "Fire Temple MQ Lizalfos Maze Upper Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterFire"
+      },
+      {
+        "type": "item",
+        "name": "fire Temple",
+        "index": 1
+      }
+    ],
+    "scene": "4"
+  },
+  {
+    "name": "Fire Temple MQ Lizalfos Maze Lower Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterFire"
+      },
+      {
+        "type": "item",
+        "name": "fire Temple",
+        "index": 1
+      }
+    ],
+    "scene": "4"
+  },
+  {
+    "name": "Fire Temple MQ Freestanding Key",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterFire"
+      },
+      {
+        "type": "item",
+        "name": "fire Temple",
+        "index": 1
+      }
+    ],
+    "scene": "4"
+  },
+  {
+    "name": "Fire Temple MQ Chest On Fire",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterFire"
+      },
+      {
+        "type": "item",
+        "name": "fire Temple",
+        "index": 1
+      }
+    ],
+    "scene": "4"
+  },
+  {
+    "name": "Fire Temple MQ GS Big Lava Room Open Door",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterFire"
+      },
+      {
+        "type": "item",
+        "name": "megaton Hammer",
+        "index": 0
+      }
+    ],
+    "scene": "4"
+  },
+  {
+    "name": "Fire Temple MQ GS Skull On Fire",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterFire"
+      },
+      {
+        "type": "item",
+        "name": "fire Temple",
+        "index": 1
+      }
+    ],
+    "scene": "4"
+  },
+  {
+    "name": "Fire Temple MQ GS Fire Wall Maze Center",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterFire"
+      },
+      {
+        "type": "item",
+        "name": "fire Temple",
+        "index": 1
+      }
+    ],
+    "scene": "4"
+  },
+  {
+    "name": "Fire Temple MQ GS Fire Wall Maze Side Room",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterFire"
+      },
+      {
+        "type": "item",
+        "name": "fire Temple",
+        "index": 1
+      }
+    ],
+    "scene": "4"
+  },
+  {
+    "name": "Fire Temple MQ GS Above Fire Wall Maze",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterFire"
+      },
+      {
+        "type": "item",
+        "name": "fire Temple",
+        "index": 1
+      }
+    ],
+    "scene": "4"
+  },
+  {
+    "name": "Fire Temple Volvagia Heart",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterFire"
+      },
+      {
+        "type": "item",
+        "name": "megaton Hammer",
+        "index": 1
+      }
+    ],
+    "scene": "4"
+  },
+  {
+    "name": "Water Temple Cracked Wall Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterWater"
+      }
+    ],
+    "scene": "5"
+  },
+  {
+    "name": "Water Temple Torches Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterWater"
+      }
+    ],
+    "scene": "5"
+  },
+  {
+    "name": "Water Temple Boss Key Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterWater"
+      }
+    ],
+    "scene": "5"
+  },
+  {
+    "name": "Water Temple Central Pillar Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterWater"
+      }
+    ],
+    "scene": "5"
+  },
+  {
+    "name": "Water Temple Central Bow Target Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterWater"
+      }
+    ],
+    "scene": "5"
+  },
+  {
+    "name": "Water Temple Longshot Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterWater"
+      }
+    ],
+    "scene": "5"
+  },
+  {
+    "name": "Water Temple River Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterWater"
+      }
+    ],
+    "scene": "5"
+  },
+  {
+    "name": "Water Temple Dragon Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterWater"
+      }
+    ],
+    "scene": "5"
+  },
+  {
+    "name": "Water Temple GS Behind Gate",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterWater"
+      }
+    ],
+    "scene": "5"
+  },
+  {
+    "name": "Water Temple GS Near Boss Key Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterWater"
+      }
+    ],
+    "scene": "5"
+  },
+  {
+    "name": "Water Temple GS Central Pillar",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterWater"
+      }
+    ],
+    "scene": "5"
+  },
+  {
+    "name": "Water Temple GS Falling Platform Room",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterWater"
+      }
+    ],
+    "scene": "5"
+  },
+  {
+    "name": "Water Temple GS River",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterWater"
+      }
+    ],
+    "scene": "5"
+  },
+  {
+    "name": "Water Temple Morpha Heart",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterWater"
+      }
+    ],
+    "scene": "5"
+  },
+  {
+    "name": "Shadow Temple Hover Boots Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterShadow"
+      }
+    ],
+    "scene": "7"
+  },
+  {
+    "name": "Shadow Temple Early Silver Rupee Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterShadow"
+      }
+    ],
+    "scene": "7"
+  },
+  {
+    "name": "Shadow Temple Invisible Blades Visible Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterShadow"
+      }
+    ],
+    "scene": "7"
+  },
+  {
+    "name": "Shadow Temple Invisible Blades Invisible Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterShadow"
+      }
+    ],
+    "scene": "7"
+  },
+  {
+    "name": "Shadow Temple Falling Spikes Lower Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterShadow"
+      }
+    ],
+    "scene": "7"
+  },
+  {
+    "name": "Shadow Temple Falling Spikes Upper Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterShadow"
+      }
+    ],
+    "scene": "7"
+  },
+  {
+    "name": "Shadow Temple Falling Spikes Switch Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterShadow"
+      }
+    ],
+    "scene": "7"
+  },
+  {
+    "name": "Shadow Temple Invisible Spikes Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterShadow"
+      }
+    ],
+    "scene": "7"
+  },
+  {
+    "name": "Shadow Temple Freestanding Key",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterShadow"
+      }
+    ],
+    "scene": "7"
+  },
+  {
+    "name": "Shadow Temple Wind Hint Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterShadow"
+      }
+    ],
+    "scene": "7"
+  },
+  {
+    "name": "Shadow Temple After Wind Enemy Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterShadow"
+      }
+    ],
+    "scene": "7"
+  },
+  {
+    "name": "Shadow Temple After Wind Hidden Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterShadow"
+      }
+    ],
+    "scene": "7"
+  },
+  {
+    "name": "Shadow Temple Spike Walls Left Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterShadow"
+      }
+    ],
+    "scene": "7"
+  },
+  {
+    "name": "Shadow Temple Boss Key Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterShadow"
+      }
+    ],
+    "scene": "7"
+  },
+  {
+    "name": "Shadow Temple Invisible Floormaster Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterShadow"
+      }
+    ],
+    "scene": "7"
+  },
+  {
+    "name": "Shadow Temple GS Like Like Room",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterShadow"
+      }
+    ],
+    "scene": "7"
+  },
+  {
+    "name": "Shadow Temple GS Falling Spikes Room",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterShadow"
+      }
+    ],
+    "scene": "7"
+  },
+  {
+    "name": "Shadow Temple GS Single Giant Pot",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterShadow"
+      }
+    ],
+    "scene": "7"
+  },
+  {
+    "name": "Shadow Temple GS Near Ship",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterShadow"
+      }
+    ],
+    "scene": "7"
+  },
+  {
+    "name": "Shadow Temple GS Triple Giant Pot",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterShadow"
+      }
+    ],
+    "scene": "7"
+  },
+  {
+    "name": "Shadow Temple Bongo Bongo Heart",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterShadow"
+      }
+    ],
+    "scene": "7"
+  },
+  {
+    "name": "Spirit Temple MQ Entrance Front Left Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "dungeon",
+        "index": 8
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterSpirit"
+      }
+    ],
+    "scene": "6"
+  },
+  {
+    "name": "Spirit Temple MQ Entrance Back Right Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "dungeon",
+        "index": 8
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterSpirit"
+      }
+    ],
+    "scene": "6"
+  },
+  {
+    "name": "Spirit Temple MQ Entrance Front Right Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "dungeon",
+        "index": 8
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterSpirit"
+      }
+    ],
+    "scene": "6"
+  },
+  {
+    "name": "Spirit Temple MQ Entrance Back Left Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "dungeon",
+        "index": 8
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterSpirit"
+      }
+    ],
+    "scene": "6",
+    "event": {
+      "payload": 2,
+      "scene": 6,
+      "data": {
+        "index": 0,
+        "object": 4
+      }
+    }
+  },
+  {
+    "name": "Spirit Temple MQ Map Room Enemy Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "dungeon",
+        "index": 8
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterSpirit"
+      }
+    ],
+    "scene": "6"
+  },
+  {
+    "name": "Spirit Temple MQ Child Climb North Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "dungeon",
+        "index": 8
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterSpirit"
+      }
+    ],
+    "scene": "6"
+  },
+  {
+    "name": "Spirit Temple MQ Child Climb South Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "dungeon",
+        "index": 8
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterSpirit"
+      }
+    ],
+    "scene": "6"
+  },
+  {
+    "name": "Spirit Temple MQ Silver Block Hallway Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "dungeon",
+        "index": 8
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterSpirit"
+      }
+    ],
+    "scene": "6"
+  },
+  {
+    "name": "Spirit Temple MQ Sun Block Room Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "dungeon",
+        "index": 8
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterSpirit"
+      }
+    ],
+    "scene": "6"
+  },
+  {
+    "name": "Spirit Temple Silver Gauntlets Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "dungeon",
+        "index": 8
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterSpirit"
+      }
+    ],
+    "scene": "6"
+  },
+  {
+    "name": "Spirit Temple MQ Child Hammer Switch Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "dungeon",
+        "index": 8
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterSpirit"
+      }
+    ],
+    "scene": "6"
+  },
+  {
+    "name": "Spirit Temple MQ Statue Room Lullaby Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "dungeon",
+        "index": 8
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterSpirit"
+      }
+    ],
+    "scene": "6"
+  },
+  {
+    "name": "Spirit Temple MQ Statue Room Invisible Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "dungeon",
+        "index": 8
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterSpirit"
+      }
+    ],
+    "scene": "6"
+  },
+  {
+    "name": "Spirit Temple MQ Leever Room Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "dungeon",
+        "index": 8
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterSpirit"
+      }
+    ],
+    "scene": "6"
+  },
+  {
+    "name": "Spirit Temple MQ Symphony Room Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "dungeon",
+        "index": 8
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterSpirit"
+      }
+    ],
+    "scene": "6"
+  },
+  {
+    "name": "Spirit Temple MQ Beamos Room Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "dungeon",
+        "index": 8
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterSpirit"
+      }
+    ],
+    "scene": "6"
+  },
+  {
+    "name": "Spirit Temple MQ Chest Switch Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "dungeon",
+        "index": 8
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterSpirit"
+      }
+    ],
+    "scene": "6"
+  },
+  {
+    "name": "Spirit Temple MQ Boss Key Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "dungeon",
+        "index": 8
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterSpirit"
+      }
+    ],
+    "scene": "6"
+  },
+  {
+    "name": "Spirit Temple Mirror Shield Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "dungeon",
+        "index": 8
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterSpirit"
+      }
+    ],
+    "scene": "6"
+  },
+  {
+    "name": "Spirit Temple MQ Mirror Puzzle Invisible Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "dungeon",
+        "index": 8
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterSpirit"
+      }
+    ],
+    "scene": "6"
+  },
+  {
+    "name": "Spirit Temple MQ GS Sun Block Room",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "dungeon",
+        "index": 8
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterSpirit"
+      }
+    ],
+    "scene": "6"
+  },
+  {
+    "name": "Spirit Temple MQ GS Leever Room",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "dungeon",
+        "index": 8
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterSpirit"
+      }
+    ],
+    "scene": "6"
+  },
+  {
+    "name": "Spirit Temple MQ GS Symphony Room",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "dungeon",
+        "index": 8
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterSpirit"
+      }
+    ],
+    "scene": "6"
+  },
+  {
+    "name": "Spirit Temple MQ GS Nine Thrones Room West",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "dungeon",
+        "index": 8
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterSpirit"
+      }
+    ],
+    "scene": "6"
+  },
+  {
+    "name": "Spirit Temple MQ GS Nine Thrones Room North",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "dungeon",
+        "index": 8
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterSpirit"
+      }
+    ],
+    "scene": "6"
+  },
+  {
+    "name": "Spirit Temple Twinrova Heart",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterSpirit"
+      }
+    ],
+    "scene": "6"
+  },
+  {
+    "name": "Ice Cavern MQ Freestanding PoH",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "dungeon",
+        "index": 9
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterIce"
+      }
+    ],
+    "scene": "9"
+  },
+  {
+    "name": "Ice Cavern MQ Iron Boots Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "dungeon",
+        "index": 9
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterIce"
+      }
+    ],
+    "scene": "9"
+  },
+  {
+    "name": "Ice Cavern MQ GS Red Ice",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "dungeon",
+        "index": 9
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterIce"
+      }
+    ],
+    "scene": "9"
+  },
+  {
+    "name": "Ice Cavern MQ GS Ice Block",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "dungeon",
+        "index": 9
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterIce"
+      }
+    ],
+    "scene": "9"
+  },
+  {
+    "name": "Ice Cavern MQ GS Scarecrow",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "dungeon",
+        "index": 9
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterIce"
+      }
+    ],
+    "scene": "9"
+  },
+  {
+    "name": "Gerudo Training Grounds Lobby Left Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterGtG"
+      }
+    ],
+    "scene": "11"
+  },
+  {
+    "name": "Gerudo Training Grounds Lobby Right Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterGtG"
+      }
+    ],
+    "scene": "11"
+  },
+  {
+    "name": "Gerudo Training Grounds Stalfos Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterGtG"
+      }
+    ],
+    "scene": "11"
+  },
+  {
+    "name": "Gerudo Training Grounds Before Heavy Block Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterGtG"
+      }
+    ],
+    "scene": "11"
+  },
+  {
+    "name": "Gerudo Training Grounds Heavy Block First Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterGtG"
+      }
+    ],
+    "scene": "11"
+  },
+  {
+    "name": "Gerudo Training Grounds Heavy Block Second Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterGtG"
+      }
+    ],
+    "scene": "11"
+  },
+  {
+    "name": "Gerudo Training Grounds Heavy Block Third Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterGtG"
+      }
+    ],
+    "scene": "11"
+  },
+  {
+    "name": "Gerudo Training Grounds Heavy Block Fourth Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterGtG"
+      }
+    ],
+    "scene": "11"
+  },
+  {
+    "name": "Gerudo Training Grounds Eye Statue Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterGtG"
+      }
+    ],
+    "scene": "11"
+  },
+  {
+    "name": "Gerudo Training Grounds Near Scarecrow Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterGtG"
+      }
+    ],
+    "scene": "11"
+  },
+  {
+    "name": "Gerudo Training Grounds Hammer Room Clear Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterGtG"
+      }
+    ],
+    "scene": "11"
+  },
+  {
+    "name": "Gerudo Training Grounds Hammer Room Switch Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterGtG"
+      }
+    ],
+    "scene": "11"
+  },
+  {
+    "name": "Gerudo Training Grounds Freestanding Key",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterGtG"
+      }
+    ],
+    "scene": "11"
+  },
+  {
+    "name": "Gerudo Training Grounds Maze Right Central Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterGtG"
+      }
+    ],
+    "scene": "11"
+  },
+  {
+    "name": "Gerudo Training Grounds Maze Right Side Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterGtG"
+      }
+    ],
+    "scene": "11"
+  },
+  {
+    "name": "Gerudo Training Grounds Underwater Silver Rupee Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterGtG"
+      }
+    ],
+    "scene": "11"
+  },
+  {
+    "name": "Gerudo Training Grounds Beamos Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterGtG"
+      }
+    ],
+    "scene": "11"
+  },
+  {
+    "name": "Gerudo Training Grounds Hidden Ceiling Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterGtG"
+      }
+    ],
+    "scene": "11"
+  },
+  {
+    "name": "Gerudo Training Grounds Maze Path First Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterGtG"
+      }
+    ],
+    "scene": "11"
+  },
+  {
+    "name": "Gerudo Training Grounds Maze Path Second Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterGtG"
+      }
+    ],
+    "scene": "11"
+  },
+  {
+    "name": "Gerudo Training Grounds Maze Path Third Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterGtG"
+      }
+    ],
+    "scene": "11"
+  },
+  {
+    "name": "Gerudo Training Grounds Maze Path Final Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterGtG"
+      }
+    ],
+    "scene": "11"
+  },
+  {
+    "name": "Ganons Castle MQ Forest Trial Freestanding Key",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "dungeon",
+        "index": 11
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterGC"
+      }
+    ],
+    "scene": "13"
+  },
+  {
+    "name": "Ganons Castle MQ Forest Trial Eye Switch Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "dungeon",
+        "index": 11
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterGC"
+      }
+    ],
+    "scene": "13"
+  },
+  {
+    "name": "Ganons Castle MQ Forest Trial Frozen Eye Switch Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "dungeon",
+        "index": 11
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterGC"
+      }
+    ],
+    "scene": "13"
+  },
+  {
+    "name": "Ganons Castle MQ Water Trial Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "dungeon",
+        "index": 11
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterGC"
+      }
+    ],
+    "scene": "13"
+  },
+  {
+    "name": "Ganons Castle MQ Shadow Trial Bomb Flower Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "dungeon",
+        "index": 11
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterGC"
+      }
+    ],
+    "scene": "13"
+  },
+  {
+    "name": "Ganons Castle MQ Shadow Trial Eye Switch Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "dungeon",
+        "index": 11
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterGC"
+      }
+    ],
+    "scene": "13"
+  },
+  {
+    "name": "Ganons Castle MQ Light Trial Lullaby Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "dungeon",
+        "index": 11
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterGC"
+      }
+    ],
+    "scene": "13"
+  },
+  {
+    "name": "Ganons Castle MQ Spirit Trial First Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "dungeon",
+        "index": 11
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterGC"
+      }
+    ],
+    "scene": "13"
+  },
+  {
+    "name": "Ganons Castle MQ Spirit Trial Invisible Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "dungeon",
+        "index": 11
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterGC"
+      }
+    ],
+    "scene": "13"
+  },
+  {
+    "name": "Ganons Castle MQ Spirit Trial Sun Front Left Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "dungeon",
+        "index": 11
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterGC"
+      }
+    ],
+    "scene": "13"
+  },
+  {
+    "name": "Ganons Castle MQ Spirit Trial Sun Back Left Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "dungeon",
+        "index": 11
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterGC"
+      }
+    ],
+    "scene": "13"
+  },
+  {
+    "name": "Ganons Castle MQ Spirit Trial Sun Back Right Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "dungeon",
+        "index": 11
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterGC"
+      }
+    ],
+    "scene": "13"
+  },
+  {
+    "name": "Ganons Castle MQ Spirit Trial Golden Gauntlets Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "dungeon",
+        "index": 11
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterGC"
+      }
+    ],
+    "scene": "13"
+  },
+  {
+    "name": "Ganons Castle MQ Deku Scrub Left",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "dungeon",
+        "index": 11
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterGC"
+      }
+    ],
+    "scene": "13"
+  },
+  {
+    "name": "Ganons Castle MQ Deku Scrub Center-Left",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "dungeon",
+        "index": 11
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterGC"
+      }
+    ],
+    "scene": "13"
+  },
+  {
+    "name": "Ganons Castle MQ Deku Scrub Center",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "dungeon",
+        "index": 11
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterGC"
+      }
+    ],
+    "scene": "13"
+  },
+  {
+    "name": "Ganons Castle MQ Deku Scrub Center-Right",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "dungeon",
+        "index": 11
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterGC"
+      }
+    ],
+    "scene": "13"
+  },
+  {
+    "name": "Ganons Castle MQ Deku Scrub Right",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "dungeon",
+        "index": 11
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterGC"
+      }
+    ],
+    "scene": "13"
+  },
+  {
+    "name": "Ganons Tower Boss Key Chest",
+    "logic": [
+      {
+        "type": "mixin",
+        "name": "CanBecomeAdult"
+      },
+      {
+        "type": "dungeon",
+        "index": 11
+      },
+      {
+        "type": "mixin",
+        "name": "CanEnterGC"
+      }
+    ],
+    "scene": "10"
+  }
+]

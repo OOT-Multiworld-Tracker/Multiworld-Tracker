@@ -1,7 +1,6 @@
 import { SettingsManager, ItemManager } from './AppManagers'
 import GameManager from './classes/GameManager'
 import { GameWorld } from './classes/GameWorld'
-import { Item } from './classes/Item'
 import { NetworkManager } from './classes/NetworkingManager'
 import { Subscription } from './classes/Subscription'
 

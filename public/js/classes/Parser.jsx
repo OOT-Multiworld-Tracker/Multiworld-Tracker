@@ -9,6 +9,8 @@ export default class Parser {
     spoiler.settings = new SettingsManager(log.settings)
     spoiler.log = log
     console.log(log);
+
+    app.walkthrough = log[":playthrough"]
     spoiler.seed = log[':seed']
     spoiler.worlds = [];
     

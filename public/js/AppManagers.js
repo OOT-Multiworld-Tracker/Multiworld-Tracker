@@ -29,6 +29,8 @@ export class SettingsManager {
       })
     }
 
+    this.addSetting = this.addSetting.bind(this)
+    this.MakeSpecialValues = this.MakeSpecialValues.bind(this)
     this.makeSettings();
   }
 
@@ -92,9 +94,6 @@ export class ItemManager {
       if (item.type && item.type == 'dungeon')
         return this[item.name.toLowerCase()] = new KeyManager(item.name, item.max);
 
-      // Make special value type.
-      values.forEach( value => this.MakeSpecialValues ( value, values ) )
-
       const category = item.category || null;
 
       this[item.name.toLowerCase()] = new Item(item.name, values, category);
@@ -124,13 +123,18 @@ export class LocationManager {
      * The world this location manager is for.
      * @type {GameWorld}
      */
-    this.world = world
+    this.world = world || new GameWorld();
+    console.log(this.world)
 
     /**
      * The locations in this world.
      * @type {Location[]}
      */
     this.locations = Parser.ParseLocations(this)
+
+    this.CheckMixin = this.CheckMixin.bind(this)
+    this.CheckLogic = this.CheckLogic.bind(this)
+    this.CheckItem = this.CheckItem.bind(this)
   }
 
   /**
@@ -175,6 +179,8 @@ export class LocationManager {
   IsAccessible (location, world) {
     const logic = location.logic;
 
+    if (!location.preExit && !this.CheckMixin({ name: "CanLeaveForest" })) return false; // If the location is not a pre-exit, check if the player can leave the forest.
+
     return this.CheckLogic(logic)
   }
 
@@ -188,11 +194,29 @@ export class LocationManager {
     const logicTypes = {
       'mixin': this.CheckMixin,
       'item': this.CheckItem,
-      'setting': this.CheckSetting, 
+      'setting': this.CheckSetting,
+      'dungeon': this.CheckDungeon,
     }
 
+    let index = 0;
+    
     for (let log of logic) {
-      if (logicTypes[logic.type](logic)) continue;
+      if (log == "||" || logicTypes[log.type] == undefined || logicTypes[log.type](log)) {
+        // Handle ors
+        if (log == "||") {
+          var lastLogic = logic[index - 1];
+          var nextLogic = logic[index + 1];
+
+          if (logicTypes[lastLogic.type](lastLogic) || logicTypes[nextLogic.type](nextLogic)) {
+            return true;
+          }
+        }
+        index++;
+        continue;
+      }
+
+      if (logic.length != 1 && logic[index+1] == "||") { index++; continue; } // If this is part of an OR logic, don't consider it individually
+
       return false;
     }
 
@@ -210,7 +234,8 @@ export class LocationManager {
   /**
    * @private
    */
-  CheckItem () {
+  CheckItem (log) {
+    if (!this.world) return;
     if (!this.world.items[log.name.toLowerCase()]) return console.warn("Item not found: " + log.name);
     if (this.world.items[log.name.toLowerCase()].Index() >= log.index) return true;
     return false;
@@ -219,10 +244,16 @@ export class LocationManager {
   /**
    * @private
    */
-  CheckSetting () {
+  CheckSetting (log) {
+    if (!this.world) return;
     if (!this.world.app.global.settings[log.name.toLowerCase()]) return console.warn("Setting not found: " + log.name);
     if (this.world.app.global.settings[log.name.toLowerCase()].Index() >= log.index) return true;
     return false;
+  }
+
+  CheckDungeon (log) {
+    if (!this.world) return;
+    return true;
   }
 
   /**

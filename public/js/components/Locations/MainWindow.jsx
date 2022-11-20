@@ -9,13 +9,13 @@ import LocationDropdown from './LocationDropdown'
 import Parser from '../../classes/Parser'
 
 export default class MainWindow extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.filter = props.completed || false
     this.showItems = props.showItems || false
 
-    this.state = { 
-      search: '', page: 0, scene: -1, dropdown: { }, world: 0, 
+    this.state = {
+      search: '', page: 0, scene: -1, dropdown: {}, world: 0, type: 0,
       locations: app.local.world.locations.Accessible(false, false, -1)
     }
 
@@ -23,25 +23,26 @@ export default class MainWindow extends Component {
     this.handleSceneChange = this.handleSceneChange.bind(this)
     this.displaySection = this.displaySection.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
+    this.displayType = this.displayType.bind(this)
     this.handleLocationClick = this.handleLocationClick.bind(this)
     this.onLocationUpdate = this.onLocationUpdate.bind(this)
 
     this.collapse = {};
   }
-  
-  handleSceneChange (scene) {
+
+  handleSceneChange(scene) {
     this.setState({ scene, locations: app.local.world.locations.Search(this.state.search, scene, this.state.page) })
   }
 
-  handleLocationClick () {
+  handleLocationClick() {
     this.setState({ accessible: app.local.world.locations.Accessible(false, false, -1).length, completed: app.local.world.locations.Get(true).length })
   }
 
-  handleSearch (term) {
-    this.setState({ search: term.search, locations: app.local.world.locations.Search(term.search, this.state.scene, this.state.page)})
+  handleSearch(term) {
+    this.setState({ search: term.search, locations: app.local.world.locations.Search(term.search, this.state.scene, this.state.page) })
   }
 
-  shouldComponentUpdate (_, nextState) {
+  shouldComponentUpdate(_, nextState) {
     return (this.state != nextState || this.state.scene != nextState.scene || this.state.locations.length != nextState.locations.length);
   }
 
@@ -49,59 +50,82 @@ export default class MainWindow extends Component {
     this.setState({ locations: app.local.world.locations.Search(this.state.search, this.state.scene, this.state.page) })
   }
 
-  componentDidMount () {
+  componentDidMount() {
     app.subscribeToWorldUpdate(this.onLocationUpdate)
     app.saveLoad.subscribe('load', () => { app.local.world.subscribeChangeScene(this.handleSceneChange); this.setState({ locations: app.local.world.locations.Search(this.state.search, -1, 0) }) })
-    app.subscribe('view', (world) => { this.setState({ world: app.worlds.indexOf(world), locations: app.local.world.locations.Accessible(this.state.search, this.state.scene, this.state.page)  }) })
+    app.subscribe('view', (world) => { this.setState({ world: app.worlds.indexOf(world), locations: app.local.world.locations.Accessible(this.state.search, this.state.scene, this.state.page) }) })
     app.subscribe('locations update', this.onLocationUpdate)
   }
 
-  handleContextMenu (e, id) {
+  handleContextMenu(e, id) {
     this.setState({ dropdown: { left: e.pageX - 240, top: e.pageY - 22 } })
     this.props.onContextMenu(e, id)
   }
 
-  displaySection (page) {
-    this.setState({ page, locations: app.local.world.locations.Search(this.state.search, this.state.scene, page)})
+  displayType(type) {
+    this.setState({ type })
   }
 
-  render () {
-    let lastScene = -1;
+  displaySection(page) {
+    this.setState({ page, locations: app.local.world.locations.Search(this.state.search, this.state.scene, page) })
+  }
 
+  walkthrough() {
+    return (
+      <div style={{ overflowY: 'auto', height: '85%' }}><List>{Object.values(app.walkthrough).map((step, index) => {
+        return (
+          <>
+            <WalkthroughLocation type="header" name={index == 0 ? "Skips" : `Sphere ${index}`} />
+            {Object.keys(step).map((walk) => (<WalkthroughLocation name={walk} />))}
+          </>
+        )
+      })}</List></div>)
+  }
+
+  locations() {
+    let lastScene = -1;
+    return (
+      <>
+        <LocationDropdown
+          onDropdownClick={this.props.onDropdownClick}
+          display={this.props.dropDownOpen}
+          position={{
+            left: this.state.dropdown.left,
+            top: this.state.dropdown.top
+          }} />
+
+        <div style={{ overflowY: 'auto', height: '85%' }}>
+          <List>
+            {
+              this.state.locations.map(
+                (location, index) => (
+                  <Fragment key={index}>
+                    {lastScene != location.scene && this.state.scene == -1 && <Location key={location.scene} onClick={() => { this.collapse[location.scene] = !this.collapse[location.scene]; this.setState({ collapse: this.collapse }) }} type="header" name={Parser.ParseScenes()[lastScene = location.scene]?.name || "Unknown"} />}
+                    {(!this.collapse[location.scene] || this.collapse[location.scene] == false) && <Location
+                      onContextMenu={this.handleContextMenu}
+                      useless={location.useless}
+                      important={location.important}
+                      key={index}
+                      id={location.id}
+                      item={(location.display) ? location.display.name : 'None'}
+                      name={location.name} />}
+                  </Fragment>
+                )
+              )
+            }
+          </List>
+        </div>
+      </>
+    )
+  }
+
+  render() {
     return (
       <div className='pane'>
         <ErrorBoundary fallback={<p>Locations Failed to Load</p>}>
-          <MainHeader locations={this.state.locations.length} world={this.state.world} onSearch={this.handleSearch} onSceneChange={this.handleSceneChange} onPageClick={this.displaySection} scene={this.state.scene} page={this.state.page} />
-          
-          <LocationDropdown 
-            onDropdownClick={this.props.onDropdownClick} 
-            display={this.props.dropDownOpen} 
-            position={{ 
-              left: this.state.dropdown.left, 
-              top: this.state.dropdown.top 
-            }} />
-          
-          <div style={{ overflowY: 'auto', height: '90%' }}>
-            <List>
-              {
-              this.state.locations.map(
-                (location, index) => (
-                 <Fragment key={index}>
-                  {lastScene != location.scene && this.state.scene == -1 && <Location key={location.scene} onClick={() => { this.collapse[location.scene] = !this.collapse[location.scene]; this.setState({ collapse: this.collapse }) } } type="header" name={Parser.ParseScenes()[lastScene = location.scene]?.name||"Unknown"} />}
-                  {(!this.collapse[location.scene] || this.collapse[location.scene] == false) && <Location
-                    onContextMenu={this.handleContextMenu} 
-                    useless={location.useless} 
-                    important={location.important} 
-                    key={index} 
-                    id={location.id} 
-                    item={(location.display) ? location.display.name : 'None'} 
-                    name={location.name} />}
-                 </Fragment> 
-                )
-              )
-              }
-            </List>
-          </div>
+          <MainHeader locations={this.state.locations.length} world={this.state.world} onSearch={this.handleSearch} onSceneChange={this.handleSceneChange} onPageTypeClick={this.displayType} onPageClick={this.displaySection} scene={this.state.scene} type={this.state.type} page={this.state.page} />
+
+          {this.state.type == 0 ? this.locations() : this.walkthrough()}
         </ErrorBoundary>
       </div>
     )
@@ -109,31 +133,47 @@ export default class MainWindow extends Component {
 }
 
 export class Location extends React.PureComponent {
-  hasRareItem () {
+  hasRareItem() {
     return Object.values(app.local.world.items).some(
       (item) => (
-        item.name === app.local.world.locations.Array()[this.props.id].item.item) 
-          || (item.name === app.local.world.locations.Array()[this.props.id].name))
+        item.name === app.local.world.locations.Array()[this.props.id].item.item)
+        || (item.name === app.local.world.locations.Array()[this.props.id].name))
   }
 
-  render () {
+  render() {
     return (
       <ErrorBoundary fallback={<p>Location Failed to Load</p>}>
-        <ListItem 
+        <ListItem
           type={this.props.type}
-          style={{ 
-            backgroundColor: ((app.global.settings.itemHints && app.global.settings.itemHints.Index() === 1 && this.hasRareItem()) || this.props.important) ? '#cbef28' : '' }} 
-            onClick={this.props.onClick || (_ => app.local.world.locations.Array()[this.props.id].Mark())} 
-            onContextMenu={(e) => { e.preventDefault(); this.props.onContextMenu(e, this.props.id) }}>
+          style={{
+            backgroundColor: ((app.global.settings.itemHints && app.global.settings.itemHints.Index() === 1 && this.hasRareItem()) || this.props.important) ? '#cbef28' : ''
+          }}
+          onClick={this.props.onClick || (_ => app.local.world.locations.Array()[this.props.id].Mark())}
+          onContextMenu={(e) => { e.preventDefault(); this.props.onContextMenu(e, this.props.id) }}>
 
           <div className='location-name' style={{ color: this.props.useless ? '#666' : null }}>
-            {this.props.name} 
+            {this.props.name}
             {(app.global.settings.playerHints && app.global.settings.playerHints.value == true && this.props.type != "header") &&
-              <span className='badge'>{app.local.world.locations.Array()[this.props.id]?.item.player||"?"}</span>}
+              <span className='badge'>{app.local.world.locations.Array()[this.props.id]?.item.player || "?"}</span>}
           </div>
 
           <div className='location-items'>
             {app.global.settings.itemHints && app.global.settings.itemHints.value === 'show items' ? app.local.world.locations.Array()[this.props.id]?.item.item : this.props.item}
+          </div>
+        </ListItem>
+      </ErrorBoundary>
+    )
+  }
+}
+
+export class WalkthroughLocation extends React.PureComponent {
+  render() {
+    return (
+      <ErrorBoundary fallback={<p>Location Failed to Load</p>}>
+        <ListItem
+          type={this.props.type}>
+          <div className='location-name'>
+            {this.props.name}
           </div>
         </ListItem>
       </ErrorBoundary>

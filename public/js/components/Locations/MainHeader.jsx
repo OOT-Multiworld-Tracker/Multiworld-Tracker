@@ -7,7 +7,7 @@ import Button from '../Buttons/Button'
 export default class MainHeader extends Component {
     constructor (props) {
       super(props)
-      this.state = { scene: -1 }
+      this.state = { scene: -1,  }
   
       this.onSceneUpdate = this.onSceneUpdate.bind(this)
     }
@@ -55,6 +55,21 @@ export default class MainHeader extends Component {
       return (
       <>
       <input type='text' className='form-control search-bar' onChange={(e) => this.props.onSearch({ search: e.target.value })} placeholder='Search...' />
+      <div className='btn-group' style={{ width: '100%', marginBottom: '4px' }}>
+        <Button theme="bottom" style={{ 
+            width: '50%', 
+            backgroundColor: (this.props.type === 0) ? '#444' : null 
+        }} onClick={() => this.props.onPageTypeClick(0)}>
+            Tracker
+        </Button>
+
+        {app.walkthrough && <Button theme="bottom" style={{ 
+            width: '50%', 
+            backgroundColor: (this.props.type === 1) ? '#444' : null 
+        }} onClick={() => this.props.onPageTypeClick(1)}>
+            Walkthrough
+        </Button>}
+      </div>
       <div className='btn-group' style={{ width: '100%', marginBottom: '4px' }}>
         <select 
           className='btn btn-bottom btn-default' 

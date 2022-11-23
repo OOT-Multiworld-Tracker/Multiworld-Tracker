@@ -9,13 +9,12 @@ import { init, ErrorBoundary } from '@sentry/react'
 import { Integrations } from '@sentry/tracing'
 import SpoilerModal from './Modals/LoadSpoiler'
 import Parser from '../classes/Parser'
-import LanguageContext from '../components/LanguageContext'
+import LanguageContext from './LanguageContext'
 
 import '../../css/global.css'
 import Window from './Window/Window'
 import MainWindow from './Locations/MainWindow'
 import LoginModal from './Modals/LoginModal'
-import Toast from './Toasts/Toast'
 import ToastManager from './Toasts/ToastManager'
 import { GameWorld } from '../classes/GameWorld'
 import { GetTranslation } from '../classes/Translator'
@@ -58,12 +57,10 @@ export default class Application extends Component {
     this.handleWindowClick = this.handleWindowClick.bind(this)
     this.handleSpoiler = this.handleSpoiler.bind(this)
     this.handleLoadSpoiler = this.handleLoadSpoiler.bind(this)
-    this.handleLogin =  this.handleLogin.bind(this)
 
     this.selectedLocation = 0
     this.selectedSave = 0
 
-    app.subscribe('account', () => { this.setState({ display: 0 }) })
   }
 
   handleModal (e) {
@@ -84,10 +81,6 @@ export default class Application extends Component {
     }
 
     app.call('locations update')
-  }
-  
-  handleLogin (e) {
-    this.setState({ display: 5 })
   }
 
   handleSidebarModal (e, name) {
@@ -152,8 +145,6 @@ export default class Application extends Component {
         return <CreateSaveModal onSave={this.handleSaveCreated} />
       case 4:
         return <SpoilerModal onSaveLoad={this.handleLoadSpoiler} log={this.log} />
-      case 5:
-        return <LoginModal onLogin={this.handleLogin}/>
     }
   }
 
@@ -171,7 +162,7 @@ export default class Application extends Component {
             {this.getModal()}
           </ModalLayer>
           <ToastManager />
-          <Sidebar onSave={this.handleCreateSave} onLogin={this.handleLogin} onSpoilerUpload={this.handleSpoiler} onModal={this.handleSidebarModal} saves={this.state.saves} />
+          <Sidebar onSave={this.handleCreateSave} onSpoilerUpload={this.handleSpoiler} onModal={this.handleSidebarModal} saves={this.state.saves} />
           <MainWindow dropDownOpen={this.state.dropdown} onContextMenu={this.handleContextMenu} onDropdownClick={this.handleDropdown} />
         </Window>
     </LanguageContext.Provider>

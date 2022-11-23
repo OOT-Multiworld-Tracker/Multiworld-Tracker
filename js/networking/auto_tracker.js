@@ -26,6 +26,9 @@ class AutoTracker extends EventEmitter {
   }
 
   Send (data) {
+    // Don't send when it's closed.
+    if (this.socket.readyState != 1 || this.lastState == false) return;
+
     const json = JSON.parse(data)
     this.socket.send(JSON.stringify({ PAYLOAD: 2, data: json }))
   }

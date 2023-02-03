@@ -22,10 +22,13 @@ export default class Sidebar extends React.Component {
   constructor (props) {
     super(props)
     this.state = { page: 0, connected: false }
-
     this.handleChange = this.handleChange.bind(this)
-
     this.pages = [this.homePage()];
+
+    app.subscribeToClientConnection(() => {
+      console.log(app.global.connected)
+      this.setState({ connected: app.global.connected })
+    })
   }
 
   shouldComponentUpdate (_, nextState) {
@@ -50,6 +53,7 @@ export default class Sidebar extends React.Component {
   }
 
   homePage () {
+    console.log(app.global.connected)
     return (
       <>
         {app.global.connected ? <PlayerList /> : <p>Connect to a tracker to see the player list.</p>}

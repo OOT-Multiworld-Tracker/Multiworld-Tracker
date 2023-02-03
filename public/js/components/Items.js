@@ -9,7 +9,6 @@ export default class Items extends React.Component {
   static contextType = LanguageContext
   constructor () {
     super()
-    console.log("Items")
     this.state = { items: app.local.world.save }
 
     this.onWorldUpdate = this.onWorldUpdate.bind(this)

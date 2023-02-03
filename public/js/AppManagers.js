@@ -77,12 +77,13 @@ export class KeyManager {
 export class ItemManager {
   constructor (world) {
     this.makeItems();
+    console.log(this)
   }
 
   makeItems () {
     GameManager.GetSelectedGame().items.forEach ( (item) => { 
       if (typeof item !== 'object') // No special manipulations.
-        return this[item.toLowerCase()] = new Item(item, [0, 1]);
+        return this[item.toLowerCase().replace(/ /g, "")] = new Item(item, [0, 1]);
 
       return this.addItem (item)
     });
@@ -92,11 +93,11 @@ export class ItemManager {
       const values = item.values;
 
       if (item.type && item.type == 'dungeon')
-        return this[item.name.toLowerCase()] = new KeyManager(item.name, item.max);
+        return this[item.name.toLowerCase().replace(/ /g, "")] = new KeyManager(item.name, item.max);
 
       const category = item.category || null;
 
-      this[item.name.toLowerCase()] = new Item(item.name, values, category);
+      this[item.name.toLowerCase().replace(/ /g, "")] = new Item(item.name, values, category);
   }
 
   MakeSpecialValues (value, values) {
@@ -236,8 +237,8 @@ export class LocationManager {
    */
   CheckItem (log) {
     if (!this.world) return;
-    if (!this.world.items[log.name.toLowerCase()]) return console.warn("Item not found: " + log.name);
-    if (this.world.items[log.name.toLowerCase()].Index() >= log.index) return true;
+    if (!this.world.items[log.name.toLowerCase().replace(/ /g, "")]) return console.warn("Item not found: " + log.name.toLowerCase().replace(/ /g, ""));
+    if (this.world.items[log.name.toLowerCase().replace(/ /g, "")].Index() >= log.index) return true;
     return false;
   }
 

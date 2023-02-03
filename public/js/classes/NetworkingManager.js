@@ -28,8 +28,8 @@ export class NetworkManager {
           )
 
           Object.keys(items).forEach((key) => {
-            if (this.app.local.world.items[key] === undefined) return // Ignore any keys not within the item manager.
-            this.app.local.world.items[key].Set(items[key] * 1)
+            if (this.app.local.world.items[key.toLowerCase()] === undefined) return // Ignore any keys not within the item manager.
+            this.app.local.world.items[key.toLowerCase()].Set(items[key] * 1)
           })
 
           this.app.global.world = parsed.data.world-1

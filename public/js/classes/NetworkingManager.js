@@ -36,7 +36,6 @@ export class NetworkManager {
 
           for (let i=this.app.global.world; i>this.app.worlds.length-1; i--) {
             this.app.worlds.unshift(new GameWorld(this.app))
-            this.app.call('world update')
           }
 
           this.app.local.world.save = parsed.data.save // Overwrite the local save with the parsed save.

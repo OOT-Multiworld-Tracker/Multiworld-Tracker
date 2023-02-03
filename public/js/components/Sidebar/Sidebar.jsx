@@ -23,12 +23,7 @@ export default class Sidebar extends React.Component {
     super(props)
     this.state = { page: 0, connected: false }
     this.handleChange = this.handleChange.bind(this)
-    this.pages = [this.homePage()];
-
-    app.subscribeToClientConnection(() => {
-      console.log(app.global.connected)
-      this.setState({ connected: app.global.connected })
-    })
+    this.pages = [this.homePage];
   }
 
   shouldComponentUpdate (_, nextState) {
@@ -40,12 +35,19 @@ export default class Sidebar extends React.Component {
   componentDidMount () {
     app.subscribeToClientConnection((connected) => {
       this.setState({ connected })
+      this.forceUpdate();
     });
-    this.pages = [this.homePage(), this.savePage(), null, this.itemPage(), this.settingsPage(), this.accountPage()]
+    this.pages = [this.homePage, this.savePage, null, this.itemPage, this.settingsPage, this.accountPage]
+    app.local.world.subscribeSync(() => {
+      this.forceUpdate();
+    })
+    app.local.world.subscribeChangeScene(() => {
+      this.forceUpdate();
+    })
   }
 
   renderPage () {
-    return this.pages[parseInt(this.state.page)]
+    return this.pages[parseInt(this.state.page)]();
   }
 
   handleChange (e) {
@@ -53,7 +55,6 @@ export default class Sidebar extends React.Component {
   }
 
   homePage () {
-    console.log(app.global.connected)
     return (
       <>
         {app.global.connected ? <PlayerList /> : <p>Connect to a tracker to see the player list.</p>}

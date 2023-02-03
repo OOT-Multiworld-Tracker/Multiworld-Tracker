@@ -9,6 +9,7 @@ export default class Items extends React.Component {
   static contextType = LanguageContext
   constructor () {
     super()
+    console.log("Items")
     this.state = { items: app.local.world.save }
 
     this.onWorldUpdate = this.onWorldUpdate.bind(this)
@@ -30,12 +31,12 @@ export default class Items extends React.Component {
     return (
       <div key={item.name+index} className={`grid-item${item.Index() > 0 ? " active" : ""}`}
         onClick={() => {item.Toggle(); this.setState({ items: app.local.world.save }); app.call('world update')}}>
-
+          
           <div style={{backgroundImage: `url("data:image/png;base64,${item.Icon()}")`}}>
             { item.values.length > 2 && item.Index ( ) > 0 && 
               <span>
                 { (typeof item.value != "number") ? item.value.slice ( 0, 1 ) : item.value } 
-                { showMax ? " / " + item.values.length - 1 : "" }
+                { showMax ? " / " + (parseInt(item.values.length) - 1) : "" }
               </span>
             }
           </div>

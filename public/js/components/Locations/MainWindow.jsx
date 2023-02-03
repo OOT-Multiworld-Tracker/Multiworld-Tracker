@@ -59,14 +59,14 @@ export default class MainWindow extends Component {
 
   walkthrough() {
     return (
-      <div style={{ overflowY: 'auto' }}><List>{Object.values(app.walkthrough).map((step, index) => {
+      <List>{Object.values(app.walkthrough).map((step, index) => {
         return (
           <>
             <WalkthroughLocation type="header" name={index == 0 ? "Skips" : `Sphere ${index}`} />
             {Object.entries(step).filter((walk) => !walk[1].completed).map((walk) => (<WalkthroughLocation name={walk[0]} />))}
           </>
         )
-      })}</List></div>)
+      })}</List>)
   }
 
   locations() {

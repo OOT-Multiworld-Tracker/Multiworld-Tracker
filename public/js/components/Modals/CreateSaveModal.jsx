@@ -1,6 +1,7 @@
 import React from 'react'
 import { SaveUtils } from '../../app'
 import Modal from './BaseModal'
+import PropTypes from 'prop-types'
 
 export default class CreateSaveModal extends React.Component {
   constructor (props) {
@@ -23,4 +24,9 @@ export default class CreateSaveModal extends React.Component {
       />
     )
   }
+}
+
+// props validation
+CreateSaveModal.propTypes = {
+  onSave: PropTypes.func.isRequired
 }

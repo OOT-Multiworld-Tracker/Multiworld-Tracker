@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 export default class Modal extends React.Component {
   render () {
@@ -10,4 +11,12 @@ export default class Modal extends React.Component {
       </div>
     )
   }
+}
+
+// prop validations
+Modal.propTypes = {
+  title: PropTypes.string,
+  content: PropTypes.string,
+  footer: PropTypes.string,
+  onClick: PropTypes.func
 }

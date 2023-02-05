@@ -32,7 +32,7 @@ export class NetworkManager {
             this.app.local.world.items[key.toLowerCase()].Set(items[key] * 1)
           })
 
-          this.app.global.world = parsed.data.world-1
+          this.app.global.world = parsed.data.world - 1
 
           for (let i = this.app.global.world; i > this.app.worlds.length - 1; i--) {
             this.app.worlds.unshift(new GameWorld(this.app))
@@ -51,7 +51,7 @@ export class NetworkManager {
           this.app.lastEvent = { payload: parsed.payload, scene: parsed.data.scene, data: JSON.parse(parsed.data.data) } // Make data to be created.
 
           this.app.local.world.locations.Accessible(false, false, parsed.data.scene).forEach((location) => {
-            if (JSON.stringify(location.event.data) == JSON.stringify(this.app.lastEvent.data)) location.completed = true // If the events match then mark as complete.
+            if (JSON.stringify(location.event.data) === JSON.stringify(this.app.lastEvent.data)) location.completed = true // If the events match then mark as complete.
           })
 
           this.app.local.world.Sync()
@@ -72,7 +72,7 @@ export class NetworkManager {
 
         case ElectronPayloads.OTHER_TRACKER_UPDATE:
           if (this.app.worlds[parsed.data.world] === this.app.local.world) { return } // Prevent lost progress through mistakes or attempted trolls.
-          if (this.app.worlds.length-1 < parsed.data.world) { this.app.worlds.push(new GameWorld(this.app)) }
+          if (this.app.worlds.length - 1 < parsed.data.world) { this.app.worlds.push(new GameWorld(this.app)) }
           this.app.worlds[parsed.data.world].save = parsed.data.save
           this.app.worlds[parsed.data.world].scene = parsed.data.scene
 
@@ -94,8 +94,8 @@ export class NetworkManager {
   }
 
   HasEntrance (from, to) {
-    console.log(this.app.global.entrances.find((entrance) => entrance[0] == from && entrance[1] == to));
-    return this.app.global.entrances.find((entrance) => entrance[0] == from && entrance[1] == to) !== undefined
+    console.log(this.app.global.entrances.find((entrance) => entrance[0] === from && entrance[1] === to))
+    return this.app.global.entrances.find((entrance) => entrance[0] === from && entrance[1] === to) !== undefined
   }
 
   /**

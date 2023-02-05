@@ -12,9 +12,9 @@ export default class Header extends PureComponent {
     this.handleStatusUpdate = this.handleStatusUpdate.bind(this)
   }
 
-  handleStatusUpdate(status) {
+  handleStatusUpdate (status) {
     this.setState({ connected: status })
-    app.global.connected = status;
+    app.global.connected = status
   }
 
   componentDidMount () {

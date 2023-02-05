@@ -1,11 +1,12 @@
-import React, {Component} from 'react'
+/* eslint-disable no-undef */
+import React, { Component } from 'react'
 import app from '../app'
 import ModalLayer from './ModalLayer'
 import SaveModal from './Modals/SaveModal'
 import CreateSaveModal from './Modals/CreateSaveModal'
 import ItemModal from './Modals/ItemModal'
 import Sidebar from './Sidebar/Sidebar'
-import { init, ErrorBoundary } from '@sentry/react'
+import { init } from '@sentry/react'
 import { Integrations } from '@sentry/tracing'
 import SpoilerModal from './Modals/LoadSpoiler'
 import Parser from '../classes/Parser'
@@ -33,7 +34,7 @@ export default class Application extends Component {
   constructor () {
     super()
 
-    this.state = { 
+    this.state = {
       world: app.local.world,
       dropdown: false,
       display: 0,
@@ -42,7 +43,7 @@ export default class Application extends Component {
 
     this.language = {
       language: 'en_us',
-      languageChange: (e) => { this.language.language = e.target.value; this.forceUpdate();},
+      languageChange: (e) => { this.language.language = e.target.value; this.forceUpdate() },
       i: (key) => { return GetTranslation(this.language.language, key) }
     }
 
@@ -60,6 +61,7 @@ export default class Application extends Component {
     this.selectedLocation = 0
     this.selectedSave = 0
 
+    this.spoilerButton = document.getElementById('spoiler')
   }
 
   handleModal (e) {
@@ -116,7 +118,7 @@ export default class Application extends Component {
 
   handleLoadSpoiler (e, options) {
     app.worlds = this.log.worlds
-    if (!app.worlds[0]) app.worlds = [new GameWorld(app)];
+    if (!app.worlds[0]) app.worlds = [new GameWorld(app)]
     app.global.settings = this.log.settings
     app.local.world = app.worlds[app.global.world]
 

@@ -4,8 +4,7 @@ import Saves from '../Saves'
 import Items from '../Items'
 import Dungeons from '../Dungeon'
 import Settings from '../Settings'
-import LanguageContext from '../LanguageContext'
-import {GetLanguages} from '../../classes/Translator'
+import { GetLanguages } from '../../classes/Translator'
 import { ErrorBoundary } from '@sentry/react'
 
 import './Sidebar.css'
@@ -17,19 +16,20 @@ import LocationHint from './LocationHint'
 import GameManager from '../../classes/GameManager'
 import { GameWorld } from '../../classes/GameWorld'
 
+import PropTypes from 'prop-types'
+
 export default class Sidebar extends React.Component {
-  static contextType = LanguageContext
   constructor (props) {
     super(props)
     this.state = { page: 0, connected: false }
 
     this.handleChange = this.handleChange.bind(this)
 
-    this.pages = [this.homePage];
+    this.pages = [this.homePage]
   }
 
   shouldComponentUpdate (_, nextState) {
-    if (JSON.stringify(this.state) != JSON.stringify(nextState)) return true
+    if (JSON.stringify(this.state) !== JSON.stringify(nextState)) return true
 
     return false
   }
@@ -37,19 +37,19 @@ export default class Sidebar extends React.Component {
   componentDidMount () {
     app.subscribeToClientConnection((connected) => {
       this.setState({ connected })
-      this.forceUpdate();
-    });
+      this.forceUpdate()
+    })
     this.pages = [this.homePage, this.savePage, null, this.itemPage, this.settingsPage, this.accountPage]
     app.local.world.subscribeSync(() => {
-      this.forceUpdate();
+      this.forceUpdate()
     })
     app.local.world.subscribeChangeScene(() => {
-      this.forceUpdate();
+      this.forceUpdate()
     })
   }
 
   renderPage (props) {
-    return this.pages[parseInt(this.state.page)](props);
+    return this.pages[parseInt(this.state.page)](props)
   }
 
   handleChange (e) {
@@ -61,7 +61,7 @@ export default class Sidebar extends React.Component {
       <>
         {app.global.connected ? <PlayerList /> : <p>Connect to a tracker to see the player list.</p>}
         <LocationHint />
-        { (app.global.settings.entranceSanity && app.global.settings.entranceSanity.value == true) && <EntranceRandomizer />}
+        { (app.global.settings.entranceSanity && app.global.settings.entranceSanity.value === true) && <EntranceRandomizer />}
       </>
     )
   }
@@ -89,10 +89,10 @@ export default class Sidebar extends React.Component {
   settingsPage (props) {
     return (
       <>
-        <input type='file' id='spoiler' onChange={ (e) => props.onSpoilerUpload(e) } accept='.json' style={{display: 'none'}} />
-        <select className='btn btn-default form-control' style={{width: '100%'}} onChange={(e) => this.context.languageChange(e)}>{GetLanguages().map((lang) => <option key={lang} value={lang}>{lang}</option>)}</select>
-        <select className='btn btn-default form-control' value={GameManager.GetSelectedGame().name} style={{width: '100%'}} onChange={(e) => { GameManager.SetSelectedGame(e.target.value); app.worlds = [new GameWorld(app)]; app.local.world = app.worlds[0]; app.global.settings.makeSettings(); app.call('locations update') }}>{GameManager.GetGames().map((game, index) => { console.log(game); return (<option key={index} value={game.name}>{game.name}</option>)})}</select>
-        <button className='btn btn-default form-control' style={{width: '100%', borderBottom: '1px solid #555'}} onClick={(e) => $('#spoiler').click()}>Upload Spoiler Log</button>
+        <input type='file' id='spoiler' onChange={ (e) => props.onSpoilerUpload(e) } accept='.json' style={{ display: 'none' }} />
+        <select className='btn btn-default form-control' style={{ width: '100%' }} onChange={(e) => this.context.languageChange(e)}>{GetLanguages().map((lang) => <option key={lang} value={lang}>{lang}</option>)}</select>
+        <select className='btn btn-default form-control' value={GameManager.GetSelectedGame().name} style={{ width: '100%' }} onChange={(e) => { GameManager.SetSelectedGame(e.target.value); app.worlds = [new GameWorld(app)]; app.local.world = app.worlds[0]; app.global.settings.makeSettings(); app.call('locations update') }}>{GameManager.GetGames().map((game, index) => { console.log(game); return (<option key={index} value={game.name}>{game.name}</option>) })}</select>
+        <button className='btn btn-default form-control' style={{ width: '100%', borderBottom: '1px solid #555' }} onClick={(e) => document.getElementById('spoiler').click()}>Upload Spoiler Log</button>
         <Settings settings={app.global.settings} />
         <hr />
         <Dungeons />
@@ -120,4 +120,13 @@ export default class Sidebar extends React.Component {
         </div>
     )
   }
+}
+
+// Sidebar props
+Sidebar.propTypes = {
+  saves: PropTypes.array,
+  onModal: PropTypes.func,
+  onSave: PropTypes.func,
+  onLogin: PropTypes.func,
+  onSpoilerUpload: PropTypes.func
 }

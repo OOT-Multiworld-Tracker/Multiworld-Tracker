@@ -1,5 +1,6 @@
-import React, { Component } from "react";
-import Header from "../Header";
+import React, { Component } from 'react'
+import Header from '../Header'
+import PropTypes from 'prop-types'
 
 export default class Window extends Component {
   render () {
@@ -16,4 +17,10 @@ export default class Window extends Component {
         </div>
     )
   }
-} 
+}
+
+// Window props validation
+Window.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  children: PropTypes.node.isRequired
+}

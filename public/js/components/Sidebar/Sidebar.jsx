@@ -22,7 +22,9 @@ export default class Sidebar extends React.Component {
   constructor (props) {
     super(props)
     this.state = { page: 0, connected: false }
+
     this.handleChange = this.handleChange.bind(this)
+
     this.pages = [this.homePage];
   }
 
@@ -46,8 +48,8 @@ export default class Sidebar extends React.Component {
     })
   }
 
-  renderPage () {
-    return this.pages[parseInt(this.state.page)]();
+  renderPage (props) {
+    return this.pages[parseInt(this.state.page)](props);
   }
 
   handleChange (e) {
@@ -83,10 +85,10 @@ export default class Sidebar extends React.Component {
     )
   }
 
-  settingsPage () {
+  settingsPage (props) {
     return (
       <>
-        <input type='file' id='spoiler' onChange={(e) => this.props.onSpoilerUpload(e)} accept='.json' style={{display: 'none'}} />
+        <input type='file' id='spoiler' onChange={ (e) => props.onSpoilerUpload(e) } accept='.json' style={{display: 'none'}} />
         <select className='btn btn-default form-control' style={{width: '100%'}} onChange={(e) => this.context.languageChange(e)}>{GetLanguages().map((lang) => <option key={lang} value={lang}>{lang}</option>)}</select>
         <select className='btn btn-default form-control' value={GameManager.GetSelectedGame().name} style={{width: '100%'}} onChange={(e) => { GameManager.SetSelectedGame(e.target.value); app.worlds = [new GameWorld(app)]; app.local.world = app.worlds[0]; app.global.settings.makeSettings(); app.call('locations update') }}>{GameManager.GetGames().map((game, index) => { console.log(game); return (<option key={index} value={game.name}>{game.name}</option>)})}</select>
         <button className='btn btn-default form-control' style={{width: '100%', borderBottom: '1px solid #555'}} onClick={(e) => $('#spoiler').click()}>Upload Spoiler Log</button>
@@ -112,7 +114,7 @@ export default class Sidebar extends React.Component {
             <SidebarButtons onChange={(e) => this.handleChange(e)} />
           </ErrorBoundary>
           <div style={{ overflowY: 'auto', height: '95%' }}>
-            {this.renderPage()}
+            {this.renderPage(this.props)}
           </div>
         </div>
     )

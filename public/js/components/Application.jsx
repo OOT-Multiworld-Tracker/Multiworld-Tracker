@@ -118,6 +118,7 @@ export default class Application extends Component {
     app.worlds = this.log.worlds
     if (!app.worlds[0]) app.worlds = [new GameWorld(app)];
     app.global.settings = this.log.settings
+    app.local.world = app.worlds[app.global.world]
 
     if (options.automark) {
       app.worlds.forEach((world) => {
@@ -156,7 +157,7 @@ export default class Application extends Component {
 
   render () {
     if (app.global.settings.popout) return <Window onClick={this.handleWindowClick}><MainWindow dropDownOpen={this.state.dropdown} onContextMenu={this.handleContextMenu} onDropdownClick={this.handleDropdown} /></Window>
-    
+
     return (
       <LanguageContext.Provider value={this.language}>
         <Window onClick={this.handleWindowClick}>

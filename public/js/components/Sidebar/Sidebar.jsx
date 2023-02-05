@@ -85,6 +85,7 @@ export default class Sidebar extends React.Component {
     )
   }
 
+  // Renderer for settings page
   settingsPage (props) {
     return (
       <>

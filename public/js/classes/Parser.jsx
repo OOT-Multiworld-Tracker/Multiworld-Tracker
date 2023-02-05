@@ -8,20 +8,21 @@ export default class Parser {
 
     spoiler.settings = new SettingsManager(log.settings)
     spoiler.log = log
-    console.log(log);
 
+    // Holds the data for the walkthrough to be parsed.
     app.walkthrough = log[":playthrough"]
+
     spoiler.seed = log[':seed']
     spoiler.worlds = [];
     
     if (!log.locations) return spoiler;
 
+    // multi world.
     if (spoiler.log.settings.world_count > 1) {
       spoiler.worlds = []
 
-      for (let i = 0; i < spoiler.log.settings.world_count; i++) {
-        spoiler.worlds.push(new GameWorld(app))
-      }
+      // Push each of the worlds into the list.
+      for (let i = 0; i < spoiler.log.settings.world_count; i++) spoiler.worlds.push(new GameWorld(app))
 
       Object.keys(log.locations).forEach((world, windex) => {
         Object.values(log.locations[world]).forEach((locale, index) => {
@@ -35,10 +36,8 @@ export default class Parser {
           spoiler.worlds[index].dungeons[i].mq = world[Object.keys(world)[i]] === 'mq'
         }
       })
-    } else {
+    } else { // single-world
       spoiler.worlds = app.worlds;
-
-      console.log(spoiler);
 
       for (let i = 0; i < Object.keys(spoiler.log.dungeons).length; i++) {
         spoiler.worlds[0].dungeons[i].mq = log.dungeons[Object.keys(log.dungeons)[i]] === 'mq'

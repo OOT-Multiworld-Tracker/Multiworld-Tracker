@@ -119,8 +119,6 @@ export default class Application extends Component {
     if (!app.worlds[0]) app.worlds = [new GameWorld(app)];
     app.global.settings = this.log.settings
 
-    if (!options.dungeons) app.worlds[0].dungeons = [{ name: 'Deku Tree', mq: false }, { name: "Dodongo's Cave", mq: false }, { name: 'Bottom of the Well', mq: false }, { name: "Jabu Jabu's Belly", mq: false }, { name: 'Forest Temple', mq: false }, { name: 'Fire Temple', mq: false }, { name: 'Water Temple', mq: false }, { name: 'Shadow Temple', mq: false }, { name: 'Spirit Temple', mq: false }, { name: 'Ice Cavern', mq: false }, { name: 'GTG', mq: false }, { name: "Ganon's Castle", mq: false }]
-
     if (options.automark) {
       app.worlds.forEach((world) => {
         world.locations.Array().forEach((locale) => {
@@ -132,6 +130,10 @@ export default class Application extends Component {
     $('#spoiler').value = null
     this.handleModal(e)
     this.setState({ world: app.local.world, locations: app.local.world.locations })
+
+    // call two update type events.
+    app.call('locations update')
+    app.call('settings update')
   }
 
   getModal () {
@@ -154,6 +156,7 @@ export default class Application extends Component {
 
   render () {
     if (app.global.settings.popout) return <Window onClick={this.handleWindowClick}><MainWindow dropDownOpen={this.state.dropdown} onContextMenu={this.handleContextMenu} onDropdownClick={this.handleDropdown} /></Window>
+    
     return (
       <LanguageContext.Provider value={this.language}>
         <Window onClick={this.handleWindowClick}>

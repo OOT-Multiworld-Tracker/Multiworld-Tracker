@@ -136,6 +136,7 @@ export class LocationManager {
     this.CheckMixin = this.CheckMixin.bind(this)
     this.CheckLogic = this.CheckLogic.bind(this)
     this.CheckItem = this.CheckItem.bind(this)
+    this.CheckSetting = this.CheckSetting.bind(this)
   }
 
   /**

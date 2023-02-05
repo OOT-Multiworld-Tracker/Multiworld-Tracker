@@ -26,7 +26,6 @@ class AppSubscriptions extends Subscription {
 export class App extends AppSubscriptions {
   constructor () {
     super()
-    console.log("app")
 
     this.local = {
       world: new GameWorld(this),
@@ -169,7 +168,6 @@ export class SaveUtils {
         app.worlds[index].locations.Set(world.locations)
       })
 
-      console.log(app);
       app.saveLoad.call('load', file)
       return resolve(file)
     })

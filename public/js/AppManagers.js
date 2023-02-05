@@ -77,7 +77,6 @@ export class KeyManager {
 export class ItemManager {
   constructor (world) {
     this.makeItems();
-    console.log(this)
   }
 
   makeItems () {
@@ -125,7 +124,6 @@ export class LocationManager {
      * @type {GameWorld}
      */
     this.world = world || new GameWorld();
-    console.log(this.world)
 
     /**
      * The locations in this world.
@@ -296,7 +294,6 @@ export class LocationManager {
   }
 
   Set (locations) {
-    console.log(locations);
     locations.forEach((location, index) => 
           Object.assign(this.locations.get(String(index)), location))
   }

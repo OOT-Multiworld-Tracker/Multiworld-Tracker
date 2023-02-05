@@ -282,7 +282,7 @@ export class LocationManager {
    * @returns {Location[]}
    */
   Get (completed = false, scene = -1) {
-    return this.Array().filter(location => (location.scene == scene || scene == -1) && location.completed === completed)
+    return this.Array().filter(location => (location.scene === scene || scene === -1) && location.completed === completed)
   }
 
   Set (locations) {

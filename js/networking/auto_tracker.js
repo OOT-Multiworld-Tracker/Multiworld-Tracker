@@ -12,7 +12,7 @@ class AutoTracker extends EventEmitter {
   }
 
   Connect () {
-    this.socket = new WebSocket(`ws://localhost:${process.argv[2] || 8080}`)
+    this.socket = new WebSocket(`ws://localhost:8080`)
     this.socket.onerror = () => { console.log('Failed to connect to client') }
     this.socket.onclose = () => { console.log('Disconnected from client'); setTimeout(() => this.Connect(), 10000); if(this.lastState == true) this.emit('tracker status', false); this.lastState = false; }
     this.socket.on('open', _ => {
@@ -26,6 +26,9 @@ class AutoTracker extends EventEmitter {
   }
 
   Send (data) {
+    // Don't send when it's closed.
+    if (this.socket.readyState != 1 || this.lastState == false) return;
+
     const json = JSON.parse(data)
     this.socket.send(JSON.stringify({ PAYLOAD: 2, data: json }))
   }

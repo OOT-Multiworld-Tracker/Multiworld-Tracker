@@ -28,15 +28,14 @@ export class NetworkManager {
           )
 
           Object.keys(items).forEach((key) => {
-            if (this.app.local.world.items[key] === undefined) return // Ignore any keys not within the item manager.
-            this.app.local.world.items[key].Set(items[key] * 1)
+            if (this.app.local.world.items[key.toLowerCase()] === undefined) return // Ignore any keys not within the item manager.
+            this.app.local.world.items[key.toLowerCase()].Set(items[key] * 1)
           })
 
           this.app.global.world = parsed.data.world-1
 
           for (let i=this.app.global.world; i>this.app.worlds.length-1; i--) {
             this.app.worlds.unshift(new GameWorld(this.app))
-            this.app.call('world update')
           }
 
           this.app.local.world.save = parsed.data.save // Overwrite the local save with the parsed save.

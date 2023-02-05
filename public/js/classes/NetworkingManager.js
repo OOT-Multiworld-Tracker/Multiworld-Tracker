@@ -10,71 +10,81 @@ export class NetworkManager {
      */
     this.app = app
 
-    require('electron').ipcRenderer.on('packet', this.OnPacket) // Start intaking packets.
-  }
+    require('electron').ipcRenderer.on('packet', (_, data) => {
+      const parsed = JSON.parse(String(data))
+      let items
 
-  OnSaveUpdated (data) {
-    const items = Object.assign({}, // Assign all of the items to the savefile.
-      data.save.questStatus,
-      data.save.inventory,
-      data.save.boots,
-      data.save.shields,
-      data.save.tunics,
-      data.save.swords
-    )
+      console.log(parsed)
 
-    this.app.local.world.items.Set(items)
-    this.app.global.world = data.world-1
+      switch (parsed.payload) {
+        case ElectronPayloads.SAVE_UPDATED:
+          items = Object.assign({}, // Assign all of the items to the savefile.
+            parsed.data.save.questStatus,
+            parsed.data.save.inventory,
+            parsed.data.save.boots,
+            parsed.data.save.shields,
+            parsed.data.save.tunics,
+            parsed.data.save.swords
+          )
 
-    for (let i=this.app.global.world; i>this.app.worlds.length-1; i--) {
-      this.app.worlds.unshift(new GameWorld(this.app))
-      this.app.call('world update')
-    }
+          Object.keys(items).forEach((key) => {
+            if (this.app.local.world.items[key.toLowerCase()] === undefined) return // Ignore any keys not within the item manager.
+            this.app.local.world.items[key.toLowerCase()].Set(items[key] * 1)
+          })
 
-    this.app.local.world.save = data.save // Overwrite the local save with the parsed save.
-    this.app.local.world.Sync()
-  }
+          this.app.global.world = parsed.data.world-1
 
-  OnEvent (parsed) {
-    this.app.lastEvent = { payload: parsed.payload, scene: parsed.data.scene, data: JSON.parse(parsed.data.data) } // Make data to be created.
+          for (let i = this.app.global.world; i > this.app.worlds.length - 1; i--) {
+            this.app.worlds.unshift(new GameWorld(this.app))
+          }
 
-    this.app.local.world.locations.Accessible(false, false, parsed.data.scene).forEach((location) => {
-      if (JSON.stringify(location.event.data) == JSON.stringify(this.app.lastEvent.data)) location.completed = true // If the events match then mark as complete.
+          this.app.local.world.save = parsed.data.save // Overwrite the local save with the parsed save.
+          this.app.local.world.Sync()
+          break
+
+        case ElectronPayloads.COLLECTABLE_COLLECTED:
+        case ElectronPayloads.EVENT_TRIGGERED:
+        case ElectronPayloads.SKULLTULA_COLLECTED:
+        case ElectronPayloads.CHEST_OPENED:
+        case ElectronPayloads.SHOPNUT_BOUGHT:
+        case ElectronPayloads.SWITCH_CHANGED:
+          this.app.lastEvent = { payload: parsed.payload, scene: parsed.data.scene, data: JSON.parse(parsed.data.data) } // Make data to be created.
+
+          this.app.local.world.locations.Accessible(false, false, parsed.data.scene).forEach((location) => {
+            if (JSON.stringify(location.event.data) == JSON.stringify(this.app.lastEvent.data)) location.completed = true // If the events match then mark as complete.
+          })
+
+          this.app.local.world.Sync()
+          break
+
+        case ElectronPayloads.SCENE_UPDATED:
+          this.AddEntrance(parsed.data.scene) // Add the entrance to the global entrances.
+          this.app.local.world.scene = parsed.data.scene
+
+          if (this.app.global.settings.followCurrentScene.value === true) this.app.local.world.call('change scene', parsed.data.scene)
+
+          if (this.app.global.settings.entranceSanity.value === true) {
+            this.app.call('entrance update')
+          }
+
+          this.app.local.world.Sync()
+          break
+
+        case ElectronPayloads.OTHER_TRACKER_UPDATE:
+          if (this.app.worlds[parsed.data.world] === this.app.local.world) { return } // Prevent lost progress through mistakes or attempted trolls.
+          if (this.app.worlds.length-1 < parsed.data.world) { this.app.worlds.push(new GameWorld(this.app)) }
+          this.app.worlds[parsed.data.world].save = parsed.data.save
+          this.app.worlds[parsed.data.world].scene = parsed.data.scene
+
+          this.Deserialize(this.app.worlds[parsed.data.world], parsed.data)
+          this.app.worlds[parsed.data.world].call('update')
+          break
+
+        case ElectronPayloads.CONNECTION_UPDATE: // Connection payload
+          this.app.call('connection', parsed.data)
+          break
+      }
     })
-
-    this.app.local.world.Sync()
-  }
-
-  OnSceneUpdate (data) {
-    this.AddEntrance(data.scene) // Add the entrance to the global entrances.
-    this.app.local.world.scene = data.scene
-
-    if (this.app.global.settings.followCurrentScene.value == true) this.app.local.world.call('change scene', data.scene)
-    
-    if (this.app.global.settings.entranceSanity.value == true) 
-      this.app.call('entrance update')
-      
-    this.app.local.world.Sync()
-  }
-
-  OnOtherUpdate (data) { 
-    if (this.app.worlds[data.world] === this.app.local.world) { return } // Prevent lost progress through mistakes or attempted trolls.
-    if (this.app.worlds.length-1 < data.world) { this.app.worlds.push(new GameWorld(this.app)) }
-    this.app.worlds[data.world].save = data.save
-    this.app.worlds[data.world].scene = data.scene
-
-    this.Deserialize(this.app.worlds[data.world], data)
-    this.app.worlds[data.world].call('update')
-  }
-
-  OnPacket (event, data) {
-    const parsed = JSON.parse(String(data))
-
-    if (parsed.payload === ElectronPayloads.SAVE_UPDATED) return this.OnSaveUpdated(parsed.data);
-    else if (parsed.payload === ElectronPayloads.SCENE_UPDATED) return this.OnEvent(parsed);
-    else if (parsed.payload === ElectronPayloads.OTHER_TRACKER_UPDATE) return this.OnOtherUpdate(parsed.data);
-    else if (parsed.payload === ElectronPayloads.CONNECTION_UPDATE) { this.app.call('connection', parsed.data) }
-    else this.OnEvent(parsed);
   }
 
   AddEntrance (to) {
@@ -117,7 +127,7 @@ export class NetworkManager {
       data.save.tunics,
       data.save.swords
     )
-    
+
     Object.keys(items).forEach((key) => {
       if (world.items[key] === undefined) return // Ignore any keys not within the item manager.
       world.items[key].Set(items[key] * 1)

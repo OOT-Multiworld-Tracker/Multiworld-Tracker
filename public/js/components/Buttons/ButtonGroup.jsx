@@ -10,7 +10,7 @@ export default class ButtonGroup extends PureComponent {
      * Create the styling/theming tree
      */
     this.className = [
-      'btn-group'
+      props.fullWidth ? 'btn-group-full-width' : 'btn-group',
     ]
 
     if (this.props.align) this.className.push('pull-' + this.props.align)

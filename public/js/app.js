@@ -1,4 +1,4 @@
-import { SettingsManager, ItemManager } from './AppManagers'
+import { SettingsManager, ItemManager, LocationManager } from './AppManagers'
 import GameManager from './classes/GameManager'
 import { GameWorld } from './classes/GameWorld'
 import { NetworkManager } from './classes/NetworkingManager'
@@ -126,9 +126,10 @@ export class SaveUtils {
         })
       )
 
-      const saveLoc = (JSON.parse(localStorage.saves || [])).find( save => ( save.name === name ) ), // Set a default save state.
+      var saves = JSON.parse(localStorage.saves) || [];
+      var saveLoc = (JSON.parse(localStorage.saves || [])).find( save => ( save.name === name ) ), // Set a default save state.
         save = { name, data: {world: app.global.world, files: saveFiles} };
-      if (!saveLoc) return JSON.parse(localStorage.saves || []).push( save ) // Push into the saves or into an empty array.
+      if (!saveLoc) saves.push( save ) // Push into the saves or into an empty array.
 
       saveLoc = save;
       localStorage.saves = JSON.stringify(saves);
@@ -160,7 +161,9 @@ export class SaveUtils {
         Object.assign(app.worlds[index], world) // Reassign the world to the current world.
 
         app.global.settings = new SettingsManager(world.settings)
-        app.worlds[index].items = new ItemManager(app.worlds[index]).Set(world.items)
+        app.worlds[index].items = new ItemManager(app.worlds[index])
+        app.worlds[index].items.Set(world.items)
+        app.worlds[index].locations = new LocationManager(app.worlds[index])
         app.worlds[index].locations.Set(world.locations)
       })
 

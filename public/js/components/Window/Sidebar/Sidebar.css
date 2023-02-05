@@ -1,0 +1,50 @@
+.pane-md, .sidebar {
+    background-color: #1d1E26;
+    overflow-y: auto;
+    margin: 0;
+    padding: 3px;
+}
+
+.pane-md div .list
+{
+    margin-top: 10px;
+    padding: 0;
+}
+
+.pane-md div .list .list-item
+{
+    padding: 3px;
+}
+
+.scene_name {
+    font-weight: bolder;
+    font-size: 11px;
+}
+
+.location-name img {
+    width: 24px; 
+    height: 32px; 
+    vertical-align: middle; 
+    margin-right: 4px;
+}
+
+.character_name {
+    font-size: 1.2em;
+    font-weight: bold;
+    display: flex;
+    cursor: pointer;
+}
+
+.character_name span {
+    width: 50%
+}
+
+.character_name span:last-child {
+    text-align: right;
+}
+
+.character_name span:last-child span {
+    font-size: 9px;
+    color: #BBB;
+    margin-left: 2px;
+}

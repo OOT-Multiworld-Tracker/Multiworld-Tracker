@@ -13,7 +13,7 @@ class ElectronRenderer extends EventEmitter {
      */
     this.window = null
 
-    app.whenReady().then(async() => {
+    app.whenReady().then(async () => {
       this.CreateWindow()
       app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) {
@@ -39,8 +39,8 @@ class ElectronRenderer extends EventEmitter {
       frame: false,
       webPreferences: { contextIsolation: false, nodeIntegration: true }
     })
-    
-    this.window.openDevTools({mode:'detach'})
+
+    this.window.openDevTools({ mode: 'detach' })
 
     ipcMain.on('packets', (_, data) => {
       if (data.payload === 7) {
@@ -52,10 +52,10 @@ class ElectronRenderer extends EventEmitter {
       else if (data === 'popout') {
         if (this.window.isAlwaysOnTop()) {
           this.window.setAlwaysOnTop(false)
-          this.window.setSize(1024, 748);
+          this.window.setSize(1024, 748)
         } else {
-          this.window.setAlwaysOnTop(true);
-          return this.window.setSize(300, 400);
+          this.window.setAlwaysOnTop(true)
+          return this.window.setSize(300, 400)
         }
       }
 

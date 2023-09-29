@@ -12,7 +12,7 @@ export default function MainHeader ({ type, pageData, onSearch, onSceneUpdate, o
   useEffect(() => {
     function onLocationUpdate () {
       setAccessible(app.local.world.locations.Accessible(false).length)
-      setComplete(app.local.world.locations.Accessible(true).length)
+      setComplete(app.local.world.locations.Completed().length)
     }
 
     // Subscribe to a location update

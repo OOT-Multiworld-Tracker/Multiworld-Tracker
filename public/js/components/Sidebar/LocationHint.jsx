@@ -6,29 +6,29 @@ export default class LocationHint extends Component {
   constructor (props) {
     super(props)
 
-    this.state = { hints: app.local.world.locations.Accessible(false, false, -1).filter((location) => this.getKeyItem((location.item?.item||location.item)||"None")) }
-    this.dismounted = false;
-    this.onLocationUp = this.onLocationUp.bind(this)  
+    this.state = { hints: app.local.world.locations.Accessible(false, false, -1).filter((location) => this.getKeyItem((location.item?.item || location.item) || 'None')) }
+    this.dismounted = false
+    this.onLocationUp = this.onLocationUp.bind(this)
   }
 
   componentDidMount () {
     app.subscribe('locations update', this.onLocationUp)
     app.saveLoad.subscribe('load', this.onLocationUp)
-    this.dismounted = false;
+    this.dismounted = false
   }
 
   componentWillUnmount () {
-    this.dismounted = true;
+    this.dismounted = true
   }
 
   onLocationUp () {
-      if (this.dismounted) return;
+    if (this.dismounted) return
 
-      this.setState({ hints: app.local.world.locations.Accessible(false, false, -1).filter((location) => this.getKeyItem((location.item?.item||location.item)||"None")) })
+    this.setState({ hints: app.local.world.locations.Accessible(false, false, -1).filter((location) => this.getKeyItem((location.item?.item || location.item) || 'None')) })
   }
 
   getKeyItem (name) {
-      return Object.values(app.local.world.items).find(item => { return item.name == name }) != null;
+    return Object.values(app.local.world.items).find(item => { return item.name === name }) != null
   }
 
   render () {
@@ -38,14 +38,14 @@ export default class LocationHint extends Component {
           <div className='list-header'>
               Item Hints
           </div>
-          {app.local.world.locations.Accessible(false, false, -1).filter((location) => this.getKeyItem((location.item?.item||location.item)||"None")).map(
+          {app.local.world.locations.Accessible(false, false, -1).filter((location) => this.getKeyItem((location.item?.item || location.item) || 'None')).map(
             (location) => (
                 <ListItem key={location.name}>
                     <div className='location-name'>
                         <span>{location.name}</span>
                     </div>
-                </ListItem>   
-          ))}
+                </ListItem>
+            ))}
       </List>
     </>
     )

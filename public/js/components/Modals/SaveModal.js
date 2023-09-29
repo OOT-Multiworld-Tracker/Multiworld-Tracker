@@ -3,11 +3,12 @@ import Modal from './BaseModal'
 import { SaveUtils } from '../../app'
 import Player from '../Player'
 import Bar from '../ProgressBar/Bar'
+import PropTypes from 'prop-types'
 
 export default class SaveModal extends React.Component {
   constructor (props) {
     super(props)
-    this.closeModal = this.props.onSaveLoad.bind(this);
+    this.closeModal = this.props.onSaveLoad.bind(this)
   }
 
   render () {
@@ -20,8 +21,8 @@ export default class SaveModal extends React.Component {
         content={
           <>
             <Player save={save} hideWorld={true} />
-            
-            <Bar 
+
+            <Bar
               width={100}
               fill={(save.locations.filter((loc) => (loc.completed && loc.completed === true)).length / save.locations.length) * 100}
             />
@@ -37,4 +38,9 @@ export default class SaveModal extends React.Component {
       />
     )
   }
+}
+
+SaveModal.propTypes = {
+  save: PropTypes.string,
+  onSaveLoad: PropTypes.func
 }

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 // Mixins
 function CanStunDeku (world) {
   return world.items.fairySlingshot.Index() > 0 || world.items.boomerang.Index() > 0 || world.items.dekuSticks.Index() > 0 || (world.items.bombs.Index() > 0 || world.items.bombchus.Index() > 0) || world.items.dekuNuts.Index() > 0 || world.items.dinsFire.Index() > 0 || world.items.kokiriSword.Index() > 0 || world.items.dekuShield.Index() > 0
@@ -8,7 +9,7 @@ function HasExplosives (world) {
 }
 
 function CanDamage (world) {
-  return world.items.kokiriSword.Index() > 0 || world.items.bombchus.Index() > 0 || world.items.bombs.Index() > 0 || world.items.dekuSticks.Index() > 0 || (CanUseMagic(world) && world.items.dinsFire.Index() > 0) || (world.save.age == 1 && world.items.fairySlingshot.Index() > 0)
+  return world.items.kokiriSword.Index() > 0 || world.items.bombchus.Index() > 0 || world.items.bombs.Index() > 0 || world.items.dekuSticks.Index() > 0 || (CanUseMagic(world) && world.items.dinsFire.Index() > 0) || (world.save.age === 1 && world.items.fairySlingshot.Index() > 0)
 }
 
 function CanExitForest (world) {
@@ -16,7 +17,7 @@ function CanExitForest (world) {
 }
 
 function CanLightFires (world) {
-  return world.items.dekuSticks.Index() > 0 || (CanUseMagic(world) && world.items.dinsFire.Index() > 0) || (world.save.age == 1 && CanUseMagic(world) && world.items.fairyBow.Index() > 0 && world.items.fireArrows.Index() > 0)
+  return world.items.dekuSticks.Index() > 0 || (CanUseMagic(world) && world.items.dinsFire.Index() > 0) || (world.save.age === 1 && CanUseMagic(world) && world.items.fairyBow.Index() > 0 && world.items.fireArrows.Index() > 0)
 }
 
 function CanUseMagic (world) {
@@ -24,7 +25,7 @@ function CanUseMagic (world) {
 }
 
 function CanBecomeAdult (world) {
-  return (world.app.global.settings.openDoorOfTime.value == true || (world.items.ocarina.Index() >= 1 && world.items.songOfTime > 0))
+  return (world.app.global.settings.openDoorOfTime.value === true || (world.items.ocarina.Index() >= 1 && world.items.songOfTime > 0))
 }
 
 const entranceLogics = [
@@ -43,16 +44,16 @@ const entranceLogics = [
 ]
 
 function GetDungeonLogic (world, dungeon) {
-  const dung = world.dungeons[dungeon];
-  const entrance = world.dungeons.find((dunge) => dunge.random === world.dungeons.indexOf(dung));
-  
-  if (dung.random && dung.random !== -1 && entrance === undefined) return false; // Don't display if it's swapped.
+  const dung = world.dungeons[dungeon]
+  const entrance = world.dungeons.find((dunge) => dunge.random === world.dungeons.indexOf(dung))
+
+  if (dung.random && dung.random !== -1 && entrance === undefined) return false // Don't display if it's swapped.
 
   return entrance === undefined ? entranceLogics[world.dungeons.indexOf(dung)](world) : entranceLogics[world.dungeons.indexOf(entrance)](world)
 }
 
 function CanEnterDeku (world) {
-  return GetDungeonLogic(world, 0);
+  return GetDungeonLogic(world, 0)
 }
 
 // Area Entry Mixins
@@ -96,18 +97,17 @@ function CanEnterGC (world) {
   return GetDungeonLogic(world, 11)
 }
 
-
 // Area Entry Mixins
 function Dodongo (world) {
   return CanEnterDeathMountain(world) && (world.items.strength.Index() >= 1 || HasExplosives(world))
 }
 
 function Deku (world) {
-  return world.items.kokiriSword.Index() > 0 && world.items.dekuShield.Index() > 0;
+  return world.items.kokiriSword.Index() > 0 && world.items.dekuShield.Index() > 0
 }
 
 function BOTW (world) {
-  return world.items.songOfStorms.Index() > 0;
+  return world.items.songOfStorms.Index() > 0
 }
 
 function CanEnterDeathMountain (world) {
@@ -119,7 +119,7 @@ function CanEnterZorasRiver (world) {
 }
 
 function CanEnterZorasDomain (world) {
-  return world.items.swimming.Index() >= 1 || (HasExplosives(world) || (CanBecomeAdult(world) && world.items.megatonHammer.Index() > 0) && (world.items.ocarina.Index() >= 1 && world.items.sariasSong.Index() > 0))
+  return world.items.swimming.Index() >= 1 || (world.items.ocarina.Index() >= 1 && world.items.sariasSong.Index() > 0)
 }
 
 function Jabu (world) {
@@ -151,7 +151,7 @@ function Shadow (world) {
 }
 
 function Spirit (world) {
-  return (world.items.ocarina.Index() >= 1 && world.items.requiemOfSpirit.Index() > 0) || (CanBecomeAdult(world) && world.items.gerudoMembershipCard.Index() > 0 && (world.items.hookshot.Index() == 2 || world.items.ocarina.Index() >= 1 && world.items.eponasSong.Index() > 0))
+  return (world.items.ocarina.Index() >= 1 && world.items.requiemOfSpirit.Index() > 0) || (CanBecomeAdult(world) && world.items.gerudoMembershipCard.Index() > 0 && (world.items.hookshot.Index() === 2 || (world.items.ocarina.Index() >= 1 && world.items.eponasSong.Index() > 0)))
 }
 
 function GtG (world) {

@@ -22,7 +22,7 @@ export class NetworkManager {
 
       for (const item of items.items) {
         if (!this.app.local.world.items.Get(item.item)) continue
-        this.app.local.world.items.Get(item.item).Toggle()
+        this.app.local.world.items.Get(item.item).Increase()
       }
 
       this.archipelago.locations.checked.forEach((location) => {

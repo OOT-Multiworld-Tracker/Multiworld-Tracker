@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
-import { GetTranslation } from '../../../classes/Translator';
+import { GetTranslation } from '../../../classes/Translator'
+import PropTypes from 'prop-types'
 
 import './Sidebar.css'
 import Pages from './SidebarPages/Pages'
 
 export default function Sidebar ({ connected }) {
-  const [page, setPage] = useState(0);
-  const pages = [<Pages.Home connected={connected} key={0} />, <Pages.Saves key={1} />, null, this.itemPage(), this.settingsPage(), this.accountPage()];
+  const [page, setPage] = useState(0)
+  const pages = [<Pages.Home connected={connected} key={0} />, <Pages.Saves key={1} />, null, this.itemPage(), this.settingsPage(), this.accountPage()]
 
   return (
     <div className='pane-md' style={{ minWidth: '240px' }}>
@@ -14,6 +15,10 @@ export default function Sidebar ({ connected }) {
       {pages[page]}
     </div>
   )
+}
+
+Sidebar.propTypes = {
+  connected: PropTypes.bool.isRequired
 }
 
 Sidebar.Dropdown = function SidebarDropdown ({ onChange }) {
@@ -26,4 +31,8 @@ Sidebar.Dropdown = function SidebarDropdown ({ onChange }) {
       <option value='5'>{GetTranslation(this.context.language, 'My Account')}</option>
     </select>
   )
+}
+
+Sidebar.Dropdown.propTypes = {
+  onChange: PropTypes.func.isRequired
 }

@@ -30,10 +30,9 @@ export default class PlayerList extends React.Component {
 
   render () {
     return this.state.worlds.map(
-        (world, index) => 
-        { 
-            return <Player key={index} current={world == app.local.world} world={index} save={world.save} /> 
-        }
+      (world, index) => {
+        return <Player key={index} current={world === app.local.world} world={index} save={world.save} />
+      }
     )
   }
 }

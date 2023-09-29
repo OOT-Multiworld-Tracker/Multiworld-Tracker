@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 
 import './Button.css'
 
@@ -29,4 +30,12 @@ export default class Button extends PureComponent {
       </button>
     )
   }
+}
+
+Button.propTypes = {
+  align: PropTypes.oneOf(['left', 'right']),
+  children: PropTypes.node,
+  onClick: PropTypes.func,
+  style: PropTypes.object,
+  theme: PropTypes.oneOf(['default', 'primary', 'success', 'info', 'warning', 'danger', 'link'])
 }

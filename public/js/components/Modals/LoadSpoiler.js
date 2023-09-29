@@ -1,5 +1,7 @@
+/* eslint-disable no-undef */
 import React from 'react'
 import Modal from './BaseModal'
+import PropTypes from 'prop-types'
 
 export default class SpoilerModal extends React.Component {
   loadSpoiler (e) {
@@ -28,4 +30,9 @@ export default class SpoilerModal extends React.Component {
       />
     )
   }
+}
+
+SpoilerModal.propTypes = {
+  log: PropTypes.object,
+  onSaveLoad: PropTypes.func
 }

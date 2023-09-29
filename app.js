@@ -2,6 +2,7 @@
  * @type{import('./public/networking/auto_tracker')}
  */
 const AutoTracker = new (require('./js/networking/auto_tracker'))()
+// eslint-disable-next-line no-unused-vars
 const WebServer = new (require('./js/renderer/webserver'))()
 
 /**
@@ -10,7 +11,6 @@ const WebServer = new (require('./js/renderer/webserver'))()
 const Electron = process.type ? new (require('./js/renderer/electron'))() : { on: () => {} }
 
 Electron.on('data', (data) => {
-  if (JSON.parse(data).id === 1) return AutoTracker.Archipelago(data)
   AutoTracker.Send(data)
 })
 

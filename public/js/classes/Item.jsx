@@ -3,16 +3,16 @@ import ValueSwitch from './ValueSwitch'
 import { existsSync, readFileSync } from 'fs'
 
 export class Item extends ValueSwitch {
-  constructor (id, name, value, category=null) {
+  constructor (id, name, value, category = null) {
     super(name, value)
     this.id = id
     this.category = category
   }
 
   Icon () {
-    if (!existsSync(`${GameManager.GetGameDirectory()}\\${GameManager.GetSelectedGame().directory}\\icons\\${this.name.replace(/ /g, '_').toLowerCase()}${(this.Index() > 1 && typeof this.value === 'string') ? `_${this.Index()}` : ""}.png`)) return 'unknown';
+    if (!existsSync(`${GameManager.GetGameDirectory()}\\${GameManager.GetSelectedGame().directory}\\icons\\${this.name.replace(/ /g, '_').toLowerCase()}${(this.Index() > 1 && typeof this.value === 'string') ? `_${this.Index()}` : ''}.png`)) return 'unknown'
 
-    return readFileSync(`${GameManager.GetGameDirectory()}\\${GameManager.GetSelectedGame().directory}\\icons\\${this.name.replace(/ /g, '_').toLowerCase()}${(this.Index() > 1 && typeof this.value === 'string') ? `_${this.Index()}` : ""}.png`, 'base64')
+    return readFileSync(`${GameManager.GetGameDirectory()}\\${GameManager.GetSelectedGame().directory}\\icons\\${this.name.replace(/ /g, '_').toLowerCase()}${(this.Index() > 1 && typeof this.value === 'string') ? `_${this.Index()}` : ''}.png`, 'base64')
   }
 }
 
@@ -39,7 +39,7 @@ export class TradeItem extends Item {
 
 export class Bottle extends Item {
   Icon () {
-    return `/images/bottle.png`
+    return '/images/bottle.png'
   }
 
   constructor (name) {

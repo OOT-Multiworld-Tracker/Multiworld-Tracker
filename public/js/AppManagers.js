@@ -170,6 +170,11 @@ export class LocationManager {
       (location.scene === scene || scene === -1) && (((this.world.app.global.settings.hideUnavaliable && this.world.app.global.settings.hideUnavaliable.value === false) || this.IsAccessible(location, this.world)) && ((complete === false && location.completed === false) || (complete === true && location.completed))))
   }
 
+  Completed (scene = -1) {
+    return this.Array().filter(location =>
+      (location.scene === scene || scene === -1) && location.completed)
+  }
+
   /**
    * List all marked and unmarked by scene
    * @param {*} scene

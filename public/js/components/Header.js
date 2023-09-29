@@ -3,6 +3,7 @@ import app from '../app'
 import Electron from 'electron'
 import ButtonGroup from './Buttons/ButtonGroup'
 import Button from './Buttons/Button'
+import PropTypes from 'prop-types'
 
 export default class Header extends Component {
   constructor (props) {
@@ -41,4 +42,8 @@ export default class Header extends Component {
       </header>
     )
   }
+}
+
+Header.propTypes = {
+  onModal: PropTypes.func
 }

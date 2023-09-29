@@ -11,7 +11,6 @@ import './Sidebar.css'
 import PlayerList from './PlayerList'
 import SidebarButtons from './SidebarButtons'
 import EntranceRandomizer from './EntranceRandomizer'
-import Account from './Account'
 import LocationHint from './LocationHint'
 import GameManager from '../../classes/GameManager'
 import { GameWorld } from '../../classes/GameWorld'
@@ -96,14 +95,6 @@ export default class Sidebar extends React.Component {
         <Settings settings={app.global.settings} />
         <hr />
         <Dungeons />
-      </>
-    )
-  }
-
-  accountPage () {
-    return (
-      <>
-        <Account onLogin={this.props.onLogin} />
       </>
     )
   }

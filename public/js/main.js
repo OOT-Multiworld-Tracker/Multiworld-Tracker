@@ -48,7 +48,7 @@ export class Application extends React.Component {
   constructor () {
     super()
 
-    this.state = { 
+    this.state = {
       world: app.local.world,
       dropdown: false,
       display: 0,
@@ -65,7 +65,7 @@ export class Application extends React.Component {
     this.handleWindowClick = this.handleWindowClick.bind(this)
     this.handleSpoiler = this.handleSpoiler.bind(this)
     this.handleLoadSpoiler = this.handleLoadSpoiler.bind(this)
-    this.handleLogin =  this.handleLogin.bind(this)
+    this.handleLogin = this.handleLogin.bind(this)
 
     this.selectedLocation = 0
     this.selectedSave = 0
@@ -122,6 +122,7 @@ export class Application extends React.Component {
   }
 
   handleSpoiler (e) {
+    // eslint-disable-next-line no-undef
     $.getJSON(URL.createObjectURL(e.target.files[0]), (data) => {
       const log = Parser.ParseSpoiler(data, app)
       this.log = log
@@ -131,7 +132,7 @@ export class Application extends React.Component {
 
   handleLoadSpoiler (e, options) {
     app.worlds = this.log.worlds
-    if (!app.worlds[0]) app.worlds = [new GameWorld(app)];
+    if (!app.worlds[0]) app.worlds = [new GameWorld(app)]
     app.global.settings = this.log.settings
 
     if (!options.dungeons) app.worlds[0].dungeons = [{ name: 'Deku Tree', mq: false }, { name: "Dodongo's Cave", mq: false }, { name: 'Bottom of the Well', mq: false }, { name: "Jabu Jabu's Belly", mq: false }, { name: 'Forest Temple', mq: false }, { name: 'Fire Temple', mq: false }, { name: 'Water Temple', mq: false }, { name: 'Shadow Temple', mq: false }, { name: 'Spirit Temple', mq: false }, { name: 'Ice Cavern', mq: false }, { name: 'GTG', mq: false }, { name: "Ganon's Castle", mq: false }]
@@ -144,6 +145,7 @@ export class Application extends React.Component {
       })
     }
 
+    // eslint-disable-next-line no-undef
     $('#spoiler').value = null
     this.handleModal(e)
     this.setState({ world: app.local.world, locations: app.local.world.locations })

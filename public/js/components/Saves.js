@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import app, { SaveUtils } from '../app'
 import { List, ListItem } from './Lists'
 
@@ -36,4 +37,8 @@ export default class Saves extends React.PureComponent {
       </List>
     )
   }
+}
+
+Saves.propTypes = {
+  onSaveClick: PropTypes.func
 }

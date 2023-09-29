@@ -1,8 +1,7 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import app from '../app'
 import Parser from '../classes/Parser'
-import { GetTranslation } from '../classes/Translator'
-import LanguageContext from '../components/LanguageContext'
 
 import GreenRupee from '../../images/green_rupee.png'
 import BlueRupee from '../../images/blue_rupee.png'
@@ -11,8 +10,6 @@ import HeartContainer from '../../images/container.png'
 import Bar from './ProgressBar/Bar'
 
 export default class Player extends React.Component {
-  static contextType = LanguageContext
-
   constructor (props) {
     super(props)
     this.state = { world: this.props.world, worldState: app.worlds[this.props.world] }
@@ -26,7 +23,7 @@ export default class Player extends React.Component {
 
   // Subscribe to world sync and save load events.
   componentDidMount () {
-    if (!this.props.world) return;
+    if (!this.props.world) return
 
     app.worlds[this.props.world].subscribeMany(['sync', 'update'], this.handleWorldSync)
     app.saveLoad.subscribe('load', this.handleWorldSync)
@@ -34,7 +31,7 @@ export default class Player extends React.Component {
 
   // Unsubscribe from world sync and save load events.
   componentWillUnmount () {
-    if (!this.props.world) return;
+    if (!this.props.world) return
 
     app.worlds[this.props.world].unsubscribeMany(['sync', 'update'], this.handleWorldSync)
     app.saveLoad.unsubscribe('load', this.handleWorldSync)
@@ -44,38 +41,34 @@ export default class Player extends React.Component {
     const elements = []
 
     for (let i = 0; i < number; i++) {
-
       elements.push(<img key={i} className='heart-container' src={HeartContainer} width='16' />)
 
-      if (elements.length === 10) 
-        elements.push(<br />)
-
+      if (elements.length === 10) { elements.push(<br />) }
     }
 
     return elements
   }
 
   render () {
-    let state = this.state.worldState || this.props.save
+    const state = this.state.worldState || this.props.save
 
     return (
       <div className='player'>
-        <div 
+        <div
           className='character_name'
 
           onClick={
             _ => {
-              if (app.worlds.length === 1 || this.props.hideWorld) return; // Don't do anything with a single world.
+              if (app.worlds.length === 1 || this.props.hideWorld) return // Don't do anything with a single world.
 
-              app.local.world = app.worlds[this.props.world]; 
+              app.local.world = app.worlds[this.props.world]
               app.call('view', app.local.world)
             }
           }>
 
-            <span>{(this.props.current) ? // Change name between save name and "You" depending on current.
-              GetTranslation(this.context.language, "You") : state.save.player_name}</span>
+            <span>{(this.props.current) ? 'You' : state.save.player_name}</span>
 
-            {state.items && state.items.wallet && <span style={(state.save.rupee_count === state.items.wallet.value) ? {color: '#e08231'} : null }>
+            {state.items && state.items.wallet && <span style={(state.save.rupee_count === state.items.wallet.value) ? { color: '#e08231' } : null }>
               <img width='16' src={[GreenRupee, BlueRupee, RedRupee][state.items.wallet.Index()]} />
 
               {state.save.rupee_count}
@@ -91,23 +84,30 @@ export default class Player extends React.Component {
           {this.generateContainers(state.save.heart_containers)}
         </div>
 
-        { state.save.magic_meter_size > 0 && 
-          <Bar 
-            length = {50 * state.save.magic_meter_size} 
+        { state.save.magic_meter_size > 0 &&
+          <Bar
+            length = {50 * state.save.magic_meter_size}
             fill = {2 * state.save.magic_current} />
         }
 
-        { app.worlds.length > 1 && 
+        { app.worlds.length > 1 &&
           <span>
-            {GetTranslation(this.context.language, "World")} 
-            {this.state.world+1}
-          </span> 
+            World
+            {this.state.world + 1}
+          </span>
         } <br/>
-        
+
         <span className='scene_name'>
-          {GetTranslation(this.context.language, Parser.ParseScenes()[state.scene].name)}
+          {Parser.ParseScenes()[state.scene].name}
         </span>
       </div>
     )
   }
+}
+
+Player.propTypes = {
+  world: PropTypes.number,
+  save: PropTypes.object,
+  current: PropTypes.bool,
+  hideWorld: PropTypes.bool
 }

@@ -1,18 +1,18 @@
 const lang = {
-    "en_us": {
-      "World": "World",
-      "Saves": "Saves",
-      "Items": "Items",
-      "Settings": "Settings"
-    },
+  en_us: {
+    World: 'World',
+    Saves: 'Saves',
+    Items: 'Items',
+    Settings: 'Settings'
+  },
 
-    "jp_jp": {
-      "World": "ワールド",
-      "Saves": "セーブ",
-      "Items": "所持品",
-      "Settings": "設定",
-      "Deku Nuts": "デクナッツ"
-    }
+  jp_jp: {
+    World: 'ワールド',
+    Saves: 'セーブ',
+    Items: '所持品',
+    Settings: '設定',
+    'Deku Nuts': 'デクナッツ'
+  }
 }
 
 export const GetLanguages = () => {

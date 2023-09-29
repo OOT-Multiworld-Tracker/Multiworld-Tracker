@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 export default class ModalLayer extends React.Component {
   constructor (props) {
@@ -17,4 +18,10 @@ export default class ModalLayer extends React.Component {
         : null
     )
   }
+}
+
+ModalLayer.propTypes = {
+  display: PropTypes.bool,
+  children: PropTypes.node,
+  onOutsideClick: PropTypes.func
 }

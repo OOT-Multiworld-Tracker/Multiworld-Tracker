@@ -23,6 +23,14 @@ export default class ValueSwitch {
     this.value = this.values[index]
   }
 
+  Increase () {
+    const index = this.values.indexOf(this.value)
+
+    if (index + 1 <= this.values.length - 1) {
+      this.value = this.values[index + 1]
+    }
+  }
+
   /**
    * Toggles through the avaliable values
    */
@@ -42,7 +50,6 @@ export default class ValueSwitch {
   Back () {
     const index = this.values.indexOf(this.value)
 
-    if (index - 1 > 0)
-      this.value = this.values[index]
+    if (index - 1 > 0) { this.value = this.values[index] }
   }
 }

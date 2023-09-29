@@ -17,11 +17,14 @@ export default class LoginModal extends React.Component {
         }
         footer={
           <>
-            <button className='btn btn-default' style={{ width: '100%' }} onClick={() => { app.networking.ConnectArchipelago({
-              id: 1,
-              hostname: document.getElementById("hostname").value,
-              port: parseInt(document.getElementById("port").value),
-              username: document.getElementById("username").value})}}>Login</button>
+            <button className='btn btn-default' style={{ width: '100%' }} onClick={() => {
+              app.networking.ConnectArchipelago({
+                id: 1,
+                hostname: document.getElementById('hostname').value,
+                port: parseInt(document.getElementById('port').value),
+                username: document.getElementById('username').value
+              })
+            }}>Login</button>
           </>
         }
       />

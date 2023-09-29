@@ -1,6 +1,7 @@
 import { ElectronPayloads } from '../enum/EnumPayloads'
 import { MapToArray } from '../Utils'
 import { GameWorld } from './GameWorld'
+import { Client, ITEMS_HANDLING_FLAGS, SERVER_PACKET_TYPE } from 'archipelago.js'
 
 export class NetworkManager {
   constructor (app) {
@@ -9,12 +10,32 @@ export class NetworkManager {
      * @type {import ('../app').App}
      */
     this.app = app
+    this.archipelago = new Client()
+
+    this.archipelago.addListener(SERVER_PACKET_TYPE.CONNECTED, () => {
+      console.log('Connected to Archipelago')
+      this.app.call('connection', true)
+    })
+
+    this.archipelago.addListener(SERVER_PACKET_TYPE.RECEIVED_ITEMS, (items) => {
+      this.app.local.world.items.Reset()
+
+      for (const item of items.items) {
+        if (!this.app.local.world.items.Get(item.item)) continue
+        this.app.local.world.items.Get(item.item).Toggle()
+      }
+
+      this.archipelago.locations.checked.forEach((location) => {
+        if (!this.app.local.world.locations.Array().find((local) => local.archi_id === location)) return
+        this.app.local.world.locations.Array().find((local) => local.archi_id === location).completed = true
+      })
+
+      this.app.local.world.call('update')
+    })
 
     require('electron').ipcRenderer.on('packet', (_, data) => {
       const parsed = JSON.parse(String(data))
       let items
-
-      console.log(parsed)
 
       switch (parsed.payload) {
         case ElectronPayloads.SAVE_UPDATED:
@@ -84,6 +105,17 @@ export class NetworkManager {
           this.app.call('connection', parsed.data)
           break
       }
+    })
+  }
+
+  ConnectArchipelago (data) {
+    this.archipelago.connect({
+      hostname: data.hostname,
+      port: data.port,
+      name: data.username,
+      game: 'Ocarina of Time',
+      tags: ['AP', 'Tracker', 'IgnoreGame'],
+      items_handling: ITEMS_HANDLING_FLAGS.REMOTE_ALL
     })
   }
 

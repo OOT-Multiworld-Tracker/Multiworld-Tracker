@@ -33,7 +33,7 @@ init({
 export default function Main () {
   const language = {
     language: 'en_us',
-    languageChange: (e) => { this.language.language = e.target.value; this.forceUpdate();},
+    languageChange: (e) => { this.language.language = e.target.value; this.forceUpdate() },
     i: (key) => { return GetTranslation(this.language.language, key) }
   }
 
@@ -92,7 +92,7 @@ export class Application extends React.Component {
 
     app.call('locations update')
   }
-  
+
   handleLogin (e) {
     this.setState({ display: 5 })
   }

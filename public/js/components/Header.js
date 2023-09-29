@@ -1,13 +1,12 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import app from '../app'
 import Electron from 'electron'
 import ButtonGroup from './Buttons/ButtonGroup'
 import Button from './Buttons/Button'
 
-export default class Header extends PureComponent {
+export default class Header extends Component {
   constructor (props) {
     super(props)
-
     this.state = { connected: false }
     this.handleStatusUpdate = this.handleStatusUpdate.bind(this)
   }
@@ -31,6 +30,7 @@ export default class Header extends PureComponent {
         <div className='toolbar-actions'>
           <span className='title'>Ocarina of Time - Multiworld Autotracker</span>
           <ButtonGroup align='right'>
+            <Button align='right' theme='dark' onClick={() => { this.props.onModal() }}>AP</Button>
             <Button align='right' theme='dark'><span className={this.state.connected ? 'icon icon-check' : 'icon icon-cancel'} /></Button>
             <Button align='right' theme='dark' onClick={() => { app.global.settings.popout = !app.global.settings.popout; Electron.ipcRenderer.send('packets', 'popout') }}>P</Button>
             <Button align='right' theme='dark' onClick={() => Electron.ipcRenderer.send('packets', 'minimize')}><span className='icon icon-minus' /></Button>

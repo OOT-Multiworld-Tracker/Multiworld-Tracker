@@ -3,8 +3,9 @@ import ValueSwitch from './ValueSwitch'
 import { existsSync, readFileSync } from 'fs'
 
 export class Item extends ValueSwitch {
-  constructor (name, value, category=null) {
+  constructor (id, name, value, category=null) {
     super(name, value)
+    this.id = id
     this.category = category
   }
 
@@ -18,6 +19,7 @@ export class Item extends ValueSwitch {
 export class TradeItem extends Item {
   constructor (name) {
     super(name, [0])
+    this.id = 1
     this.values[0] = 0
     this.values[33] = 'Weird Egg'
     this.values[34] = 'Chicken'
@@ -42,6 +44,7 @@ export class Bottle extends Item {
 
   constructor (name) {
     super(name, [0])
+    this.id = 1
     this.values[0] = 0
     this.values[1] = 1
     this.values[20] = 'Empty Bottle'

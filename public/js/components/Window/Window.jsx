@@ -6,7 +6,7 @@ export default class Window extends Component {
   render () {
     return (
         <div className="window" onClick={this.props.onClick}>
-            <Header />
+            <Header onModal={this.props.onModal} />
 
             <div className="window-content">
                 <div className="pane-group">
@@ -22,5 +22,6 @@ export default class Window extends Component {
 // Window props validation
 Window.propTypes = {
   onClick: PropTypes.func.isRequired,
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
+  onModal: PropTypes.func.isRequired
 }

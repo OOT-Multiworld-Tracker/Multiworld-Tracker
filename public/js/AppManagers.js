@@ -55,9 +55,10 @@ export class SettingsManager {
 
 export class KeyManager {
   constructor (dungeon, maxKeys) {
+    this.id = 1
     this.name = dungeon
-    this.smallKeys = new Item('Small Key', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].filter((num) => num <= maxKeys))
-    this.bigKey = new Item('Boss Key', [0, 1])
+    this.smallKeys = new Item(1, 'Small Key', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].filter((num) => num <= maxKeys))
+    this.bigKey = new Item(1, 'Boss Key', [0, 1])
   }
 }
 
@@ -69,7 +70,7 @@ export class ItemManager {
   makeItems () {
     GameManager.GetSelectedGame().items.forEach((item) => {
       if (typeof item !== 'object') {
-        this[item.toLowerCase().replace(/ /g, '')] = new Item(item, [0, 1])
+        this[item.toLowerCase().replace(/ /g, '')] = new Item(1, item, [0, 1])
         return
       }
 
@@ -87,7 +88,14 @@ export class ItemManager {
 
     const category = item.category || null
 
-    this[item.name.toLowerCase().replace(/ /g, '')] = new Item(item.name, values, category)
+    this[item.name.toLowerCase().replace(/ /g, '')] = new Item(item.id, item.name, values, category)
+  }
+
+  Get (id) {
+    const items = Object.values(this)
+    console.log(items)
+    if (id === undefined) return items
+    return items.find((item) => item.id === id)
   }
 
   MakeSpecialValues (value, values) {
@@ -102,6 +110,14 @@ export class ItemManager {
       if (this[key] === undefined || !(this[key] instanceof Item)) { return } // Ignore any keys not within the item manager.
 
       this[key].Set(items[key].value * 1)
+    })
+  }
+
+  Reset () {
+    Object.keys(this).forEach(key => {
+      if (this[key] === undefined || !(this[key] instanceof Item)) { return } // Ignore any keys not within the item manager.
+
+      this[key].Set(0)
     })
   }
 }
@@ -310,6 +326,8 @@ export class Location {
      * @type {string}
      */
     this.id = data.id
+
+    this.archi_id = data.archi_id
 
     /**
      * The scene of the location.

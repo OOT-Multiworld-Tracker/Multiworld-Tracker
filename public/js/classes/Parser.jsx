@@ -62,7 +62,9 @@ export default class Parser {
 
     GameManager.GetSelectedGame().locations.forEach((locale, index) => {
       const location = Object.assign({}, locale)
+      const { id } = locale
       location.id = index
+      location.archi_id = id
 
       locations.set(String(index), new Location(manager, location))
     })

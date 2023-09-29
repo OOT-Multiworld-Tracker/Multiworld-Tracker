@@ -2,8 +2,6 @@
  * @type{import('./public/networking/auto_tracker')}
  */
 const AutoTracker = new (require('./js/networking/auto_tracker'))()
-//AutoTracker.Initalize() // Initalize the emulator-linked auto tracker.
-
 const WebServer = new (require('./js/renderer/webserver'))()
 
 /**
@@ -12,6 +10,7 @@ const WebServer = new (require('./js/renderer/webserver'))()
 const Electron = process.type ? new (require('./js/renderer/electron'))() : { on: () => {} }
 
 Electron.on('data', (data) => {
+  if (JSON.parse(data).id === 1) return AutoTracker.Archipelago(data)
   AutoTracker.Send(data)
 })
 

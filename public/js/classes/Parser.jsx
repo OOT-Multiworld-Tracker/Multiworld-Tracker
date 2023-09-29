@@ -1,4 +1,4 @@
-import { SettingsManager, Location, LocationManager } from '../AppManagers'
+import { SettingsManager, Location } from '../AppManagers'
 import GameManager from './GameManager'
 import { GameWorld } from './GameWorld'
 
@@ -10,12 +10,12 @@ export default class Parser {
     spoiler.log = log
 
     // Holds the data for the walkthrough to be parsed.
-    app.walkthrough = log[":playthrough"]
+    app.walkthrough = log[':playthrough']
 
     spoiler.seed = log[':seed']
-    spoiler.worlds = [];
-    
-    if (!log.locations) return spoiler;
+    spoiler.worlds = []
+
+    if (!log.locations) return spoiler
 
     // multi world.
     if (spoiler.log.settings.world_count > 1) {
@@ -37,7 +37,7 @@ export default class Parser {
         }
       })
     } else { // single-world
-      spoiler.worlds = app.worlds;
+      spoiler.worlds = app.worlds
 
       for (let i = 0; i < Object.keys(spoiler.log.dungeons).length; i++) {
         spoiler.worlds[0].dungeons[i].mq = log.dungeons[Object.keys(log.dungeons)[i]] === 'mq'
@@ -52,11 +52,6 @@ export default class Parser {
     return spoiler
   }
 
-  static addLocationID (id, event) {
-    if ((!LocationList[id].event || !LocationList[id].event === -1) && event != -1) LocationList[id].event = event
-    require('electron').ipcRenderer.send('packets', { payload: 7, LocationList })
-  }
-
   /**
    * Parse the locations.json into a usable map.
    * @param {LocationManager} manager
@@ -67,7 +62,9 @@ export default class Parser {
 
     GameManager.GetSelectedGame().locations.forEach((locale, index) => {
       const location = Object.assign({}, locale)
+      const { id } = locale
       location.id = index
+      location.archi_id = id
 
       locations.set(String(index), new Location(manager, location))
     })

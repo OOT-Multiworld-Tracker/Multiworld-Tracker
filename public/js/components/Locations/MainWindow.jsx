@@ -7,9 +7,10 @@ import './MainWindow.css'
 import MainHeader from './MainHeader'
 import LocationDropdown from './LocationDropdown'
 import Locations from './Locations'
+import PropTypes from 'prop-types'
 
 export default class MainWindow extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.filter = props.completed || false
     this.showItems = props.showItems || false
@@ -24,58 +25,58 @@ export default class MainWindow extends Component {
     this.handleSearch = this.handleSearch.bind(this)
     this.displayType = this.displayType.bind(this)
 
-    this.collapse = {};
+    this.collapse = {}
   }
 
-  handleSceneChange(scene) {
+  handleSceneChange (scene) {
     this.setState({ scene, locations: app.local.world.locations.Search(this.state.search, scene, this.state.page) })
   }
 
-  handleSearch(term) {
+  handleSearch (term) {
     this.setState({ search: term.search, locations: app.local.world.locations.Search(term.search, this.state.scene, this.state.page) })
   }
 
-  shouldComponentUpdate(_, nextState) {
-    return (this.state != nextState || this.state.scene != nextState.scene);
+  shouldComponentUpdate (_, nextState) {
+    return (this.state !== nextState || this.state.scene !== nextState.scene)
   }
 
-  componentDidMount() {
+  componentDidMount () {
     app.saveLoad.subscribe('load', () => { app.local.world.subscribeChangeScene(this.handleSceneChange); this.setState({ locations: app.local.world.locations.Search(this.state.search, -1, 0) }) })
     app.subscribe('view', (world) => { this.setState({ world: app.worlds.indexOf(world), locations: app.local.world.locations.Accessible(this.state.search, this.state.scene, this.state.page) }) })
   }
 
-  handleContextMenu(e, id) {
+  handleContextMenu (e, id) {
     this.setState({ dropdown: { left: e.pageX - 240, top: e.pageY - 22 } })
     this.props.onContextMenu(e, id)
   }
 
-  displayType(type) {
+  displayType (type) {
     this.setState({ type })
   }
 
-  displaySection(page) {
+  displaySection (page) {
     this.setState({ page, locations: app.local.world.locations.Search(this.state.search, this.state.scene, page) })
   }
 
-  walkthrough() {
+  walkthrough () {
     return (
       <List>{Object.values(app.walkthrough).map((step, index) => {
         return (
           <>
-            <WalkthroughLocation type="header" name={index == 0 ? "Skips" : `Sphere ${index}`} />
-            {Object.entries(step).filter((walk) => !walk[1].completed).map((walk) => (<WalkthroughLocation name={walk[0]} />))}
+            <WalkthroughLocation type="header" name={index === 0 ? 'Skips' : `Sphere ${index}`} />
+            {Object.entries(step).filter((walk) => !walk[1].completed).map((walk, index) => (<WalkthroughLocation key={index} name={walk[0]} />))}
           </>
         )
       })}</List>)
   }
 
-  locations() {
+  locations () {
     return (
       <Locations onContextMenu={this.handleContextMenu} targetedScene={this.state.scene} pageData={{ page: this.state.page, search: this.state.search }} />
     )
   }
 
-  render() {
+  render () {
     return (
       <div className='pane'>
         <ErrorBoundary fallback={<p>Locations Failed to Load</p>}>
@@ -97,7 +98,7 @@ export default class MainWindow extends Component {
           }} />
 
           <div style={{ overflowY: 'auto', height: '85%' }}>
-            {this.state.type == 0 ? this.locations() : this.walkthrough()}
+            {this.state.type === 0 ? this.locations() : this.walkthrough()}
           </div>
         </ErrorBoundary>
       </div>
@@ -106,7 +107,7 @@ export default class MainWindow extends Component {
 }
 
 export class WalkthroughLocation extends React.PureComponent {
-  render() {
+  render () {
     return (
       <ErrorBoundary fallback={<p>Location Failed to Load</p>}>
         <ListItem
@@ -118,4 +119,17 @@ export class WalkthroughLocation extends React.PureComponent {
       </ErrorBoundary>
     )
   }
+}
+
+MainWindow.propTypes = {
+  onContextMenu: PropTypes.func.isRequired,
+  onDropdownClick: PropTypes.func.isRequired,
+  dropDownOpen: PropTypes.bool.isRequired,
+  completed: PropTypes.bool.isRequired,
+  showItems: PropTypes.bool.isRequired
+}
+
+WalkthroughLocation.propTypes = {
+  name: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired
 }

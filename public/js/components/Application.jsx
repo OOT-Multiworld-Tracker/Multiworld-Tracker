@@ -1,11 +1,12 @@
-import React, {Component} from 'react'
+/* eslint-disable no-undef */
+import React, { Component } from 'react'
 import app from '../app'
 import ModalLayer from './ModalLayer'
 import SaveModal from './Modals/SaveModal'
 import CreateSaveModal from './Modals/CreateSaveModal'
 import ItemModal from './Modals/ItemModal'
 import Sidebar from './Sidebar/Sidebar'
-import { init, ErrorBoundary } from '@sentry/react'
+import { init } from '@sentry/react'
 import { Integrations } from '@sentry/tracing'
 import SpoilerModal from './Modals/LoadSpoiler'
 import Parser from '../classes/Parser'
@@ -17,6 +18,7 @@ import MainWindow from './Locations/MainWindow'
 import ToastManager from './Toasts/ToastManager'
 import { GameWorld } from '../classes/GameWorld'
 import { GetTranslation } from '../classes/Translator'
+import LoginModal from './Modals/ArchipelagoModel'
 
 init({
   dsn: 'https://8957f94163d144e1b2efc135a8a2be1e@o174553.ingest.sentry.io/6000676',
@@ -33,7 +35,7 @@ export default class Application extends Component {
   constructor () {
     super()
 
-    this.state = { 
+    this.state = {
       world: app.local.world,
       dropdown: false,
       display: 0,
@@ -42,7 +44,7 @@ export default class Application extends Component {
 
     this.language = {
       language: 'en_us',
-      languageChange: (e) => { this.language.language = e.target.value; this.forceUpdate();},
+      languageChange: (e) => { this.language.language = e.target.value; this.forceUpdate() },
       i: (key) => { return GetTranslation(this.language.language, key) }
     }
 
@@ -56,10 +58,12 @@ export default class Application extends Component {
     this.handleWindowClick = this.handleWindowClick.bind(this)
     this.handleSpoiler = this.handleSpoiler.bind(this)
     this.handleLoadSpoiler = this.handleLoadSpoiler.bind(this)
+    this.handleArchipelago = this.handleArchipelago.bind(this)
 
     this.selectedLocation = 0
     this.selectedSave = 0
 
+    this.spoilerButton = document.getElementById('spoiler')
   }
 
   handleModal (e) {
@@ -114,9 +118,13 @@ export default class Application extends Component {
     })
   }
 
+  handleArchipelago (e) {
+    this.setState({ display: 5 })
+  }
+
   handleLoadSpoiler (e, options) {
     app.worlds = this.log.worlds
-    if (!app.worlds[0]) app.worlds = [new GameWorld(app)];
+    if (!app.worlds[0]) app.worlds = [new GameWorld(app)]
     app.global.settings = this.log.settings
     app.local.world = app.worlds[app.global.world]
 
@@ -147,6 +155,8 @@ export default class Application extends Component {
         return <CreateSaveModal onSave={this.handleSaveCreated} />
       case 4:
         return <SpoilerModal onSaveLoad={this.handleLoadSpoiler} log={this.log} />
+      case 5:
+        return <LoginModal onLogin={this.handleLogin} />
     }
   }
 
@@ -160,7 +170,7 @@ export default class Application extends Component {
 
     return (
       <LanguageContext.Provider value={this.language}>
-        <Window onClick={this.handleWindowClick}>
+        <Window onClick={this.handleWindowClick} onModal={this.handleArchipelago}>
           <ModalLayer onOutsideClick={this.handleModal} display={this.state.display > 0}>
             {this.getModal()}
           </ModalLayer>

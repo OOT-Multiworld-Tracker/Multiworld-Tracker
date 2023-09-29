@@ -1,5 +1,6 @@
 const WebSocket = require('ws')
 const EventEmitter = require('events')
+const { Client } = require('archipelago.js')
 
 class AutoTracker extends EventEmitter {
   constructor () {

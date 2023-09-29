@@ -1,6 +1,7 @@
 import { ElectronPayloads } from '../enum/EnumPayloads'
 import { MapToArray } from '../Utils'
 import { GameWorld } from './GameWorld'
+import { Client, ITEMS_HANDLING_FLAGS, SERVER_PACKET_TYPE } from 'archipelago.js'
 
 export class NetworkManager {
   constructor (app) {
@@ -9,12 +10,32 @@ export class NetworkManager {
      * @type {import ('../app').App}
      */
     this.app = app
+    this.archipelago = new Client()
+
+    this.archipelago.addListener(SERVER_PACKET_TYPE.CONNECTED, () => {
+      console.log('Connected to Archipelago')
+      this.app.call('connection', true)
+    })
+
+    this.archipelago.addListener(SERVER_PACKET_TYPE.RECEIVED_ITEMS, (items) => {
+      this.app.local.world.items.Reset()
+
+      for (const item of items.items) {
+        if (!this.app.local.world.items.Get(item.item)) continue
+        this.app.local.world.items.Get(item.item).Toggle()
+      }
+
+      this.archipelago.locations.checked.forEach((location) => {
+        if (!this.app.local.world.locations.Array().find((local) => local.archi_id === location)) return
+        this.app.local.world.locations.Array().find((local) => local.archi_id === location).completed = true
+      })
+
+      this.app.local.world.call('update')
+    })
 
     require('electron').ipcRenderer.on('packet', (_, data) => {
       const parsed = JSON.parse(String(data))
       let items
-
-      console.log(parsed)
 
       switch (parsed.payload) {
         case ElectronPayloads.SAVE_UPDATED:
@@ -32,9 +53,9 @@ export class NetworkManager {
             this.app.local.world.items[key.toLowerCase()].Set(items[key] * 1)
           })
 
-          this.app.global.world = parsed.data.world-1
+          this.app.global.world = parsed.data.world - 1
 
-          for (let i=this.app.global.world; i>this.app.worlds.length-1; i--) {
+          for (let i = this.app.global.world; i > this.app.worlds.length - 1; i--) {
             this.app.worlds.unshift(new GameWorld(this.app))
           }
 
@@ -51,7 +72,7 @@ export class NetworkManager {
           this.app.lastEvent = { payload: parsed.payload, scene: parsed.data.scene, data: JSON.parse(parsed.data.data) } // Make data to be created.
 
           this.app.local.world.locations.Accessible(false, false, parsed.data.scene).forEach((location) => {
-            if (JSON.stringify(location.event.data) == JSON.stringify(this.app.lastEvent.data)) location.completed = true // If the events match then mark as complete.
+            if (JSON.stringify(location.event.data) === JSON.stringify(this.app.lastEvent.data)) location.completed = true // If the events match then mark as complete.
           })
 
           this.app.local.world.Sync()
@@ -61,17 +82,18 @@ export class NetworkManager {
           this.AddEntrance(parsed.data.scene) // Add the entrance to the global entrances.
           this.app.local.world.scene = parsed.data.scene
 
-          if (this.app.global.settings.followCurrentScene.value == true) this.app.local.world.call('change scene', parsed.data.scene)
-          
-          if (this.app.global.settings.entranceSanity.value == true) 
+          if (this.app.global.settings.followCurrentScene.value === true) this.app.local.world.call('change scene', parsed.data.scene)
+
+          if (this.app.global.settings.entranceSanity.value === true) {
             this.app.call('entrance update')
-            
+          }
+
           this.app.local.world.Sync()
           break
 
         case ElectronPayloads.OTHER_TRACKER_UPDATE:
           if (this.app.worlds[parsed.data.world] === this.app.local.world) { return } // Prevent lost progress through mistakes or attempted trolls.
-          if (this.app.worlds.length-1 < parsed.data.world) { this.app.worlds.push(new GameWorld(this.app)) }
+          if (this.app.worlds.length - 1 < parsed.data.world) { this.app.worlds.push(new GameWorld(this.app)) }
           this.app.worlds[parsed.data.world].save = parsed.data.save
           this.app.worlds[parsed.data.world].scene = parsed.data.scene
 
@@ -86,6 +108,17 @@ export class NetworkManager {
     })
   }
 
+  ConnectArchipelago (data) {
+    this.archipelago.connect({
+      hostname: data.hostname,
+      port: data.port,
+      name: data.username,
+      game: 'Ocarina of Time',
+      tags: ['AP', 'Tracker', 'IgnoreGame'],
+      items_handling: ITEMS_HANDLING_FLAGS.REMOTE_ALL
+    })
+  }
+
   AddEntrance (to) {
     if (this.HasEntrance(this.app.local.world.scene, to)) return // Prevent duplicates.
 
@@ -93,8 +126,8 @@ export class NetworkManager {
   }
 
   HasEntrance (from, to) {
-    console.log(this.app.global.entrances.find((entrance) => entrance[0] == from && entrance[1] == to));
-    return this.app.global.entrances.find((entrance) => entrance[0] == from && entrance[1] == to) !== undefined
+    console.log(this.app.global.entrances.find((entrance) => entrance[0] === from && entrance[1] === to))
+    return this.app.global.entrances.find((entrance) => entrance[0] === from && entrance[1] === to) !== undefined
   }
 
   /**
@@ -126,7 +159,7 @@ export class NetworkManager {
       data.save.tunics,
       data.save.swords
     )
-    
+
     Object.keys(items).forEach((key) => {
       if (world.items[key] === undefined) return // Ignore any keys not within the item manager.
       world.items[key].Set(items[key] * 1)

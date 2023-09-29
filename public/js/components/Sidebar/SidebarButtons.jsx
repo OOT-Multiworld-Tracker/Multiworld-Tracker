@@ -25,7 +25,6 @@ export default class SidebarButtons extends React.Component {
         <option value='3'>{GetTranslation(this.context.language, 'Items')}</option>
         <option value='1'>{GetTranslation(this.context.language, 'Saves')}</option>
         <option value='4'>{GetTranslation(this.context.language, 'Settings')}</option>
-        <option value='5'>{GetTranslation(this.context.language, 'My Account')}</option>
       </select>
     )
   }

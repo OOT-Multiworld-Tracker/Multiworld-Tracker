@@ -1,11 +1,12 @@
-import React, { Component } from "react";
-import Header from "../Header";
+import React, { Component } from 'react'
+import Header from '../Header'
+import PropTypes from 'prop-types'
 
 export default class Window extends Component {
   render () {
     return (
         <div className="window" onClick={this.props.onClick}>
-            <Header />
+            <Header onModal={this.props.onModal} />
 
             <div className="window-content">
                 <div className="pane-group">
@@ -16,4 +17,11 @@ export default class Window extends Component {
         </div>
     )
   }
-} 
+}
+
+// Window props validation
+Window.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  children: PropTypes.node.isRequired,
+  onModal: PropTypes.func.isRequired
+}

@@ -1,4 +1,3 @@
-import { App } from '../app'
 import { ItemManager, LocationManager } from '../AppManagers'
 import { Subscription } from './Subscription'
 
@@ -71,9 +70,8 @@ export class GameWorld extends Subscription {
   subscribeSync (callback) {
     this.subscribe('sync', callback)
   }
-  
+
   subscribeChangeScene (callback) {
     this.subscribe('change scene', callback)
   }
-
 }

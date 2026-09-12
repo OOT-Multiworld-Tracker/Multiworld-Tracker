@@ -12,6 +12,16 @@ export class NetworkManager {
     this.app = app
     this.archipelago = new Client()
 
+    this.archipelago.socket.on('connected', () => {
+      console.log('Connected to Archipelago')
+      this.app.call('connection', true)
+    })
+
+    this.archipelago.socket.on('disconnected', () => {
+      console.log('Disconnected from Archipelago')
+      this.app.call('connection', false)
+    })
+
     this.archipelago.items.on('itemsReceived', () => {
       this.app.local.world.items.Reset()
 
@@ -108,7 +118,8 @@ export class NetworkManager {
 
   ConnectArchipelago (data) {
     const hostname = data.hostname.trim()
-    const port = Number.isInteger(data.port) && data.port > 0 ? data.port : undefined
+    const parsedPort = Number(data.port)
+    const port = Number.isInteger(parsedPort) && parsedPort > 0 ? parsedPort : undefined
     const colonCount = (hostname.match(/:/g) || []).length
     const isBracketedIpv6 = hostname.startsWith('[') && hostname.includes(']')
     const isBareIpv6 = colonCount > 1 && !isBracketedIpv6
@@ -118,9 +129,6 @@ export class NetworkManager {
     this.archipelago.login(endpoint, data.username, 'Ocarina of Time', {
       tags: ['AP', 'Tracker', 'IgnoreGame'],
       items: itemsHandlingFlags.all
-    }).then(() => {
-      console.log('Connected to Archipelago')
-      this.app.call('connection', true)
     }).catch((error) => {
       console.error(`Failed to login to Archipelago (${endpoint}): ${error?.message || error}`)
       this.app.call('connection', false)

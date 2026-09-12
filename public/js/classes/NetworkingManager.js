@@ -12,18 +12,20 @@ export class NetworkManager {
     this.app = app
     this.archipelago = new Client()
 
-    this.archipelago.items.on('itemsReceived', (items) => {
+    this.archipelago.items.on('itemsReceived', () => {
       this.app.local.world.items.Reset()
 
-      for (const item of items) {
+      for (const item of this.archipelago.items.received) {
         if (!this.app.local.world.items.Get(item.item)) continue
         this.app.local.world.items.Get(item.item).Toggle()
       }
 
       const checkedLocations = this.archipelago.room?.checkedLocations ?? []
+      const localLocations = this.app.local.world.locations.Array()
       checkedLocations.forEach((location) => {
-        if (!this.app.local.world.locations.Array().find((local) => local.archi_id === location)) return
-        this.app.local.world.locations.Array().find((local) => local.archi_id === location).completed = true
+        const localLocation = localLocations.find((local) => local.archi_id === location)
+        if (!localLocation) return
+        localLocation.completed = true
       })
 
       this.app.local.world.call('update')
@@ -105,9 +107,13 @@ export class NetworkManager {
   }
 
   ConnectArchipelago (data) {
-    const hasIpv6Host = data.hostname.includes(':') && !data.hostname.startsWith('[')
-    const host = hasIpv6Host ? `[${data.hostname}]` : data.hostname
-    const endpoint = data.port ? `${host}:${data.port}` : host
+    const hostname = data.hostname.trim()
+    const port = Number.isInteger(data.port) && data.port > 0 ? data.port : undefined
+    const colonCount = (hostname.match(/:/g) || []).length
+    const isBracketedIpv6 = hostname.startsWith('[') && hostname.includes(']')
+    const isBareIpv6 = colonCount > 1 && !isBracketedIpv6
+    const host = isBareIpv6 ? `[${hostname}]` : hostname
+    const endpoint = port ? `${host}:${port}` : host
 
     this.archipelago.login(endpoint, data.username, 'Ocarina of Time', {
       tags: ['AP', 'Tracker', 'IgnoreGame'],
@@ -116,7 +122,7 @@ export class NetworkManager {
       console.log('Connected to Archipelago')
       this.app.call('connection', true)
     }).catch((error) => {
-      console.error(error)
+      console.error(`Failed to login to Archipelago (${endpoint}): ${error?.message || error}`)
       this.app.call('connection', false)
     })
   }

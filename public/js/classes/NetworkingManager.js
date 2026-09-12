@@ -109,7 +109,9 @@ export class NetworkManager {
   }
 
   ConnectArchipelago (data) {
-    const endpoint = data.port ? `${data.hostname}:${data.port}` : data.hostname
+    const hasIpv6Host = data.hostname.includes(':') && !data.hostname.startsWith('[')
+    const host = hasIpv6Host ? `[${data.hostname}]` : data.hostname
+    const endpoint = data.port ? `${host}:${data.port}` : host
 
     this.archipelago.login(endpoint, data.username, 'Ocarina of Time', {
       tags: ['AP', 'Tracker', 'IgnoreGame'],

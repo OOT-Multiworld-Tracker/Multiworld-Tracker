@@ -12,11 +12,6 @@ export class NetworkManager {
     this.app = app
     this.archipelago = new Client()
 
-    this.archipelago.socket.on('connected', () => {
-      console.log('Connected to Archipelago')
-      this.app.call('connection', true)
-    })
-
     this.archipelago.items.on('itemsReceived', (items) => {
       this.app.local.world.items.Reset()
 
@@ -25,7 +20,8 @@ export class NetworkManager {
         this.app.local.world.items.Get(item.item).Toggle()
       }
 
-      this.archipelago.room.checkedLocations.forEach((location) => {
+      const checkedLocations = this.archipelago.room?.checkedLocations ?? []
+      checkedLocations.forEach((location) => {
         if (!this.app.local.world.locations.Array().find((local) => local.archi_id === location)) return
         this.app.local.world.locations.Array().find((local) => local.archi_id === location).completed = true
       })
@@ -116,6 +112,9 @@ export class NetworkManager {
     this.archipelago.login(endpoint, data.username, 'Ocarina of Time', {
       tags: ['AP', 'Tracker', 'IgnoreGame'],
       items: itemsHandlingFlags.all
+    }).then(() => {
+      console.log('Connected to Archipelago')
+      this.app.call('connection', true)
     }).catch((error) => {
       console.error(error)
       this.app.call('connection', false)

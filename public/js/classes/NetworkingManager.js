@@ -118,17 +118,39 @@ export class NetworkManager {
 
   ConnectArchipelago (data) {
     const hostname = data.hostname.trim()
-    const parsedPort = Number(data.port)
-    const port = Number.isInteger(parsedPort) && parsedPort > 0 ? parsedPort : undefined
-    const colonCount = (hostname.match(/:/g) || []).length
-    const isBracketedIpv6 = hostname.startsWith('[') && hostname.includes(']')
-    const isBareIpv6 = colonCount > 1 && !isBracketedIpv6
-    const host = isBareIpv6 ? `[${hostname}]` : hostname
+    const explicitPort = Number(data.port)
+    let port = Number.isInteger(explicitPort) && explicitPort > 0 ? explicitPort : undefined
+    let host = hostname
+
+    const bracketedWithPort = hostname.match(/^\[([^\]]+)\]:(\d+)$/)
+    if (!port && bracketedWithPort) {
+      host = `[${bracketedWithPort[1]}]`
+      port = Number(bracketedWithPort[2])
+    } else if (!port && !hostname.startsWith('[') && hostname.includes(':')) {
+      const colonCount = (hostname.match(/:/g) || []).length
+      const lastColon = hostname.lastIndexOf(':')
+      const maybePort = Number(hostname.slice(lastColon + 1))
+      const maybeHost = hostname.slice(0, lastColon)
+
+      if (Number.isInteger(maybePort) && maybePort > 0 && maybeHost.includes(':')) {
+        host = maybeHost
+        port = maybePort
+      } else if (colonCount === 1 && Number.isInteger(maybePort) && maybePort > 0) {
+        host = maybeHost
+        port = maybePort
+      }
+    }
+
+    if (host.includes(':') && !host.startsWith('[')) {
+      host = `[${host}]`
+    }
+
     const endpoint = port ? `${host}:${port}` : host
 
     this.archipelago.login(endpoint, data.username, 'Ocarina of Time', {
       tags: ['AP', 'Tracker', 'IgnoreGame'],
-      items: itemsHandlingFlags.all
+      items: itemsHandlingFlags.all,
+      password: data.password
     }).catch((error) => {
       console.error(`Failed to login to Archipelago (${endpoint}): ${error?.message || error}`)
       this.app.call('connection', false)

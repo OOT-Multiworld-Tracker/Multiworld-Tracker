@@ -1,7 +1,7 @@
 import { ElectronPayloads } from '../enum/EnumPayloads'
 import { MapToArray } from '../Utils'
 import { GameWorld } from './GameWorld'
-import { Client, ITEMS_HANDLING_FLAGS, SERVER_PACKET_TYPE } from 'archipelago.js'
+import { Client, itemsHandlingFlags } from 'archipelago.js'
 
 export class NetworkManager {
   constructor (app) {
@@ -12,22 +12,30 @@ export class NetworkManager {
     this.app = app
     this.archipelago = new Client()
 
-    this.archipelago.addListener(SERVER_PACKET_TYPE.CONNECTED, () => {
+    this.archipelago.socket.on('connected', () => {
       console.log('Connected to Archipelago')
       this.app.call('connection', true)
     })
 
-    this.archipelago.addListener(SERVER_PACKET_TYPE.RECEIVED_ITEMS, (items) => {
+    this.archipelago.socket.on('disconnected', () => {
+      console.log('Disconnected from Archipelago')
+      this.app.call('connection', false)
+    })
+
+    this.archipelago.items.on('itemsReceived', () => {
       this.app.local.world.items.Reset()
 
-      for (const item of items.items) {
+      for (const item of this.archipelago.items.received) {
         if (!this.app.local.world.items.Get(item.item)) continue
         this.app.local.world.items.Get(item.item).Toggle()
       }
 
-      this.archipelago.locations.checked.forEach((location) => {
-        if (!this.app.local.world.locations.Array().find((local) => local.archi_id === location)) return
-        this.app.local.world.locations.Array().find((local) => local.archi_id === location).completed = true
+      const checkedLocations = this.archipelago.room?.checkedLocations ?? []
+      const localLocations = this.app.local.world.locations.Array()
+      checkedLocations.forEach((location) => {
+        const localLocation = localLocations.find((local) => local.archi_id === location)
+        if (!localLocation) return
+        localLocation.completed = true
       })
 
       this.app.local.world.call('update')
@@ -109,13 +117,43 @@ export class NetworkManager {
   }
 
   ConnectArchipelago (data) {
-    this.archipelago.connect({
-      hostname: data.hostname,
-      port: data.port,
-      name: data.username,
-      game: 'Ocarina of Time',
+    const hostname = data.hostname.trim()
+    const explicitPort = Number(data.port)
+    let port = Number.isInteger(explicitPort) && explicitPort > 0 ? explicitPort : undefined
+    let host = hostname
+
+    const bracketedWithPort = hostname.match(/^\[([^\]]+)\]:(\d+)$/)
+    if (!port && bracketedWithPort) {
+      host = `[${bracketedWithPort[1]}]`
+      port = Number(bracketedWithPort[2])
+    } else if (!port && !hostname.startsWith('[') && hostname.includes(':')) {
+      const colonCount = (hostname.match(/:/g) || []).length
+      const lastColon = hostname.lastIndexOf(':')
+      const maybePort = Number(hostname.slice(lastColon + 1))
+      const maybeHost = hostname.slice(0, lastColon)
+
+      if (Number.isInteger(maybePort) && maybePort > 0 && maybeHost.includes(':')) {
+        host = maybeHost
+        port = maybePort
+      } else if (colonCount === 1 && Number.isInteger(maybePort) && maybePort > 0) {
+        host = maybeHost
+        port = maybePort
+      }
+    }
+
+    if (host.includes(':') && !host.startsWith('[')) {
+      host = `[${host}]`
+    }
+
+    const endpoint = port ? `${host}:${port}` : host
+
+    this.archipelago.login(endpoint, data.username, 'Ocarina of Time', {
       tags: ['AP', 'Tracker', 'IgnoreGame'],
-      items_handling: ITEMS_HANDLING_FLAGS.REMOTE_ALL
+      items: itemsHandlingFlags.all,
+      password: data.password
+    }).catch((error) => {
+      console.error(`Failed to login to Archipelago (${endpoint}): ${error?.message || error}`)
+      this.app.call('connection', false)
     })
   }
 
